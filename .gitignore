@@ -1,1 +1,4 @@
 /Server/Activus_Server/nbproject/private/
+*.xml
+Server/Activus_Server/nbproject/.idea/nbproject.iml
+Server/Activus_Server/Activus_Server.iml
