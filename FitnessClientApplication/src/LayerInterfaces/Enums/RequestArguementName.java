@@ -5,13 +5,14 @@
  */
 package LayerInterfaces.Enums;
 
+import java.io.Serializable;
 import javafx.scene.text.Text;
 
 /**
  *
  * @author madsh
  */
-public enum RequestArguementName {
+public enum RequestArguementName implements Serializable{
     USER_ID,
     PROFILE_ID,
     PROGRAM_ID,

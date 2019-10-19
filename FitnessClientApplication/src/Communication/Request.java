@@ -8,6 +8,7 @@ package Communication;
 import Exceptions.ArguementNotFoundException;
 import LayerInterfaces.Enums.RequestArguementName;
 import LayerInterfaces.Enums.RequestType;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
  *
  * @author madsh
  */
-public class Request {
+public class Request implements Serializable{
 
     private RequestType type;
     private UUID authToken;

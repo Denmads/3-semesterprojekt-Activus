@@ -5,11 +5,13 @@
  */
 package LayerInterfaces.Enums;
 
+import java.io.Serializable;
+
 /**
  *
  * @author madsh
  */
-public enum RequestType {
+public enum RequestType implements Serializable{
     LOGIN,
     LOGOUT,
     CREATE_NEW_USER,

@@ -6,13 +6,14 @@
 package LayerInterfaces;
 
 import Communication.Request;
+import java.io.IOException;
 
 /**
  *
  * @author madsh
  */
 public interface ICommunicationFacade {
-    public void openConnection();
+    public void openConnection() throws IOException;
     public void closeConnection();
     public void sendRequest(Request request);
 }
