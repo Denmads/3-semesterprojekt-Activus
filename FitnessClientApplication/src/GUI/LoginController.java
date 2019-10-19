@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
  *
  * @author Victor
  */
-public class FXMLMainController implements Initializable {
+public class LoginController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -17,6 +17,6 @@ public class FXMLMainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
