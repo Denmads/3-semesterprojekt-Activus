@@ -3,41 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain.Authentication;
+package Communication;
 
-import Domain.serviceInterfaces.IAuthenticationService;
 import LayerInterfaces.ICommunicationFacade;
 
 /**
  *
  * @author madsh
  */
-public class AuthenticationService extends IAuthenticationService{
-
-    private CredentialsContainer credentials;
-    
-    public AuthenticationService (ICommunicationFacade communication) {
-        super(communication);
-    }
-    
-    @Override
-    public CredentialsContainer getCredentials() {
-        return credentials;
-    }
+public class CommunicationFacade implements ICommunicationFacade{
 
     @Override
-    public boolean Login(String username, String password) {
-        //Credentials get set here
+    public void openConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Logout() {
+    public void closeConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean CreateAccount(NewAccountInfo accountInfo) {
+    public void sendRequest(Request request) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -11,9 +11,9 @@ package LayerInterfaces;
  */
 public abstract class IService {
     
-    protected ICommunication communicationLayer;
+    protected ICommunicationFacade communicationLayer;
     
-    public IService (ICommunication communication) {
+    public IService (ICommunicationFacade communication) {
         communicationLayer = communication;
     }
 }

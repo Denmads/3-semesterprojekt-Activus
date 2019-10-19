@@ -7,8 +7,8 @@ package Domain.serviceInterfaces;
 
 import Domain.Authentication.CredentialsContainer;
 import Domain.Authentication.NewAccountInfo;
-import LayerInterfaces.ICommunication;
 import LayerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
 
 /**
  *
@@ -16,7 +16,7 @@ import LayerInterfaces.IService;
  */
 public abstract class IAuthenticationService extends IService {
 
-    public IAuthenticationService(ICommunication communication) {
+    public IAuthenticationService(ICommunicationFacade communication) {
         super(communication);
     }
     public abstract CredentialsContainer getCredentials();

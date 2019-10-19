@@ -5,10 +5,14 @@
  */
 package LayerInterfaces;
 
+import Communication.Request;
+
 /**
  *
  * @author madsh
  */
-public interface ICommunication {
-    
+public interface ICommunicationFacade {
+    public void openConnection();
+    public void closeConnection();
+    public void sendRequest(Request request);
 }

@@ -3,10 +3,10 @@ package Domain;
 import Domain.Authentication.AuthenticationService;
 import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
-import LayerInterfaces.ICommunication;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
 import java.util.HashMap;
+import LayerInterfaces.ICommunicationFacade;
 
 /**
  *
@@ -16,17 +16,17 @@ public class DomainFacade implements IDomainFacade{
 
     private HashMap<ServiceType, IService> services;
     
-    public DomainFacade (ICommunication communication) {
+    public DomainFacade (ICommunicationFacade communicationFacade) {
         services = new HashMap<>();
-        InitializeServices(communication);
+        InitializeServices(communicationFacade);
     }
     
-    private void InitializeServices (ICommunication communication) {
-        services.put(ServiceType.AUTHENTICATION, new AuthenticationService(communication));
+    private void InitializeServices (ICommunicationFacade communicationFacade) {
+        services.put(ServiceType.AUTHENTICATION, new AuthenticationService(communicationFacade));
     }
     
     @Override
-    public <T extends IService> T GetService(ServiceType type) throws ServiceNotFoundException{
+    public <T extends IService> T GetService(ServiceType type) throws ServiceNotFoundException, ClassCastException{
         if (!services.containsKey(type)) {
             throw new ServiceNotFoundException();
         }
