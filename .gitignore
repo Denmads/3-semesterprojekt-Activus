@@ -2,3 +2,5 @@
 *.asta.lock
 /FitnessClientApplication/build/
 /FitnessClientApplication/dist/
+*.xml
+*.iml
