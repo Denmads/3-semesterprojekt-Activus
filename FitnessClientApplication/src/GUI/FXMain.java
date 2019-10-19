@@ -21,6 +21,7 @@ public class FXMain extends Application {
 
         Stage stage = new Stage();
         stage.setTitle("Activius");
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.show();
     }

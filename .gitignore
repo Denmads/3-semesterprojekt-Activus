@@ -1,2 +1,4 @@
 /FitnessClientApplication/nbproject/private/
 *.asta.lock
+/FitnessClientApplication/build/
+/FitnessClientApplication/dist/
