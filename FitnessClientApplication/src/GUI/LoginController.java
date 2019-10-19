@@ -23,11 +23,11 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField passwordField;
     @FXML
-    private ImageView loginImageBtn;
-    @FXML
     private Label loginLabel;
     @FXML
     private Label createAccountLabel;
+    @FXML
+    private ImageView loginImageButton;
 
     /**
      * Initializes the controller class.
@@ -37,6 +37,10 @@ public class LoginController implements Initializable {
         // TODO
     }
 
+    //All of the following methods are meant to do the same thing.
+    //Get the text from the two textfields and then verify the login.
+    //The easiest thing to do to avoid code repetition is to make a new method
+    //that verifies the login and then call it in the following methods.
     @FXML
     private void handleUserFieldAction(ActionEvent event) {
     }
@@ -52,9 +56,10 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLoginLabelAction(MouseEvent event) {
     }
-
+    
     @FXML
     private void handleCreateAccountAction(MouseEvent event) {
+    //This is the only method that is not supposed to verify the login.
     }
 
 }
