@@ -1,6 +1,6 @@
 package Communication.Connection;
 
-import Communication.RequestDelegater;
+import Domain.RequestDelegater;
 import Models.Request;
 
 import java.io.*;
