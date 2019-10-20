@@ -17,14 +17,14 @@ public class Response {
     }
 
     public void addArgument(ResponseArguementName argName, Object value) {
-        arguements.put(argName,value);
+        arguements.put(argName, value);
     }
 
-    public Object GetArguement (ResponseArguementName argName) throws ArguementNotFoundException {
+    public Object GetArguement(ResponseArguementName argName) throws ArguementNotFoundException {
         if (!arguements.containsKey(argName)) {
             throw new ArguementNotFoundException();
         }
-        
+
         return arguements.get(argName);
     }
 

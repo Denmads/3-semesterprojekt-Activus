@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Communication;
 
 import Enums.RequestArguementName;
@@ -16,17 +11,17 @@ import java.util.UUID;
  *
  * @author madsh
  */
-public class Request implements Serializable{
+public class Request implements Serializable {
 
     private RequestType type;
     private UUID authToken;
-    private int profileId;
+    private int userId;
     private HashMap<RequestArguementName, Object> arguements;
 
-    public Request(RequestType type, UUID authToken, int profileId) {
+    public Request(RequestType type, UUID authToken, int userId) {
         this.type = type;
         this.authToken = authToken;
-        this.profileId = profileId;
+        this.userId = userId;
         arguements = new HashMap<>();
     }
 
@@ -38,21 +33,19 @@ public class Request implements Serializable{
         return authToken;
     }
 
-    public int getProfileId() {
-        return profileId;
+    public int getUserId() {
+        return userId;
     }
-    
-    
-    
-    public void AddArgument (RequestArguementName argName, Object value) {
+
+    public void AddArgument(RequestArguementName argName, Object value) {
         arguements.put(argName, value);
     }
-    
-    public <T> T GetArguement (RequestArguementName argName) throws ArguementNotFoundException, ClassCastException{
+
+    public <T> T GetArguement(RequestArguementName argName) throws ArguementNotFoundException, ClassCastException {
         if (!arguements.containsKey(argName)) {
             throw new ArguementNotFoundException();
         }
-        
-        return (T)arguements.get(argName);
+
+        return (T) arguements.get(argName);
     }
 }

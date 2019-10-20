@@ -43,23 +43,32 @@ public class LoginController implements Initializable {
     //that verifies the login and then call it in the following methods.
     @FXML
     private void handleUserFieldAction(ActionEvent event) {
+        verifyLogin(usernameField.getText(), passwordField.getText());
     }
 
     @FXML
     private void handlePasswordFieldAction(ActionEvent event) {
+        verifyLogin(usernameField.getText(), passwordField.getText());
     }
 
     @FXML
     private void handleLoginImageAction(MouseEvent event) {
+        verifyLogin(usernameField.getText(), passwordField.getText());
     }
 
     @FXML
     private void handleLoginLabelAction(MouseEvent event) {
+        verifyLogin(usernameField.getText(), passwordField.getText());
     }
-    
+
     @FXML
     private void handleCreateAccountAction(MouseEvent event) {
-    //This is the only method that is not supposed to verify the login.
+        //This is the only method that is not supposed to verify the login.
+    }
+
+    //Create Login method here;
+    private boolean verifyLogin(String username, String password) {
+        return false;
     }
 
 }
