@@ -5,6 +5,7 @@ import Enums.SearchType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
+import java.util.List;
 
 public abstract class IProfileService extends IService{
     
@@ -12,7 +13,7 @@ public abstract class IProfileService extends IService{
         super(communication, domainFacade);
     }
     
-public abstract Profile search (String searchString, SearchType searchType);
+public abstract List<Profile> search (String searchString, SearchType searchType);
 public abstract Profile getProfile (int profileID);
 public abstract boolean updateProfile(Profile newProfileInfo);
 public abstract boolean updateProfilePassWord (String newPassword);
