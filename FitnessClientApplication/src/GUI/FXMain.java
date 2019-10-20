@@ -4,18 +4,12 @@ import Communication.CommunicationFacade;
 import Communication.Request;
 import Exceptions.ConfigFileNotFound;
 import Enums.*;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -23,20 +17,20 @@ import javafx.stage.Stage;
  * @author Victor
  */
 public class FXMain extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws IOException {
-        
+
         try {
             CommunicationFacade cf = new CommunicationFacade();
-            
+
             Request r = new Request(RequestType.LOGIN, UUID.randomUUID(), 1);
             r.AddArgument(RequestArguementName.USERNAME, "Denmads");
             r.AddArgument(RequestArguementName.PASSWORD, "test");
             cf.sendRequest(r);
-            
+
             Platform.exit();
-            
+
 //        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Login.fxml"));
 //
 //        Scene scene = new Scene(root);
@@ -56,5 +50,5 @@ public class FXMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

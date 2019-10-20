@@ -9,8 +9,8 @@ import java.util.HashMap;
 public class TrainingScheme {
 
     private HashMap<Day, TrainingProgram> DayTrainingProgramMap;
-
-    public TrainingScheme(HashMap<Day, TrainingProgram> DayTrainingProgramDictionary) {
+    
+    public TrainingScheme(HashMap<Day, TrainingProgram> DayTrainingProgramMap) {
         this.DayTrainingProgramMap = DayTrainingProgramMap;
     }
 

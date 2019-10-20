@@ -1,39 +1,56 @@
 package Domain.TraningScheme;
 
-import Domain.serviceInterfaces.ITrainingSchemeService;
 import java.util.ArrayList;
 
 /**
  *
  * @author Victor
  */
-public class Exercise implements ITrainingSchemeService {
+public class Exercise {
 
     private int ID;
     private String name;
     private double time;
+
     private ArrayList<SetInfo> Set;
-    private SetInfo setInfo;
-    
-    
 
-    
-
-    
-
-    @Override
-    public boolean createNewTrainingScheme(String schemeName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Exercise(int ID, String name, double time, ArrayList<SetInfo> Set) {
+        this.ID = ID;
+        this.name = name;
+        this.time = time;
+        this.Set = Set;
     }
 
-    @Override
-    public boolean createNewTrainingProgram(String programName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getID() {
+        return ID;
     }
 
-    @Override
-    public Exercise LoadExercise() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    public ArrayList<SetInfo> getSet() {
+        return Set;
+    }
+
+    public void setSet(ArrayList<SetInfo> Set) {
+        this.Set = Set;
     }
 
 }
