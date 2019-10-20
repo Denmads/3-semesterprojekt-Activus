@@ -1,20 +1,28 @@
 package Domain.User;
 
 import Domain.TraningScheme.Exercise;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 
-public interface IProfileService {
-Profile searchProfile (String searchString, boolean buddySearch);
-Profile getProfile (int profileID);
-boolean updateProfile(Profile newProfileInfo);
-boolean updateProfilePassWord (String newPassword);
-boolean deleteAccount();
-boolean FollowProfile(int profileID);
-boolean FolloTraniningProgram(int programID);
-boolean SendBuddyRequest(int buddyID);
-boolean AcceptBuddyRequest(int requestingProfileID);
-boolean setGoal(String Goal);
-int setStats(Exercise exercise);
-boolean removeStats(int statsID);
+public abstract class IProfileService extends IService{
+    
+    public IProfileService(ICommunicationFacade communication, IDomainFacade domainFacade) {
+        super(communication, domainFacade);
+    }
+    
+public abstract Profile searchProfile (String searchString, boolean buddySearch);
+public abstract Profile getProfile (int profileID);
+public abstract boolean updateProfile(Profile newProfileInfo);
+public abstract boolean updateProfilePassWord (String newPassword);
+public abstract boolean deleteAccount();
+public abstract boolean FollowProfile(int profileID);
+public abstract boolean FolloTraniningProgram(int programID);
+public abstract boolean SendBuddyRequest(int buddyID);
+public abstract boolean AcceptBuddyRequest(int requestingProfileID);
+public abstract boolean setGoal(String Goal);
+public abstract int setStats(Exercise exercise);
+public abstract boolean removeStats(int statsID);
 
 
 

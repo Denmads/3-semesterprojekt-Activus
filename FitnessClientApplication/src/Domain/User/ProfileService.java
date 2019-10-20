@@ -5,16 +5,23 @@
  */
 package Domain.User;
 
+import Communication.Request;
+import Domain.DomainFacade;
 import Domain.TraningScheme.Exercise;
+import Enums.RequestType;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 
 /**
  *
  * @author steff
  */
-public class ProfileService implements IProfileService{
+public class ProfileService extends IProfileService{
     private Profile currentProfile;
+    
 
-    public ProfileService(Profile currentProfile) {
+    public ProfileService(Profile currentProfile,ICommunicationFacade communication, IDomainFacade domainFacade) {
+        super(communication, domainFacade);
         this.currentProfile = currentProfile;
     }
     
@@ -22,6 +29,7 @@ public class ProfileService implements IProfileService{
 
     @Override
     public Profile searchProfile(String searchString, boolean buddySearch) {
+        Request request = new Request(RequestType.SEARCH,  , 0)
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
