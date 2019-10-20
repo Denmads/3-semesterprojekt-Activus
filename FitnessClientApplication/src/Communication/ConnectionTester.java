@@ -14,8 +14,6 @@ public class ConnectionTester {
      */
     public static void main(String[] args) throws ConfigFileNotFound, IOException {
         CommunicationFacade CF = new CommunicationFacade();
-        CF.openConnection();
-        CF.closeConnection();
     }
 
 }

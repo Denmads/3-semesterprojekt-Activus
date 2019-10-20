@@ -7,6 +7,7 @@ package Communication;
 
 import Exceptions.ConfigFileNotFound;
 import LayerInterfaces.ICommunicationFacade;
+import Models.Response;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,7 +63,7 @@ public class CommunicationFacade implements ICommunicationFacade{
     }
 
     @Override
-    public Object sendRequest(Request request) {
+    public Response sendRequest(Request request) {
         Object response = null;
         
         try {
@@ -76,7 +77,7 @@ public class CommunicationFacade implements ICommunicationFacade{
             Logger.getLogger(CommunicationFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return response;
+        return (Response)response;
     }
     
 }

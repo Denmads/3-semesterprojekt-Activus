@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package LayerInterfaces;
-
-import Communication.Request;
-import Models.Response;
-import java.io.IOException;
+package Enums;
 
 /**
  *
  * @author madsh
  */
-public interface ICommunicationFacade {
-    public Response sendRequest(Request request);
+public enum ResponseArguementName {
+    
 }
