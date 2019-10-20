@@ -8,15 +8,11 @@ public class Response {
 
     private HashMap<ResponseArguementName, Object> arguements = new HashMap<ResponseArguementName, Object>();
 
-    public Response() {
-
-    }
-
     public void addArgument(ResponseArguementName argName, Object value) {
         arguements.put(argName, value);
     }
 
-    public Object GetArguement(ResponseArguementName argName) throws ArguementNotFoundException {
+    public Object getArguement(ResponseArguementName argName) throws ArguementNotFoundException {
         if (!arguements.containsKey(argName)) {
             throw new ArguementNotFoundException();
         }
