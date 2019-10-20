@@ -13,7 +13,5 @@ import java.io.IOException;
  * @author madsh
  */
 public interface ICommunicationFacade {
-    public void openConnection() throws IOException;
-    public void closeConnection();
-    public void sendRequest(Request request);
+    public Object sendRequest(Request request);
 }

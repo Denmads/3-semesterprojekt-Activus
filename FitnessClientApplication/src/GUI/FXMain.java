@@ -31,14 +31,10 @@ public class FXMain extends Application {
         try {
             CommunicationFacade cf = new CommunicationFacade();
             
-            cf.openConnection();
-            
             Request r = new Request(RequestType.LOGIN, UUID.randomUUID(), 1);
             r.AddArgument(RequestArguementName.USERNAME, "Denmads");
             r.AddArgument(RequestArguementName.PASSWORD, "test");
             cf.sendRequest(r);
-            
-            cf.closeConnection();
             
             Platform.exit();
             

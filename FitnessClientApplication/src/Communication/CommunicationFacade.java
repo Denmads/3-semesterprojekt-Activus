@@ -45,15 +45,13 @@ public class CommunicationFacade implements ICommunicationFacade{
         serverPort = Integer.parseInt(prop.getProperty("serverPort"));
     }
     
-    @Override
-    public void openConnection() throws IOException {
+    private void openConnection() throws IOException {
        socket = new Socket(serverAddress, serverPort);
        serverRequestStream = new ObjectOutputStream(socket.getOutputStream());
        serverResponseStream = new ObjectInputStream(socket.getInputStream());
     }
 
-    @Override
-    public void closeConnection() {
+    private void closeConnection() {
         try {
             serverRequestStream.close();
             serverResponseStream.close();
@@ -64,13 +62,21 @@ public class CommunicationFacade implements ICommunicationFacade{
     }
 
     @Override
-    public void sendRequest(Request request) {
+    public Object sendRequest(Request request) {
+        Object response = null;
+        
         try {
+            openConnection();
+            
             serverRequestStream.writeObject(request);
-            serverResponseStream.readObject();
+            response = serverResponseStream.readObject();
+            
+            closeConnection();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(CommunicationFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return response;
     }
     
 }
