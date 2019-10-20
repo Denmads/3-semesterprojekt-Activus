@@ -12,10 +12,6 @@ public class Response {
 
     }
 
-    public HashMap<ResponseArguementName, Object> getArgumentsNameList() {
-        return arguements;
-    }
-
     public void addArgument(ResponseArguementName argName, Object value) {
         arguements.put(argName,value);
     }

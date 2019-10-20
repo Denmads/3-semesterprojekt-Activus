@@ -34,12 +34,14 @@ public class RequestDelegater {
         
         Response response = null;
         
+        if (contains(authenticationTypes, request)) {
+            response = requestHandlers[0].handleRequest(request);
+        }
+        
         if (authenticateRequest(request)) {
         
-            if (contains(authenticationTypes, request)) {
-                response = requestHandlers[0].handleRequest(request);
-            }
-            else if (contains(profileRequestTypes, request)) {
+            
+            if (contains(profileRequestTypes, request)) {
 
             }
             else if (contains(trainingSchemeRequestTypes, request)) {
