@@ -1,7 +1,5 @@
 package Domain.TraningScheme;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Victor
@@ -31,9 +29,5 @@ public class SetInfo {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-
-  
-    
-    
 
 }
