@@ -1,6 +1,6 @@
 package Domain.Authentication;
 
-import Models.Response;
+
 import Domain.User.Profile;
 import Domain.User.ProfileService;
 import Domain.serviceInterfaces.IAuthenticationService;
@@ -13,6 +13,7 @@ import LayerInterfaces.Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
+import Models.Response;
 
 /**
  *
@@ -35,14 +36,14 @@ public class AuthenticationService extends IAuthenticationService {
     public boolean Login(String username, String password) {
         //Creating a request object, which is an object that holds the different information
         //we want to ask the server for.
-        Request loginRQ = createRequest(RequestType.LOGIN);
+        Request loginRQ = new Request(RequestType.LOGIN, null, -1);
         //Adding the username to the request.
         loginRQ.AddArgument(RequestArguementName.USERNAME, username);
         //Adding the password to the request.
         loginRQ.AddArgument(RequestArguementName.PASSWORD, password);
         //Sending the request to the server.
         Response response = communicationLayer.sendRequest(loginRQ);
-
+        
         //We verify the users login in a try-catch statement. 
         //If the server receives an argument that doesn't exist we will get an exception.
         //Therefore if the logininformation is incorrect the method will return false. 
@@ -78,11 +79,14 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public Request createRequest(RequestType type) {
         if (credentials != null) {
-            return new Request(type, credentials.getAuthenticationToken(), credentials.getUserId());
-        } else {
+            return new Request(type, credentials.getAuthenticationToken(), credentials.getUserId());        
+        }
+        else {
             return new Request(type, null, -1);
         }
-
+        
     }
-
+    
+    
+    
 }

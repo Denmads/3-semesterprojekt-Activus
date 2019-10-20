@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Exceptions.*;
 import Models.Request;
+import Models.Response;
 
 /**
  *
@@ -34,10 +35,12 @@ public class ProfileService extends IProfileService {
 
         try {
             IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
-            Request request = new Request(RequestType.SEARCH, authenticationService.getCredentials().getAuthenticationToken(), authenticationService.getCredentials().getUserId());
+            Request request = authenticationService.createRequest(RequestType.SEARCH);
             request.AddArgument(RequestArguementName.SEARCH_TYPE, searchType);
             request.AddArgument(RequestArguementName.TEXT, searchType);
-
+            Response response = communicationLayer.sendRequest(request);
+            
+            
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -47,6 +50,14 @@ public class ProfileService extends IProfileService {
 
     @Override
     public Profile getProfile(int profileID) {
+        try {
+            IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
+            Request request = authenticationService.createRequest(RequestType.GET_PROFILE);
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
