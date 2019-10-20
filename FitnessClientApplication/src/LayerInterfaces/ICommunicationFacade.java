@@ -7,7 +7,7 @@ package LayerInterfaces;
 
 import Communication.Request;
 import Models.Response;
-import java.io.IOException;
+
 
 /**
  *

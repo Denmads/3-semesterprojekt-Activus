@@ -1,5 +1,6 @@
 package Domain.TraningScheme;
 
+import Enums.Day;
 import java.util.HashMap;
 
 /**

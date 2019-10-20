@@ -1,6 +1,7 @@
 package Domain.User;
 
 import Domain.TraningScheme.Exercise;
+import Enums.SearchType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
@@ -11,7 +12,7 @@ public abstract class IProfileService extends IService{
         super(communication, domainFacade);
     }
     
-public abstract Profile searchProfile (String searchString, boolean buddySearch);
+public abstract Profile search (String searchString, SearchType searchType);
 public abstract Profile getProfile (int profileID);
 public abstract boolean updateProfile(Profile newProfileInfo);
 public abstract boolean updateProfilePassWord (String newPassword);

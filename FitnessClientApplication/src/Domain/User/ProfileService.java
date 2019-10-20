@@ -8,9 +8,18 @@ package Domain.User;
 import Communication.Request;
 import Domain.DomainFacade;
 import Domain.TraningScheme.Exercise;
+import Domain.serviceInterfaces.IAuthenticationService;
+import Enums.RequestArguementName;
 import Enums.RequestType;
+import Enums.SearchType;
+import Exceptions.ServiceNotFoundException;
+import LayerInterfaces.Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Exceptions.*;
 
 /**
  *
@@ -28,8 +37,19 @@ public class ProfileService extends IProfileService{
     
 
     @Override
-    public Profile searchProfile(String searchString, boolean buddySearch) {
-        Request request = new Request(RequestType.SEARCH,  , 0)
+    public Profile search(String searchString,SearchType searchType ) {
+        
+        try {
+            IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
+            Request request = new Request(RequestType.SEARCH, authenticationService.getCredentials().getAuthenticationToken() , authenticationService.getCredentials().getUserId());
+            request.AddArgument(RequestArguementName.SEARCH_TYPE, searchType);
+            request.AddArgument(RequestArguementName.TEXT, searchType);
+            
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
