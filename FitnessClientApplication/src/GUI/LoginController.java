@@ -43,22 +43,22 @@ public class LoginController implements Initializable {
     //that verifies the login and then call it in the following methods.
     @FXML
     private void handleUserFieldAction(ActionEvent event) {
-        verifyLogin(usernameField.getText(), passwordField.getText());
+        verifyLogin();
     }
 
     @FXML
     private void handlePasswordFieldAction(ActionEvent event) {
-        verifyLogin(usernameField.getText(), passwordField.getText());
+        verifyLogin();
     }
 
     @FXML
     private void handleLoginImageAction(MouseEvent event) {
-        verifyLogin(usernameField.getText(), passwordField.getText());
+        verifyLogin();
     }
 
     @FXML
     private void handleLoginLabelAction(MouseEvent event) {
-        verifyLogin(usernameField.getText(), passwordField.getText());
+        verifyLogin();
     }
 
     @FXML
@@ -67,7 +67,8 @@ public class LoginController implements Initializable {
     }
 
     //Create Login method here;
-    private boolean verifyLogin(String username, String password) {
+    private boolean verifyLogin() {
+        //Do the getText here:
         return false;
     }
 
