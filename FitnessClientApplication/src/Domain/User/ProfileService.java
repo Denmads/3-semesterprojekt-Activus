@@ -1,5 +1,6 @@
 package Domain.User;
 
+import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
 import Domain.TraningScheme.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
