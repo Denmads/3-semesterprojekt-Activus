@@ -1,4 +1,6 @@
-package Communication;
+package Communication.Connection;
+
+import Communication.Connection.TcpServer;
 
 public class Main
 {

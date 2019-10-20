@@ -1,4 +1,6 @@
-package Communication;
+package Communication.Connection;
+
+import Communication.ObjectValidation;
 
 import java.io.*;
 import java.net.Socket;

@@ -1,5 +1,7 @@
 package Communication;
 
+import Communication.Enums.ArgumentName;
+
 import java.util.HashMap;
 
 public class Respons {

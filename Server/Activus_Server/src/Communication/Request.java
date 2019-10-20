@@ -6,6 +6,10 @@
 package Communication;
 
 
+import Communication.Enceptions.ArguementNotFoundException;
+import Communication.Enums.RequestArguementName;
+import Communication.Enums.RequestType;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
