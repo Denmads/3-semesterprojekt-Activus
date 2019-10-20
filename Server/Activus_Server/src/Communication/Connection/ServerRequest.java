@@ -1,6 +1,7 @@
 package Communication.Connection;
 
-import Communication.ObjectValidation;
+import Communication.RequestDelegater;
+import Models.Request;
 
 import java.io.*;
 import java.net.Socket;
@@ -15,36 +16,30 @@ public class ServerRequest extends Thread {
     }
 
     public void run() {
-        InputStream inp = null;
-        ObjectInput brinp = null;
-        ObjectOutputStream out = null;
+        ObjectInput requestStream = null;
+        ObjectOutputStream responseStream = null;
         try {
-            inp = socket.getInputStream();
-            brinp = new ObjectInputStream(inp);
-            out = new ObjectOutputStream(socket.getOutputStream());
+            requestStream = new ObjectInputStream(socket.getInputStream());
+            responseStream = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             return;
         }
 
-        Object line;
-        while (true) {
+        Request request = null;
+       
             try {
-                line = brinp.readObject();
+                request = (Request)requestStream.readObject();
 
-                if ((line == null)) {
-                    socket.close();
-                    return;
-                } else {
-                    ObjectValidation a = new ObjectValidation(line);
-
-                    //out.writeBytes(line + "\n\r");
-                    //out.flush();
-                }
+                //Handle Request and get respsone object
+                
+                //Send object back and close
+                //resonseStream.WriteObject(response);
+                
+                socket.close();
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 return;
             }
-        }
     }
 
 }

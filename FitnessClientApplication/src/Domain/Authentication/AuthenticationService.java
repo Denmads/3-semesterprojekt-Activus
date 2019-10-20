@@ -7,6 +7,8 @@ package Domain.Authentication;
 
 import Domain.serviceInterfaces.IAuthenticationService;
 import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import Models.CredentialsContainer;
 
 /**
  *
@@ -16,8 +18,8 @@ public class AuthenticationService extends IAuthenticationService{
 
     private CredentialsContainer credentials;
     
-    public AuthenticationService (ICommunicationFacade communication) {
-        super(communication);
+    public AuthenticationService (ICommunicationFacade communication, IDomainFacade domainFacade) {
+        super(communication, domainFacade);
     }
     
     @Override

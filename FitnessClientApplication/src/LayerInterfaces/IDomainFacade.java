@@ -15,5 +15,6 @@ import java.util.HashMap;
  */
 public interface IDomainFacade {
     
-    <T extends IService> T GetService (ServiceType type) throws ServiceNotFoundException, ClassCastException;
+    <T extends IService> T getService (ServiceType type) throws ServiceNotFoundException, ClassCastException;
+    public void addService (ServiceType type, IService service);
 }

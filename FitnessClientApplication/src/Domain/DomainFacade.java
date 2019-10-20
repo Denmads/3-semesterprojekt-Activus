@@ -22,16 +22,21 @@ public class DomainFacade implements IDomainFacade{
     }
     
     private void InitializeServices (ICommunicationFacade communicationFacade) {
-        services.put(ServiceType.AUTHENTICATION, new AuthenticationService(communicationFacade));
+        addService(ServiceType.AUTHENTICATION, new AuthenticationService(communicationFacade, this));
     }
     
     @Override
-    public <T extends IService> T GetService(ServiceType type) throws ServiceNotFoundException, ClassCastException{
+    public <T extends IService> T getService(ServiceType type) throws ServiceNotFoundException, ClassCastException{
         if (!services.containsKey(type)) {
             throw new ServiceNotFoundException();
         }
         
         return (T)services.get(type);
+    }
+
+    @Override
+    public void addService(ServiceType type, IService service) {
+        services.put(type, service);
     }
     
 }

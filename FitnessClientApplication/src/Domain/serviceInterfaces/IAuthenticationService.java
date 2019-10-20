@@ -5,10 +5,11 @@
  */
 package Domain.serviceInterfaces;
 
-import Domain.Authentication.CredentialsContainer;
 import Domain.Authentication.NewAccountInfo;
 import LayerInterfaces.IService;
 import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import Models.CredentialsContainer;
 
 /**
  *
@@ -16,8 +17,8 @@ import LayerInterfaces.ICommunicationFacade;
  */
 public abstract class IAuthenticationService extends IService {
 
-    public IAuthenticationService(ICommunicationFacade communication) {
-        super(communication);
+    public IAuthenticationService(ICommunicationFacade communication, IDomainFacade domainFacade) {
+        super(communication, domainFacade);
     }
     public abstract CredentialsContainer getCredentials();
     public abstract boolean Login (String username, String password);
