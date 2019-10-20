@@ -5,7 +5,7 @@
  */
 package LayerInterfaces;
 
-import Communication.Request;
+import Models.Request;
 import Models.Response;
 
 

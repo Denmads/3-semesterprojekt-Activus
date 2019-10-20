@@ -6,9 +6,11 @@
 package Domain.Authentication;
 
 import Domain.serviceInterfaces.IAuthenticationService;
+import Enums.RequestType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
+import Models.Request;
 
 /**
  *
@@ -42,5 +44,18 @@ public class AuthenticationService extends IAuthenticationService{
     public boolean CreateAccount(NewAccountInfo accountInfo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Request createRequest(RequestType type) {
+        if (credentials != null) {
+            return new Request(type, credentials.getAuthenticationToken(), credentials.getUserId());        
+        }
+        else {
+            return new Request(type, null, -1);
+        }
+        
+    }
+    
+    
     
 }

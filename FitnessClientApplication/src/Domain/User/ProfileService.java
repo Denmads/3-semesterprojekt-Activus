@@ -5,7 +5,6 @@
  */
 package Domain.User;
 
-import Communication.Request;
 import Domain.DomainFacade;
 import Domain.TraningScheme.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
@@ -20,6 +19,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Exceptions.*;
+import Models.Request;
 
 /**
  *

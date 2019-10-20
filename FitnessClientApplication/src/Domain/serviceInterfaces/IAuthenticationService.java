@@ -6,10 +6,12 @@
 package Domain.serviceInterfaces;
 
 import Domain.Authentication.NewAccountInfo;
+import Enums.RequestType;
 import LayerInterfaces.IService;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
+import Models.Request;
 
 /**
  *
@@ -24,4 +26,5 @@ public abstract class IAuthenticationService extends IService {
     public abstract boolean Login (String username, String password);
     public abstract void Logout ();
     public abstract boolean CreateAccount(NewAccountInfo accountInfo);
+    public abstract Request createRequest (RequestType type);
 }

@@ -7,6 +7,7 @@ package Communication;
 
 import Exceptions.ConfigFileNotFound;
 import LayerInterfaces.ICommunicationFacade;
+import Models.Request;
 import Models.Response;
 import java.io.File;
 import java.io.FileNotFoundException;
