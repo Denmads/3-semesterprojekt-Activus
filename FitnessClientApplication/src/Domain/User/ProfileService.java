@@ -33,6 +33,7 @@ public class ProfileService extends IProfileService {
 
     @Override
     public List<Profile> search(String searchString, SearchType searchType) {
+       
         List<Profile> profiles = null;
         try {
             
@@ -52,26 +53,20 @@ public class ProfileService extends IProfileService {
 
     @Override
     public Profile getProfile(int profileID) {
-        Profile profile=null;
-        try {
-            Request request = getAuthenticationService().createRequest(RequestType.GET_PROFILE);
-            request.AddArgument(RequestArguementName.PROFILE_ID, profileID);
-            Response response = communicationLayer.sendRequest(request);
-            profile= (Profile) response.getArguement(ResponseArguementName.PROFILE);
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ArguementNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return profile;
+        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArguementName.PROFILE_ID, ResponseArguementName.PROFILE, profileID);
+        
     }
 
     @Override
     public boolean updateProfile(Profile newProfileInfo) {
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean isUpdate;
+        //To do OPdate the profile in db;
+        if(getProfile(currentProfile.getProfileID())!=newProfileInfo){
+            isUpdate= false;
+        }else{
+            isUpdate=true;
+        }
+        return isUpdate;
     }
 
     @Override
@@ -121,5 +116,21 @@ public class ProfileService extends IProfileService {
 
     private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
         return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
+    }
+    private Object returnObject(RequestType requestType, RequestArguementName requestArguementName,ResponseArguementName responseArguementName, Object o){
+        Object object=null;
+        try {
+            Request request = getAuthenticationService().createRequest(requestType);
+            request.AddArgument(requestArguementName, o);
+            Response response = communicationLayer.sendRequest(request);
+            object= response.getArguement(responseArguementName);
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArguementNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return object;
     }
 }
