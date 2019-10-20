@@ -2,7 +2,6 @@
 *.asta.lock
 /FitnessClientApplication/build/
 /FitnessClientApplication/dist/
-*.xml
 *.iml
 /ActivusDataLibrary/nbproject/private/
 /ActivusDataLibrary/build/
