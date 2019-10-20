@@ -49,9 +49,9 @@ public class AuthenticationService extends IAuthenticationService {
         //Therefore if the logininformation is incorrect the method will return false. 
         try {
             //Casting the information received from the server to the CredentialsContainer. The Container is used to hold the received information.
-            credentials = (CredentialsContainer) response.GetArguement(ResponseArguementName.CREDENTIALS);
+            credentials = (CredentialsContainer) response.getArguement(ResponseArguementName.CREDENTIALS);
             //Casting the received information into a Profile object for the user.
-            Profile p = (Profile) response.GetArguement(ResponseArguementName.PROFILE);
+            Profile p = (Profile) response.getArguement(ResponseArguementName.PROFILE);
             //Creating a profileservice with the current users information. 
             ProfileService PS = new ProfileService(p, communicationLayer, domainFacade);
             //Adding ProfileService to the domainFacade.

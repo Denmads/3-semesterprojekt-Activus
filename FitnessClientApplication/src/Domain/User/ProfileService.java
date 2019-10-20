@@ -5,6 +5,7 @@ import Domain.TraningScheme.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestArguementName;
 import Enums.RequestType;
+import Enums.ResponseArguementName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
@@ -32,37 +33,44 @@ public class ProfileService extends IProfileService {
 
     @Override
     public List<Profile> search(String searchString, SearchType searchType) {
-
+        List<Profile> profiles = null;
         try {
-            IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
-            Request request = authenticationService.createRequest(RequestType.SEARCH);
+            
+            Request request = getAuthenticationService().createRequest(RequestType.SEARCH);
             request.AddArgument(RequestArguementName.SEARCH_TYPE, searchType);
             request.AddArgument(RequestArguementName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
-            
-            
-        } catch (ServiceNotFoundException | ClassCastException ex) {
+            profiles= (List < Profile >) response.getArguement(ResponseArguementName.PROFILE);
+        } catch (ArguementNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return profiles;
     }
 
     @Override
     public Profile getProfile(int profileID) {
+        Profile profile=null;
         try {
-            IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
-            Request request = authenticationService.createRequest(RequestType.GET_PROFILE);
+            Request request = getAuthenticationService().createRequest(RequestType.GET_PROFILE);
+            request.AddArgument(RequestArguementName.PROFILE_ID, profileID);
+            Response response = communicationLayer.sendRequest(request);
+            profile= (Profile) response.getArguement(ResponseArguementName.PROFILE);
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArguementNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return profile;
     }
 
     @Override
     public boolean updateProfile(Profile newProfileInfo) {
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -111,4 +119,7 @@ public class ProfileService extends IProfileService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
+        return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
+    }
 }
