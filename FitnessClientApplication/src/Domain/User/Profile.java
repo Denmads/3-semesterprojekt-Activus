@@ -3,6 +3,7 @@ package Domain.User;
 import java.util.List;
 
 public class Profile {
+
     private String firstName;
     private String LastName;
     private String Username;
@@ -62,6 +63,5 @@ public class Profile {
     public void setBuffyList(List<Profile> buffyList) {
         this.buffyList = buffyList;
     }
-    
-    
+
 }
