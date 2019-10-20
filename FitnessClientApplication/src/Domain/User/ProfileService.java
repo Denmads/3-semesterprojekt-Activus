@@ -10,6 +10,7 @@ import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,7 +28,7 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public Profile search(String searchString, SearchType searchType) {
+    public List<Profile> search(String searchString, SearchType searchType) {
 
         try {
             IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
