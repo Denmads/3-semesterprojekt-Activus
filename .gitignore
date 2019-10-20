@@ -4,3 +4,6 @@
 /FitnessClientApplication/dist/
 *.xml
 *.iml
+/ActivusDataLibrary/nbproject/private/
+/ActivusDataLibrary/build/
+/ActivusDataLibrary/dist/
