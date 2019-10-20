@@ -16,6 +16,6 @@ public class AuthenticationRequestHandler implements IRequestHandler{
     
     @Override
     public Response handleRequest(Request request) {
-        return null;
+        return new Response();
     }
 }
