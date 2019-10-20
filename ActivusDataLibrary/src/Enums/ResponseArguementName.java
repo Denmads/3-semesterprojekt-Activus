@@ -10,5 +10,6 @@ package Enums;
  * @author madsh
  */
 public enum ResponseArguementName {
-    
+    CREDENTIALS,
+    PROFILE    
 }
