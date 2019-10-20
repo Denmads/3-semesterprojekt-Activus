@@ -17,4 +17,5 @@ public interface IDomainFacade {
     
     <T extends IService> T getService (ServiceType type) throws ServiceNotFoundException, ClassCastException;
     public void addService (ServiceType type, IService service);
+    public void removeAllServices ();
 }

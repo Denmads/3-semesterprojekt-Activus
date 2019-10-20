@@ -23,8 +23,8 @@ public abstract class IAuthenticationService extends IService {
         super(communication, domainFacade);
     }
     public abstract CredentialsContainer getCredentials();
-    public abstract boolean Login (String username, String password);
-    public abstract void Logout ();
-    public abstract boolean CreateAccount(NewAccountInfo accountInfo);
+    public abstract boolean login (String username, String password);
+    public abstract void logout ();
+    public abstract boolean createAccount(NewAccountInfo accountInfo);
     public abstract Request createRequest (RequestType type);
 }

@@ -7,6 +7,7 @@ import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
 import java.util.HashMap;
 import LayerInterfaces.ICommunicationFacade;
+import java.util.Map;
 
 /**
  *
@@ -37,6 +38,16 @@ public class DomainFacade implements IDomainFacade{
     @Override
     public void addService(ServiceType type, IService service) {
         services.put(type, service);
+    }
+
+    @Override
+    public void removeAllServices() {
+        for (Map.Entry<ServiceType, IService> entry : services.entrySet()) {
+            if (entry.getKey() != ServiceType.AUTHENTICATION) {
+                services.remove(entry.getKey());
+            }
+            
+        }
     }
     
 }

@@ -1,6 +1,8 @@
 package Domain.Authentication;
 
-
+import Domain.TraningScheme.TrainingSchemeService;
+import Domain.serviceInterfaces.IProfileService;
+import Models.Response;
 import Domain.User.Profile;
 import Domain.User.ProfileService;
 import Domain.serviceInterfaces.IAuthenticationService;
@@ -33,7 +35,7 @@ public class AuthenticationService extends IAuthenticationService {
     }
 
     @Override
-    public boolean Login(String username, String password) {
+    public boolean login(String username, String password) {
         //Creating a request object, which is an object that holds the different information
         //we want to ask the server for.
         Request loginRQ = new Request(RequestType.LOGIN, null, -1);
@@ -56,6 +58,9 @@ public class AuthenticationService extends IAuthenticationService {
             ProfileService PS = new ProfileService(p, communicationLayer, domainFacade);
             //Adding ProfileService to the domainFacade.
             domainFacade.addService(ServiceType.PROFILE, PS);
+            
+            TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
+            domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
 
             return true;
 
@@ -67,13 +72,32 @@ public class AuthenticationService extends IAuthenticationService {
     }
 
     @Override
-    public void Logout() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void logout() {
+        Request request = createRequest(RequestType.LOGOUT);
+        communicationLayer.sendRequest(request);
+        credentials = null;
+        
+        domainFacade.removeAllServices();
     }
 
     @Override
-    public boolean CreateAccount(NewAccountInfo accountInfo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean createAccount(NewAccountInfo accountInfo) {
+        Request request = createRequest(RequestType.CREATE_NEW_USER);
+        request.AddArgument(RequestArguementName.FIRST_NAME, accountInfo.firstName);
+        request.AddArgument(RequestArguementName.LAST_NAME, accountInfo.lastName);
+        request.AddArgument(RequestArguementName.USERNAME, accountInfo.username);
+        request.AddArgument(RequestArguementName.PASSWORD, accountInfo.password);
+        
+        Response response = communicationLayer.sendRequest(request);
+        
+        try {
+            response.getArguement(ResponseArguementName.SUCCESS);
+            
+            return true;
+        }
+        catch (ArguementNotFoundException ex) {
+            return false;
+        }
     }
 
     @Override
