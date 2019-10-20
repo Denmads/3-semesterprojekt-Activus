@@ -1,9 +1,9 @@
 package GUI;
 
 import Communication.CommunicationFacade;
-import Communication.Request;
 import Exceptions.ConfigFileNotFound;
 import Enums.*;
+import Models.Request;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;

@@ -1,16 +1,23 @@
 package Domain.serviceInterfaces;
 
 import Domain.TraningScheme.Exercise;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 
 /**
  *
  * @author Victor
  */
-public interface ITrainingSchemeService {
+public abstract class ITrainingSchemeService extends IService{
 
-    public boolean createNewTrainingScheme(String schemeName);
+    public ITrainingSchemeService(ICommunicationFacade communication, IDomainFacade domainFacade) {
+        super(communication, domainFacade);
+    }
+    
+    public abstract boolean createNewTrainingScheme(String schemeName);
 
-    public boolean createNewTrainingProgram(String programName);
+    public abstract boolean createNewTrainingProgram(String programName);
 
-    public Exercise LoadExercise();
+    public abstract Exercise LoadExercise();
 }
