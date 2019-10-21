@@ -16,6 +16,10 @@ public class ChatRequestHandler implements IRequestHandler{
 
     @Override
     public Response handleRequest(Request request) {
+        switch(request.getRequestType()){
+            case SEND_MESSAGE: /*do something*/ break; //Missing implementation
+            case RECEIVE_MESSAGE_HISTORY: break;
+        }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
