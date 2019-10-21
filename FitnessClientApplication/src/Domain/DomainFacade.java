@@ -2,7 +2,7 @@ package Domain;
 
 import Domain.Authentication.AuthenticationService;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.Enums.ServiceType;
+import Enums.ServiceType;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
 import java.util.HashMap;

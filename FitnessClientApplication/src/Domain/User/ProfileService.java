@@ -10,7 +10,7 @@ import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.Enums.ServiceType;
+import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import java.util.List;
