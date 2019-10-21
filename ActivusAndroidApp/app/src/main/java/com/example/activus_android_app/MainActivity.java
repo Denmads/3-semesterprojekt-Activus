@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 EditText passWord =(EditText) findViewById(R.id.passWord);
                 //TODO create contakt to Domain
                 Intent menu = new Intent(getApplicationContext(),Menu.class);
-                
+                startActivity(menu);
             }
         });
     }
