@@ -12,7 +12,7 @@ public class ServerRequest extends Thread {
 
     public ServerRequest(Socket clientSocket) {
         this.socket = clientSocket;
-        System.out.println("Cennectet to "+this.socket.getInetAddress().toString());
+        System.out.println("Connected to "+this.socket.getInetAddress().toString());
     }
 
     public void run() {
