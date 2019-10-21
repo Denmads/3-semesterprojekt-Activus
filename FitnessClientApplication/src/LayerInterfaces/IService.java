@@ -3,7 +3,7 @@ package LayerInterfaces;
 import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestType;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.Enums.ServiceType;
+import Enums.ServiceType;
 import Models.Request;
 
 /**

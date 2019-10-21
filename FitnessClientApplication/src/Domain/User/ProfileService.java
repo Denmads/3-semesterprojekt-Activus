@@ -92,7 +92,7 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean followTraininingProgram(int programID) {
+    public boolean followTrainingProgram(int programID) {
         return (boolean) returnResponsObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArgumentName.PROGRAM_ID, ResponseArgumentName.SUCCESS, programID);
         
     }

@@ -20,7 +20,7 @@ public abstract class IChatService extends IService {
         super(communication, domainFacade);
     }
     
-    public abstract void sendMessage(int buddyProfileId, String message);
+    public abstract void sendMessage(int buddyProfileId, Message message);
     
     public abstract Message[] getChatHistory(int buddyProfileId);
     

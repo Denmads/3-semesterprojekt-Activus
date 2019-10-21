@@ -23,5 +23,6 @@ public enum RequestType implements Serializable {
     SET_GOAL,
     SET_STAT,
     REMOVE_STAT,
-    SEND_MESSAGE
+    SEND_MESSAGE,
+    RECEIVE_MESSAGE_HISTORY
 }

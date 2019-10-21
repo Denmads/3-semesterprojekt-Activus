@@ -33,8 +33,8 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean followProfile(int profileID);
 
-    public abstract boolean folloTraniningProgram(int programID);
-
+    public abstract boolean followTrainingProgram(int programID);
+    
     public abstract boolean sendBuddyRequest(int buddyID);
 
     public abstract boolean acceptBuddyRequest(int requestingProfileID);

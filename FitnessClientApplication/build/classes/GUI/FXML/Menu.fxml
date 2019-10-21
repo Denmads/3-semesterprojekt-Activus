@@ -52,7 +52,7 @@
                 <Image url="@../../Images/menuButton.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="emptyImageButton1" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="610.0" onMouseClicked="#handleEmptyImageButton1Action" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="buddyImageButton" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="610.0" onMouseClicked="#handleBuddyImageButtonAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../Images/menuButton.png" />
             </image>
@@ -77,12 +77,12 @@
                 <Font name="System Bold" size="80.0" />
             </font>
         </Label>
-        <Label fx:id="emptyLabel1" layoutX="1263.0" layoutY="630.0" text="Label" textFill="WHITE">
+        <Label fx:id="buddieLabel" layoutX="1222.0" layoutY="634.0" onMouseClicked="#handleBuddyLabelAction" text="Buddies" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="80.0" />
             </font>
         </Label>
-        <Label fx:id="emptyLabel2" layoutX="1263.0" layoutY="823.0" text="Label" textFill="WHITE">
+        <Label fx:id="scheduleLabel" layoutX="1206.0" layoutY="828.0" onMouseClicked="#handleScheduleLabelAction" text="Schedule" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="80.0" />
             </font>
