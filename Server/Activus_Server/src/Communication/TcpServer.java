@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Communication;
 
 import java.io.*;
@@ -14,38 +9,45 @@ import java.net.Socket;
  * @author steff
  */
 public class TcpServer {
+
+    //Creating a server socket to wait for a connection over a network.
     private ServerSocket serverSocket = null;
-    private Socket socket = null;
+    //Creating a socket to retrieve the clients requests.
+    private Socket sock = null;
     final int PORT = 4598;
 
     public void start() {
 
         try {
-
+            //Opening a connection on the chosen PORT.
             serverSocket = new ServerSocket(PORT);
-            System.out.println("Wating for client on port "+ PORT);
+            //Show that the server is waiting for a connection.
+            System.out.println("Wating for client on port " + PORT);
         } catch (IOException e) {
             e.printStackTrace();
-
         }
+
         while (true) {
+
             try {
-
-                socket = serverSocket.accept();
-
+                //Accept the connection from the client to the socket object.
+                sock = serverSocket.accept();
 
             } catch (IOException e) {
                 System.out.println("I/O error: " + e);
             }
-            if(socket.isConnected()){
+            //If a connection to the client is made, then handle the clients request.
+            if (sock.isConnected()) {
+                //Show that the client is connected.
                 System.out.println("Client Connedtet");
-                new ServerRequest(socket).start();
-            }else{
+                //Handle the clients request.
+                new ServerRequest(sock).start();
+            } else {
+                //If no connection is made continue waiting for a connection.
                 System.out.println("wating for Client");
             }
 
         }
     }
-
 
 }
