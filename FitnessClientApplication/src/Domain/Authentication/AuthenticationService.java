@@ -51,9 +51,9 @@ public class AuthenticationService extends IAuthenticationService {
         //Therefore if the logininformation is incorrect the method will return false. 
         try {
             //Casting the information received from the server to the CredentialsContainer. The Container is used to hold the received information.
-            credentials = (CredentialsContainer) response.getArguement(ResponseArgumentName.CREDENTIALS);
+            credentials = (CredentialsContainer) response.getArgument(ResponseArgumentName.CREDENTIALS);
             //Casting the received information into a Profile object for the user.
-            Profile p = (Profile) response.getArguement(ResponseArgumentName.PROFILE);
+            Profile p = (Profile) response.getArgument(ResponseArgumentName.PROFILE);
             //Creating a profileservice with the current users information. 
             ProfileService PS = new ProfileService(p, communicationLayer, domainFacade);
             //Adding ProfileService to the domainFacade.
@@ -91,7 +91,7 @@ public class AuthenticationService extends IAuthenticationService {
         Response response = communicationLayer.sendRequest(request);
         
         try {
-            response.getArguement(ResponseArgumentName.SUCCESS);
+            response.getArgument(ResponseArgumentName.SUCCESS);
             
             return true;
         }

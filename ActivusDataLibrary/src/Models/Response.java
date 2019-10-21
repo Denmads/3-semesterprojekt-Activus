@@ -12,7 +12,7 @@ public class Response {
         arguements.put(argName, value);
     }
 
-    public Object getArguement(ResponseArgumentName argName) throws ArgumentNotFoundException {
+    public Object getArgument(ResponseArgumentName argName) throws ArgumentNotFoundException {
         if (!arguements.containsKey(argName)) {
             throw new ArgumentNotFoundException();
         }
