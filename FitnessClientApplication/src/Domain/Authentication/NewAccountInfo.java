@@ -10,16 +10,32 @@ package Domain.Authentication;
  * @author madsh
  */
 public class NewAccountInfo {
-    public String firstName;
-    public String lastName;
-    public String username;
-    public String password;
-
+    private String firstName;
+    private String lastName;
+    private String username;
+    private String password;
+    
     public NewAccountInfo(String firstName, String lastName, String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
     }
     
     
