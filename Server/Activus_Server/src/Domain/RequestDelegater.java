@@ -4,13 +4,18 @@ import Enums.RequestType;
 import Enums.ServiceType;
 import Models.Request;
 import Models.Response;
+import java.util.HashMap;
 
 public class RequestDelegater {
     
-    IRequestHandler[] requestHandlers = new IRequestHandler[4];
+    HashMap<ServiceType, IRequestHandler> requestHandlers;
     
     public RequestDelegater () {
-        requestHandlers[0] = new AuthenticationRequestHandler();
+        requestHandlers = new HashMap<>();
+        requestHandlers.put(ServiceType.AUTHENTICATION, new AuthenticationRequestHandler());
+        requestHandlers.put(ServiceType.PROFILE, new ProfileRequestHandler());
+        requestHandlers.put(ServiceType.TRAININGSCHEME, new TrainingSchemeRequestHandler());
+        requestHandlers.put(ServiceType.CHAT, new ChatRequestHandler()); 
     }
 
     private boolean contains (RequestType[] typeArray, Request request) {
@@ -28,12 +33,12 @@ public class RequestDelegater {
         Response response = null;
         
         if (request.getServiceType() == ServiceType.AUTHENTICATION) {
-            response = requestHandlers[0].handleRequest(request);
+            response = requestHandlers.get(request.getServiceType()).handleRequest(request);
         }
         else 
         {
             if (authenticateRequest(request)) {
-                response = requestHandlers[request.getServiceType().ordinal()].handleRequest(request);
+                response = requestHandlers.get(request.getServiceType()).handleRequest(request);
             }
             else {
                 //TODO: Create response object with Authentiation Error
