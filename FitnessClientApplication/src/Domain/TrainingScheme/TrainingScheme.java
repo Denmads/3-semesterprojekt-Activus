@@ -15,10 +15,11 @@ public class TrainingScheme {
         dayTrainingProgramMap = new HashMap<>();
     }
 
-    public void setDayTrainingProgramForDictionary(HashMap<Day, TrainingProgram> DayTrainingProgramMap) {
-        this.dayTrainingProgramMap = DayTrainingProgramMap;
+    public void setTrainingProgramAdDay(Day day , TrainingProgram trainingProgram) {
+        dayTrainingProgramMap.put(day, trainingProgram);
     }
 
+    
     public void RemoveTrainingProgramForDay(Day day) {
         this.dayTrainingProgramMap.remove(day);
     }
