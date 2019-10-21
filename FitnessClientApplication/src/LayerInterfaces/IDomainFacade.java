@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LayerInterfaces;
 
 import Exceptions.ServiceNotFoundException;
@@ -14,8 +9,10 @@ import java.util.HashMap;
  * @author madsh
  */
 public interface IDomainFacade {
-    
-    <T extends IService> T getService (ServiceType type) throws ServiceNotFoundException, ClassCastException;
-    public void addService (ServiceType type, IService service);
-    public void removeAllServices ();
+
+    <T extends IService> T getService(ServiceType type) throws ServiceNotFoundException, ClassCastException;
+
+    public void addService(ServiceType type, IService service);
+
+    public void removeAllServices();
 }

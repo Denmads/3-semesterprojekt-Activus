@@ -1,5 +1,6 @@
 package Domain.User;
 
+import Models.Profile;
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
 import Domain.TrainingScheme.Exercise;
@@ -61,8 +62,9 @@ public class ProfileService extends IProfileService {
     @Override
     public boolean updateProfile(Profile newProfileInfo) {
         boolean isUpdate;
+        currentProfile = (Profile) returnObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);
         //To do OPdate the profile in db;
-        if(getProfile(currentProfile.getProfileID())!=newProfileInfo){
+        if(currentProfile!=newProfileInfo){
             isUpdate= false;
         }else{
             isUpdate=true;
@@ -72,47 +74,49 @@ public class ProfileService extends IProfileService {
 
     @Override
     public boolean updateProfilePassWord(String newPassword) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (boolean) returnObject(RequestType.UPDATE_PASSWORD, RequestArgumentName.PASSWORD, ResponseArgumentName.SUCCESS, newPassword);
     }
 
     @Override
     public boolean deleteAccount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (boolean) returnObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
     }
 
     @Override
-    public boolean FollowProfile(int profileID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean followProfile(int profileID) {
+        return (boolean) returnObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
     }
 
     @Override
-    public boolean FolloTraniningProgram(int programID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean folloTraniningProgram(int programID) {
+        return (boolean) returnObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArgumentName.PROGRAM_ID, ResponseArgumentName.SUCCESS, programID);
+        
     }
 
     @Override
-    public boolean SendBuddyRequest(int buddyID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean sendBuddyRequest(int buddyID) {
+        return (boolean) returnObject(RequestType.SEND_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
+        
     }
 
     @Override
-    public boolean AcceptBuddyRequest(int requestingProfileID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean acceptBuddyRequest(int requestingProfileID) {
+        return (boolean) returnObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
     }
 
     @Override
     public boolean setGoal(String Goal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (boolean) returnObject(RequestType.SET_GOAL, RequestArgumentName.TEXT, ResponseArgumentName.SUCCESS, Goal);
     }
 
     @Override
     public int setStats(Exercise exercise) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) returnObject(RequestType.SET_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, exercise);
     }
 
     @Override
     public boolean removeStats(int statsID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return (boolean) returnObject(RequestType.REMOVE_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, statsID);
     }
 
     private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{

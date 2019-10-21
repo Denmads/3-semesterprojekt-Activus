@@ -12,5 +12,7 @@ package Enums;
 public enum ResponseArgumentName {
     CREDENTIALS,
     PROFILE,
-    SUCCESS
-}
+    SUCCESS,
+    TRAININGPROGRAM,
+    STATS}
+

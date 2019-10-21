@@ -1,7 +1,7 @@
 package Domain.serviceInterfaces;
 
 import Domain.TrainingScheme.Exercise;
-import Domain.User.Profile;
+import Models.Profile;
 import Enums.SearchType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
@@ -19,10 +19,10 @@ public abstract Profile getProfile (int profileID);
 public abstract boolean updateProfile(Profile newProfileInfo);
 public abstract boolean updateProfilePassWord (String newPassword);
 public abstract boolean deleteAccount();
-public abstract boolean FollowProfile(int profileID);
-public abstract boolean FolloTraniningProgram(int programID);
-public abstract boolean SendBuddyRequest(int buddyID);
-public abstract boolean AcceptBuddyRequest(int requestingProfileID);
+public abstract boolean followProfile(int profileID);
+public abstract boolean folloTraniningProgram(int programID);
+public abstract boolean sendBuddyRequest(int buddyID);
+public abstract boolean acceptBuddyRequest(int requestingProfileID);
 public abstract boolean setGoal(String Goal);
 public abstract int setStats(Exercise exercise);
 public abstract boolean removeStats(int statsID);

@@ -28,8 +28,6 @@ public class MenuController implements Initializable {
     @FXML
     private ImageView profileImageButton;
     @FXML
-    private ImageView emptyImageButton1;
-    @FXML
     private ImageView emptyImageButton2;
     @FXML
     private Label statsLabel;
@@ -38,9 +36,11 @@ public class MenuController implements Initializable {
     @FXML
     private Label profileLabel;
     @FXML
-    private Label emptyLabel1;
+    private ImageView buddyImageButton;
     @FXML
-    private Label emptyLabel2;
+    private Label buddieLabel;
+    @FXML
+    private Label scheduleLabel;
 
     /**
      * Initializes the controller class.
@@ -71,10 +71,6 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void handleEmptyImageButton1Action(MouseEvent event) {
-    }
-
-    @FXML
     private void handleEmptyImageButton2Action(MouseEvent event) {
     }
 
@@ -88,6 +84,18 @@ public class MenuController implements Initializable {
 
     @FXML
     private void handleProfileLabelAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleBuddyImageButtonAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleBuddyLabelAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleScheduleLabelAction(MouseEvent event) {
     }
 
 }

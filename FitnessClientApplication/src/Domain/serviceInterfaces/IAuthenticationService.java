@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Domain.serviceInterfaces;
 
 import Domain.Authentication.NewAccountInfo;
@@ -22,9 +17,14 @@ public abstract class IAuthenticationService extends IService {
     public IAuthenticationService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         super(communication, domainFacade);
     }
+
     public abstract CredentialsContainer getCredentials();
-    public abstract boolean login (String username, String password);
-    public abstract void logout ();
+
+    public abstract boolean login(String username, String password);
+
+    public abstract void logout();
+
     public abstract boolean createAccount(NewAccountInfo accountInfo);
-    public abstract Request createRequest (RequestType type);
+
+    public abstract Request createRequest(RequestType type);
 }
