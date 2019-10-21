@@ -5,15 +5,15 @@ import java.util.List;
 public class Profile {
 
     private String firstName;
-    private String LastName;
-    private String Username;
-    private int profileID;
-    private int[] buddiesID;
-    private List<Profile> buffyList;
+    private String lastName;
+    private String username;
+    private int profileId;
+    private int[] buddyIds;
+    private List<Profile> buddyList;
 
     public Profile(String Username, int profileID) {
-        this.Username = Username;
-        this.profileID = profileID;
+        this.username = Username;
+        this.profileId = profileID;
     }
 
     public String getFirstName() {
@@ -25,43 +25,43 @@ public class Profile {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String LastName) {
-        this.LastName = LastName;
+        this.lastName = LastName;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String Username) {
-        this.Username = Username;
+        this.username = Username;
     }
 
     public int getProfileID() {
-        return profileID;
+        return profileId;
     }
 
     public void setProfileID(int profileID) {
-        this.profileID = profileID;
+        this.profileId = profileID;
     }
 
     public int[] getBuddiesID() {
-        return buddiesID;
+        return buddyIds;
     }
 
     public void setBuddiesID(int[] buddiesID) {
-        this.buddiesID = buddiesID;
+        this.buddyIds = buddiesID;
     }
 
     public List<Profile> getBuffyList() {
-        return buffyList;
+        return buddyList;
     }
 
     public void setBuffyList(List<Profile> buffyList) {
-        this.buffyList = buffyList;
+        this.buddyList = buffyList;
     }
 
 }

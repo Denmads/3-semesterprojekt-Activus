@@ -17,6 +17,8 @@ import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
 import Models.Response;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -85,21 +87,20 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public boolean createAccount(NewAccountInfo accountInfo) {
         Request request = createRequest(RequestType.CREATE_NEW_USER);
-        request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.firstName);
-        request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.lastName);
-        request.addArgument(RequestArgumentName.USERNAME, accountInfo.username);
-        request.addArgument(RequestArgumentName.PASSWORD, accountInfo.password);
+        request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.getFirstName());
+        request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.getLastName());
+        request.addArgument(RequestArgumentName.USERNAME, accountInfo.getUsername());
+        request.addArgument(RequestArgumentName.PASSWORD, accountInfo.getPassword());
         
         Response response = communicationLayer.sendRequest(request);
         
         try {
-            response.getArgument(ResponseArgumentName.SUCCESS);
-            
-            return true;
+            return (boolean)response.getArgument(ResponseArgumentName.SUCCESS);
+        } catch (ArgumentNotFoundException ex) {
+            Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (ArgumentNotFoundException ex) {
-            return false;
-        }
+        
+        return false;
     }
 
     @Override
