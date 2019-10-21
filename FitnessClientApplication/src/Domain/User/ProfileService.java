@@ -1,5 +1,6 @@
 package Domain.User;
 
+import Models.Profile;
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
 import Domain.TrainingScheme.Exercise;

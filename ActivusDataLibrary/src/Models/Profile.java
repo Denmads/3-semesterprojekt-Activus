@@ -1,4 +1,4 @@
-package Domain.User;
+package Models;
 
 import java.util.List;
 
