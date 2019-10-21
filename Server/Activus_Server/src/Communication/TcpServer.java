@@ -5,9 +5,13 @@
  */
 package Communication;
 
+import Persistence.DatabaseConnection;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +32,8 @@ public class TcpServer {
             e.printStackTrace();
 
         }
-        while (true) {
+        boolean running = true;
+        while (running) {
             try {
 
                 socket = serverSocket.accept();
@@ -44,6 +49,12 @@ public class TcpServer {
                 System.out.println("wating for Client");
             }
 
+        }
+        
+        try {
+            DatabaseConnection.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(TcpServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

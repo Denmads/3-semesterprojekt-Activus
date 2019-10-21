@@ -6,9 +6,10 @@ import java.util.List;
 public class Profile implements Serializable {
 
     private int profileId;
+    private String username;
     private String firstName;
     private String lastName;
-    private String username;
+    private int age;
     private String city;
     private String country;
     private String gender;
@@ -16,9 +17,8 @@ public class Profile implements Serializable {
 
     private int[] buddyIds;
 
-    public Profile(String Username, int profileID) {
-        this.username = Username;
-        this.profileId = profileID;
+    public Profile(int profileId) {
+        this.profileId = profileId;
     }
 
     public String getFirstName() {
@@ -49,24 +49,8 @@ public class Profile implements Serializable {
         return profileId;
     }
 
-    public void setProfileID(int profileID) {
-        this.profileId = profileID;
-    }
-
-    public int[] getBuddiesID() {
-        return buddyIds;
-    }
-
-    public void setBuddiesID(int[] buddiesID) {
-        this.buddyIds = buddiesID;
-    }
-
     public int getProfileId() {
         return profileId;
-    }
-
-    public void setProfileId(int profileId) {
-        this.profileId = profileId;
     }
 
     public String getCity() {
@@ -109,4 +93,13 @@ public class Profile implements Serializable {
         this.buddyIds = buddyIds;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    
 }
