@@ -1,16 +1,16 @@
 package Domain.Authentication;
 
-import Domain.TraningScheme.TrainingSchemeService;
+import Domain.TrainingScheme.TrainingSchemeService;
 import Domain.serviceInterfaces.IProfileService;
 import Models.Response;
 import Domain.User.Profile;
 import Domain.User.ProfileService;
 import Domain.serviceInterfaces.IAuthenticationService;
 import Models.Request;
-import Enums.RequestArguementName;
+import Enums.RequestArgumentName;
 import Enums.RequestType;
-import Enums.ResponseArguementName;
-import Exceptions.ArguementNotFoundException;
+import Enums.ResponseArgumentName;
+import Exceptions.ArgumentNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
@@ -40,9 +40,9 @@ public class AuthenticationService extends IAuthenticationService {
         //we want to ask the server for.
         Request loginRQ = new Request(RequestType.LOGIN, null, -1);
         //Adding the username to the request.
-        loginRQ.AddArgument(RequestArguementName.USERNAME, username);
+        loginRQ.AddArgument(RequestArgumentName.USERNAME, username);
         //Adding the password to the request.
-        loginRQ.AddArgument(RequestArguementName.PASSWORD, password);
+        loginRQ.AddArgument(RequestArgumentName.PASSWORD, password);
         //Sending the request to the server.
         Response response = communicationLayer.sendRequest(loginRQ);
         
@@ -51,9 +51,9 @@ public class AuthenticationService extends IAuthenticationService {
         //Therefore if the logininformation is incorrect the method will return false. 
         try {
             //Casting the information received from the server to the CredentialsContainer. The Container is used to hold the received information.
-            credentials = (CredentialsContainer) response.getArguement(ResponseArguementName.CREDENTIALS);
+            credentials = (CredentialsContainer) response.getArguement(ResponseArgumentName.CREDENTIALS);
             //Casting the received information into a Profile object for the user.
-            Profile p = (Profile) response.getArguement(ResponseArguementName.PROFILE);
+            Profile p = (Profile) response.getArguement(ResponseArgumentName.PROFILE);
             //Creating a profileservice with the current users information. 
             ProfileService PS = new ProfileService(p, communicationLayer, domainFacade);
             //Adding ProfileService to the domainFacade.
@@ -64,7 +64,7 @@ public class AuthenticationService extends IAuthenticationService {
 
             return true;
 
-        } catch (ArguementNotFoundException e) {
+        } catch (ArgumentNotFoundException e) {
             System.out.println(e);
             System.out.println("----------Failed Login----------");
         }
@@ -83,19 +83,19 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public boolean createAccount(NewAccountInfo accountInfo) {
         Request request = createRequest(RequestType.CREATE_NEW_USER);
-        request.AddArgument(RequestArguementName.FIRST_NAME, accountInfo.firstName);
-        request.AddArgument(RequestArguementName.LAST_NAME, accountInfo.lastName);
-        request.AddArgument(RequestArguementName.USERNAME, accountInfo.username);
-        request.AddArgument(RequestArguementName.PASSWORD, accountInfo.password);
+        request.AddArgument(RequestArgumentName.FIRST_NAME, accountInfo.firstName);
+        request.AddArgument(RequestArgumentName.LAST_NAME, accountInfo.lastName);
+        request.AddArgument(RequestArgumentName.USERNAME, accountInfo.username);
+        request.AddArgument(RequestArgumentName.PASSWORD, accountInfo.password);
         
         Response response = communicationLayer.sendRequest(request);
         
         try {
-            response.getArguement(ResponseArguementName.SUCCESS);
+            response.getArguement(ResponseArgumentName.SUCCESS);
             
             return true;
         }
-        catch (ArguementNotFoundException ex) {
+        catch (ArgumentNotFoundException ex) {
             return false;
         }
     }

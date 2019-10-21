@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.TraningScheme.Exercise;
+import Domain.TrainingScheme.Exercise;
 import Domain.User.Profile;
 import Enums.SearchType;
 import LayerInterfaces.ICommunicationFacade;

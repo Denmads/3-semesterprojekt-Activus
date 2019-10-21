@@ -1,20 +1,20 @@
 package Models;
 
-import Enums.ResponseArguementName;
-import Exceptions.ArguementNotFoundException;
+import Enums.ResponseArgumentName;
+import Exceptions.ArgumentNotFoundException;
 import java.util.HashMap;
 
 public class Response {
 
-    private HashMap<ResponseArguementName, Object> arguements = new HashMap<ResponseArguementName, Object>();
+    private HashMap<ResponseArgumentName, Object> arguements = new HashMap<ResponseArgumentName, Object>();
 
-    public void addArgument(ResponseArguementName argName, Object value) {
+    public void addArgument(ResponseArgumentName argName, Object value) {
         arguements.put(argName, value);
     }
 
-    public Object getArguement(ResponseArguementName argName) throws ArguementNotFoundException {
+    public Object getArguement(ResponseArgumentName argName) throws ArgumentNotFoundException {
         if (!arguements.containsKey(argName)) {
-            throw new ArguementNotFoundException();
+            throw new ArgumentNotFoundException();
         }
 
         return arguements.get(argName);

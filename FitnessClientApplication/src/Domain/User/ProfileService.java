@@ -2,11 +2,11 @@ package Domain.User;
 
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
-import Domain.TraningScheme.Exercise;
+import Domain.TrainingScheme.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
-import Enums.RequestArguementName;
+import Enums.RequestArgumentName;
 import Enums.RequestType;
-import Enums.ResponseArguementName;
+import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
@@ -39,11 +39,11 @@ public class ProfileService extends IProfileService {
         try {
             
             Request request = getAuthenticationService().createRequest(RequestType.SEARCH);
-            request.AddArgument(RequestArguementName.SEARCH_TYPE, searchType);
-            request.AddArgument(RequestArguementName.TEXT, searchType);
+            request.AddArgument(RequestArgumentName.SEARCH_TYPE, searchType);
+            request.AddArgument(RequestArgumentName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
-            profiles= (List < Profile >) response.getArguement(ResponseArguementName.PROFILE);
-        } catch (ArguementNotFoundException ex) {
+            profiles= (List < Profile >) response.getArguement(ResponseArgumentName.PROFILE);
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,7 +54,7 @@ public class ProfileService extends IProfileService {
 
     @Override
     public Profile getProfile(int profileID) {
-        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArguementName.PROFILE_ID, ResponseArguementName.PROFILE, profileID);
+        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
         
     }
 
@@ -118,7 +118,7 @@ public class ProfileService extends IProfileService {
     private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
         return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
     }
-    private Object returnObject(RequestType requestType, RequestArguementName requestArguementName,ResponseArguementName responseArguementName, Object o){
+    private Object returnObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
         Object object=null;
         try {
             Request request = getAuthenticationService().createRequest(requestType);
@@ -129,7 +129,7 @@ public class ProfileService extends IProfileService {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ArguementNotFoundException ex) {
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;

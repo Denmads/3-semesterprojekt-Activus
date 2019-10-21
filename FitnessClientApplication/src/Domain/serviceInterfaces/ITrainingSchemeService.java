@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.TraningScheme.Exercise;
+import Domain.TrainingScheme.Exercise;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
