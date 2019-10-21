@@ -79,11 +79,13 @@ public class ProfileService extends IProfileService {
 
     @Override
     public boolean deleteAccount() {
-        boolean isdeletet =(boolean) returnResponsObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
-        getAuthenticationService().logout();
-        
-        
-        return isdeletet;
+       
+        try {
+            getAuthenticationService().logout();
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+        return (boolean) returnResponsObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
     }
 
     @Override
