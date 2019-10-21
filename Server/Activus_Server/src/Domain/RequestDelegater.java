@@ -1,6 +1,5 @@
 package Domain;
 
-import Enums.RequestType;
 import Enums.ServiceType;
 import Models.Request;
 import Models.Response;
@@ -16,16 +15,6 @@ public class RequestDelegater {
         requestHandlers.put(ServiceType.PROFILE, new ProfileRequestHandler());
         requestHandlers.put(ServiceType.TRAININGSCHEME, new TrainingSchemeRequestHandler());
         requestHandlers.put(ServiceType.CHAT, new ChatRequestHandler()); 
-    }
-
-    private boolean contains (RequestType[] typeArray, Request request) {
-        for (int i = 0; i < typeArray.length; i++) {
-            if (typeArray[i] == request.getRequestType()) {
-                return true;
-            }
-        }
-        
-        return false;
     }
     
     public Response delegate (Request request) {
