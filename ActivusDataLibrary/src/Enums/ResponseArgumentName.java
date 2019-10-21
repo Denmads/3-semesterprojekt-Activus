@@ -15,6 +15,7 @@ public enum ResponseArgumentName {
     SUCCESS,
     TRAININGPROGRAM,
     STATS,
-    CHAT_HISTORY
+    CHAT_HISTORY,
+    EXERCISE
 }
 
