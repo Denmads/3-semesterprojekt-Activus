@@ -55,14 +55,14 @@ public class ProfileService extends IProfileService {
 
     @Override
     public Profile getProfile(int profileID) {
-        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
+        return (Profile) returnResponsObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
         
     }
 
     @Override
     public boolean updateProfile(Profile newProfileInfo) {
         boolean isUpdate;
-        currentProfile = (Profile) returnObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);
+        currentProfile = (Profile) returnResponsObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);
         //To do OPdate the profile in db;
         if(currentProfile!=newProfileInfo){
             isUpdate= false;
@@ -74,55 +74,59 @@ public class ProfileService extends IProfileService {
 
     @Override
     public boolean updateProfilePassWord(String newPassword) {
-        return (boolean) returnObject(RequestType.UPDATE_PASSWORD, RequestArgumentName.PASSWORD, ResponseArgumentName.SUCCESS, newPassword);
+        return (boolean) returnResponsObject(RequestType.UPDATE_PASSWORD, RequestArgumentName.PASSWORD, ResponseArgumentName.SUCCESS, newPassword) ;
     }
 
     @Override
     public boolean deleteAccount() {
-        return (boolean) returnObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
+        boolean isdeletet =(boolean) returnResponsObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
+        getAuthenticationService().logout();
+        
+        
+        return isdeletet;
     }
 
     @Override
     public boolean followProfile(int profileID) {
-        return (boolean) returnObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
+        return (boolean) returnResponsObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
     }
 
     @Override
     public boolean folloTraniningProgram(int programID) {
-        return (boolean) returnObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArgumentName.PROGRAM_ID, ResponseArgumentName.SUCCESS, programID);
+        return (boolean) returnResponsObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArgumentName.PROGRAM_ID, ResponseArgumentName.SUCCESS, programID);
         
     }
 
     @Override
     public boolean sendBuddyRequest(int buddyID) {
-        return (boolean) returnObject(RequestType.SEND_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
+        return (boolean) returnResponsObject(RequestType.SEND_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
         
     }
 
     @Override
     public boolean acceptBuddyRequest(int requestingProfileID) {
-        return (boolean) returnObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
+        return (boolean) returnResponsObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
     }
 
     @Override
     public boolean setGoal(String Goal) {
-        return (boolean) returnObject(RequestType.SET_GOAL, RequestArgumentName.TEXT, ResponseArgumentName.SUCCESS, Goal);
+        return (boolean) returnResponsObject(RequestType.SET_GOAL, RequestArgumentName.TEXT, ResponseArgumentName.SUCCESS, Goal);
     }
 
     @Override
     public int setStats(Exercise exercise) {
-        return (int) returnObject(RequestType.SET_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, exercise);
+        return (int) returnResponsObject(RequestType.SET_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, exercise);
     }
 
     @Override
     public boolean removeStats(int statsID) {
-       return (boolean) returnObject(RequestType.REMOVE_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, statsID);
+       return (boolean) returnResponsObject(RequestType.REMOVE_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, statsID);
     }
 
     private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
         return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
     }
-    private Object returnObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
+    private Object returnResponsObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
         Object object=null;
         try {
             Request request = getAuthenticationService().createRequest(requestType);
