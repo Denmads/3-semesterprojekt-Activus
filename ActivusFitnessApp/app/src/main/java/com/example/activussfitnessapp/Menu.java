@@ -2,6 +2,7 @@ package com.example.activussfitnessapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
@@ -65,7 +66,8 @@ public class Menu extends AppCompatActivity {
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent goToProfile = new Intent(getApplicationContext(),Profile.class);
+                startActivity(goToProfile);
             }
         });
 
