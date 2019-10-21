@@ -18,4 +18,11 @@ public abstract class ITrainingSchemeService extends IService{
     public abstract boolean createNewTrainingProgram(String programName);
 
     public abstract Exercise LoadExercise();
+    
+    public abstract boolean addExercise(Exercise exercise);
+    
+    public abstract boolean removeExercise(Exercise exercise);
+    
+    
+    
 }
