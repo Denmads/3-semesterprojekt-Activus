@@ -38,7 +38,7 @@ public class TrainingSchemeService extends ITrainingSchemeService {
 
     @Override
     public Exercise LoadExercise() {
-        return (Exercise) returnResponsObject(RequestType.RECEIVE_EXERCISE, ResponseArgumentName.EXERCISE);
+        return (Exercise) returnResponseObject(RequestType.RECEIVE_EXERCISE, ResponseArgumentName.EXERCISE);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TrainingSchemeService extends ITrainingSchemeService {
         return false;
     }
 
-   private Object returnResponsObject(RequestType requestType,ResponseArgumentName responseArguementName){
+   private Object returnResponseObject(RequestType requestType,ResponseArgumentName responseArguementName){
         Object object=null;
         try {
             Request request = createRequest(requestType);
