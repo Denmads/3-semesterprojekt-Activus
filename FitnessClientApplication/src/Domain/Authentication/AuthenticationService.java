@@ -40,9 +40,9 @@ public class AuthenticationService extends IAuthenticationService {
         //we want to ask the server for.
         Request loginRQ = new Request(RequestType.LOGIN, null, -1);
         //Adding the username to the request.
-        loginRQ.AddArgument(RequestArgumentName.USERNAME, username);
+        loginRQ.addArgument(RequestArgumentName.USERNAME, username);
         //Adding the password to the request.
-        loginRQ.AddArgument(RequestArgumentName.PASSWORD, password);
+        loginRQ.addArgument(RequestArgumentName.PASSWORD, password);
         //Sending the request to the server.
         Response response = communicationLayer.sendRequest(loginRQ);
         
@@ -83,10 +83,10 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public boolean createAccount(NewAccountInfo accountInfo) {
         Request request = createRequest(RequestType.CREATE_NEW_USER);
-        request.AddArgument(RequestArgumentName.FIRST_NAME, accountInfo.firstName);
-        request.AddArgument(RequestArgumentName.LAST_NAME, accountInfo.lastName);
-        request.AddArgument(RequestArgumentName.USERNAME, accountInfo.username);
-        request.AddArgument(RequestArgumentName.PASSWORD, accountInfo.password);
+        request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.firstName);
+        request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.lastName);
+        request.addArgument(RequestArgumentName.USERNAME, accountInfo.username);
+        request.addArgument(RequestArgumentName.PASSWORD, accountInfo.password);
         
         Response response = communicationLayer.sendRequest(request);
         

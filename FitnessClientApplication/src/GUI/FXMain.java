@@ -25,8 +25,8 @@ public class FXMain extends Application {
             CommunicationFacade cf = new CommunicationFacade();
 
             Request r = new Request(RequestType.LOGIN, UUID.randomUUID(), 1);
-            r.AddArgument(RequestArgumentName.USERNAME, "Denmads");
-            r.AddArgument(RequestArgumentName.PASSWORD, "test");
+            r.addArgument(RequestArgumentName.USERNAME, "Denmads");
+            r.addArgument(RequestArgumentName.PASSWORD, "test");
             cf.sendRequest(r);
 
             Platform.exit();

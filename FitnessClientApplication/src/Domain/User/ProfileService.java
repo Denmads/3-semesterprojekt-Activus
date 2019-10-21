@@ -39,8 +39,8 @@ public class ProfileService extends IProfileService {
         try {
             
             Request request = getAuthenticationService().createRequest(RequestType.SEARCH);
-            request.AddArgument(RequestArgumentName.SEARCH_TYPE, searchType);
-            request.AddArgument(RequestArgumentName.TEXT, searchType);
+            request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
+            request.addArgument(RequestArgumentName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
             profiles= (List < Profile >) response.getArgument(ResponseArgumentName.PROFILE);
         } catch (ArgumentNotFoundException ex) {
@@ -122,7 +122,7 @@ public class ProfileService extends IProfileService {
         Object object=null;
         try {
             Request request = getAuthenticationService().createRequest(requestType);
-            request.AddArgument(requestArguementName, o);
+            request.addArgument(requestArguementName, o);
             Response response = communicationLayer.sendRequest(request);
             object= response.getArgument(responseArguementName);
         } catch (ServiceNotFoundException ex) {
