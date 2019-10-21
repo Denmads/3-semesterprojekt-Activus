@@ -1,5 +1,6 @@
 package com.example.activus_android_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,8 +13,20 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+
+
+import org.w3c.dom.Text;
+
+import Domain.Authentication.AuthenticationService;
+import Domain.serviceInterfaces.IAuthenticationService;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 
 public class MainActivity extends AppCompatActivity {
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +44,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button loginbtn = (Button)findViewById(R.id.loginbtn)
+        ImageButton loginbtn = (ImageButton) findViewById(R.id.loginbtn);
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText username = (EditText) findViewById(R.id.userName);
+                EditText passWord =(EditText) findViewById(R.id.passWord);
+                //TODO create contakt to Domain
+                Intent menu = new Intent(getApplicationContext(),Menu.class);
+                
+            }
+        });
     }
 
     @Override
