@@ -17,6 +17,10 @@ public abstract class IProfileService extends IService {
         this.currentProfile = currentProfile;
     }
 
+    public Profile getCurrentProfile () {
+    	return currentProfile;
+    }
+
     public abstract List<Profile> search(String searchString, SearchType searchType);
 
     public abstract Profile getProfile(int profileID);
