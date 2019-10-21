@@ -123,7 +123,7 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public Request createServerRequest(ServiceType serviceType, RequestType type) {
         if (credentials != null) {
-            return new Request(type, credentials, serviceType);        
+            return new Request(type, credentials, serviceType);
         }
         else {
             return new Request(type, null, ServiceType.AUTHENTICATION);
