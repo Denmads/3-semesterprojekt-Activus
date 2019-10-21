@@ -77,7 +77,7 @@ public class AuthenticationService extends IAuthenticationService {
 
     @Override
     public void logout() {
-        Request request = createRequest(RequestType.LOGOUT);
+        Request request = createServerRequest(RequestType.LOGOUT);
         communicationLayer.sendRequest(request);
         credentials = null;
         
@@ -86,7 +86,7 @@ public class AuthenticationService extends IAuthenticationService {
 
     @Override
     public boolean createAccount(NewAccountInfo accountInfo) {
-        Request request = createRequest(RequestType.CREATE_NEW_USER);
+        Request request = createServerRequest(RequestType.CREATE_NEW_USER);
         request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.getFirstName());
         request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.getLastName());
         request.addArgument(RequestArgumentName.USERNAME, accountInfo.getUsername());
@@ -104,7 +104,7 @@ public class AuthenticationService extends IAuthenticationService {
     }
 
     @Override
-    public Request createRequest(RequestType type) {
+    public Request createServerRequest(RequestType type) {
         if (credentials != null) {
             return new Request(type, credentials.getAuthenticationToken(), credentials.getUserId());        
         }

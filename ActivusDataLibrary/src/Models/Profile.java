@@ -4,12 +4,16 @@ import java.util.List;
 
 public class Profile {
 
+    private int profileId;
     private String firstName;
     private String lastName;
     private String username;
-    private int profileId;
+    private String city;
+    private String country;
+    private String gender;
+    private String gym;
+
     private int[] buddyIds;
-    private List<Profile> buddyList;
 
     public Profile(String Username, int profileID) {
         this.username = Username;
@@ -56,12 +60,52 @@ public class Profile {
         this.buddyIds = buddiesID;
     }
 
-    public List<Profile> getBuffyList() {
-        return buddyList;
+    public int getProfileId() {
+        return profileId;
     }
 
-    public void setBuffyList(List<Profile> buffyList) {
-        this.buddyList = buffyList;
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getGym() {
+        return gym;
+    }
+
+    public void setGym(String gym) {
+        this.gym = gym;
+    }
+
+    public int[] getBuddyIds() {
+        return buddyIds;
+    }
+
+    public void setBuddyIds(int[] buddyIds) {
+        this.buddyIds = buddyIds;
     }
 
 }

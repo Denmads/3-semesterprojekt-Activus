@@ -26,11 +26,9 @@ import Models.Response;
  */
 public class ProfileService extends IProfileService {
 
-    private Profile currentProfile;
 
     public ProfileService(Profile currentProfile, ICommunicationFacade communication, IDomainFacade domainFacade) {
-        super(communication, domainFacade);
-        this.currentProfile = currentProfile;
+        super(communication, domainFacade, currentProfile);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class ProfileService extends IProfileService {
         List<Profile> profiles = null;
         try {
             
-            Request request = getAuthenticationService().createRequest(RequestType.SEARCH);
+            Request request = createRequest(RequestType.SEARCH);
             request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
             request.addArgument(RequestArgumentName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
@@ -81,7 +79,7 @@ public class ProfileService extends IProfileService {
     public boolean deleteAccount() {
        
         try {
-            getAuthenticationService().logout();
+            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -125,13 +123,10 @@ public class ProfileService extends IProfileService {
        return (boolean) returnResponsObject(RequestType.REMOVE_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, statsID);
     }
 
-    private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
-        return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
-    }
     private Object returnResponsObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
         Object object=null;
         try {
-            Request request = getAuthenticationService().createRequest(requestType);
+            Request request = createRequest(requestType);
             request.addArgument(requestArguementName, o);
             Response response = communicationLayer.sendRequest(request);
             object= response.getArgument(responseArguementName);

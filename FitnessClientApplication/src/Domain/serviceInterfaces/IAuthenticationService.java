@@ -26,5 +26,5 @@ public abstract class IAuthenticationService extends IService {
 
     public abstract boolean createAccount(NewAccountInfo accountInfo);
 
-    public abstract Request createRequest(RequestType type);
+    public abstract Request createServerRequest(RequestType type);
 }
