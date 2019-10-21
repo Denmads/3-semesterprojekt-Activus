@@ -12,7 +12,7 @@ import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
-import LayerInterfaces.Enums.ServiceType;
+import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;

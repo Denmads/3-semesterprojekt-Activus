@@ -1,4 +1,4 @@
-package LayerInterfaces.Enums;
+package Enums;
 
 /**
  *

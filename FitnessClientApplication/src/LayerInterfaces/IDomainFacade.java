@@ -1,7 +1,7 @@
 package LayerInterfaces;
 
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.Enums.ServiceType;
+import Enums.ServiceType;
 import java.util.HashMap;
 
 /**
