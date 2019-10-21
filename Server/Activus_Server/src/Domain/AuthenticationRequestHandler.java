@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import Enums.ResponseArgumentName;
 import Models.Request;
 import Models.Response;
 
@@ -16,6 +17,9 @@ public class AuthenticationRequestHandler implements IRequestHandler{
     
     @Override
     public Response handleRequest(Request request) {
-        return new Response();
+        Response response = new Response();
+        response.addArgument(ResponseArgumentName.SUCCESS, "It worked!");
+        
+        return response;
     }
 }

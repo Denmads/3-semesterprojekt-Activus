@@ -2,6 +2,7 @@ package Domain.serviceInterfaces;
 
 import Domain.Authentication.NewAccountInfo;
 import Enums.RequestType;
+import Enums.ServiceType;
 import LayerInterfaces.IService;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
@@ -16,6 +17,7 @@ public abstract class IAuthenticationService extends IService {
 
     public IAuthenticationService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         super(communication, domainFacade);
+        type = ServiceType.AUTHENTICATION;
     }
 
     public abstract CredentialsContainer getCredentials();
@@ -26,5 +28,5 @@ public abstract class IAuthenticationService extends IService {
 
     public abstract boolean createAccount(NewAccountInfo accountInfo);
 
-    public abstract Request createServerRequest(RequestType type);
+    public abstract Request createServerRequest(ServiceType serviceType, RequestType type);
 }

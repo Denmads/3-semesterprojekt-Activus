@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Communication.Connection;
+package Communication;
 
 import java.io.*;
 import java.net.ServerSocket;

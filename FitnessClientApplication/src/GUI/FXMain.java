@@ -3,7 +3,9 @@ package GUI;
 import Communication.CommunicationFacade;
 import Exceptions.ConfigFileNotFound;
 import Enums.*;
+import Exceptions.ArgumentNotFoundException;
 import Models.Request;
+import Models.Response;
 import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -24,11 +26,13 @@ public class FXMain extends Application {
         try {
             CommunicationFacade cf = new CommunicationFacade();
 
-            Request r = new Request(RequestType.LOGIN, UUID.randomUUID(), 1);
+            Request r = new Request(RequestType.LOGIN, null, ServiceType.AUTHENTICATION);
             r.addArgument(RequestArgumentName.USERNAME, "Denmads");
             r.addArgument(RequestArgumentName.PASSWORD, "test");
-            cf.sendRequest(r);
-
+            Response response = cf.sendRequest(r);
+            System.out.println(response.getArgument(ResponseArgumentName.SUCCESS));
+            
+            
             Platform.exit();
 
 //        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Login.fxml"));
@@ -40,6 +44,8 @@ public class FXMain extends Application {
 //        stage.setScene(scene);
 //        stage.show();
         } catch (ConfigFileNotFound ex) {
+            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

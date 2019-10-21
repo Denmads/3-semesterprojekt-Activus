@@ -14,6 +14,8 @@ public abstract class IService {
 
     protected ICommunicationFacade communicationLayer;
     protected IDomainFacade domainFacade;
+    
+    protected ServiceType type;
 
     public IService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         communicationLayer = communication;
@@ -22,6 +24,6 @@ public abstract class IService {
     
     protected Request createRequest (RequestType type) throws ServiceNotFoundException {
         IAuthenticationService authenticationService = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
-        return authenticationService.createServerRequest(type);
+        return authenticationService.createServerRequest(this.type, type);
     }
 }

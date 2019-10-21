@@ -1,12 +1,13 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author madsh
  */
-public class CredentialsContainer {
+public class CredentialsContainer implements Serializable {
 
     private String username;
     private int userId;

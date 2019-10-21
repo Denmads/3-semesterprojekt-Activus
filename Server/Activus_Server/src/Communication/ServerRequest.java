@@ -1,10 +1,15 @@
-package Communication.Connection;
+package Communication;
 
 import Domain.RequestDelegater;
+import Enums.ResponseArgumentName;
+import Exceptions.ArgumentNotFoundException;
 import Models.Request;
+import Models.Response;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerRequest extends Thread {
 
@@ -29,12 +34,11 @@ public class ServerRequest extends Thread {
        
             try {
                 request = (Request)requestStream.readObject();
-                
                 //Handle Request and get respsone object
                 RequestDelegater requestDelegater = new RequestDelegater();
-                requestDelegater.delegate(request);
+                Response response = requestDelegater.delegate(request);
                 //Send object back and close
-                //resonseStream.WriteObject(response);
+                responseStream.writeObject(response);
                 
                 socket.close();
             } catch (IOException | ClassNotFoundException e) {

@@ -3,6 +3,7 @@ package Domain.serviceInterfaces;
 import Domain.TrainingScheme.Exercise;
 import Models.Profile;
 import Enums.SearchType;
+import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
@@ -15,6 +16,7 @@ public abstract class IProfileService extends IService {
     public IProfileService(ICommunicationFacade communication, IDomainFacade domainFacade, Profile currentProfile) {
         super(communication, domainFacade);
         this.currentProfile = currentProfile;
+        type = ServiceType.PROFILE;
     }
 
     public Profile getCurrentProfile () {

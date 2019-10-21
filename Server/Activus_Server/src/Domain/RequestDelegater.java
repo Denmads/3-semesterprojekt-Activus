@@ -1,18 +1,11 @@
 package Domain;
 
 import Enums.RequestType;
+import Enums.ServiceType;
 import Models.Request;
 import Models.Response;
 
 public class RequestDelegater {
-
-    RequestType[] authenticationTypes = {RequestType.CREATE_NEW_USER, RequestType.LOGIN, RequestType.LOGOUT};
-    RequestType[] profileRequestTypes = {RequestType.ACCEPT_BUDDY_REQUEST, RequestType.DELETE_ACCOUNT, RequestType.FOLLOW_PROFILE, RequestType.FOLLOW_TRAINING_PROGRAM, 
-                                         RequestType.GET_PROFILE, RequestType.REMOVE_STAT, RequestType.SEARCH, RequestType.SEND_BUDDY_REQUEST, RequestType.SET_GOAL, 
-                                         RequestType.SET_STAT, RequestType.UPDATE_PASSWORD, RequestType.UPDATE_PROFILE, RequestType.UPDATE_USERNAME};
-    RequestType[] trainingSchemeRequestTypes = {};
-    RequestType[] chatRequestTypes = {RequestType.SEND_MESSAGE};
-    
     
     IRequestHandler[] requestHandlers = new IRequestHandler[4];
     
@@ -34,26 +27,17 @@ public class RequestDelegater {
         
         Response response = null;
         
-        if (contains(authenticationTypes, request)) {
+        if (request.getServiceType() == ServiceType.AUTHENTICATION) {
             response = requestHandlers[0].handleRequest(request);
         }
-        
-        if (authenticateRequest(request)) {
-        
-            
-            if (contains(profileRequestTypes, request)) {
-
+        else 
+        {
+            if (authenticateRequest(request)) {
+                response = requestHandlers[request.getServiceType().ordinal()].handleRequest(request);
             }
-            else if (contains(trainingSchemeRequestTypes, request)) {
-
+            else {
+                //TODO: Create response object with Authentiation Error
             }
-            else if (contains(chatRequestTypes, request)) {
-
-            }
-        
-        }
-        else {
-            //TODO: Create response object with Authentiation Error
         }
         
         return response;

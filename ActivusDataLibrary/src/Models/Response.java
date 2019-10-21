@@ -2,11 +2,12 @@ package Models;
 
 import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Response {
+public class Response  implements Serializable{
 
-    private HashMap<ResponseArgumentName, Object> arguements = new HashMap<ResponseArgumentName, Object>();
+    private HashMap<ResponseArgumentName, Object> arguements = new HashMap<>();
 
     public void addArgument(ResponseArgumentName argName, Object value) {
         arguements.put(argName, value);

@@ -5,11 +5,13 @@
  */
 package Enums;
 
+import java.io.Serializable;
+
 /**
  *
  * @author madsh
  */
-public enum ResponseArgumentName {
+public enum ResponseArgumentName  implements Serializable {
     CREDENTIALS,
     PROFILE,
     SUCCESS,

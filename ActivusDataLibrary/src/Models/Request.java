@@ -7,6 +7,7 @@ package Models;
 
 import Enums.RequestArgumentName;
 import Enums.RequestType;
+import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -18,31 +19,29 @@ import java.util.UUID;
  */
 public class Request implements Serializable{
 
+    private ServiceType serviceType;
     private RequestType type;
-    private UUID authToken;
-    private int profileId;
+    private CredentialsContainer credentials;
     private HashMap<RequestArgumentName, Object> arguments;
 
-    public Request(RequestType type, UUID authToken, int profileId) {
+    public Request(RequestType type, CredentialsContainer credentials, ServiceType serviceType) {
         this.type = type;
-        this.authToken = authToken;
-        this.profileId = profileId;
+        this.credentials = credentials;
+        this.serviceType = serviceType;
         arguments = new HashMap<>();
     }
 
+    public ServiceType getServiceType () {
+        return serviceType;
+    }
+    
     public RequestType getRequestType() {
         return type;
     }
 
-    public UUID getAuthenticationToken() {
-        return authToken;
+    public CredentialsContainer getCredentials () {
+        return credentials;
     }
-
-    public int getProfileId() {
-        return profileId;
-    }
-    
-    
     
     public void addArgument (RequestArgumentName argName, Object value) {
         arguments.put(argName, value);

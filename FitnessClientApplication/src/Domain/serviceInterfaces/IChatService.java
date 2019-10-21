@@ -6,6 +6,7 @@
 package Domain.serviceInterfaces;
 
 import Domain.Chat.Message;
+import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
@@ -18,6 +19,7 @@ public abstract class IChatService extends IService {
     
     public IChatService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         super(communication, domainFacade);
+        type = ServiceType.CHAT;
     }
     
     public abstract void sendMessage(int buddyProfileId, Message message);
