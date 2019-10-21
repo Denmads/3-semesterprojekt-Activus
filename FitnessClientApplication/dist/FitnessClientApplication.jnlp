@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="FitnessClientApplication.jar" size="4444443" download="eager" />
-    <jar href="lib\ActivusDataLibrary.jar" size="13858" download="eager" />
+    <jar href="FitnessClientApplication.jar" size="4444400" download="eager" />
+    <jar href="lib\ActivusDataLibrary.jar" size="15130" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="FitnessClientApplication" >
     <param name="requiredFXVersion" value="8.0+"/>

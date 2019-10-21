@@ -5,9 +5,9 @@
  */
 package Models;
 
-import Enums.RequestArguementName;
+import Enums.RequestArgumentName;
 import Enums.RequestType;
-import Exceptions.ArguementNotFoundException;
+import Exceptions.ArgumentNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.UUID;
@@ -21,13 +21,13 @@ public class Request implements Serializable{
     private RequestType type;
     private UUID authToken;
     private int profileId;
-    private HashMap<RequestArguementName, Object> arguements;
+    private HashMap<RequestArgumentName, Object> arguments;
 
     public Request(RequestType type, UUID authToken, int profileId) {
         this.type = type;
         this.authToken = authToken;
         this.profileId = profileId;
-        arguements = new HashMap<>();
+        arguments = new HashMap<>();
     }
 
     public RequestType getRequestType() {
@@ -44,15 +44,15 @@ public class Request implements Serializable{
     
     
     
-    public void AddArgument (RequestArguementName argName, Object value) {
-        arguements.put(argName, value);
+    public void addArgument (RequestArgumentName argName, Object value) {
+        arguments.put(argName, value);
     }
     
-    public <T> T GetArguement (RequestArguementName argName) throws ArguementNotFoundException, ClassCastException{
-        if (!arguements.containsKey(argName)) {
-            throw new ArguementNotFoundException();
+    public <T> T getArgument (RequestArgumentName argName) throws ArgumentNotFoundException, ClassCastException{
+        if (!arguments.containsKey(argName)) {
+            throw new ArgumentNotFoundException();
         }
         
-        return (T)arguements.get(argName);
+        return (T)arguments.get(argName);
     }
 }

@@ -2,11 +2,11 @@ package Domain.User;
 
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
-import Domain.TraningScheme.Exercise;
+import Domain.TrainingScheme.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
-import Enums.RequestArguementName;
+import Enums.RequestArgumentName;
 import Enums.RequestType;
-import Enums.ResponseArguementName;
+import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.Enums.ServiceType;
@@ -39,11 +39,11 @@ public class ProfileService extends IProfileService {
         try {
             
             Request request = getAuthenticationService().createRequest(RequestType.SEARCH);
-            request.AddArgument(RequestArguementName.SEARCH_TYPE, searchType);
-            request.AddArgument(RequestArguementName.TEXT, searchType);
+            request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
+            request.addArgument(RequestArgumentName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
-            profiles= (List < Profile >) response.getArguement(ResponseArguementName.PROFILE);
-        } catch (ArguementNotFoundException ex) {
+            profiles= (List < Profile >) response.getArgument(ResponseArgumentName.PROFILE);
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,14 +54,14 @@ public class ProfileService extends IProfileService {
 
     @Override
     public Profile getProfile(int profileID) {
-        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArguementName.PROFILE_ID, ResponseArguementName.PROFILE, profileID);
+        return (Profile) returnObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
         
     }
 
     @Override
     public boolean updateProfile(Profile newProfileInfo) {
         boolean isUpdate;
-        currentProfile = (Profile) returnObject(RequestType.UPDATE_PROFILE, RequestArguementName.PROFILE_ID, ResponseArguementName.PROFILE, newProfileInfo);
+        currentProfile = (Profile) returnObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);
         //To do OPdate the profile in db;
         if(currentProfile!=newProfileInfo){
             isUpdate= false;
@@ -73,66 +73,66 @@ public class ProfileService extends IProfileService {
 
     @Override
     public boolean updateProfilePassWord(String newPassword) {
-        return (boolean) returnObject(RequestType.UPDATE_PASSWORD, RequestArguementName.PASSWORD, ResponseArguementName.SUCCESS, newPassword);
+        return (boolean) returnObject(RequestType.UPDATE_PASSWORD, RequestArgumentName.PASSWORD, ResponseArgumentName.SUCCESS, newPassword);
     }
 
     @Override
     public boolean deleteAccount() {
-        return (boolean) returnObject(RequestType.DELETE_ACCOUNT, RequestArguementName.PROFILE_ID, ResponseArguementName.SUCCESS, currentProfile);
+        return (boolean) returnObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
     }
 
     @Override
     public boolean followProfile(int profileID) {
-        return (boolean) returnObject(RequestType.FOLLOW_PROFILE, RequestArguementName.PROFILE_ID, ResponseArguementName.SUCCESS, profileID);
+        return (boolean) returnObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
     }
 
     @Override
     public boolean folloTraniningProgram(int programID) {
-        return (boolean) returnObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArguementName.PROGRAM_ID, ResponseArguementName.SUCCESS, programID);
+        return (boolean) returnObject(RequestType.FOLLOW_TRAINING_PROGRAM, RequestArgumentName.PROGRAM_ID, ResponseArgumentName.SUCCESS, programID);
         
     }
 
     @Override
     public boolean sendBuddyRequest(int buddyID) {
-        return (boolean) returnObject(RequestType.SEND_BUDDY_REQUEST, RequestArguementName.PROFILE_ID, ResponseArguementName.SUCCESS, buddyID);
+        return (boolean) returnObject(RequestType.SEND_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
         
     }
 
     @Override
     public boolean acceptBuddyRequest(int requestingProfileID) {
-        return (boolean) returnObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArguementName.PROFILE_ID, ResponseArguementName.SUCCESS, requestingProfileID);
+        return (boolean) returnObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
     }
 
     @Override
     public boolean setGoal(String Goal) {
-        return (boolean) returnObject(RequestType.SET_GOAL, RequestArguementName.TEXT, ResponseArguementName.SUCCESS, Goal);
+        return (boolean) returnObject(RequestType.SET_GOAL, RequestArgumentName.TEXT, ResponseArgumentName.SUCCESS, Goal);
     }
 
     @Override
     public int setStats(Exercise exercise) {
-        return (int) returnObject(RequestType.SET_STAT, RequestArguementName.STAT_ID, ResponseArguementName.STATS, exercise);
+        return (int) returnObject(RequestType.SET_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, exercise);
     }
 
     @Override
     public boolean removeStats(int statsID) {
-       return (boolean) returnObject(RequestType.REMOVE_STAT, RequestArguementName.STAT_ID, ResponseArguementName.STATS, statsID);
+       return (boolean) returnObject(RequestType.REMOVE_STAT, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, statsID);
     }
 
     private IAuthenticationService getAuthenticationService() throws ServiceNotFoundException{
         return  domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION);
     }
-    private Object returnObject(RequestType requestType, RequestArguementName requestArguementName,ResponseArguementName responseArguementName, Object o){
+    private Object returnObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
         Object object=null;
         try {
             Request request = getAuthenticationService().createRequest(requestType);
-            request.AddArgument(requestArguementName, o);
+            request.addArgument(requestArguementName, o);
             Response response = communicationLayer.sendRequest(request);
-            object= response.getArguement(responseArguementName);
+            object= response.getArgument(responseArguementName);
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ArguementNotFoundException ex) {
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
