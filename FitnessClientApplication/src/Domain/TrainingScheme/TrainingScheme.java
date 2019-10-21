@@ -9,17 +9,17 @@ import java.util.HashMap;
  */
 public class TrainingScheme {
 
-    private HashMap<Day, TrainingProgram> DayTrainingProgramMap;
+    private HashMap<Day, TrainingProgram> dayTrainingProgramMap;
     
-    public TrainingScheme(HashMap<Day, TrainingProgram> DayTrainingProgramMap) {
-        this.DayTrainingProgramMap = DayTrainingProgramMap;
+    public TrainingScheme() {
+        dayTrainingProgramMap = new HashMap<>();
     }
 
     public void setDayTrainingProgramForDictionary(HashMap<Day, TrainingProgram> DayTrainingProgramMap) {
-        this.DayTrainingProgramMap = DayTrainingProgramMap;
+        this.dayTrainingProgramMap = DayTrainingProgramMap;
     }
 
     public void RemoveTrainingProgramForDay(Day day) {
-        this.DayTrainingProgramMap.remove(day);
+        this.dayTrainingProgramMap.remove(day);
     }
 }

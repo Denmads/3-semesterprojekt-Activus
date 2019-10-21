@@ -14,8 +14,6 @@ public abstract class ITrainingSchemeService extends IService{
     public ITrainingSchemeService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         super(communication, domainFacade);
     }
-    
-    public abstract boolean createNewTrainingScheme(String schemeName);
 
     public abstract boolean createNewTrainingProgram(String programName);
 
