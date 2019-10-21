@@ -10,8 +10,8 @@ public class TrainingProgram {
 
     private ArrayList<Exercise> exercises;
 
-    public TrainingProgram(ArrayList<Exercise> exercises) {
-        this.exercises = exercises;
+    public TrainingProgram() {
+        exercises = new ArrayList();
     }
 
     public void addExercise(Exercise exercise) {
