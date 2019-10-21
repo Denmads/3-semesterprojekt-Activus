@@ -1,8 +1,6 @@
 package Domain.Authentication;
 
 import Domain.TraningScheme.TrainingSchemeService;
-import Domain.serviceInterfaces.IProfileService;
-import Models.Response;
 import Domain.User.Profile;
 import Domain.User.ProfileService;
 import Domain.serviceInterfaces.IAuthenticationService;
@@ -16,6 +14,7 @@ import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
 import Models.Response;
+
 
 /**
  *
