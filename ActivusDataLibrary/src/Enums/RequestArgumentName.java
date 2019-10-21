@@ -17,10 +17,12 @@ public enum RequestArgumentName implements Serializable {
     LAST_NAME,
     TEXT,
     SEARCH_TYPE,
+    EXERCISE,
     EXERCISE_NAME,
     EXERCISE_REPS,
     EXERCISE_WEIGHT,
     EXERCISE_TIME,
-    MESSAGE
+    MESSAGE,
+    PROGRAM_NAME
     
 }
