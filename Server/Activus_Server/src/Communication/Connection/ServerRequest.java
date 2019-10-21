@@ -12,7 +12,7 @@ public class ServerRequest extends Thread {
 
     public ServerRequest(Socket clientSocket) {
         this.socket = clientSocket;
-        System.out.println("Cennectet to "+this.socket.getInetAddress().toString());
+        System.out.println("Connected to "+this.socket.getInetAddress().toString());
     }
 
     public void run() {
@@ -29,9 +29,10 @@ public class ServerRequest extends Thread {
        
             try {
                 request = (Request)requestStream.readObject();
-
-                //Handle Request and get respsone object
                 
+                //Handle Request and get respsone object
+                RequestDelegater requestDelegater = new RequestDelegater();
+                requestDelegater.delegate(request);
                 //Send object back and close
                 //resonseStream.WriteObject(response);
                 
