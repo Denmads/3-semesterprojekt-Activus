@@ -20,7 +20,7 @@ public abstract boolean updateProfile(Profile newProfileInfo);
 public abstract boolean updateProfilePassWord (String newPassword);
 public abstract boolean deleteAccount();
 public abstract boolean followProfile(int profileID);
-public abstract boolean folloTraniningProgram(int programID);
+public abstract boolean followTraininingProgram(int programID);
 public abstract boolean sendBuddyRequest(int buddyID);
 public abstract boolean acceptBuddyRequest(int requestingProfileID);
 public abstract boolean setGoal(String Goal);
