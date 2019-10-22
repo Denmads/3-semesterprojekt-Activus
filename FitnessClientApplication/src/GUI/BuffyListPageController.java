@@ -5,7 +5,9 @@
  */
 package GUI;
 
+import Models.Profile;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -22,31 +26,44 @@ import javafx.scene.layout.AnchorPane;
  */
 public class BuffyListPageController extends PageHandler implements Initializable {
 
-    @FXML
-    private TextField searchfiels;
-    @FXML
-    private ImageView menuBtn;
-    @FXML
-    private ImageView searchBtn;
-    @FXML
-    private ListView<?> resultList;
+    
     @FXML
     private AnchorPane pane;
-
+    @FXML
+    private ImageView Menubtn;
+    @FXML
+    private AnchorPane tilePane;
+    @FXML
+    private VBox Vboks;
+    private List<Profile> buddyList;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+         for (int i = 0; i < 5; i++) {
+            Profile p = new Profile(i);
+        }
+        
+        for (Profile profile : buddyList) {
+            AnchorPane p = new AnchorPane();
+            //changeFxml(p, fxml);
+            
+            Vboks.getChildren().add(p);
+        }
+        
+        
+        
+       
+        
+        
+        
     }    
 
     @FXML
     private void ActionOnMouseClick(MouseEvent event) {
-        if(event.getSource()==menuBtn){
+        if(event.getSource()==Menubtn){
             changeFxml(pane, "FXML/Menu.fxml");
-        }else if (event.getSource()==searchBtn){
-            
         }
     }
     
