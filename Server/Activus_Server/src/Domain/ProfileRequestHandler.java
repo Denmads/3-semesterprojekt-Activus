@@ -7,12 +7,17 @@ package Domain;
 
 import Models.Request;
 import Models.Response;
+import Persistence.DatabaseFacade;
 
 /**
  *
  * @author madsh
  */
-public class ProfileRequestHandler implements IRequestHandler{
+public class ProfileRequestHandler extends IRequestHandler{
+
+    public ProfileRequestHandler(DatabaseFacade dbFacade) {
+        super(dbFacade);
+    }
 
     @Override
     public Response handleRequest(Request request) {

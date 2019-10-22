@@ -8,12 +8,17 @@ package Domain;
 import Enums.ResponseArgumentName;
 import Models.Request;
 import Models.Response;
+import Persistence.DatabaseFacade;
 
 /**
  *
  * @author madsh
  */
-public class AuthenticationRequestHandler implements IRequestHandler{
+public class AuthenticationRequestHandler extends IRequestHandler{
+
+    public AuthenticationRequestHandler(DatabaseFacade dbFacade) {
+        super(dbFacade);
+    }
     
     @Override
     public Response handleRequest(Request request) {

@@ -7,11 +7,18 @@ package Domain;
 
 import Models.Request;
 import Models.Response;
+import Persistence.DatabaseFacade;
 
 /**
  *
  * @author madsh
  */
-public interface IRequestHandler {
-    public Response handleRequest (Request request);
+public abstract class IRequestHandler {
+    protected DatabaseFacade databaseFacade;
+    
+    public IRequestHandler (DatabaseFacade dbFacade) {
+        databaseFacade = dbFacade;
+    }
+    
+    public abstract Response handleRequest (Request request);
 }

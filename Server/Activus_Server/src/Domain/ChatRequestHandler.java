@@ -7,12 +7,17 @@ package Domain;
 
 import Models.Request;
 import Models.Response;
+import Persistence.DatabaseFacade;
 
 /**
  *
  * @author madsh
  */
-public class ChatRequestHandler implements IRequestHandler{
+public class ChatRequestHandler extends IRequestHandler{
+
+    public ChatRequestHandler(DatabaseFacade dbFacade) {
+        super(dbFacade);
+    }
 
     @Override
     public Response handleRequest(Request request) {

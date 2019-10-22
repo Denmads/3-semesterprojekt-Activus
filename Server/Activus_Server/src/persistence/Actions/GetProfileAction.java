@@ -5,15 +5,17 @@
  */
 package persistence.Actions;
 
-import Enums.DatabaseTableName;
 import Models.Profile;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import static Persistence.Database.generated.Tables.LOGIN;
+import static Persistence.Database.generated.Tables.PROFILE;
+import Persistence.Database.generated.tables.Login;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import persistence.IDatabaseAction;
+import Persistence.IDatabaseAction;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 
 /**
  *
@@ -21,7 +23,7 @@ import persistence.IDatabaseAction;
  */
 public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
     
-    private ArrayList<Profile> result = null;
+    private ArrayList<Profile> resultList = null;
     
     private ArrayList<Integer> profileIds;
     
@@ -30,35 +32,24 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
     }
     
     @Override
-    protected void execute(Connection connection) throws SQLException{
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT profile.*, login.username FROM " + getTableName(DatabaseTableName.PROFILE) + " WHERE id IN " + generateIdSet()
-                + " INNER JOIN " + getTableName(DatabaseTableName.LOGIN) + " ON profile.login_id = login.id");
+    protected void execute(DSLContext database) throws SQLException{
+        Result<Record> result = database.select(PROFILE.asterisk(), LOGIN.USERNAME).from(PROFILE.join(LOGIN).on(PROFILE.LOGIN_ID.eq(LOGIN.ID))).where(PROFILE.ID.in(profileIds)).fetch();
         
-        for (int i = 0; i < profileIds.size(); i++) {
-            preparedStatement.setInt(1+i, profileIds.get(i));
-        }
+        resultList = new ArrayList<>();
         
-        ResultSet res = preparedStatement.executeQuery();
-        result = new ArrayList<>();
-        
-        while (res.next()) {
-            Profile profile = new Profile(res.getInt("id"));
-            profile.setAge(res.getInt("age"));
-            profile.setCity(res.getString("city"));
-            profile.setCountry(res.getString("country"));
-            profile.setFirstName(res.getString("first_name"));
-            profile.setLastName(res.getString("last_name"));
-            profile.setGender(res.getString("gender"));
-            profile.setGym(res.getString("gym"));
-            profile.setUsername(res.getString("username"));
+        for (Record r : result) {
+            Profile profile = new Profile(r.getValue(PROFILE.ID));
+            profile.setAge(r.getValue(PROFILE.AGE));
+            profile.setCity(r.getValue(PROFILE.CITY));
+            profile.setCountry(r.getValue(PROFILE.COUNTRY));
+            profile.setFirstName(r.getValue(PROFILE.FIRST_NAME));
+            profile.setLastName(r.getValue(PROFILE.LAST_NAME));
+            profile.setGender(r.getValue(PROFILE.GENDER));
+            profile.setGym(r.getValue(PROFILE.GYM));
+            profile.setUsername(r.getValue(LOGIN.USERNAME));
             
-            result.add(profile);
+            resultList.add(profile);
         }
-    }
-    
-    private String generateIdSet () {
-        String questionString = String.join("", Collections.nCopies(profileIds.size(), "?,"));
-        return "(" + questionString.substring(0, questionString.length()-1) + ")";
     }
     
     @Override
@@ -68,7 +59,7 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
 
     @Override
     public boolean hasResult() {
-        return result != null;
+        return resultList != null;
     }
     
 }

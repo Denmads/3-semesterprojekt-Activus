@@ -52,12 +52,6 @@ public class TcpServer {
             }
 
         }
-        
-        try {
-            DatabaseConnection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(TcpServer.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

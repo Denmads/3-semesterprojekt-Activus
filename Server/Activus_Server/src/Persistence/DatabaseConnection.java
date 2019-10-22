@@ -12,11 +12,9 @@ import java.util.logging.Logger;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
- * A singleton class to provide a singular connection pool to multiple classes.
- * @author Morten Kargo Lyngesen
+ * A class to provide a singular connection pool to multiple classes.
  */
 public class DatabaseConnection {
-    private static final DatabaseConnection INSTANCE = new DatabaseConnection();
     private static BasicDataSource connectionPool;
     
     
@@ -26,7 +24,7 @@ public class DatabaseConnection {
     private final String username;
     private final String password;
     
-    private DatabaseConnection () {
+    public DatabaseConnection () {
         readConfig();
         
         String ipAddress = prop.getProperty("databaseIpAddress");
@@ -60,12 +58,12 @@ public class DatabaseConnection {
      * Returns a connection to perform transactions on.
      * @return a connection pool to perform transactions on.
      */
-    public static Connection getConnection () throws SQLException{
+    public Connection getConnection () throws SQLException{
         return connectionPool.getConnection();
     }
     
     
-    public static void close() throws SQLException {
+    public void close() throws SQLException {
         connectionPool.close();
     }
 }

@@ -3,18 +3,25 @@ package Domain;
 import Enums.ServiceType;
 import Models.Request;
 import Models.Response;
+import Persistence.DatabaseFacade;
+import Persistence.IDatabaseAction;
 import java.util.HashMap;
+import persistence.Actions.AuthenticateTokenAction;
 
 public class RequestDelegater {
 
-    HashMap<ServiceType, IRequestHandler> requestHandlers;
+    private HashMap<ServiceType, IRequestHandler> requestHandlers;
+    
+    private DatabaseFacade databaseFacade;
 
     public RequestDelegater() {
+        databaseFacade = new DatabaseFacade();
+        
         requestHandlers = new HashMap<>();
-        requestHandlers.put(ServiceType.AUTHENTICATION, new AuthenticationRequestHandler());
-        requestHandlers.put(ServiceType.PROFILE, new ProfileRequestHandler());
-        requestHandlers.put(ServiceType.TRAININGSCHEME, new TrainingSchemeRequestHandler());
-        requestHandlers.put(ServiceType.CHAT, new ChatRequestHandler());
+        requestHandlers.put(ServiceType.AUTHENTICATION, new AuthenticationRequestHandler(databaseFacade));
+        requestHandlers.put(ServiceType.PROFILE, new ProfileRequestHandler(databaseFacade));
+        requestHandlers.put(ServiceType.TRAININGSCHEME, new TrainingSchemeRequestHandler(databaseFacade));
+        requestHandlers.put(ServiceType.CHAT, new ChatRequestHandler(databaseFacade));
     }
 
     public Response delegate(Request request) {
@@ -35,6 +42,9 @@ public class RequestDelegater {
     }
 
     private boolean authenticateRequest(Request request) {
-        return false;
+        AuthenticateTokenAction authenticationAction = new AuthenticateTokenAction(request.getCredentials());
+        databaseFacade.execute(authenticationAction);
+        
+        return (authenticationAction.hasResult() ? authenticationAction.getResult() : false);
     }
 }

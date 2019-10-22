@@ -5,12 +5,15 @@
  */
 package persistence.Actions;
 
-import Enums.DatabaseTableName;
 import Models.CredentialsContainer;
+import static Persistence.Database.generated.Tables.TOKEN;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import persistence.IDatabaseAction;
+import Persistence.IDatabaseAction;
+import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 
 /**
  *
@@ -28,8 +31,9 @@ public class AuthenticateTokenAction extends IDatabaseAction<Boolean>{
     }
     
     @Override
-    protected void execute(Connection connection) throws SQLException {
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + getTableName(DatabaseTableName.TOKEN) + " WHERE ");
+    protected void execute(DSLContext database) throws SQLException {
+        int count = database.selectCount().from(TOKEN).where(TOKEN.LOGINID.eq(credentials.getUserId()).and(TOKEN.TOKEN_.eq(credentials.getAuthenticationToken()))).fetchOne().value1();
+        result = count > 0;
     }
 
     @Override
