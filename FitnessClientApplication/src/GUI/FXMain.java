@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -19,35 +22,21 @@ import javafx.stage.Stage;
  * @author Victor
  */
 public class FXMain extends Application {
-
+    private SceneHandler sh = new SceneHandler();
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-        try {
-            CommunicationFacade cf = new CommunicationFacade();
-
-            Request r = new Request(RequestType.LOGIN, null, ServiceType.AUTHENTICATION);
-            r.addArgument(RequestArgumentName.USERNAME, "Denmads");
-            r.addArgument(RequestArgumentName.PASSWORD, "test");
-            Response response = cf.sendRequest(r);
-            System.out.println(response.getArgument(ResponseArgumentName.SUCCESS));
-            
-            
-            Platform.exit();
-
-//        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Login.fxml"));
+        
+        sh.setCurrentStage(primaryStage);
+        sh.setNewScene("/GUI/FXML/Menu.fxml");
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Menu.fxml"));
 //
 //        Scene scene = new Scene(root);
-//
+
 //        Stage stage = new Stage();
 //        stage.setTitle("Activius");
 //        stage.setScene(scene);
 //        stage.show();
-        } catch (ConfigFileNotFound ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ArgumentNotFoundException ex) {
-            Logger.getLogger(FXMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

@@ -18,8 +18,6 @@ public class MenuController implements Initializable {
     @FXML
     private ImageView todayImageButton;
     @FXML
-    private Label todayLabel;
-    @FXML
     private ImageView todayTextboxImage;
     @FXML
     private ImageView statsImageButton;
@@ -30,18 +28,21 @@ public class MenuController implements Initializable {
     @FXML
     private ImageView emptyImageButton2;
     @FXML
-    private Label statsLabel;
+    private ImageView buddyImageButton;
     @FXML
-    private Label træningsPrgLabel;
+    private Label todayLabel;
+    @FXML
+    private Label statsLabel;
     @FXML
     private Label profileLabel;
     @FXML
-    private ImageView buddyImageButton;
-    @FXML
-    private Label buddieLabel;
-    @FXML
     private Label scheduleLabel;
-
+    @FXML
+    private Label buddyLabel;
+    @FXML
+    private Label trainingPrgLabel;
+    private SceneHandler sceneHandler = new SceneHandler();
+    
     /**
      * Initializes the controller class.
      */
@@ -50,56 +51,42 @@ public class MenuController implements Initializable {
         // TODO
     }
 
+
     @FXML
-    private void handleTodayImageAction(MouseEvent event) {
+    private void handleAction(MouseEvent event) {
+       
+    }
+    
+    private void changepage(String path){
+        PageLoader pageLoader = null;
+    }
+
+    @FXML
+    private void handleTodayAction(MouseEvent event){
         
-        
-        
-        
     }
 
     @FXML
-    private void handleTodayLabelAction(MouseEvent event) {
+    private void handleStatsAction(MouseEvent event) {
+        sceneHandler.setNewScene("/GUI/FXML/Profile.fxml");
     }
 
     @FXML
-    private void handleStatsImageButtonAction(MouseEvent event) {
+    private void handleProgramAction(MouseEvent event) {
     }
 
     @FXML
-    private void handleProgramImageButtonAction(MouseEvent event) {
+    private void handleProfileAction(MouseEvent event) {
     }
 
     @FXML
-    private void handleProfileImageButtonAction(MouseEvent event) {
+    private void handleBuddyAction(MouseEvent event) {
     }
 
     @FXML
-    private void handleEmptyImageButton2Action(MouseEvent event) {
+    private void handleScheduleAction(MouseEvent event) {
     }
-
-    @FXML
-    private void handleStatsLabelAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleTræningsPrgLabelAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleProfileLabelAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleBuddyImageButtonAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleBuddyLabelAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleScheduleLabelAction(MouseEvent event) {
-    }
-
+    
 }
+    
+
