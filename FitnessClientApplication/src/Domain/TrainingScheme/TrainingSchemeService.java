@@ -10,6 +10,7 @@ import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import Models.Request;
 import Models.Response;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,6 +78,11 @@ public class TrainingSchemeService extends ITrainingSchemeService {
             Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
+    }
+
+    @Override
+    public List<Exercise> loadAllExercise() {
+        returnResponseObject(RequestType., ResponseArgumentName.CREDENTIALS)
     }
 
 }

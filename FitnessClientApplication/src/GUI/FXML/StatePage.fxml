@@ -1,11 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.StatePageController">
-    
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUI.StatePageController">
+   <children>
+      <LineChart layoutX="8.0" layoutY="14.0" prefHeight="231.0" prefWidth="571.0" style="-fx-background-color: blue;">
+        <xAxis>
+          <CategoryAxis fx:id="dataakse" label="dataakse" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="timeakse" label="timeAkse" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <ChoiceBox fx:id="DataBoks" layoutX="43.0" layoutY="295.0" prefWidth="150.0" style="-fx-background-color: blue;" />
+      <ImageView fx:id="menuBtn" fitHeight="53.0" fitWidth="57.0" layoutX="599.0" onMouseClicked="#onMouseClick">
+         <image>
+            <Image url="@../../Images/Button/menubtn.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

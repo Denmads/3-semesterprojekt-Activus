@@ -5,6 +5,7 @@ import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
+import java.util.List;
 
 /**
  *
@@ -24,6 +25,8 @@ public abstract class ITrainingSchemeService extends IService{
     public abstract boolean addExercise(Exercise exercise);
     
     public abstract boolean removeExercise(Exercise exercise);
+    
+    public abstract List<Exercise> loadAllExercise();
     
     
     
