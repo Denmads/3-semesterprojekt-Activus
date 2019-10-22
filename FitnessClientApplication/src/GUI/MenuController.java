@@ -41,7 +41,8 @@ public class MenuController implements Initializable {
     private Label buddyLabel;
     @FXML
     private Label trainingPrgLabel;
-
+    private PageLoader pageLoader=null;
+    
     /**
      * Initializes the controller class.
      */
@@ -50,28 +51,16 @@ public class MenuController implements Initializable {
         // TODO
     }
 
-    @FXML
-    private void handleTodayAction(MouseEvent event) {
-    }
 
     @FXML
-    private void handleStatsAction(MouseEvent event) {
-    }
+    private void handleAction(MouseEvent event) {
+       if(event.getSource()==todayImageButton){
+           
+       }       
+       
+        }
 
-    @FXML
-    private void handleProgramAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleProfileAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleBuddyAction(MouseEvent event) {
-    }
-
-    @FXML
-    private void handleScheduleAction(MouseEvent event) {
-    }
-
+}
+private void changepage(string path){
+PageL
 }

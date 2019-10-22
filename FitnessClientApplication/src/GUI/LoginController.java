@@ -1,8 +1,11 @@
 package GUI;
 
+import Domain.Authentication.AuthenticationService;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -10,6 +13,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+
 
 /**
  * FXML Controller class
@@ -28,7 +33,10 @@ public class LoginController implements Initializable {
     private Label createAccountLabel;
     @FXML
     private ImageView loginImageButton;
-
+    private AuthenticationService authentication;
+    @FXML
+    private AnchorPane apane;
+    
     /**
      * Initializes the controller class.
      */
@@ -59,7 +67,18 @@ public class LoginController implements Initializable {
         //Do the getText here:
         String username = usernameField.getText();
         String password = passwordField.getText();
+        //TO do conection to db
+        if(authentication.login(username, password)){
+           
+            try { 
+                PageLoader pageLoader = null;
+                pageLoader.pageChanger(apane, "FXML/Menu.fxml");
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
+
         return false;
     }
 }
