@@ -41,25 +41,7 @@ public class LoginController implements Initializable {
     //Get the text from the two textfields and then verify the login.
     //The easiest thing to do to avoid code repetition is to make a new method
     //that verifies the login and then call it in the following methods.
-    @FXML
-    private void handleUserFieldAction(ActionEvent event) {
-        verifyLogin();
-    }
 
-    @FXML
-    private void handlePasswordFieldAction(ActionEvent event) {
-        verifyLogin();
-    }
-
-    @FXML
-    private void handleLoginImageAction(MouseEvent event) {
-        verifyLogin();
-    }
-
-    @FXML
-    private void handleLoginLabelAction(MouseEvent event) {
-        verifyLogin();
-    }
 
     @FXML
     private void handleCreateAccountAction(MouseEvent event) {
@@ -67,9 +49,14 @@ public class LoginController implements Initializable {
     }
 
     //Create Login method here;
+
+    @FXML
+    private void handleLoginAction(MouseEvent event) {
+        verifyLogin();
+    }
+
     private boolean verifyLogin() {
         //Do the getText here:
         return false;
     }
-
 }
