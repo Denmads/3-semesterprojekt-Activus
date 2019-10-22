@@ -57,6 +57,9 @@ public class LoginController implements Initializable {
 
     private boolean verifyLogin() {
         //Do the getText here:
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        
         return false;
     }
 }
