@@ -72,11 +72,12 @@ public class LoginController implements Initializable {
            
             try { 
                 PageLoader pageLoader = null;
-                pageLoader.pageChanger(apane, "FXML/Menu.fxml");
+                pageLoader.pageChanger(apane, "../FXML/Menu.fxml");
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
         
 
         return false;
