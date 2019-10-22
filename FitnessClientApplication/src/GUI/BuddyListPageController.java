@@ -5,7 +5,13 @@
  */
 package GUI;
 
+import Domain.Authentication.AuthenticationService;
+import Domain.DomainFacade;
+import Domain.User.ProfileService;
+import Enums.RequestType;
+import Enums.ServiceType;
 import Models.Profile;
+import Models.Request;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,27 +42,20 @@ public class BuddyListPageController extends PageHandler implements Initializabl
     private AnchorPane tilePane;
     @FXML
     private VBox Vboks;
-    private List<Profile> buddyList;
+    private AuthenticationService authenticationService;
+    
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-         for (int i = 0; i < 5; i++) {
-             Profile p=new Profile(i);
-             ProfileItem(p);       
-        }
+    public void initialize(URL url, ResourceBundle rb) {      
         
-            
- 
-           
-        
-        
-        
-        
-       
-        
-        
+      //TODO new to get the curret Profile
+//        for (int buddyID : currentProfile.getBuddyIds()) {
+//            Profile buddy = profileService.getProfile(buddyID);
+//            ProfileItem(buddy);
+//                    
+//        }
         
     }    
 
@@ -67,12 +66,13 @@ public class BuddyListPageController extends PageHandler implements Initializabl
         }
     }
          private void ProfileItem(Profile profile){
+          DataSender dateSender = DataSender.getInstance();
+          dateSender.setProfile(profile);
           AnchorPane g = new AnchorPane();
-          changeFxml(g, "FXML/UserShow.fxml");
-          
-           Vboks.getChildren().add(g);
-           Label l = new Label();           
-           Vboks.getChildren().add(l);
+          changeFxml(g, "FXML/UserShow.fxml");  
+          Vboks.getChildren().add(g);
+          Label l = new Label();           
+          Vboks.getChildren().add(l);
      }   
            
 }

@@ -6,6 +6,7 @@
 package GUI;
 
 import Models.Profile;
+import Models.Request;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -60,8 +61,8 @@ public class UserShowController implements Initializable {
     public void setCity(Label city) {
         this.city = city;
     }
-
-   
+    
+    
     
    
 
@@ -69,7 +70,10 @@ public class UserShowController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {      
+    public void initialize(URL url, ResourceBundle rb) { 
+        DataSender dateSender = DataSender.getInstance();
+        setData(dateSender.getProfile());
+        
     }    
     public void setData(Profile profile){
         Username.setText(profile.getUsername());
@@ -77,7 +81,6 @@ public class UserShowController implements Initializable {
         cuntry.setText(profile.getCountry());
         city.setText(profile.getCity());
     }
-    public String hello(){
-        return "Hej med dig idiot";
-    }
+    
+   
 }

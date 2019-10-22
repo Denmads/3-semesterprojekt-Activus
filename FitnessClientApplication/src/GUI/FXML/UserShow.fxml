@@ -7,31 +7,31 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="UserPane" cacheShape="false" centerShape="false" prefHeight="109.0" prefWidth="447.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserShowController">
+<AnchorPane fx:id="UserPane" cacheShape="false" centerShape="false" prefHeight="58.0" prefWidth="507.0" scaleShape="false" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.UserShowController">
 
     <children>
-      <ImageView fitHeight="109.0" fitWidth="507.0">
+      <ImageView fitHeight="56.0" fitWidth="507.0">
          <image>
             <Image url="@../../Images/UsershowBackground.png" />
          </image>
       </ImageView>
-      <Label fx:id="Username" layoutX="61.0" layoutY="4.0" prefHeight="17.0" prefWidth="140.0" text="Username l">
+      <Label fx:id="Username" layoutX="61.0" layoutY="4.0" prefHeight="8.0" prefWidth="127.0" text="Username l">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="gym" layoutX="61.0" layoutY="24.0" prefHeight="17.0" prefWidth="79.0" text="GYM">
+      <Label fx:id="gym" layoutX="61.0" layoutY="27.0" prefHeight="17.0" prefWidth="79.0" text="GYM">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Circle fill="DODGERBLUE" layoutX="448.0" layoutY="55.0" radius="45.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="cuntry" layoutX="61.0" layoutY="45.0" prefHeight="17.0" prefWidth="79.0" text="Cuntry">
+      <Circle fill="DODGERBLUE" layoutX="460.0" layoutY="28.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="cuntry" layoutX="254.0" layoutY="27.0" prefHeight="17.0" prefWidth="79.0" text="Cuntry">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="city" layoutX="61.0" layoutY="65.0" prefHeight="17.0" prefWidth="79.0" text="City">
+      <Label fx:id="city" layoutX="254.0" layoutY="4.0" prefHeight="17.0" prefWidth="79.0" text="City">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

@@ -20,6 +20,7 @@ public class Profile implements Serializable {
     public Profile(int profileId) {
         this.profileId = profileId;
     }
+    
 
     public String getFirstName() {
         return firstName;
