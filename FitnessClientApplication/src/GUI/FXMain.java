@@ -25,9 +25,7 @@ public class FXMain extends Application {
     private SceneHandler sh = new SceneHandler();
     @Override
     public void start(Stage primaryStage) throws IOException {
-
-
-        primaryStage = primaryStage;
+        
         sh.setCurrentStage(primaryStage);
         sh.setNewScene("/GUI/FXML/Menu.fxml");
         
