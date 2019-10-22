@@ -41,6 +41,7 @@ public class MenuController implements Initializable {
     private Label buddyLabel;
     @FXML
     private Label trainingPrgLabel;
+    private SceneHandler sceneHandler = new SceneHandler();
     
     /**
      * Initializes the controller class.
@@ -67,6 +68,7 @@ public class MenuController implements Initializable {
 
     @FXML
     private void handleStatsAction(MouseEvent event) {
+        sceneHandler.setNewScene("/GUI/FXML/Profile.fxml");
     }
 
     @FXML

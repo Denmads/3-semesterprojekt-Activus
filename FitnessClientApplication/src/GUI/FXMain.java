@@ -22,19 +22,23 @@ import javafx.stage.Stage;
  * @author Victor
  */
 public class FXMain extends Application {
-
+    private SceneHandler sh = new SceneHandler();
     @Override
     public void start(Stage primaryStage) throws IOException {
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Login.fxml"));
+        primaryStage = primaryStage;
+        sh.setCurrentStage(primaryStage);
+        sh.setNewScene("/GUI/FXML/Menu.fxml");
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Menu.fxml"));
+//
+//        Scene scene = new Scene(root);
 
-        Scene scene = new Scene(root);
-
-        Stage stage = new Stage();
-        stage.setTitle("Activius");
-        stage.setScene(scene);
-        stage.show();
+//        Stage stage = new Stage();
+//        stage.setTitle("Activius");
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     /**
