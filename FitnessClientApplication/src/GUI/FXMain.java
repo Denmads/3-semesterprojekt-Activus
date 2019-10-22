@@ -1,20 +1,11 @@
 package GUI;
 
-import Communication.CommunicationFacade;
-import Exceptions.ConfigFileNotFound;
-import Enums.*;
-import Exceptions.ArgumentNotFoundException;
-import Models.Request;
-import Models.Response;
 import java.io.IOException;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -22,21 +13,13 @@ import javafx.stage.Stage;
  * @author Victor
  */
 public class FXMain extends Application {
-    private SceneHandler sh = new SceneHandler();
+  
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        
-        sh.setCurrentStage(primaryStage);
-        sh.setNewScene("/GUI/FXML/Menu.fxml");
-        
-//        Parent root = FXMLLoader.load(getClass().getResource("/GUI/FXML/Menu.fxml"));
-//
-//        Scene scene = new Scene(root);
-
-//        Stage stage = new Stage();
-//        stage.setTitle("Activius");
-//        stage.setScene(scene);
-//        stage.show();
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("FXML/Login.fxml"));  
+        Scene scene = new Scene(root);       
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**

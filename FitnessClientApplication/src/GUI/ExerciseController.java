@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author Patrick
  */
-public class ExerciseController implements Initializable {
+public class ExerciseController extends PageHandler implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

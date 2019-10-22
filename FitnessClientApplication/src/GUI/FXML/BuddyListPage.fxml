@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F9AD55;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.BuffyListPageController">
+   <children>
+      <ImageView fitHeight="31.0" fitWidth="446.0" layoutX="84.0" layoutY="14.0">
+         <image>
+            <Image url="@../../Images/LoginPage/textbackground.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="searchfiels" layoutX="109.0" layoutY="17.0" prefHeight="25.0" prefWidth="361.0" />
+      <ImageView fx:id="menuBtn" fitHeight="39.0" fitWidth="48.0" layoutX="552.0" layoutY="5.0" onMouseClicked="#ActionOnMouseClick">
+         <image>
+            <Image url="@../../Images/Button/menubtn.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="searchBtn" fitHeight="25.0" fitWidth="32.0" layoutX="480.0" layoutY="17.0">
+         <image>
+            <Image url="@../../Images/Button/searchbtn.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="resultList" layoutX="78.0" layoutY="45.0" opacity="0.27" prefHeight="352.0" prefWidth="455.0" visible="false" />
+   </children>
+</AnchorPane>

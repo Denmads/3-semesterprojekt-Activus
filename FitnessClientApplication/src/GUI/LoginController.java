@@ -1,42 +1,39 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GUI;
 
 import Domain.Authentication.AuthenticationService;
-import java.io.IOException;
+import GUI.PageHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author Victor
+ * @author steff
  */
-public class LoginController implements Initializable {
+public class LoginController extends PageHandler implements Initializable {
 
     @FXML
-    private TextField usernameField;
+    private AnchorPane pane;
     @FXML
-    private PasswordField passwordField;
+    private ImageView loginBtn;
     @FXML
-    private Label loginLabel;
+    private ImageView createAccountbtn;
     @FXML
-    private Label createAccountLabel;
+    private TextField username;
     @FXML
-    private ImageView loginImageButton;
-    private AuthenticationService authentication;
-    @FXML
-    private AnchorPane apane;
+    private TextField password;
+    AuthenticationService authenticationService;
 
     /**
      * Initializes the controller class.
@@ -44,45 +41,18 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
-    //All of the following methods are meant to do the same thing.
-    //Get the text from the two textfields and then verify the login.
-    //The easiest thing to do to avoid code repetition is to make a new method
-    //that verifies the login and then call it in the following methods.
     @FXML
-    private void handleCreateAccountAction(MouseEvent event) {
-        //This is the only method that is not supposed to verify the login.
-    }
-
-    //Create Login method here;
-    @FXML
-    private void handleLoginAction(MouseEvent event) {
-        verifyLogin();
+    private void loginMouseClick(MouseEvent event) {
+        changeFxml(pane, "FXML/Menu.fxml");
+//        if(authenticationService.login(username.getText().toString(), password.getText().toString())){
+//            changeFxml(pane, "FXML/Menu.fxml");
+//        }
     }
 
     @FXML
-    private void handleLoginKeyAction(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            verifyLogin();
-        }
+    private void createAccountOnMouse(MouseEvent event) {
     }
-
-    private boolean verifyLogin() {
-        //Do the getText here:
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        //TO do conection to db
-        if (authentication.login(username, password)) {
-
-            try {
-                PageLoader pageLoader = null;
-                pageLoader.pageChanger(apane, "../FXML/Menu.fxml");
-            } catch (IOException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        return false;
-    }
+    
 }
