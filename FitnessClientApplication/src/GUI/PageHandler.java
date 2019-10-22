@@ -7,6 +7,7 @@ package GUI;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -24,4 +25,23 @@ public abstract class PageHandler {
             System.out.println(ex.getMessage());
         }
     }
+    
+  public static Object getController(Node node) {
+    Object controller = null;
+    do {
+        controller = node.getProperties().get("foo");
+        node = node.getParent();
+    } while (controller == null && node != null);
+    return controller;
+}
+  
+  
+  public static Object getControllerObject(Node node) {
+    Object controller = null;
+    do {
+        controller = node.getUserData();
+        node = node.getParent();
+    } while (controller == null && node != null);
+    return controller;
+}
 }

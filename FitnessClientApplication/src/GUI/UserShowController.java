@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Models.Profile;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -30,12 +31,53 @@ public class UserShowController implements Initializable {
     @FXML
     private Label city;
 
+    private Profile profile;
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public void setUserPane(AnchorPane UserPane) {
+        this.UserPane = UserPane;
+    }
+
+    public void setUsername(Label Username) {
+        this.Username = Username;
+    }
+
+    public void setGym(Label gym) {
+        this.gym = gym;
+    }
+
+    public void setCuntry(Label cuntry) {
+        this.cuntry = cuntry;
+    }
+
+    public void setCity(Label city) {
+        this.city = city;
+    }
+
+   
+    
+   
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) {      
     }    
-    
+    public void setData(Profile profile){
+        Username.setText(profile.getUsername());
+        gym.setText(profile.getGym());
+        cuntry.setText(profile.getCountry());
+        city.setText(profile.getCity());
+    }
+    public String hello(){
+        return "Hej med dig idiot";
+    }
 }
