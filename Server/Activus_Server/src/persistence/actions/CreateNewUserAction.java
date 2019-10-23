@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jooq.DSLContext;
 import persistence.IDatabaseAction;
-import persistence.Util.PasswordTool;
+import persistence.util.PasswordTool;
 import static persistence.database.generated.Tables.LOGIN;
 import static persistence.database.generated.Tables.PROFILE;
 
