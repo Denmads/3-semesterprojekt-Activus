@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
-import Domain.Authentication.AuthenticationService;
-import GUI.PageHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -19,21 +14,22 @@ import javafx.scene.layout.AnchorPane;
 /**
  * FXML Controller class
  *
- * @author steff
+ * @author Victor
  */
-public class LoginController extends PageHandler implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
-    private AnchorPane pane;
+    private AnchorPane apane;
     @FXML
-    private ImageView loginBtn;
+    private TextField usernameField;
     @FXML
-    private ImageView createAccountbtn;
+    private PasswordField passwordField;
     @FXML
-    private TextField username;
+    private ImageView loginImageButton;
     @FXML
-    private TextField password;
-    AuthenticationService authenticationService;
+    private Label loginLabel;
+    @FXML
+    private Label createAccountLabel;
 
     /**
      * Initializes the controller class.
@@ -44,15 +40,11 @@ public class LoginController extends PageHandler implements Initializable {
     }    
 
     @FXML
-    private void loginMouseClick(MouseEvent event) {
-        changeFxml(pane, "FXML/Menu.fxml");
-//        if(authenticationService.login(username.getText().toString(), password.getText().toString())){
-//            changeFxml(pane, "FXML/Menu.fxml");
-//        }
+    private void handleLoginAction(MouseEvent event) {
     }
 
     @FXML
-    private void createAccountOnMouse(MouseEvent event) {
+    private void handleCreateAccountAction(MouseEvent event) {
     }
     
 }

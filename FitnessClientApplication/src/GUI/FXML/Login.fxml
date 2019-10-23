@@ -1,46 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="pane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
-   <children>
-      <ImageView fitHeight="400.0" fitWidth="644.0">
-         <image>
-            <Image url="@../../Images/LoginPage/loginbackground.png" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#030303" height="87.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="25.0" layoutY="169.0" opacity="0.5">
-         <image>
-            <Image url="@../../Images/LoginPage/textbackground.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="26.0" layoutY="209.0" opacity="0.5">
-         <image>
-            <Image url="@../../Images/LoginPage/textbackground.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="loginBtn" fitHeight="34.0" fitWidth="200.0" layoutX="26.0" layoutY="253.0" onMouseClicked="#loginMouseClick">
-         <image>
-            <Image url="@../../Images/LoginPage/LoginBtn.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="14.0" fitWidth="109.0" layoutX="34.0" layoutY="293.0">
-         <image>
-            <Image url="@../../Images/LoginPage/Create%20Account.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="createAccountbtn" fitHeight="14.0" fitWidth="48.0" layoutX="153.0" layoutY="293.0" onMouseClicked="#createAccountOnMouse">
-         <image>
-            <Image url="@../../Images/LoginPage/Here.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="username" layoutX="49.0" layoutY="172.0" opacity="0.29" promptText="Username" />
-      <TextField fx:id="password" layoutX="51.0" layoutY="212.0" opacity="0.3" promptText="Password" />
-   </children>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.PasswordField?>
+
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.image.Image?>
+
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import javafx.scene.text.Font?>
+
+
+
+<AnchorPane id="AnchorPane" fx:id="apane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
+
+    <children>
+
+        <AnchorPane prefHeight="1156.0" prefWidth="975.0" style="-fx-background-color: #000000;">
+
+            <children>
+
+                <ImageView fitHeight="495.0" fitWidth="742.0" layoutX="117.0" pickOnBounds="true" preserveRatio="true">
+
+                    <image>
+
+                        <Image url="@../../Images/activus_logo_transparent.png" />
+
+                    </image>
+
+                </ImageView>
+
+                <TextField fx:id="usernameField" layoutX="238.0" layoutY="499.0" prefHeight="79.0" prefWidth="499.0" promptText="Username">
+
+                    <font>
+
+                        <Font size="35.0" />
+
+                    </font>
+
+                </TextField>
+
+                <PasswordField fx:id="passwordField" layoutX="238.0" layoutY="642.0" prefHeight="79.0" prefWidth="499.0" promptText="Password">
+
+                    <font>
+
+                        <Font size="35.0" />
+
+                    </font>
+
+                </PasswordField>
+
+                <ImageView fx:id="loginImageButton" fitHeight="79.0" fitWidth="499.0" layoutX="239.0" layoutY="805.0" onMouseClicked="#handleLoginAction" pickOnBounds="true" preserveRatio="true">
+
+                    <image>
+
+                        <Image url="@../../Images/loginButton.png" />
+
+                    </image>
+
+                </ImageView>
+
+                <Label fx:id="loginLabel" layoutX="446.0" layoutY="819.0" onMouseClicked="#handleLoginAction" text="Login" textFill="WHITE">
+
+                    <font>
+
+                        <Font size="35.0" />
+
+                    </font>
+
+                </Label>
+
+                <Label fx:id="createAccountLabel" layoutX="363.0" layoutY="899.0" onMouseClicked="#handleCreateAccountAction" text="Create Account" textFill="WHITE" underline="true">
+
+                    <font>
+
+                        <Font name="System Bold" size="35.0" />
+
+                    </font>
+
+                </Label>
+
+            </children>
+
+        </AnchorPane>
+
+        <ImageView fitHeight="1442.0" fitWidth="1050.0" layoutX="964.0" layoutY="-285.0" pickOnBounds="true" preserveRatio="true">
+
+            <image>
+
+                <Image url="@../../Images/login_girl.png" />
+
+            </image>
+
+        </ImageView>
+
+    </children>
+
 </AnchorPane>
