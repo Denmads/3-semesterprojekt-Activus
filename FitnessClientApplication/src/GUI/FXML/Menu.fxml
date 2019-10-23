@@ -1,55 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MenuController">
    <children>
-      <ImageView fitHeight="727.0" fitWidth="1286.0" layoutX="-7.0" layoutY="-9.0">
+      <ImageView fitHeight="720.0" fitWidth="880.0" layoutX="400.0">
          <image>
             <Image url="@../../Images/Menu/menubackgrpund.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="calenderBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="75.0" onMouseClicked="#OnMousclickHandler">
+      <ImageView fitHeight="720.0" fitWidth="400.0">
          <image>
-            <Image url="@../../Images/Button/canenderbtn.png" />
+            <Image url="@../../Images/Todaybackground.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="buddylistBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="144.0" onMouseClicked="#OnMousclickHandler">
+      <ImageView fx:id="profileBtn" fitHeight="50.0" fitWidth="500.0" layoutX="419.0" layoutY="28.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/buddylistbtn.png" />
+            <Image url="@../../../../../../desktopImages/Rectangle%204.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="profileBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="6.0" onMouseClicked="#OnMousclickHandler">
+      <Label layoutX="614.0" layoutY="26.0" text="Profile" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="buddylistBtn" fitHeight="50.0" fitWidth="500.0" layoutX="419.0" layoutY="86.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/profilebtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="notificationBtn" fitHeight="69.0" fitWidth="76.0" layoutX="517.0" layoutY="6.0" onMouseClicked="#OnMousclickHandler" visible="false">
+      <Label layoutX="594.0" layoutY="88.0" text="Buddy list" textFill="#fffdfd">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="exiciseBtn" fitHeight="50.0" fitWidth="500.0" layoutX="420.0" layoutY="201.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/notificationbtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="statsBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="282.0" onMouseClicked="#OnMousclickHandler">
+      <ImageView fx:id="calenderBtn" fitHeight="50.0" fitWidth="500.0" layoutX="420.0" layoutY="143.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/statsbtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="exiciseBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="213.0" onMouseClicked="#OnMousclickHandler">
+      <Label layoutX="603.0" layoutY="145.0" text="Calender" textFill="#fcfcfc">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="614.0" layoutY="203.0" text="Exicise" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="workoutBtn" fitHeight="50.0" fitWidth="500.0" layoutX="419.0" layoutY="259.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/exicisebtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="workoutBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="429.0" onMouseClicked="#OnMousclickHandler">
+      <Label layoutX="603.0" layoutY="261.0" text="Workout" textFill="#fffdfd">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="statsBtn" fitHeight="50.0" fitWidth="500.0" layoutX="420.0" layoutY="318.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/workoutbtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="InboksBtn" fitHeight="69.0" fitWidth="76.0" layoutX="7.0" layoutY="360.0" onMouseClicked="#OnMousclickHandler">
+      <Label layoutX="627.0" layoutY="320.0" text="Stats" textFill="#fcfafa">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="InboksBtn" fitHeight="50.0" fitWidth="500.0" layoutX="420.0" layoutY="377.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../Images/Button/inboksbtn.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
+      <Label layoutX="619.0" layoutY="379.0" text="Inboks" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

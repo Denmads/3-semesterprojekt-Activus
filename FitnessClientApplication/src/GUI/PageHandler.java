@@ -21,8 +21,8 @@ public abstract class PageHandler {
         try {
             pane = FXMLLoader.load(getClass().getResource(fxml));
             subPane.getChildren().setAll(pane);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
     
