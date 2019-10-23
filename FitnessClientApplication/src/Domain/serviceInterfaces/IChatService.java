@@ -5,13 +5,14 @@
  */
 package Domain.serviceInterfaces;
 
-import Domain.Chat.Message;
+import Domain.chat.Message;
 import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
 
 /**
+ * The service provinding methods related to chatting with buddies
  *
  * @author Patrick
  */

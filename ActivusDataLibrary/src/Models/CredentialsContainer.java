@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
+ * Contains login information
+ * Used in authentication
  *
  * @author madsh
  */

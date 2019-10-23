@@ -5,7 +5,9 @@
  */
 package GUI;
 
-import Domain.TrainingScheme.Exercise;
+import Domain.trainingScheme.Exercise;
+import Domain.trainingScheme.TrainingScheme;
+import Domain.trainingScheme.TrainingSchemeService;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

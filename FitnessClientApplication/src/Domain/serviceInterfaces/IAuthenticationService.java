@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.Authentication.NewAccountInfo;
+import Domain.authentication.NewAccountInfo;
 import Enums.RequestType;
 import Enums.ServiceType;
 import LayerInterfaces.IService;
@@ -10,7 +10,8 @@ import Models.CredentialsContainer;
 import Models.Request;
 
 /**
- *
+ * The service provinding methods related to authentication and login
+ * 
  * @author madsh
  */
 public abstract class IAuthenticationService extends IService {

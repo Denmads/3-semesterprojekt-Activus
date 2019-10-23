@@ -1,5 +1,7 @@
 package GUI;
 
+import Domain.authentication.AuthenticationService;
+import GUI.PageHandler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

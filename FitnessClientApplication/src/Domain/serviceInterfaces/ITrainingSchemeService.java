@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.TrainingScheme.Exercise;
+import Domain.trainingScheme.Exercise;
 import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
@@ -8,7 +8,8 @@ import LayerInterfaces.IService;
 import java.util.List;
 
 /**
- *
+ * The service provinding methods related to Creating and editing trainingSchemes and trainingProgram
+ * 
  * @author Victor
  */
 public abstract class ITrainingSchemeService extends IService{

@@ -7,6 +7,7 @@ import Enums.ServiceType;
 import Models.Request;
 
 /**
+ * Defines a service in the domain layer, and makes sure it have access to the domainFacade and communication layer
  *
  * @author madsh
  */

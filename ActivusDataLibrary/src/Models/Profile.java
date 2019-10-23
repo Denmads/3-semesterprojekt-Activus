@@ -3,6 +3,12 @@ package Models;
 import java.io.Serializable;
 import java.util.List;
 
+
+/**
+ * Model class for profile
+ * 
+ * @author madsh
+ */
 public class Profile implements Serializable {
 
     private int profileId;

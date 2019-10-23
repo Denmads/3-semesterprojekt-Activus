@@ -1,14 +1,21 @@
 package Domain;
 
 import Enums.ServiceType;
+import LayerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
-import Persistence.DatabaseFacade;
-import Persistence.IDatabaseAction;
+import persistence.DatabaseFacade;
+import persistence.IDatabaseAction;
 import java.util.HashMap;
-import persistence.Actions.AuthenticateTokenAction;
+import persistence.actions.AuthenticateTokenAction;
 
-public class RequestDelegater {
+
+/**
+ * Delegates the different request to the handlers based on the service type
+ * 
+ * @author madsh
+ */
+public class RequestDelegater implements IRequestDelegater{
 
     private HashMap<ServiceType, IRequestHandler> requestHandlers;
     

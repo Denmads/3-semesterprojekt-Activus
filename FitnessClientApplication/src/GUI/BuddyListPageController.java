@@ -5,9 +5,9 @@
  */
 package GUI;
 
-import Domain.Authentication.AuthenticationService;
+import Domain.authentication.AuthenticationService;
 import Domain.DomainFacade;
-import Domain.User.ProfileService;
+import Domain.profile.ProfileService;
 import Enums.RequestType;
 import Enums.ServiceType;
 import Models.Profile;
