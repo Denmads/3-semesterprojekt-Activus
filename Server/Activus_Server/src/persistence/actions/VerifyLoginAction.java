@@ -19,9 +19,10 @@ import static persistence.database.generated.Tables.LOGIN;
  * @author Victor
  */
 public class VerifyLoginAction extends IDatabaseAction<Boolean> {
+
     private boolean loginCorrect = false;
     private boolean executed = false;
-    
+
     private String username;
     private String password;
 
@@ -29,25 +30,29 @@ public class VerifyLoginAction extends IDatabaseAction<Boolean> {
         this.username = username;
         this.password = password;
     }
-    
+
     @Override
     protected void execute(DSLContext database) throws SQLException {
+        //Fetching login information from database.
         Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
-        
+
+        //If the database returns something(Isn't empty) the password is verified.
         if (!res.isEmpty()) {
             Record record = res.get(0);
-            
+
             byte[] passSalt = record.getValue(LOGIN.PASSWORD_SALT);
             byte[] hashedPassword = null;
+
+            //Hashing the password argument(From constructor) so it matches the one from the database.
             try {
                 hashedPassword = PasswordTool.hashPassword(password, passSalt);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
                 Logger.getLogger(VerifyLoginAction.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            //Checking the password.
             loginCorrect = Arrays.equals(hashedPassword, record.getValue(LOGIN.HASH_PASSWORD));
         }
-        
+
         executed = true;
     }
 
@@ -60,5 +65,5 @@ public class VerifyLoginAction extends IDatabaseAction<Boolean> {
     public boolean hasResult() {
         return executed;
     }
-    
+
 }
