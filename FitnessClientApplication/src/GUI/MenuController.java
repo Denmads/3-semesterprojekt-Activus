@@ -9,7 +9,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,6 +28,8 @@ public class MenuController extends PageHandler implements Initializable {
     private ImageView buddylistBtn;
     @FXML
     private ImageView profileBtn;
+    @FXML
+    private ImageView notificationBtn;
     @FXML
     private ImageView statsBtn;
     @FXML
@@ -54,6 +55,8 @@ public class MenuController extends PageHandler implements Initializable {
             changeFxml(pane, "FXML/BuddyListPage.fxml");
         }else if(event.getSource()==profileBtn){        
             changeFxml(pane, "FXML/Profile.fxml");
+        }else if(event.getSource()==notificationBtn && notificationBtn.isVisible()){
+            
         }else if(event.getSource()== statsBtn){
             changeFxml(pane, "FXML/StatePage.fxml");
         }else if (event.getSource()==exiciseBtn){

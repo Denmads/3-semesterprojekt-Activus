@@ -6,43 +6,41 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="pane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
+<AnchorPane fx:id="pane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.LoginController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0">
+      <ImageView fitHeight="400.0" fitWidth="644.0">
          <image>
             <Image url="@../../Images/LoginPage/loginbackground.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="232.0" layoutY="488.0" stroke="BLACK" strokeType="INSIDE" width="606.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#030303" height="138.0" stroke="BLACK" strokeType="INSIDE" width="606.0" />
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="153.0" layoutY="360.0" opacity="0.5">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#030303" height="87.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="25.0" layoutY="169.0" opacity="0.5">
          <image>
             <Image url="@../../Images/LoginPage/textbackground.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="153.0" layoutY="414.0" opacity="0.5">
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="26.0" layoutY="209.0" opacity="0.5">
          <image>
             <Image url="@../../Images/LoginPage/textbackground.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loginBtn" fitHeight="34.0" fitWidth="200.0" layoutX="153.0" layoutY="454.0" onMouseClicked="#loginMouseClick">
+      <ImageView fx:id="loginBtn" fitHeight="34.0" fitWidth="200.0" layoutX="26.0" layoutY="253.0" onMouseClicked="#loginMouseClick">
          <image>
             <Image url="@../../Images/LoginPage/LoginBtn.png" />
          </image>
       </ImageView>
-
-      <ImageView fitHeight="25.0" fitWidth="109.0" layoutX="170.0" layoutY="499.0">
-
+      <ImageView fitHeight="14.0" fitWidth="109.0" layoutX="34.0" layoutY="293.0">
          <image>
             <Image url="@../../Images/LoginPage/Create%20Account.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="createAccountbtn" fitHeight="25.0" fitWidth="48.0" layoutX="296.0" layoutY="499.0" onMouseClicked="#createAccountOnMouse">
+      <ImageView fx:id="createAccountbtn" fitHeight="14.0" fitWidth="48.0" layoutX="153.0" layoutY="293.0" onMouseClicked="#createAccountOnMouse">
          <image>
             <Image url="@../../Images/LoginPage/Here.png" />
          </image>
       </ImageView>
-      <TextField fx:id="username" layoutX="177.0" layoutY="363.0" opacity="0.29" promptText="Username" />
-      <TextField fx:id="password" layoutX="177.0" layoutY="417.0" opacity="0.3" promptText="Password" />
+      <TextField fx:id="username" layoutX="49.0" layoutY="172.0" opacity="0.29" promptText="Username" />
+      <TextField fx:id="password" layoutX="51.0" layoutY="212.0" opacity="0.3" promptText="Password" />
    </children>
 </AnchorPane>
