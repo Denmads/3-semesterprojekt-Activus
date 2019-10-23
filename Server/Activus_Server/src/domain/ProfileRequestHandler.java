@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain;
+package domain;
 
-import Enums.ResponseArgumentName;
 import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;
@@ -14,17 +13,15 @@ import persistence.DatabaseFacade;
  *
  * @author madsh
  */
-public class AuthenticationRequestHandler extends IRequestHandler{
+public class ProfileRequestHandler extends IRequestHandler{
 
-    public AuthenticationRequestHandler(DatabaseFacade dbFacade) {
+    public ProfileRequestHandler(DatabaseFacade dbFacade) {
         super(dbFacade);
     }
-    
+
     @Override
     public Response handleRequest(Request request) {
-        Response response = new Response();
-        response.addArgument(ResponseArgumentName.SUCCESS, "It worked!");
-        
-        return response;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

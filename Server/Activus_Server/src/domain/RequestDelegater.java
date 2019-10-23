@@ -1,7 +1,7 @@
-package Domain;
+package domain;
 
 import Enums.ServiceType;
-import LayerInterfaces.IRequestDelegater;
+import layerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;

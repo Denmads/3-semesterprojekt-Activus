@@ -1,4 +1,4 @@
-package persistence.Util;
+package persistence.util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
