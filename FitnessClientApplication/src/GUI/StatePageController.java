@@ -9,9 +9,7 @@ import Domain.trainingScheme.Exercise;
 import Domain.trainingScheme.TrainingScheme;
 import Domain.trainingScheme.TrainingSchemeService;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
@@ -38,7 +36,7 @@ public class StatePageController extends PageHandler implements Initializable {
     private ChoiceBox<Exercise> dataBoks;
     @FXML
     private ImageView menuBtn;
-    TrainingSchemeService trainingSchemeService;
+    
 
     /**
      * Initializes the controller class.
@@ -46,18 +44,10 @@ public class StatePageController extends PageHandler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        for(Exercise exercise: (List<Exercise>) trainingSchemeService.LoadExercise()){
-           dataBoks.getItems().add(exercise); 
-        }
-        
-        
-        
-        
     }
 
     @FXML
     private void onMouseClick(MouseEvent event) {
-        changeFxml(pane, "FXML/Main.fxml");
     }
 
 }

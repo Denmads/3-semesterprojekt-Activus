@@ -78,14 +78,12 @@ public class TrainingSchemeService extends ITrainingSchemeService {
             Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
-    }
+   }
 
     @Override
     public List<Exercise> loadAllExercise() {
-        //TODO create loder 
-       
-      // return (List<Exercise>) returnResponseObject(RequestType.LOAD_ALL_EXERCISE, ResponseArgumentName.TRAININGPROGRAM);
-      return null;
+        //returnResponseObject(RequestType., ResponseArgumentName.CREDENTIALS);
+        return null; //FIX THIS PLZ
     }
 
 }

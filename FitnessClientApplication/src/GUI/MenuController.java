@@ -1,72 +1,77 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
  *
- * @author steff
+ * @author Victor
  */
-public class MenuController extends PageHandler implements Initializable {
+public class MenuController implements Initializable {
 
     @FXML
-    private AnchorPane pane;
+    private ImageView todayImageButton;
     @FXML
-    private ImageView calenderBtn;
+    private Label todayLabel;
     @FXML
-    private ImageView buddylistBtn;
+    private ImageView todayTextboxImage;
     @FXML
-    private ImageView profileBtn;
+    private ImageView statsImageButton;
     @FXML
-    private ImageView notificationBtn;
+    private ImageView programImageButton;
     @FXML
-    private ImageView statsBtn;
+    private ImageView profileImageButton;
     @FXML
-    private ImageView exiciseBtn;
+    private ImageView buddyImageButton;
     @FXML
-    private ImageView workoutBtn;
+    private ImageView emptyImageButton2;
     @FXML
-    private ImageView InboksBtn;
+    private Label statsLabel;
+    @FXML
+    private Label trainingPrgLabel;
+    @FXML
+    private Label profileLabel;
+    @FXML
+    private Label buddyLabel;
+    @FXML
+    private Label scheduleLabel;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
+        // TODO
+    }
 
     @FXML
-    private void OnMousclickHandler(MouseEvent event) {
-        if(event.getSource()==calenderBtn){
-            System.out.println("calender");
-        }else if(event.getSource()== buddylistBtn){
-            changeFxml(pane, "FXML/BuddyListPage.fxml");
-        }else if(event.getSource()==profileBtn){        
-            changeFxml(pane, "FXML/Profile.fxml");
-        }else if(event.getSource()==notificationBtn && notificationBtn.isVisible()){
-            
-        }else if(event.getSource()== statsBtn){
-            changeFxml(pane, "FXML/StatePage.fxml");
-        }else if (event.getSource()==exiciseBtn){
-            changeFxml(pane, "FXML/ExiciesePage.fxml");
-        }else if(event.getSource()==workoutBtn){
-            changeFxml(pane, "FXML/WorkoutPage.fxml");
-        }else if (event.getSource()==InboksBtn){
-            changeFxml(pane, "FXML/InboksPage.fxml");
-        }else
-                System.out.println("?");
+    private void handleTodayAction(MouseEvent event) {
     }
-    
+
+    @FXML
+    private void handleStatsAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleProgramAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleProfileAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleBuddyAction(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleScheduleAction(MouseEvent event) {
+    }
+
 }
