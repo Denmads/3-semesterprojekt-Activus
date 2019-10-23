@@ -1,7 +1,7 @@
-package Communication;
+package communication;
 
-import Domain.RequestDelegater;
-import LayerInterfaces.IRequestDelegater;
+import domain.RequestDelegater;
+import layerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
 import java.io.*;

@@ -1,7 +1,7 @@
-package Communication;
+package communication;
 
-import Domain.RequestDelegater;
-import LayerInterfaces.IRequestDelegater;
+import domain.RequestDelegater;
+import layerInterfaces.IRequestDelegater;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
