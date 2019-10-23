@@ -16,38 +16,51 @@ import Models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.DatabaseFacade;
+import persistence.actions.CreateNewUserAction;
 import persistence.actions.GetProfileByLoginIdAction;
+import persistence.actions.LogoutAction;
 import persistence.actions.VerifyLoginAction;
 
 /**
  *
  * @author madsh
  */
-public class AuthenticationRequestHandler extends IRequestHandler{
+public class AuthenticationRequestHandler extends IRequestHandler {
 
     public AuthenticationRequestHandler(DatabaseFacade dbFacade) {
         super(dbFacade);
     }
-    
+
     @Override
     public Response handleRequest(Request request) {
         Response response = new Response();
-        
-        if(request.getRequestType().equals(CREATE_NEW_USER)){
-            response.addArgument(ResponseArgumentName.SUCCESS, true);
-        } else if (request.getRequestType().equals(LOGIN)){
+
+        if (request.getRequestType().equals(CREATE_NEW_USER)) {
             try {
-                VerifyLoginAction vla = new VerifyLoginAction(request.getArgument(RequestArgumentName.USERNAME),request.getArgument(RequestArgumentName.PASSWORD));
+                CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
+                response.addArgument(ResponseArgumentName.SUCCESS, cnua.getResult());
+            } catch (ArgumentNotFoundException | ClassCastException ex) {
+                Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (request.getRequestType().equals(LOGIN)) {
+            try {
+                VerifyLoginAction vla = new VerifyLoginAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
                 GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getUserId());
-                response.addArgument(ResponseArgumentName.CREDENTIALS,vla.getResult());
+                response.addArgument(ResponseArgumentName.CREDENTIALS, vla.getResult());
                 response.addArgument(ResponseArgumentName.PROFILE, gpblia.getResult());
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (request.getRequestType().equals(LOGOUT)){
-            response.addArgument(ResponseArgumentName.SUCCESS, true);
+        } else if (request.getRequestType().equals(LOGOUT)) {
+            LogoutAction la;
+            try {
+                la = new LogoutAction(request.getArgument(RequestArgumentName.USER_ID));
+                response.addArgument(ResponseArgumentName.SUCCESS, la.getResult());
+            } catch (ArgumentNotFoundException | ClassCastException ex) {
+                Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
         return response;
     }
 }

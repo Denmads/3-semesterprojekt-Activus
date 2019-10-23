@@ -12,13 +12,13 @@ import static persistence.database.generated.Tables.TOKEN;
  * 
  * @author $Terpen
  */
-public class LogoutHandler extends IDatabaseAction<Boolean>{
+public class LogoutAction extends IDatabaseAction<Boolean>{
     
     private boolean result = false;
     private boolean executed = false;
     private int id;
     
-    public LogoutHandler(int id){
+    public LogoutAction(int id){
         this.id = id;
     }
 
