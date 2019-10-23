@@ -52,9 +52,8 @@ public class AuthenticationRequestHandler extends IRequestHandler {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (request.getRequestType().equals(LOGOUT)) {
-            LogoutAction la;
             try {
-                la = new LogoutAction(request.getArgument(RequestArgumentName.USER_ID));
+                LogoutAction la = new LogoutAction(request.getArgument(RequestArgumentName.USER_ID));
                 response.addArgument(ResponseArgumentName.SUCCESS, la.getResult());
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
