@@ -27,6 +27,10 @@ public class LogoutHandler extends IDatabaseAction<Boolean>{
         
         database.delete(TOKEN).where(TOKEN.LOGINID.eq(id));
         
+        Result<Record> res = database.select().from(TOKEN).where(TOKEN.LOGINID.eq(id));
+        if (res.isEmpty()){
+            result = true;
+        }
         executed = true;
     }
 
