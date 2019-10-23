@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import persistence.IDatabaseAction;
 import persistence.util.PasswordTool;
 import static persistence.database.generated.Tables.LOGIN;
@@ -45,8 +47,14 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
             byte[] hashedPassword = PasswordTool.hashPassword(password, salt);
             database.insertInto(LOGIN).columns(LOGIN.USERNAME, LOGIN.HASH_PASSWORD, LOGIN.PASSWORD_SALT).values(username, hashedPassword, salt).execute();
             executed = true;
+
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Result<Record> res = database.select(LOGIN.ID).from(LOGIN).where(LOGIN.USERNAME.eq(username));
+        if (!res.isEmpty()) {
+            result = true;
         }
     }
 
