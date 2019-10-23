@@ -15,34 +15,34 @@
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="232.0" layoutY="488.0" stroke="BLACK" strokeType="INSIDE" width="606.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#030303" height="138.0" stroke="BLACK" strokeType="INSIDE" width="606.0" />
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="103.0" layoutY="351.0" opacity="0.5">
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="153.0" layoutY="360.0" opacity="0.5">
          <image>
             <Image url="@../../Images/LoginPage/textbackground.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="103.0" layoutY="395.0" opacity="0.5">
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="153.0" layoutY="414.0" opacity="0.5">
          <image>
             <Image url="@../../Images/LoginPage/textbackground.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="loginBtn" fitHeight="34.0" fitWidth="200.0" layoutX="103.0" layoutY="445.0" onMouseClicked="#loginMouseClick">
+      <ImageView fx:id="loginBtn" fitHeight="34.0" fitWidth="200.0" layoutX="153.0" layoutY="454.0" onMouseClicked="#loginMouseClick">
          <image>
             <Image url="@../../Images/LoginPage/LoginBtn.png" />
          </image>
       </ImageView>
 
-      <ImageView fitHeight="25.0" fitWidth="109.0" layoutX="34.0" layoutY="293.0">
+      <ImageView fitHeight="25.0" fitWidth="109.0" layoutX="170.0" layoutY="499.0">
 
          <image>
             <Image url="@../../Images/LoginPage/Create%20Account.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="createAccountbtn" fitHeight="25.0" fitWidth="48.0" layoutX="153.0" layoutY="293.0" onMouseClicked="#createAccountOnMouse">
+      <ImageView fx:id="createAccountbtn" fitHeight="25.0" fitWidth="48.0" layoutX="296.0" layoutY="499.0" onMouseClicked="#createAccountOnMouse">
          <image>
             <Image url="@../../Images/LoginPage/Here.png" />
          </image>
       </ImageView>
-      <TextField fx:id="username" layoutX="127.0" layoutY="353.0" opacity="0.29" promptText="Username" />
-      <TextField fx:id="password" layoutX="127.0" layoutY="397.0" opacity="0.3" promptText="Password" />
+      <TextField fx:id="username" layoutX="177.0" layoutY="363.0" opacity="0.29" promptText="Username" />
+      <TextField fx:id="password" layoutX="177.0" layoutY="417.0" opacity="0.3" promptText="Password" />
    </children>
 </AnchorPane>
