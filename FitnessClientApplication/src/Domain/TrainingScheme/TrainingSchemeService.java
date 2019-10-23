@@ -82,7 +82,10 @@ public class TrainingSchemeService extends ITrainingSchemeService {
 
     @Override
     public List<Exercise> loadAllExercise() {
-        returnResponseObject(RequestType., ResponseArgumentName.CREDENTIALS)
+        //TODO create loder 
+       
+      // return (List<Exercise>) returnResponseObject(RequestType.LOAD_ALL_EXERCISE, ResponseArgumentName.TRAININGPROGRAM);
+      return null;
     }
 
 }
