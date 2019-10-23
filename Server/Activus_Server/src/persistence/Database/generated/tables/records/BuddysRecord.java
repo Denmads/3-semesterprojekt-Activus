@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Buddys;
-
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -13,6 +11,8 @@ import org.jooq.Record2;
 import org.jooq.Record3;
 import org.jooq.Row3;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Buddys;
 
 
 /**
@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BuddysRecord extends UpdatableRecordImpl<BuddysRecord> implements Record3<Integer, Integer, Boolean> {
 
-    private static final long serialVersionUID = -743987752;
+    private static final long serialVersionUID = -552172392;
 
     /**
      * Setter for <code>public.buddys.profileid</code>.

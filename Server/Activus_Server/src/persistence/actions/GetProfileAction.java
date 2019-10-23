@@ -29,7 +29,7 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
     
     @Override
     protected void execute(DSLContext database) throws SQLException{
-        Result<Record> result = database.select(PROFILE.asterisk(), LOGIN.USERNAME).from(PROFILE.join(LOGIN).on(PROFILE.LOGIN_ID.eq(LOGIN.ID))).where(PROFILE.ID.in(profileIds)).fetch();
+        Result<Record> result = database.select(PROFILE.asterisk(), LOGIN.USERNAME).from(PROFILE.join(LOGIN).on(PROFILE.LOGINID.eq(LOGIN.ID))).where(PROFILE.ID.in(profileIds)).fetch();
         
         resultList = new ArrayList<>();
         

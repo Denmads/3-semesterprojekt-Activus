@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Exercise;
-
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -13,6 +11,8 @@ import org.jooq.Record1;
 import org.jooq.Record7;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Exercise;
 
 
 /**
@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ExerciseRecord extends UpdatableRecordImpl<ExerciseRecord> implements Record7<Integer, String, String, Long, Integer, Integer, Integer> {
 
-    private static final long serialVersionUID = -1183916724;
+    private static final long serialVersionUID = 252548172;
 
     /**
      * Setter for <code>public.exercise.id</code>.

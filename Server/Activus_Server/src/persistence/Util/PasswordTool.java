@@ -1,4 +1,4 @@
-package Domain.Util;
+package persistence.Util;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

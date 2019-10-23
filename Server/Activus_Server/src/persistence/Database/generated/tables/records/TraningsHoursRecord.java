@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.TraningsHours;
-
 import java.sql.Time;
 
 import javax.annotation.Generated;
@@ -15,6 +13,8 @@ import org.jooq.Record1;
 import org.jooq.Record5;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.TraningsHours;
 
 
 /**
@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TraningsHoursRecord extends UpdatableRecordImpl<TraningsHoursRecord> implements Record5<Integer, String, Time, Time, Integer> {
 
-    private static final long serialVersionUID = 1200003678;
+    private static final long serialVersionUID = 559397608;
 
     /**
      * Setter for <code>public.tranings_hours.id</code>.

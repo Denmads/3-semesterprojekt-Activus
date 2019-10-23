@@ -4,11 +4,6 @@
 package persistence.database.generated.tables;
 
 
-import persistence.database.generated.Indexes;
-import persistence.database.generated.Keys;
-import persistence.database.generated.Public;
-import persistence.database.generated.tables.records.TrainingProgramRecord;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,13 +15,18 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import persistence.database.generated.Indexes;
+import persistence.database.generated.Keys;
+import persistence.database.generated.Public;
+import persistence.database.generated.tables.records.TrainingProgramRecord;
 
 
 /**
@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
 
-    private static final long serialVersionUID = 1856661010;
+    private static final long serialVersionUID = 1797059461;
 
     /**
      * The reference instance of <code>public.training_program</code>
@@ -71,6 +71,11 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
      * The column <code>public.training_program.description</code>.
      */
     public final TableField<TrainingProgramRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'No Description'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>public.training_program.ownerid</code>.
+     */
+    public final TableField<TrainingProgramRecord, Integer> OWNERID = createField(DSL.name("ownerid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.training_program</code> table reference
@@ -131,6 +136,15 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
     }
 
     @Override
+    public List<ForeignKey<TrainingProgramRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<TrainingProgramRecord, ?>>asList(Keys.TRAINING_PROGRAM__FKTRAINING_P613326);
+    }
+
+    public Profile profile() {
+        return new Profile(this, Keys.TRAINING_PROGRAM__FKTRAINING_P613326);
+    }
+
+    @Override
     public TrainingProgram as(String alias) {
         return new TrainingProgram(DSL.name(alias), this);
     }
@@ -157,11 +171,11 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Integer, String, String, Integer> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

@@ -3,9 +3,9 @@
   <!-- Configure the database connection here -->
   <jdbc>
     <driver>org.postgresql.Driver</driver>
-    <url>jdbc:postgresql://localhost/ActivusTest</url>
-    <user>postgres</user>
-    <password>postgres</password>
+    <url>jdbc:postgresql://tek-mmmi-db0a.tek.c.sdu.dk/si3_2019_group_9_db</url>
+    <user>si3_2019_group_9</user>
+    <password>Punic3;drops</password>
   </jdbc>
 
   <generator>
@@ -41,7 +41,7 @@
       <packageName>persistence.database.generated</packageName>
 
       <!-- The destination directory of your generated classes. Using Maven directory layout here -->
-      <directory>F:\Software engineering\3. semester - software i global kontekst\Semester project\3-semesterprojekt-Activus\Server\Activus_Server\src</directory>
+      <directory>..\Activus_Server\src</directory>
     </target>
   </generator>
 </configuration>

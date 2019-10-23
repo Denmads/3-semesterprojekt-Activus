@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Goal;
-
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -13,6 +11,8 @@ import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Goal;
 
 
 /**
@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class GoalRecord extends UpdatableRecordImpl<GoalRecord> implements Record4<Integer, Integer, Integer, String> {
 
-    private static final long serialVersionUID = -1898428863;
+    private static final long serialVersionUID = -1054786303;
 
     /**
      * Setter for <code>public.goal.id</code>.

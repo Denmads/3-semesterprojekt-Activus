@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.QuestionForBuddys;
-
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -13,6 +11,8 @@ import org.jooq.Record1;
 import org.jooq.Record5;
 import org.jooq.Row5;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.QuestionForBuddys;
 
 
 /**
@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class QuestionForBuddysRecord extends UpdatableRecordImpl<QuestionForBuddysRecord> implements Record5<Integer, Boolean, String, String, Integer> {
 
-    private static final long serialVersionUID = 1684095346;
+    private static final long serialVersionUID = 169941012;
 
     /**
      * Setter for <code>public.question_for_buddys.id</code>.

@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Login;
-
 import javax.annotation.Generated;
 
 import org.jooq.Field;
@@ -13,6 +11,8 @@ import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Row4;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Login;
 
 
 /**
@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class LoginRecord extends UpdatableRecordImpl<LoginRecord> implements Record4<Integer, String, byte[], byte[]> {
 
-    private static final long serialVersionUID = -1989722636;
+    private static final long serialVersionUID = -412040038;
 
     /**
      * Setter for <code>public.login.id</code>.

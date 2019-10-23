@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Message;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -16,6 +14,8 @@ import org.jooq.Record1;
 import org.jooq.Record6;
 import org.jooq.Row6;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Message;
 
 
 /**
@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MessageRecord extends UpdatableRecordImpl<MessageRecord> implements Record6<Integer, Integer, Integer, String, Timestamp, Date> {
 
-    private static final long serialVersionUID = -1968589449;
+    private static final long serialVersionUID = -6817071;
 
     /**
      * Setter for <code>public.message.id</code>.

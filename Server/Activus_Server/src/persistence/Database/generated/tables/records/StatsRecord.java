@@ -4,8 +4,6 @@
 package persistence.database.generated.tables.records;
 
 
-import persistence.database.generated.tables.Stats;
-
 import java.sql.Date;
 
 import javax.annotation.Generated;
@@ -15,6 +13,8 @@ import org.jooq.Record1;
 import org.jooq.Record8;
 import org.jooq.Row8;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import persistence.database.generated.tables.Stats;
 
 
 /**
@@ -30,7 +30,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StatsRecord extends UpdatableRecordImpl<StatsRecord> implements Record8<Integer, Integer, Integer, Long, Integer, Integer, Integer, Date> {
 
-    private static final long serialVersionUID = 115652585;
+    private static final long serialVersionUID = -955597451;
 
     /**
      * Setter for <code>public.stats.id</code>.

@@ -28,9 +28,8 @@ public class DatabaseConnection {
         readConfig();
         
         String ipAddress = prop.getProperty("databaseIpAddress");
-        String port = prop.getProperty("databasePort");
         String dbName = prop.getProperty("databaseName");
-        dbAddressString = "jdbc:postgresql://" + ipAddress + ":" + port + "/" + dbName;
+        dbAddressString = "jdbc:postgresql://" + ipAddress + "/" + dbName;
         
         username = prop.getProperty("databaseUsername");
         password = prop.getProperty("databasePassword");
