@@ -7,9 +7,10 @@ package Domain;
 
 import Models.Request;
 import Models.Response;
-import Persistence.DatabaseFacade;
+import persistence.DatabaseFacade;
 
 /**
+ * Handles a request and returns the corresponding response
  *
  * @author madsh
  */

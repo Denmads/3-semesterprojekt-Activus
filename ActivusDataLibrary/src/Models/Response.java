@@ -5,6 +5,11 @@ import Exceptions.ArgumentNotFoundException;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Model class for response
+ * 
+ * @author madsh
+ */
 public class Response  implements Serializable{
 
     private HashMap<ResponseArgumentName, Object> arguements = new HashMap<>();

@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import Domain.Authentication.AuthenticationService;
+import Domain.authentication.AuthenticationService;
 import GUI.PageHandler;
 import java.net.URL;
 import java.util.ResourceBundle;

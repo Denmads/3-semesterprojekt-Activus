@@ -5,6 +5,8 @@ import Enums.ServiceType;
 import java.util.HashMap;
 
 /**
+ * Defines the domainFacade class
+ * Provides acces to the different services
  *
  * @author madsh
  */

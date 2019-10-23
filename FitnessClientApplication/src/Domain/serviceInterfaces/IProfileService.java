@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.TrainingScheme.Exercise;
+import Domain.trainingScheme.Exercise;
 import Models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
@@ -9,6 +9,12 @@ import LayerInterfaces.IDomainFacade;
 import LayerInterfaces.IService;
 import java.util.List;
 
+
+/**
+ * The service provinding methods related to the profile and buddies
+ * 
+ * @author madsh
+ */
 public abstract class IProfileService extends IService {
 
     protected Profile currentProfile;

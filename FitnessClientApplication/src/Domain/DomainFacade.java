@@ -1,6 +1,6 @@
 package Domain;
 
-import Domain.Authentication.AuthenticationService;
+import Domain.authentication.AuthenticationService;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
 import LayerInterfaces.IDomainFacade;
@@ -10,7 +10,8 @@ import LayerInterfaces.ICommunicationFacade;
 import java.util.Map;
 
 /**
- *
+ * Providing access to the different services in the domain layer
+ * 
  * @author Victor
  */
 public class DomainFacade implements IDomainFacade{

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 /**
+ * Model class for a request
  *
  * @author madsh
  */

@@ -5,9 +5,10 @@
  */
 package LayerInterfaces;
 
-import Persistence.IDatabaseAction;
+import persistence.IDatabaseAction;
 
 /**
+ * Defines the database facade, which should be able to execute a databaseAction
  *
  * @author madsh
  */

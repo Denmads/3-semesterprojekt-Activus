@@ -38,7 +38,7 @@
 
     <target>
       <!-- The destination package of your generated classes (within the destination directory) -->
-      <packageName>Persistence.Database.generated</packageName>
+      <packageName>persistence.database.generated</packageName>
 
       <!-- The destination directory of your generated classes. Using Maven directory layout here -->
       <directory>F:\Software engineering\3. semester - software i global kontekst\Semester project\3-semesterprojekt-Activus\Server\Activus_Server\src</directory>

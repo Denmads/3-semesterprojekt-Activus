@@ -1,15 +1,22 @@
 package Communication;
 
 import Domain.RequestDelegater;
+import LayerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
 import java.io.*;
 import java.net.Socket;
 
+/**
+ * A thread that handles a single request
+ * 
+ * @author madsh
+ */
 public class ServerRequest extends Thread {
 
-    //Shouldn't this be private.
-    protected Socket socket;
+    private final Socket socket;
+    
+    private IRequestDelegater requestDelegater;
 
     public ServerRequest(Socket clientSocket) {
         this.socket = clientSocket;
@@ -17,6 +24,7 @@ public class ServerRequest extends Thread {
         System.out.println("Connected to " + this.socket.getInetAddress().toString());
     }
 
+    @Override
     public void run() {
         ObjectInput requestStream = null;
         ObjectOutputStream responseStream = null;
@@ -32,7 +40,6 @@ public class ServerRequest extends Thread {
         try {
             request = (Request) requestStream.readObject();
             //Handle Request and get respsone object
-            RequestDelegater requestDelegater = new RequestDelegater();
             Response response = requestDelegater.delegate(request);
             //Send object back and close
             responseStream.writeObject(response);
@@ -44,4 +51,9 @@ public class ServerRequest extends Thread {
         }
     }
 
+    public void setRequestDelegater(IRequestDelegater requestDelegater) {
+        this.requestDelegater = requestDelegater;
+    }
+
+    
 }
