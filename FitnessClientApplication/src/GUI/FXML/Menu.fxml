@@ -20,7 +20,7 @@
       </ImageView>
       <ImageView fx:id="profileBtn" fitHeight="50.0" fitWidth="500.0" layoutX="419.0" layoutY="28.0" onMouseClicked="#OnMousclickHandler">
          <image>
-            <Image url="@../../../../../../desktopImages/Rectangle%204.png" />
+            <Image url="@../../Images/menuButton.png" />
          </image>
       </ImageView>
       <Label layoutX="614.0" layoutY="26.0" text="Profile" textFill="WHITE">
