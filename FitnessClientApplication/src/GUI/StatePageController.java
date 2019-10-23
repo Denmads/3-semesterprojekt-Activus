@@ -34,16 +34,13 @@ public class StatePageController extends PageHandler implements Initializable {
     private ChoiceBox<Exercise> dataBoks;
     @FXML
     private ImageView menuBtn;
-    T
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        dataBoks = 
-        
-        
         
     }
 

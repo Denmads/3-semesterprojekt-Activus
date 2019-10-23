@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author steff
  */
-public class ExiciesePageController extends PageHandler implements Initializable {
+public class InboxPageController extends PageHandler implements Initializable {
 
     /**
      * Initializes the controller class.
