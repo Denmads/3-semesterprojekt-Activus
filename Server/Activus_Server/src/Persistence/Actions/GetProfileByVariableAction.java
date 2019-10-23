@@ -31,6 +31,7 @@ public class GetProfileByVariableAction extends IDatabaseAction<ArrayList<Intege
     @Override
     protected void execute(DSLContext database) throws SQLException {
         //Fetching the chosen information.
+        //ResultType might cause problems?
         Result<Record1<Integer>> result = database.select(PROFILE.ID).from(PROFILE).where(TF.eq(value)).fetch();
 
         returnList = new ArrayList();
