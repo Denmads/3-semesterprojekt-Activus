@@ -30,12 +30,14 @@
             <Image url="@../../Images/LoginPage/LoginBtn.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="14.0" fitWidth="109.0" layoutX="105.0" layoutY="488.0">
+
+      <ImageView fitHeight="25.0" fitWidth="109.0" layoutX="34.0" layoutY="293.0">
+
          <image>
             <Image url="@../../Images/LoginPage/Create%20Account.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="createAccountbtn" fitHeight="14.0" fitWidth="48.0" layoutX="240.0" layoutY="488.0" onMouseClicked="#createAccountOnMouse">
+      <ImageView fx:id="createAccountbtn" fitHeight="25.0" fitWidth="48.0" layoutX="153.0" layoutY="293.0" onMouseClicked="#createAccountOnMouse">
          <image>
             <Image url="@../../Images/LoginPage/Here.png" />
          </image>
