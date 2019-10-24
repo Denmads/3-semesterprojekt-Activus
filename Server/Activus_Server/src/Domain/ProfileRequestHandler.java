@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import persistence.DatabaseFacade;
 import persistence.actions.RemoveExerciseByIDAction;
 import persistence.actions.AddExerciseToTrainingProgramAction;
+import persistence.actions.CreateTrainingProgramAction;
 
 /**
  *
@@ -27,31 +28,39 @@ public class ProfileRequestHandler extends IRequestHandler {
         Response response = new Response();
         switch (request.getRequestType()) {
             case REMOVE_EXERCISE:
-                RemoveExerciseByIDAction rebia;
                 try {
-                    rebia = new RemoveExerciseByIDAction(request.getArgument(RequestArgumentName.EXERCISE_ID));
+                    RemoveExerciseByIDAction rebia = new RemoveExerciseByIDAction(request.getArgument(RequestArgumentName.EXERCISE_ID));
                     response.addArgument(ResponseArgumentName.SUCCESS, rebia.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case ADD_EXERCISE:
-                AddExerciseToTrainingProgramAction aettpa;
+
                 try {
-                    aettpa = new AddExerciseToTrainingProgramAction(request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_ID));
+                    AddExerciseToTrainingProgramAction aettpa = new AddExerciseToTrainingProgramAction(request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_ID));
                     response.addArgument(ResponseArgumentName.SUCCESS, aettpa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
             case UPDATE_PASSWORD:
-                UpdatePasswordAction upa;
+
                 try {
-                    upa = new UpdatePasswordAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
-                    response.addArgument(ResponseArgumentName.SUCCESS, upa);
+                    UpdatePasswordAction upa = new UpdatePasswordAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
+                    response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            case CREATE_TRAINING_PROGRAM:
+        
+            try {
+                CreateTrainingProgramAction ctpa = new CreateTrainingProgramAction(request.getArgument(RequestArgumentName.PROGRAM_OWNER_ID),request.getArgument(RequestArgumentName.PROGRAM_NAME),request.getArgument(RequestArgumentName.PROGRAM_DESCRIPTION));
+                response.addArgument(ResponseArgumentName.SUCCESS, ctpa.getResult());
+            } catch (ArgumentNotFoundException | ClassCastException ex) {
+                Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+               
         }
         //UPDATE RETURN STATEMENT LATER!!!
         return null;

@@ -10,6 +10,8 @@ public enum RequestArgumentName implements Serializable {
     USER_ID,
     PROFILE_ID,
     PROGRAM_ID,
+    PROGRAM_OWNER_ID,
+    PROGRAM_DESCRIPTION,
     STAT_ID,
     USERNAME,
     PASSWORD,
