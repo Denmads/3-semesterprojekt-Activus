@@ -8,6 +8,8 @@ package persistence.actions;
 
 import java.sql.SQLException;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import persistence.IDatabaseAction;
 import static persistence.database.generated.Tables.MESSAGE;
 
@@ -30,8 +32,11 @@ public class SendMessageAction extends IDatabaseAction<Boolean>{
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message);
-        
+        Result<Record> res = database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message);
+        System.out.println(res.toString());
+        if (res.isNotEmpty()) {
+            result = true;
+        }
         executed = true;
     }
 
