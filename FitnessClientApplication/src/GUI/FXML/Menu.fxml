@@ -75,17 +75,17 @@
                   </Button>
                </children>
                <padding>
-                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" spacing="20.0">
+            <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" style="-fx-background-color: #E88C22; -fx-background-radius: 30;" text="        Today        ">
                      <font>
                         <Font size="26.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listViewTodaysTraining" style="-fx-background-color: #707070; -fx-background-radius: 30;" VBox.vgrow="ALWAYS" />
+                  <ListView fx:id="listViewTodaysTraining" style="-fx-background-color: #707070; -fx-background-radius: 30;" stylesheets="@../css/Stylesheet.css" VBox.vgrow="ALWAYS" />
                </children>
                <padding>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

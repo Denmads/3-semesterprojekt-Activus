@@ -1,18 +1,26 @@
 package GUI.cellsControllers;
 
+import Domain.serviceInterfaces.ITrainingSchemeService;
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
 import LayerInterfaces.IDomainFacade;
 import Models.Exercise;
 import Models.SetInfo;
 import java.io.IOException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -42,7 +50,17 @@ public class TodaysCellController extends ListCell<Exercise> {
 
     @FXML
     private void exerciseDone(ActionEvent event) {
+        
+//        try {
+//            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).exerciseForTodayDone(exercise);
+//        } catch (ServiceNotFoundException ex) {
+//            Logger.getLogger(TodaysCellController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassCastException ex) {
+//            Logger.getLogger(TodaysCellController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
+        exerciseList.remove(exercise);
+        
     }
 
     @Override
@@ -58,8 +76,9 @@ public class TodaysCellController extends ListCell<Exercise> {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/listViewCells/TodayCell.fxml"));
         
             loader.setController(this);
+            VBox parent = null;
             try{
-               loader.load();
+               parent = loader.load();
                
             }catch(IOException ex){
                 System.out.println(ex);
@@ -69,11 +88,14 @@ public class TodaysCellController extends ListCell<Exercise> {
             for (SetInfo setInfo : exercise.getSetInfo()) {
                 
                 HBox root = new HBox();
+                root.setPrefSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
                 root.setSpacing(25);
                 root.setAlignment(Pos.CENTER);
                 
                 
                 VBox repsBox = new VBox();
+                repsBox.setPrefSize(75, Control.USE_COMPUTED_SIZE);
+                repsBox.setAlignment(Pos.TOP_LEFT);
                 HBox.setHgrow(repsBox, Priority.ALWAYS);
                 root.getChildren().add(repsBox);
                 
@@ -83,6 +105,8 @@ public class TodaysCellController extends ListCell<Exercise> {
                 
                 
                 VBox weightBox = new VBox();
+                weightBox.setPrefSize(Control.USE_COMPUTED_SIZE, Control.USE_COMPUTED_SIZE);
+                weightBox.setAlignment(Pos.TOP_LEFT);
                 HBox.setHgrow(weightBox, Priority.ALWAYS);
                 root.getChildren().add(weightBox);
                 
@@ -92,6 +116,10 @@ public class TodaysCellController extends ListCell<Exercise> {
                 
                 setsList.getChildren().add(root);
                 
+                
+                
+                setText(null);
+                setGraphic(parent);
             }
         }
     }

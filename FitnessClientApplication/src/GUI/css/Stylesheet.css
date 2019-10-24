@@ -23,7 +23,7 @@
 }
 
 .list-view .list-cell:even {
-    -fx-background-color: #2899C230;
+    -fx-background-color: transparent;
 }
 
 .list-view .list-cell:odd {
