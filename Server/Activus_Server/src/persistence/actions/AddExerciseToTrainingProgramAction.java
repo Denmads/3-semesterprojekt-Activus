@@ -8,6 +8,7 @@ package persistence.actions;
 import java.sql.SQLException;
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.Record1;
 import org.jooq.Result;
 import persistence.IDatabaseAction;
 import static persistence.database.generated.Tables.TRAINING_PROGRAM_EXERCISE;
@@ -34,7 +35,7 @@ public class AddExerciseToTrainingProgramAction extends IDatabaseAction<Boolean>
         database.insertInto(TRAINING_PROGRAM_EXERCISE).columns(TRAINING_PROGRAM_EXERCISE.EXERCISEID, TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID).values(exerciseID, trainingProgramID).execute();
         executed = true;
         
-        Result<Record> res = database.select(TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID).from(TRAINING_PROGRAM_EXERCISE).where(TRAINING_PROGRAM_EXERCISE.EXERCISEID.eq(exerciseID));
+        Result<Record1<Integer>> res = database.select(TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID).from(TRAINING_PROGRAM_EXERCISE).where(TRAINING_PROGRAM_EXERCISE.EXERCISEID.eq(exerciseID)).fetch();
         for(Record rec : res){
             if(rec.equals(trainingProgramID)){
                 result = true;
