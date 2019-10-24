@@ -30,11 +30,16 @@ public class RemoveExerciseByIDAction extends IDatabaseAction<Boolean> {
     protected void execute(DSLContext database) throws SQLException {
         database.deleteFrom(EXERCISE).where(EXERCISE.ID.eq(id));
         executed = true;
+        
+        Result<Record> res = database.select().from(EXERCISE).where(EXERCISE.ID.eq(id));
+        if(res.isEmpty()){
+            result = true;
+        }
     }
 
     @Override
     public Boolean getResult() {
-        return null;
+        return executed ? result : false;
     }
 
     @Override

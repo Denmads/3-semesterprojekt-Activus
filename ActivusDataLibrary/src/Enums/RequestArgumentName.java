@@ -18,6 +18,7 @@ public enum RequestArgumentName implements Serializable {
     TEXT,
     SEARCH_TYPE,
     EXERCISE,
+    EXERCISE_ID,
     EXERCISE_NAME,
     EXERCISE_REPS,
     EXERCISE_WEIGHT,
