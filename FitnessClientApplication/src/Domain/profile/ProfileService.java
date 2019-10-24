@@ -3,7 +3,7 @@ package Domain.profile;
 import Models.Profile;
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
-import Domain.trainingScheme.Exercise;
+import Models.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;

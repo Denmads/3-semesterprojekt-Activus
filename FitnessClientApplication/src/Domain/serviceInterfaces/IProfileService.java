@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.trainingScheme.Exercise;
+import Models.Exercise;
 import Models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;

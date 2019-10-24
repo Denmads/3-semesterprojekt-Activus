@@ -1,46 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
  *
- * @author Victor
+ * @author Sebas
  */
 public class MenuController implements Initializable {
-
     @FXML
-    private ImageView todayImageButton;
+    private Label notifications;
     @FXML
-    private Label todayLabel;
-    @FXML
-    private ImageView todayTextboxImage;
-    @FXML
-    private ImageView statsImageButton;
-    @FXML
-    private ImageView programImageButton;
-    @FXML
-    private ImageView profileImageButton;
-    @FXML
-    private ImageView buddyImageButton;
-    @FXML
-    private ImageView emptyImageButton2;
-    @FXML
-    private Label statsLabel;
-    @FXML
-    private Label trainingPrgLabel;
-    @FXML
-    private Label profileLabel;
-    @FXML
-    private Label buddyLabel;
-    @FXML
-    private Label scheduleLabel;
+    private ListView<?> listViewTodaysTraining;
 
     /**
      * Initializes the controller class.
@@ -48,30 +30,34 @@ public class MenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }    
+
+    @FXML
+    private void ViewProfile(ActionEvent event) {
     }
 
     @FXML
-    private void handleTodayAction(MouseEvent event) {
+    private void ViewStats(ActionEvent event) {
     }
 
     @FXML
-    private void handleStatsAction(MouseEvent event) {
+    private void ViewBuddies(ActionEvent event) {
     }
 
     @FXML
-    private void handleProgramAction(MouseEvent event) {
+    private void ViewFindBuddy(ActionEvent event) {
     }
 
     @FXML
-    private void handleProfileAction(MouseEvent event) {
+    private void ViewExercise(ActionEvent event) {
     }
 
     @FXML
-    private void handleBuddyAction(MouseEvent event) {
+    private void ViewTrainingPrograms(ActionEvent event) {
     }
 
     @FXML
-    private void handleScheduleAction(MouseEvent event) {
+    private void LogoutBtn(ActionEvent event) {
     }
-
+    
 }
