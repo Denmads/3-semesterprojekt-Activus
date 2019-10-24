@@ -7,34 +7,39 @@ package persistence.actions;
 
 import java.sql.SQLException;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import persistence.IDatabaseAction;
+import static persistence.database.generated.Tables.EXERCISE;
 
 /**
- *
+ * Action that removes an exercise from the DB
  * @author Patrick
  */
-public class RemoveExerciseAction extends IDatabaseAction<Boolean> {
+public class RemoveExerciseByIDAction extends IDatabaseAction<Boolean> {
 
     private boolean result;
     private boolean executed;
+    private int id;
     
-    public RemoveExerciseAction(){
-        
+    public RemoveExerciseByIDAction(int id){
+        this.id = id;
     }
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        database.deleteFrom(EXERCISE).where(EXERCISE.ID.eq(id));
+        executed = true;
     }
 
     @Override
     public Boolean getResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return null;
     }
 
     @Override
     public boolean hasResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return executed;
     }
     
 }
