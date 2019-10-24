@@ -14,6 +14,7 @@ public class Message implements Serializable {
     private String message;
     private Time time;
     private Date date;
+    private boolean isRead;
 
     public Message(int senderId) {
         this.senderId = senderId;
@@ -70,6 +71,12 @@ public class Message implements Serializable {
         this.date = date;
     }
     
-    
+        public boolean isIsRead() {
+        return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
     
 }
