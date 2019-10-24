@@ -52,6 +52,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
             case CREATE_TRAINING_PROGRAM:
         
             try {
@@ -60,7 +61,7 @@ public class ProfileRequestHandler extends IRequestHandler {
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-               
+            break;
         }
         //UPDATE RETURN STATEMENT LATER!!!
         return null;
