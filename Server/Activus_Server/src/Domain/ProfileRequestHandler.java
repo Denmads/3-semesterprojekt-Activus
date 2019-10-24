@@ -36,7 +36,6 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case ADD_EXERCISE:
-
                 try {
                     AddExerciseToTrainingProgramAction aettpa = new AddExerciseToTrainingProgramAction(request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_ID));
                     response.addArgument(ResponseArgumentName.SUCCESS, aettpa.getResult());
@@ -45,7 +44,6 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case UPDATE_PASSWORD:
-
                 try {
                     UpdatePasswordAction upa = new UpdatePasswordAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
                     response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
@@ -54,14 +52,13 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case CREATE_TRAINING_PROGRAM:
-        
-            try {
-                CreateTrainingProgramAction ctpa = new CreateTrainingProgramAction(request.getArgument(RequestArgumentName.PROGRAM_OWNER_ID),request.getArgument(RequestArgumentName.PROGRAM_NAME),request.getArgument(RequestArgumentName.PROGRAM_DESCRIPTION));
-                response.addArgument(ResponseArgumentName.SUCCESS, ctpa.getResult());
-            } catch (ArgumentNotFoundException | ClassCastException ex) {
-                Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            break;
+                try {
+                    CreateTrainingProgramAction ctpa = new CreateTrainingProgramAction(request.getArgument(RequestArgumentName.PROGRAM_OWNER_ID), request.getArgument(RequestArgumentName.PROGRAM_NAME), request.getArgument(RequestArgumentName.PROGRAM_DESCRIPTION));
+                    response.addArgument(ResponseArgumentName.SUCCESS, ctpa.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
         }
         //UPDATE RETURN STATEMENT LATER!!!
         return null;
