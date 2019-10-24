@@ -41,6 +41,8 @@ public class GetExerciseByIDAction extends IDatabaseAction<Exercise>{
         result.setSets(rec.get(EXERCISE.SETS));
         result.setTimeTaken(rec.get(EXERCISE.TIME_TAKEN));
         result.setWeight(rec.get(EXERCISE.WEIGHT));
+        
+        executed = true;
     }
 
     @Override
