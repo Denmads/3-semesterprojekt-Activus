@@ -60,7 +60,7 @@ public class ProfileRequestHandler extends IRequestHandler {
             case UPDATE_PROFILE:
                 try {
                     //FIGURE OUT: The arguments for the UpdateProfileAction constructor.
-                UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.), Object obj);
+                UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName), Object obj);
                 response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);

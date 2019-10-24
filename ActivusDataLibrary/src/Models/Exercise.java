@@ -1,25 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
-import java.io.Serializable;
+import Models.SetInfo;
+import java.util.ArrayList;
 
 /**
  *
- * @author Patrick
+ * @author Victor
  */
-public class Exercise implements Serializable {
+public class Exercise {
+
+    private int ID;
     private String name;
-    private String description;
-    private long timeTaken;
-    private int reps;
-    private int sets;
-    private int weight;
+    private double time;
+    private String Description;
+    
+
+    private ArrayList<SetInfo> set;
 
     public Exercise() {
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+    
+    
+    public Exercise(int ID, String name, double time) {
+        this.ID = ID;
+        this.name = name;
+        this.time = time;
+        this.set = new ArrayList<>();
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+
+    public ArrayList<SetInfo> getSet() {
+        return set;
+    }
+
+    public void setSet(ArrayList<SetInfo> set) {
+        this.set = set;
+    }
+
+    
+    public int getID() {
+        return ID;
     }
 
     public String getName() {
@@ -30,44 +61,19 @@ public class Exercise implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public double getTime() {
+        return time;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTime(double time) {
+        this.time = time;
     }
 
-    public long getTimeTaken() {
-        return timeTaken;
-    }
-
-    public void setTimeTaken(long timeTaken) {
-        this.timeTaken = timeTaken;
-    }
-
-    public int getReps() {
-        return reps;
-    }
-
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public int getSets() {
-        return sets;
-    }
-
-    public void setSets(int sets) {
-        this.sets = sets;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void addSetInfo (SetInfo info) {
+        set.add(info);
     }
     
+    public void removeSetInfo (int index) {
+        set.remove(index);
+    }
 }

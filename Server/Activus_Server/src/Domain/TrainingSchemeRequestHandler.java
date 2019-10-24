@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import persistence.DatabaseFacade;
 import persistence.actions.AddExerciseToTrainingProgramAction;
 import persistence.actions.CreateTrainingProgramAction;
+import persistence.actions.GetAllExerciseAction;
 import persistence.actions.RemoveExerciseByIDAction;
 
 /**
@@ -56,11 +57,12 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
                 }
                 break;
             case LOAD_ALL_EXERCISE:
-                
+                GetAllExerciseAction allExerciseAction = new GetAllExerciseAction();
+                response.addArgument(ResponseArgumentName.EXERCISE, allExerciseAction.getResult());
         }
         
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
     
 }

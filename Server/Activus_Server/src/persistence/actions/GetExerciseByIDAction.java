@@ -6,7 +6,9 @@
 package persistence.actions;
 
 import Models.Exercise;
+import Models.SetInfo;
 import java.sql.SQLException;
+import java.util.Set;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Record6;
@@ -34,11 +36,14 @@ public class GetExerciseByIDAction extends IDatabaseAction<Exercise>{
         Result<Record6<String, String, Long, Integer, Integer, Integer>> res = database.select(EXERCISE.NAME,EXERCISE.DESCRIPTION,EXERCISE.TIME_TAKEN,EXERCISE.REBS,EXERCISE.SETS,EXERCISE.WEIGHT).from(EXERCISE.where(EXERCISE.ID.eq(id))).fetch();
         result = new Exercise();
         
+        //TODO change database for getting sets for etch ecerxise
         Record rec = res.get(0);
         result.setDescription(rec.get(EXERCISE.DESCRIPTION));
         result.setName(rec.get(EXERCISE.NAME));
-        result.setReps(rec.get(EXERCISE.REBS));
-        result.setSets(rec.get(EXERCISE.SETS));
+        SetInfo set = new SetInfo(id, id);
+        
+        set.setReps(rec.get(EXERCISE.REBS));
+        set.setWeight(rec.get(EXERCISE.WEIGHT));
         result.setTimeTaken(rec.get(EXERCISE.TIME_TAKEN));
         result.setWeight(rec.get(EXERCISE.WEIGHT));
     }

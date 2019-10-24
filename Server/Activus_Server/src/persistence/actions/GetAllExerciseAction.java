@@ -5,11 +5,15 @@
  */
 package persistence.actions;
 
+import Models.Exercise;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import persistence.IDatabaseAction;
-import persistence.database.generated.tables.Exercise;
+import static persistence.database.generated.Tables.EXERCISE;
+
 
 /**
  *
@@ -17,23 +21,25 @@ import persistence.database.generated.tables.Exercise;
  */
 public class GetAllExerciseAction extends IDatabaseAction<ArrayList<Exercise>>{
     
-    private ArrayList<Exercise> exerciseList = null;
-    
-            
+    private ArrayList<Exercise> exerciseList = null;        
 
-    @Override;
+    @Override
     protected void execute(DSLContext database) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Result<Record> result = database.select().from(EXERCISE);
+        this.exerciseList = new ArrayList<>();
+        result.stream().map((r) -> new Exercise((int)r.get(EXERCISE.ID),r.get(EXERCISE.NAME), r.get(EXERCISE.DESCRIPTION))).forEachOrdered((exercise) -> {
+            exerciseList.add((Exercise) exercise);
+        });      
     }
 
     @Override
     public ArrayList<Exercise> getResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return exerciseList;
     }
 
     @Override
     public boolean hasResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return exerciseList.isEmpty();
     }
     
     

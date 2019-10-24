@@ -1,5 +1,6 @@
 package Domain.trainingScheme;
 
+import Models.Exercise;
 import java.util.ArrayList;
 
 /**
