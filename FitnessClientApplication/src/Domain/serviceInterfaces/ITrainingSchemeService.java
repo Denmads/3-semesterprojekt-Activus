@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.trainingScheme.Exercise;
+import Models.Exercise;
 import Enums.ServiceType;
 import LayerInterfaces.ICommunicationFacade;
 import LayerInterfaces.IDomainFacade;
@@ -29,6 +29,6 @@ public abstract class ITrainingSchemeService extends IService{
     
     public abstract List<Exercise> loadAllExercise();
     
-    
+    public abstract void exerciseForTodayDone(Exercise exercise);
     
 }

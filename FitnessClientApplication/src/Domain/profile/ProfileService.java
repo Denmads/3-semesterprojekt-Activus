@@ -3,7 +3,7 @@ package Domain.profile;
 import Models.Profile;
 import Domain.serviceInterfaces.IProfileService;
 import Domain.DomainFacade;
-import Domain.trainingScheme.Exercise;
+import Models.Exercise;
 import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
@@ -49,12 +49,6 @@ public class ProfileService extends IProfileService {
         }
 
         return profiles;
-    }
-
-    @Override
-    public Profile getProfile(int profileID) {
-        return (Profile) returnResponsObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
-        
     }
 
     @Override

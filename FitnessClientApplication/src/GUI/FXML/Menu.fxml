@@ -1,181 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
-
 <?import javafx.scene.image.ImageView?>
-
-<?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MenuController">
-
-    <children>
-
-        <ImageView fitHeight="1084.0" fitWidth="1624.0" layoutX="296.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menu_girl.png" />
-
-            </image>
-
-        </ImageView>
-
-        <AnchorPane prefHeight="1080.0" prefWidth="800.0" style="-fx-background-color: #000000;">
-
-            <children>
-
-                <ImageView fitHeight="495.0" fitWidth="742.0" layoutX="1.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-
-                    <image>
-
-                        <Image url="@../../Images/activus_logo_transparent.png" />
-
-                    </image>
-
-                </ImageView>
-
-                <ImageView fx:id="todayImageButton" fitHeight="107.0" fitWidth="595.0" layoutX="71.0" layoutY="355.0" onMouseClicked="#handleTodayAction" pickOnBounds="true" preserveRatio="true">
-
-                    <image>
-
-                        <Image url="@../../Images/loginButton.png" />
-
-                    </image>
-
-                </ImageView>
-
-                <Label fx:id="todayLabel" layoutX="314.0" layoutY="378.0" onMouseClicked="#handleTodayAction" text="Today" textFill="WHITE">
-
-                    <font>
-
-                        <Font name="System Bold" size="35.0" />
-
-                    </font>
-
-                </Label>
-
-                <ImageView fx:id="todayTextboxImage" fitHeight="568.0" fitWidth="595.0" layoutX="77.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
-
-                    <image>
-
-                        <Image url="@../../Images/todayTextbox.png" />
-
-                    </image>
-
-                </ImageView>
-
-            </children>
-
-        </AnchorPane>
-
-        <ImageView fx:id="statsImageButton" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="31.0" onMouseClicked="#handleStatsAction" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menuButton.png" />
-
-            </image>
-
-        </ImageView>
-
-        <ImageView fx:id="programImageButton" fitHeight="216.0" fitWidth="1070.0" layoutX="828.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menuButton.png" />
-
-            </image>
-
-        </ImageView>
-
-        <ImageView fx:id="profileImageButton" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menuButton.png" />
-
-            </image>
-
-        </ImageView>
-
-        <ImageView fx:id="buddyImageButton" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="610.0" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menuButton.png" />
-
-            </image>
-
-        </ImageView>
-
-        <ImageView fx:id="emptyImageButton2" fitHeight="216.0" fitWidth="1070.0" layoutX="830.0" layoutY="803.0" pickOnBounds="true" preserveRatio="true">
-
-            <image>
-
-                <Image url="@../../Images/menuButton.png" />
-
-            </image>
-
-        </ImageView>
-
-        <Label fx:id="statsLabel" layoutX="1263.0" layoutY="51.0" onMouseClicked="#handleStatsAction" text="Stats" textFill="WHITE">
-
-            <font>
-
-                <Font name="System Bold" size="80.0" />
-
-            </font>
-
-        </Label>
-
-        <Label fx:id="trainingPrgLabel" layoutX="1174.0" layoutY="244.0" onMouseClicked="#handleProgramAction" text="Program" textFill="WHITE">
-
-            <font>
-
-                <Font name="System Bold" size="80.0" />
-
-            </font>
-
-        </Label>
-
-        <Label fx:id="profileLabel" layoutX="1238.0" layoutY="437.0" onMouseClicked="#handleProfileAction" text="Profile" textFill="WHITE">
-
-            <font>
-
-                <Font name="System Bold" size="80.0" />
-
-            </font>
-
-        </Label>
-
-        <Label fx:id="buddyLabel" layoutX="1222.0" layoutY="634.0" onMouseClicked="#handleBuddyAction" text="Buddies" textFill="WHITE">
-
-            <font>
-
-                <Font name="System Bold" size="80.0" />
-
-            </font>
-
-        </Label>
-
-        <Label fx:id="scheduleLabel" layoutX="1206.0" layoutY="828.0" onMouseClicked="#handleScheduleAction" text="Schedule" textFill="WHITE">
-
-            <font>
-
-                <Font name="System Bold" size="80.0" />
-
-            </font>
-
-        </Label>
-
-    </children>
-
-</AnchorPane>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MenuController">
+   <children>
+      <HBox alignment="CENTER_LEFT">
+         <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/Menu/backgroudn.png" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="138.0" fitWidth="231.0" opacity="0.9">
+                     <image>
+                        <Image url="@../../Images/Menu/Todaybackground.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#ViewProfile" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Profile" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" onAction="#ViewStats" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Stats" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <StackPane>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#ViewBuddies" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Buddies" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="notifications" alignment="CENTER" minWidth="25.0" style="-fx-background-color: #cc3333; -fx-background-radius: 100;" text="99+" textFill="WHITE" translateX="120.0" translateY="-15.0" StackPane.alignment="CENTER">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <Button mnemonicParsing="false" onAction="#ViewFindBuddy" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Find buddy" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#ViewExercise" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Exercices" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#ViewTrainingPrograms" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Training Programs" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#LogoutBtn" prefHeight="37.0" prefWidth="125.0" style="-fx-background-color: #e88c22; -fx-background-radius: 30;" text="Logout" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" style="-fx-background-color: #E88C22; -fx-background-radius: 30;" text="        Today        ">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="listViewTodaysTraining" style="-fx-background-color: #707070; -fx-background-radius: 30;" stylesheets="@../css/Stylesheet.css" VBox.vgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </padding></VBox>
+         </children>
+      </HBox>
+   </children>
+</StackPane>

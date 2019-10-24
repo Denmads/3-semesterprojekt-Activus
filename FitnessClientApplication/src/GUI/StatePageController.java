@@ -5,8 +5,8 @@
  */
 package GUI;
 
-import Domain.trainingScheme.Exercise;
-import Domain.trainingScheme.TrainingScheme;
+import Models.Exercise;
+import Models.TrainingScheme;
 import Domain.trainingScheme.TrainingSchemeService;
 import java.net.URL;
 import java.util.ResourceBundle;

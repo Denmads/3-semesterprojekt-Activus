@@ -1,6 +1,6 @@
 package Domain.serviceInterfaces;
 
-import Domain.trainingScheme.Exercise;
+import Models.Exercise;
 import Models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
@@ -30,8 +30,6 @@ public abstract class IProfileService extends IService {
     }
 
     public abstract List<Profile> search(String searchString, SearchType searchType);
-
-    public abstract Profile getProfile(int profileID);
 
     public abstract boolean updateProfile(Profile newProfileInfo);
 
