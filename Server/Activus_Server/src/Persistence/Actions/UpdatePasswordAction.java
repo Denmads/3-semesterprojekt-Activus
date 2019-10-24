@@ -14,7 +14,8 @@ import persistence.Util.PasswordTool;
 import static persistence.database.generated.Tables.LOGIN;
 
 /**
- *
+ * This class is meant to update the users password and the salt belonging to it.
+ * 
  * @author Victor
  */
 public class UpdatePasswordAction extends IDatabaseAction<Boolean> {
