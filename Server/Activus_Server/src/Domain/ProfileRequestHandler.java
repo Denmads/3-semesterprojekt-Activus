@@ -24,6 +24,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 RemoveExerciseByIDAction rebia = new RemoveExerciseByIDAction(request.getArgument(RequestArgumentName.EXERCISE_ID));
                 Response response = new Response();
                 response.addArgument(ResponseArgumentName.SUCCESS, rebia.getResult());
+                break;
         }
     }
 
