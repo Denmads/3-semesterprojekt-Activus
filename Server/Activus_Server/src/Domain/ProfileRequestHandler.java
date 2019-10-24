@@ -6,6 +6,7 @@ import Exceptions.ArgumentNotFoundException;
 import Models.Request;
 import Models.Response;
 import Persistence.Actions.UpdatePasswordAction;
+import Persistence.Actions.UpdateUsernameAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.DatabaseFacade;
@@ -28,6 +29,7 @@ public class ProfileRequestHandler extends IRequestHandler {
         Response response = new Response();
         switch (request.getRequestType()) {
             case REMOVE_EXERCISE:
+
                 try {
                     RemoveExerciseByIDAction rebia = new RemoveExerciseByIDAction(request.getArgument(RequestArgumentName.EXERCISE_ID));
                     response.addArgument(ResponseArgumentName.SUCCESS, rebia.getResult());
@@ -54,14 +56,21 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case CREATE_TRAINING_PROGRAM:
-        
-            try {
-                CreateTrainingProgramAction ctpa = new CreateTrainingProgramAction(request.getArgument(RequestArgumentName.PROGRAM_OWNER_ID),request.getArgument(RequestArgumentName.PROGRAM_NAME),request.getArgument(RequestArgumentName.PROGRAM_DESCRIPTION));
-                response.addArgument(ResponseArgumentName.SUCCESS, ctpa.getResult());
-            } catch (ArgumentNotFoundException | ClassCastException ex) {
-                Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            break;
+
+                try {
+                    CreateTrainingProgramAction ctpa = new CreateTrainingProgramAction(request.getArgument(RequestArgumentName.PROGRAM_OWNER_ID), request.getArgument(RequestArgumentName.PROGRAM_NAME), request.getArgument(RequestArgumentName.PROGRAM_DESCRIPTION));
+                    response.addArgument(ResponseArgumentName.SUCCESS, ctpa.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case UPDATE_USERNAME:
+                try {
+                    UpdateUsernameAction uua = new UpdateUsernameAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.USER_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, uua);
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
         //UPDATE RETURN STATEMENT LATER!!!
         return null;
