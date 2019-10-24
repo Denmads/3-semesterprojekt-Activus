@@ -12,7 +12,7 @@ import static persistence.database.generated.Tables.MESSAGE;
 /**
  * @author $Terpen
  */
-public class ReciveMessageAction extends IDatabaseAction<ArrayList<Message>>{
+public class ReciveMessageHistoryAction extends IDatabaseAction<ArrayList<Message>>{
 
     private int reciverId;
     private int senderId;
@@ -20,7 +20,7 @@ public class ReciveMessageAction extends IDatabaseAction<ArrayList<Message>>{
     private ArrayList<Message> resultList = null;
         
 
-    public ReciveMessageAction(int reciverId, int senderId){
+    public ReciveMessageHistoryAction(int reciverId, int senderId){
         this.reciverId = reciverId;
         this.senderId = senderId;
     }
@@ -42,6 +42,7 @@ public class ReciveMessageAction extends IDatabaseAction<ArrayList<Message>>{
             message.setMessage(r.get(MESSAGE.MESSAGE_));
             message.setDate(r.get(MESSAGE.DATE));
             message.setTime(r.get(MESSAGE.TIME));
+            message.setIsRead(r.get(MESSAGE.SEEN));
             
             resultList.add(message);
         }

@@ -2,7 +2,7 @@ package Models;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author $Terpen
