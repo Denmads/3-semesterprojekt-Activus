@@ -47,7 +47,6 @@ public class ChatRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ChatRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
                 break;
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
