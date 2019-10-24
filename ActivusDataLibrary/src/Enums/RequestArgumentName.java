@@ -26,6 +26,11 @@ public enum RequestArgumentName implements Serializable {
     EXERCISE_WEIGHT,
     EXERCISE_TIME,
     MESSAGE,
-    PROGRAM_NAME
+    PROGRAM_NAME,
+    PROGRAM_TIME_TAKEN,
+    PROGRAM_REPS,
+    PROGRAM_SETS,
+    PROGRAM_WEIGHT,
+    PROGRAM_DATE
     
 }
