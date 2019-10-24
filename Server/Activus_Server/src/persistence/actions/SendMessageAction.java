@@ -32,7 +32,7 @@ public class SendMessageAction extends IDatabaseAction<Boolean>{
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        Result<Record> res = database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message);
+        Result<Record> res = database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message).returning();
         System.out.println(res.toString());
         if (res.isNotEmpty()) {
             result = true;
