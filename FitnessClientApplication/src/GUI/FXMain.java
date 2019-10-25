@@ -21,7 +21,7 @@ public class FXMain extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+//hej med dig
     /**
      * @param args the command line arguments
      */
