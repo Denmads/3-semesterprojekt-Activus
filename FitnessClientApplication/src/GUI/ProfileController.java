@@ -5,23 +5,93 @@
  */
 package GUI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.SubScene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
  *
- * @author steff
+ * @author perte
  */
-public class ProfileController extends PageHandler  implements Initializable {
+public class ProfileController implements Initializable {
+
+    @FXML
+    private SubScene subSceneMenu;
+    @FXML
+    private Circle circleProfilePic;
+    @FXML
+    private TextField fieldName;
+    @FXML
+    private TextField fieldCountry;
+    @FXML
+    private TextField fieldGender;
+    @FXML
+    private TextField fieldGym;
+    @FXML
+    private TextField fieldCity;
+    @FXML
+    private Button btnModifyProfile;
+    @FXML
+    private Button btnSaveProfile;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        //Should make the subscene to the manu subscene
+        /*
+        try {
+            subSceneMenu = FXMLLoader.load(getClass().getResource("SidebarMenu.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        */
+    }
+
     
+    @FXML
+    private void btnSaveProfileHandler(ActionEvent event) {
+        if(btnSaveProfile.getText().equals("Save profile info")){
+            saveProfile();
+        } else{
+            modifyProfile();
+        }
+        
+    }
+    
+    private void modifyProfile(){
+        fieldCity.setEditable(true);
+        fieldCountry.setEditable(true);
+        fieldGender.setEditable(true);
+        fieldGym.setEditable(true);
+        fieldName.setEditable(true);
+        btnSaveProfile.setText("Save profile info");
+    }
+    
+    
+    //should send data to server
+    private void saveProfile(){
+        fieldCity.setEditable(false);
+        fieldCountry.setEditable(false);
+        fieldGender.setEditable(false);
+        fieldGym.setEditable(false);
+        fieldName.setEditable(false);
+        btnSaveProfile.setText("Modify profile info");
+        //save data to server TODO
+    }
+
 }
