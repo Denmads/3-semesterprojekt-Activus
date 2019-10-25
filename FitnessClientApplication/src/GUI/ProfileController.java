@@ -18,7 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 
 /**
@@ -28,7 +30,6 @@ import javafx.scene.shape.Circle;
  */
 public class ProfileController implements Initializable {
 
-    @FXML
     private SubScene subSceneMenu;
     @FXML
     private Circle circleProfilePic;
@@ -43,23 +44,32 @@ public class ProfileController implements Initializable {
     @FXML
     private TextField fieldCity;
     @FXML
-    private Button btnModifyProfile;
-    @FXML
     private Button btnSaveProfile;
+    @FXML
+    private HBox hboxen;
+    @FXML
+    private Pane subpane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Should make the subscene to the manu subscene
-        /*
-        try {
-            subSceneMenu = FXMLLoader.load(getClass().getResource("SidebarMenu.fxml"));
-        } catch (IOException ex) {
+        
+            //Should make the subscene to the manu subscene
+            
+            try {
+            
+            Pane subScene = FXMLLoader.load(getClass().getResource("FXML/PupUpMenu/SidebarMenu.fxml"));
+            subpane.getChildren().setAll(subScene);
+            } catch (IOException ex) {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
+            }
+            
+           
+           
+           
+      
     }
 
     
