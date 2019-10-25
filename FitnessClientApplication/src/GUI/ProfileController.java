@@ -18,6 +18,8 @@ import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -49,6 +51,7 @@ public class ProfileController implements Initializable {
     private HBox hboxen;
     @FXML
     private Pane subpane;
+    
 
     /**
      * Initializes the controller class.
@@ -58,16 +61,8 @@ public class ProfileController implements Initializable {
         
             //Should make the subscene to the manu subscene
             
-            try {
-            
-            Pane subScene = FXMLLoader.load(getClass().getResource("FXML/PupUpMenu/SidebarMenu.fxml"));
-            subpane.getChildren().setAll(subScene);
-            } catch (IOException ex) {
-            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-           
-           
+     
+         
            
       
     }
@@ -103,5 +98,28 @@ public class ProfileController implements Initializable {
         btnSaveProfile.setText("Modify profile info");
         //save data to server TODO
     }
+    private void Menu(){
+         try {
+            
+            Pane subScene = FXMLLoader.load(getClass().getResource("FXML/PupUpMenu/SidebarMenu.fxml"));
+            subpane.getChildren().setAll(subScene);
+            } catch (IOException ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+    }
 
+    @FXML
+    private void MouseEcited(MouseEvent event) {
+        subpane.getChildren().clear();
+    }
+
+    @FXML
+    private void MouseEntered(MouseEvent event) {
+       Menu();
+    }
+
+   
+
+  
 }

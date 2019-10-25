@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="138.0" fitWidth="231.0" opacity="0.9">
          <image>
-            <Image url="@../../Images/Menu/Todaybackground.png" />
+            <Image url="@../../../Images/activus_logo_transparent.png" />
          </image>
       </ImageView>
       <Button fx:id="profileBtn" mnemonicParsing="false" onAction="#ViewProfile" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Profile" textFill="WHITE">
