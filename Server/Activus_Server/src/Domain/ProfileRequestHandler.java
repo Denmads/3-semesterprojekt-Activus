@@ -15,6 +15,7 @@ import persistence.DatabaseFacade;
 import persistence.actions.RemoveExerciseByIDAction;
 import persistence.actions.AddExerciseToTrainingProgramAction;
 import persistence.actions.CreateTrainingProgramAction;
+import persistence.actions.DeleteAccountAction;
 import persistence.actions.SetStatsAction;
 
 /**
@@ -62,6 +63,14 @@ public class ProfileRequestHandler extends IRequestHandler {
                     //FIGURE OUT: The arguments for the UpdateProfileAction constructor.
                 UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName), Object obj);
                 response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case DELETE_ACCOUNT:
+                try {
+                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.PROFILE_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }

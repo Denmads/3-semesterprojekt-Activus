@@ -43,6 +43,7 @@ public class SetStatsAction extends IDatabaseAction<Boolean> {
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
+        //After Stats UI Design is made this function needs to be looked at. Benjamin
         Result<Record1<Integer>> res = database.select(STATS.ID).from(STATS).where(STATS.PROFILEID.eq(profileID)).and(STATS.EXERCISEID.eq(exerciseID)).and(STATS.TIME_TAKEN.eq(timeTaken)).and(STATS.REBS.eq(reps)).and(STATS.SETS.eq(sets)).and(STATS.WEIGHT.eq(weight)).and(STATS.DATE.eq(date)).fetch();
         int id = res.get(0).get(STATS.ID);
         if (id > -1) {
