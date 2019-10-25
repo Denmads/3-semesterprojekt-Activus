@@ -11,6 +11,7 @@ public class Exercise {
     private int ID;
     private String name;
     private double time;
+    private String Description;
 
     private ArrayList<SetInfo> set;
 
@@ -19,8 +20,18 @@ public class Exercise {
         this.name = name;
         this.time = time;
         this.set = new ArrayList<>();
+        this.Description = "no description";
     }
 
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String Description) {
+        this.Description = Description;
+    }
+
+    
     public int getID() {
         return ID;
     }

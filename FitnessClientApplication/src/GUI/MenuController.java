@@ -52,7 +52,9 @@ public class MenuController implements Initializable {
         test.add(testEx1);
         
         listViewTodaysTraining.setItems(test);
-        listViewTodaysTraining.setCellFactory(view -> new TodaysCellController(test, null));
+        listViewTodaysTraining.setCellFactory((ListView<Exercise> view) -> {
+            return new TodaysCellController(test, null);
+        });
         listViewTodaysTraining.refresh();
     }    
 
