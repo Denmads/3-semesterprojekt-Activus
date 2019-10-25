@@ -1,6 +1,7 @@
 package Domain.authentication;
 
 
+import Domain.chat.ChatService;
 import Domain.trainingScheme.TrainingSchemeService;
 import Domain.serviceInterfaces.IProfileService;
 import Models.Response;
@@ -65,8 +66,7 @@ public class AuthenticationService extends IAuthenticationService {
                 //Adding ProfileService to the domainFacade.
                 domainFacade.addService(ServiceType.PROFILE, PS);
                 
-                TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
-                domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
+                createServices();
                 
                 return true;
                 
@@ -80,6 +80,14 @@ public class AuthenticationService extends IAuthenticationService {
         }
         
         return false;
+    }
+    
+    private void createServices () {
+        TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
+        domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
+
+        ChatService chatService = new ChatService(communicationLayer, domainFacade);
+        domainFacade.addService(ServiceType.CHAT, chatService);
     }
 
     @Override
