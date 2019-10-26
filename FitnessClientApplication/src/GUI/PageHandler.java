@@ -9,6 +9,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -16,8 +17,8 @@ import javafx.scene.layout.AnchorPane;
  */
 public abstract class PageHandler {
     
-    public void changeFxml(AnchorPane subPane, String fxml) {
-        AnchorPane pane;
+    public void changeFxml(Pane subPane, String fxml) {
+        Pane pane;
         try {
             pane = FXMLLoader.load(getClass().getResource(fxml));
             subPane.getChildren().setAll(pane);

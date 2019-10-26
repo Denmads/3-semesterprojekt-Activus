@@ -8,6 +8,7 @@ package GUI;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import sun.plugin.javascript.navig.Anchor;
 
 /**
@@ -16,8 +17,8 @@ import sun.plugin.javascript.navig.Anchor;
  */
 public abstract class PageLoader {
     
-    public void pageChanger(AnchorPane subpane, String fxmlpath) throws IOException{
-        AnchorPane pane;
+    public void pageChanger(Pane subpane, String fxmlpath) throws IOException{
+        Pane pane;
         pane = FXMLLoader.load(getClass().getResource(fxmlpath));
         subpane.getChildren().setAll(pane);
         

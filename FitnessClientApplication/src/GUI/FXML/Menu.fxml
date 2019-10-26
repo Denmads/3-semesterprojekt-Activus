@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MenuController">
+
+<StackPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MenuController">
    <children>
       <HBox alignment="CENTER_LEFT">
          <children>
@@ -24,64 +24,6 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <ImageView fitHeight="138.0" fitWidth="231.0" opacity="0.9">
-                     <image>
-                        <Image url="@../../Images/Menu/Todaybackground.png" />
-                     </image>
-                  </ImageView>
-                  <Button mnemonicParsing="false" onAction="#ViewProfile" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Profile" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" onAction="#ViewStats" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Stats" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <StackPane>
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#ViewBuddies" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Buddies" textFill="WHITE">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Button>
-                        <Label fx:id="notifications" alignment="CENTER" minWidth="25.0" style="-fx-background-color: #cc3333; -fx-background-radius: 100;" text="99+" textFill="WHITE" translateX="120.0" translateY="-15.0" StackPane.alignment="CENTER">
-                           <padding>
-                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                           </padding>
-                           <font>
-                              <Font name="System Bold" size="15.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <Button mnemonicParsing="false" onAction="#ViewFindBuddy" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Find buddy" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#ViewExercise" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Exercices" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#ViewTrainingPrograms" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Training Programs" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#LogoutBtn" prefHeight="37.0" prefWidth="125.0" style="-fx-background-color: #e88c22; -fx-background-radius: 30;" text="Logout" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-               </padding>
-            </VBox>
             <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" style="-fx-background-color: #E88C22; -fx-background-radius: 30;" text="        Today        ">
@@ -93,7 +35,8 @@
                </children>
                <padding>
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-               </padding></VBox>
+               </padding>
+            </VBox>
          </children>
       </HBox>
    </children>
