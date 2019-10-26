@@ -15,12 +15,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -29,8 +33,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class LoginController extends PageHandler implements Initializable {
 
-    @FXML
-    private AnchorPane apane;
+   
     @FXML
     private TextField usernameField;
     @FXML
@@ -39,9 +42,9 @@ public class LoginController extends PageHandler implements Initializable {
     private ImageView loginImageButton;
     @FXML
     private Label loginLabel;
-    @FXML
-    private Label createAccountLabel;
     private DomainFacade domain;
+    @FXML
+    private Pane aPene;
     /**
      * Initializes the controller class.
      */
@@ -57,11 +60,17 @@ public class LoginController extends PageHandler implements Initializable {
         
         
         System.out.println("login ");
+        
         try {
             boolean login = domain.<AuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
+            if(login){
+            changeFxml(aPene, "FXML/RootPage.fxml");
             
-            System.out.println(login);
-            changeFxml(apane, "FXML/RootPane.fxml");
+            }
+            else{
+                infoBox("Worng username or password", "Login Erro!", "Login not validated!");
+            }
+            
             
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,8 +78,5 @@ public class LoginController extends PageHandler implements Initializable {
         
     }
 
-    @FXML
-    private void handleCreateAccountAction(MouseEvent event) {
-    }
     
 }
