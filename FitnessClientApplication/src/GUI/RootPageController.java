@@ -79,26 +79,34 @@ public class RootPageController extends PageHandler implements Initializable {
 
     @FXML
     private void ViewStats(ActionEvent event) {
+        changeFxml(subPane, "FXML/StatePage.fxml");
     }
 
     @FXML
     private void ViewBuddies(ActionEvent event) {
+        System.out.println("StetePage");
+         changeFxml(subPane, "FXML/StatePage.fxml");
     }
 
     @FXML
     private void ViewFindBuddy(ActionEvent event) {
+        System.out.println("search");
+         changeFxml(subPane, "FXML/SearchPage.fxml");
     }
-
+    //TO DO Remove this ViewExerciser :) all responsibility is in searchPage
     @FXML
     private void ViewExercise(ActionEvent event) {
+         changeFxml(subPane, "FXML/StatePage.fxml");
     }
 
     @FXML
     private void ViewTrainingPrograms(ActionEvent event) {
+         changeFxml(subPane, "FXML/WorkoutPage.fxml");
     }
 
     @FXML
     private void LogoutBtn(ActionEvent event) {
+        Runtime.getRuntime().exit(0);
     }
     
 }
