@@ -17,6 +17,8 @@ import javafx.scene.layout.Pane;
  */
 public abstract class PageHandler {
     
+    
+    
     public void changeFxml(Pane subPane, String fxml) {
         Pane pane;
         try {
@@ -25,6 +27,7 @@ public abstract class PageHandler {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        
     }
     
  

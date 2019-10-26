@@ -17,10 +17,11 @@ public class FXMain extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Parent root = FXMLLoader.load(getClass().getResource("FXML/RootPage.fxml"));  
+        Parent root = FXMLLoader.load(getClass().getResource("FXML/Login.fxml"));  
         Scene scene = new Scene(root);       
         stage.setScene(scene);
         stage.show();
+        
     }
     /**
      * @param args the command line arguments

@@ -6,8 +6,11 @@
 package Domain;
 
 import Enums.ResponseArgumentName;
+import Exceptions.ArgumentNotFoundException;
 import Models.Request;
 import Models.Response;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistence.DatabaseFacade;
 
 /**
@@ -24,6 +27,11 @@ public class AuthenticationRequestHandler extends IRequestHandler{
     public Response handleRequest(Request request) {
         Response response = new Response();
         response.addArgument(ResponseArgumentName.SUCCESS, "It worked!");
+        try {
+            System.out.println(response.getArgument(ResponseArgumentName.PROFILE).toString());
+        } catch (ArgumentNotFoundException ex) {
+            Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return response;
     }
