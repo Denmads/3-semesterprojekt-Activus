@@ -23,6 +23,7 @@ import javafx.scene.input.KeyEvent;
  * FXML Controller class
  *
  * @author Sebas
+ * @auther Stped
  */
 public class ExiciesePageController implements Initializable {
     @FXML
