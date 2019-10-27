@@ -64,8 +64,7 @@ public class LoginController extends PageHandler implements Initializable {
         try {
             boolean login = domain.<AuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
             if(login){
-            changeFxml(aPene, "FXML/RootPage.fxml");
-            
+            changeFxml(aPene, "FXML/RootPage.fxml"); 
             }
             else{
                 infoBox("Worng username or password", "Login Erro!", "Login not validated!");
