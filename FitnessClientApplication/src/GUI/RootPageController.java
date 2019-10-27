@@ -5,16 +5,25 @@
  */
 package GUI;
 
+import GUI.FXML.SideMenu.SidebarMenuController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -24,89 +33,58 @@ import javafx.scene.layout.Pane;
 public class RootPageController extends PageHandler implements Initializable {
 
     @FXML
-    private Pane menuPane;
+    private StackPane rootPane;
     @FXML
-    private Pane subPane;
-    @FXML
-    private Button profileBtn;
-    @FXML
-    private Button statsBtn;
-    @FXML
-    private Button BuddiesBtn;
-    @FXML
-    private Label messegetLb;
-    @FXML
-    private Button findBuddiesBtn;
-    @FXML
-    private Button exercicesBtn;
-    @FXML
-    private Button trainingProgramBtn;
-    @FXML
-    private Button loguotBtn;
-        double width;
-    @FXML
-    private Pane Rootpane;
+    private BorderPane contentPane;
+    
+    private SidebarMenuController menuController;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        changeFxml(subPane, "FXML/Menu.fxml");
-        menuPane.setPrefWidth(300);
-        width = Rootpane.getWidth();
-    }    
-
-    @FXML
-    private void MouseExited(MouseEvent event) {
-        menuPane.setPrefWidth(1);
-        
-        
-        
-    }
-
-    @FXML
-    private void MouseEntered(MouseEvent event) {
-        menuPane.setPrefWidth(300);
-        
-        
-    }
-
-    @FXML
-    private void ViewProfile(ActionEvent event) {
-        changeFxml(subPane, "FXML/Profile.fxml");
-       
-    }
-
-    @FXML
-    private void ViewStats(ActionEvent event) {
-        changeFxml(subPane, "FXML/StatePage.fxml");
-    }
-
-    @FXML
-    private void ViewBuddies(ActionEvent event) {
-        System.out.println("StetePage");
-         changeFxml(subPane, "FXML/StatePage.fxml");
-    }
-
-    @FXML
-    private void ViewFindBuddy(ActionEvent event) {
-        System.out.println("search");
-         changeFxml(subPane, "FXML/SearchPage.fxml");
-    }
-    //TO DO Remove this ViewExerciser :) all responsibility is in searchPage
-    @FXML
-    private void ViewExercise(ActionEvent event) {
-         changeFxml(subPane, "FXML/StatePage.fxml");
-    }
-
-    @FXML
-    private void ViewTrainingPrograms(ActionEvent event) {
-         changeFxml(subPane, "FXML/WorkoutPage.fxml");
-    }
-
-    @FXML
-    private void LogoutBtn(ActionEvent event) {
-        Runtime.getRuntime().exit(0);
+        rootPane.setPrefWidth(900);
+        addMenu();
     }
     
+    private void addMenu () {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/SideMenu/SidebarMenu.fxml"));
+            Parent menuRoot = loader.load();
+            menuRoot.setTranslateX(-300);
+            menuController = loader.getController();
+            rootPane.getChildren().add(menuRoot);
+        } catch (IOException ex) {
+            Logger.getLogger(RootPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addMenuButton (String buttonText, String contentFxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/SideMenu/defaultButton.fxml"));
+            Button menuButton = loader.load();
+            menuButton.onActionProperty().addListener((observable, oldVal, newVal) -> {
+                loadContent(contentFxml);
+            });
+            menuButton.setText(buttonText);
+            rootPane.getChildren().add(menuButton);
+        } catch (IOException ex) {
+            Logger.getLogger(RootPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addCustomMenuButton () {
+        
+    }
+    
+    private void loadContent (String fxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/" + fxml + ".fxml"));
+            Parent contentRoot = loader.load();
+            contentPane.setCenter(contentRoot);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(RootPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
