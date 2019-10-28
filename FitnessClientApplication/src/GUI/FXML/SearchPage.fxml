@@ -4,25 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" style="-fx-background-color: #e88c22;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.ExiciesePageController">
+<VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #e88c22;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SearchPageController">
    <children>
-      <VBox alignment="CENTER" spacing="20.0">
-         <children>
-            <Label text="Find excise" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-            </Label>
-            <TextField fx:id="search" onKeyReleased="#searchAction" style="-fx-background-color: #707070; -fx-background-radius: 30;" />
-            <ListView fx:id="searchFiled" style="-fx-background-color: #707070; -fx-background-radius: 30;" VBox.vgrow="ALWAYS" />
-         </children>
-         <StackPane.margin>
-            <Insets bottom="10.0" left="100.0" right="100.0" top="10.0" />
-         </StackPane.margin>
-      </VBox>
+      <Label text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextField fx:id="search" onKeyReleased="#searchAction" style="-fx-background-color: #707070; -fx-background-radius: 30;" />
+      <ListView fx:id="searchFiled" style="-fx-background-color: #707070; -fx-background-radius: 30;" VBox.vgrow="ALWAYS" />
    </children>
-</StackPane>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</VBox>

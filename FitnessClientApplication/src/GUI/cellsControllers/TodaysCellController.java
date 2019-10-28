@@ -50,7 +50,7 @@ public class TodaysCellController extends ListCell<Exercise> {
 
     @FXML
     private void exerciseDone(ActionEvent event) {
-        
+        System.out.println("Done");
 //        try {
 //            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).exerciseForTodayDone(exercise);
 //        } catch (ServiceNotFoundException ex) {

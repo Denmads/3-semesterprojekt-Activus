@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,22 +35,7 @@ import javafx.util.Duration;
  */
 public class SidebarMenuController implements Initializable {
 
-    @FXML
-    private Button profileBtn;
-    @FXML
-    private Button statsBtn;
-    @FXML
-    private Button BuddiesBtn;
-    @FXML
-    private Label messegetLb;
-    @FXML
-    private Button findBuddiesBtn;
-    @FXML
-    private Button exercicesBtn;
-    @FXML
-    private Button trainingProgramBtn;
-    @FXML
-    private Button loguotBtn;
+    
     @FXML
     private HBox root;
     @FXML
@@ -71,12 +57,12 @@ public class SidebarMenuController implements Initializable {
 
     private void createAnimationMenu () {
         menuFocusTimeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(), 300, Interpolator.LINEAR);
+        KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.LINEAR);
         KeyFrame kf = new KeyFrame(Duration.millis(100), kv);
         menuFocusTimeline.getKeyFrames().add(kf);
         
         menuLostFocusTimeline = new Timeline();
-        KeyValue kv1 = new KeyValue(root.translateXProperty(), 0, Interpolator.LINEAR);
+        KeyValue kv1 = new KeyValue(root.translateXProperty(), -300, Interpolator.LINEAR);
         KeyFrame kf1 = new KeyFrame(Duration.millis(100), kv1);
         menuLostFocusTimeline.getKeyFrames().add(kf1);
     }
@@ -104,34 +90,6 @@ public class SidebarMenuController implements Initializable {
     
     public void addButton (Node button) {
         buttonBox.getChildren().add(button);
-    }
-
-    @FXML
-    private void ViewProfile(ActionEvent event) {
-    }
-
-    @FXML
-    private void ViewStats(ActionEvent event) {
-    }
-
-    @FXML
-    private void ViewBuddies(ActionEvent event) {
-    }
-
-    @FXML
-    private void ViewFindBuddy(ActionEvent event) {
-    }
-
-    @FXML
-    private void ViewExercise(ActionEvent event) {
-    }
-
-    @FXML
-    private void ViewTrainingPrograms(ActionEvent event) {
-    }
-
-    @FXML
-    private void LogoutBtn(ActionEvent event) {
     }
     
 }

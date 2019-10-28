@@ -14,7 +14,7 @@ import javafx.fxml.Initializable;
  *
  * @author steff
  */
-public class CalenderPageController extends PageHandler implements Initializable {
+public class CalenderPageController extends ContentPageController {
 
     /**
      * Initializes the controller class.
