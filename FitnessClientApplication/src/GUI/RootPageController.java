@@ -48,6 +48,10 @@ public class RootPageController implements Initializable {
         loadContent("HomePage");
     }
     
+    public void setDomainFacade (DomainFacade facade) {
+        domainFacade = facade;
+    }
+    
     private void addMenu () {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/SideMenu/SidebarMenu.fxml"));
