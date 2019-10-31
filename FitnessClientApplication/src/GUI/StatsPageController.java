@@ -5,16 +5,26 @@
  */
 package GUI;
 
+import Domain.serviceInterfaces.IProfileService;
+import Domain.serviceInterfaces.ITrainingSchemeService;
 import Models.Exercise;
 import Models.TrainingScheme;
 import Domain.trainingScheme.TrainingSchemeService;
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import LayerInterfaces.IDomainFacade;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,9 +37,11 @@ import javafx.scene.layout.AnchorPane;
 public class StatsPageController extends ContentPageController {
 
     @FXML
-    private NumberAxis timeakse;
+    private Label exerciseName;
     @FXML
-    private CategoryAxis dataakse;
+    private LineChart<Integer, Date> charid;
+    @FXML
+    private ChoiceBox<Exercise> choseBoks;
     
 
     /**
@@ -37,6 +49,14 @@ public class StatsPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            IProfileService profileService = domainFacade.<IProfileService>getService(ServiceType.PROFILE);
+            
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 
