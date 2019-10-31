@@ -61,7 +61,7 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
                 response.addArgument(ResponseArgumentName.EXERCISE, allExerciseAction.getResult());
         }
         
-        
+        return response;
        
     }
     
