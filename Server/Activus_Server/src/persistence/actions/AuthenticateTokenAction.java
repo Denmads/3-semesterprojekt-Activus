@@ -4,6 +4,7 @@ import Models.CredentialsContainer;
 import java.sql.SQLException;
 import persistence.IDatabaseAction;
 import org.jooq.DSLContext;
+import static persistence.database.generated.Tables.TOKEN;
 
 /**
  * An action for verifying the authenticationToken
