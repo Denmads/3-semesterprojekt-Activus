@@ -1,5 +1,7 @@
 package GUI;
 
+import Communication.CommunicationFacade;
+import Models.Request;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +18,13 @@ public class FXMain extends Application {
   
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML/Login.fxml"));  
-        Scene scene = new Scene(root);       
-        stage.setScene(scene);
-        stage.show();
+            CommunicationFacade facade = new CommunicationFacade();
+            Request
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("FXML/Login.fxml"));  
+//        Scene scene = new Scene(root);       
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     /**
