@@ -1,5 +1,6 @@
 package persistence.actions;
 
+import Models.Request;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import persistence.IDatabaseAction;
@@ -59,6 +60,11 @@ public class VerifyLoginAction extends IDatabaseAction<Boolean> {
     @Override
     public boolean hasResult() {
         return executed;
+    }
+
+    @Override
+    public void setResult(Request request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

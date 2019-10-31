@@ -5,10 +5,13 @@
  */
 package persistence.actions;
 
+import Models.Request;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import org.jooq.DSLContext;
 import persistence.IDatabaseAction;
+import persistence.database.generated.tables.Exercise;
 import persistence.database.generated.tables.TrainingProgram;
 
 /**
@@ -17,13 +20,14 @@ import persistence.database.generated.tables.TrainingProgram;
  */
 public class CreateTrainingProgramAction extends  IDatabaseAction<TrainingProgram>{
     
-    private ArrayList<TrainingProgram> resultList = null;
+    private List<Exercise> TraninggsProgam;
+    private Request reguest;
     
     
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        
+       
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -35,6 +39,11 @@ public class CreateTrainingProgramAction extends  IDatabaseAction<TrainingProgra
     @Override
     public boolean hasResult() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setResult(Request request) {
+        this.reguest = request;
     }
     
 }

@@ -1,6 +1,7 @@
 package persistence.actions;
 
 import Models.CredentialsContainer;
+import Models.Request;
 import static persistence.database.generated.Tables.TOKEN;
 import java.sql.SQLException;
 import persistence.IDatabaseAction;
@@ -36,6 +37,11 @@ public class AuthenticateTokenAction extends IDatabaseAction<Boolean> {
     @Override
     public boolean hasResult() {
         return executed;
+    }
+
+    @Override
+    public void setResult(Request request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -1,6 +1,7 @@
 package persistence.actions;
 
 import Models.Profile;
+import Models.Request;
 import static persistence.database.generated.Tables.LOGIN;
 import static persistence.database.generated.Tables.PROFILE;
 import persistence.database.generated.tables.Login;
@@ -56,6 +57,11 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
     @Override
     public boolean hasResult() {
         return resultList != null;
+    }
+
+    @Override
+    public void setResult(Request request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
