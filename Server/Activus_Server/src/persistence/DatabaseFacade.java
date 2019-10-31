@@ -1,6 +1,6 @@
 package persistence;
 
-import LayerInterfaces.IDatabaseFacade;
+import layerInterfaces.IDatabaseFacade;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

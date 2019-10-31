@@ -1,6 +1,6 @@
 
 
-import Communication.TcpServer;
+import communication.TcpServer;
 
 /**
  * Start th server

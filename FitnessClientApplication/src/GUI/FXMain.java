@@ -1,5 +1,12 @@
 package GUI;
 
+import Communication.CommunicationFacade;
+import Enums.RequestArgumentName;
+import Enums.RequestType;
+import Enums.ResponseArgumentName;
+import Enums.ServiceType;
+import Models.Request;
+import Models.Response;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

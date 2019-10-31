@@ -43,7 +43,11 @@ public class DatabaseConnection {
     }
     
     private void readConfig () {
-        try (FileReader reader = new FileReader(new File("config.properties"))) {
+        //Change if path on server is changed
+        File f = new File("home/config.properties");
+        System.out.println(f.getAbsolutePath());
+        
+        try (FileReader reader = new FileReader(f)) {
             prop = new Properties();
             prop.load(reader);
         } catch (FileNotFoundException ex) {
@@ -52,7 +56,6 @@ public class DatabaseConnection {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     /**
      * Returns a connection to perform transactions on.
      * @return a connection pool to perform transactions on.
