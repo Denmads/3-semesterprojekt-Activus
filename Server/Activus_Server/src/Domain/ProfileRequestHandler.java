@@ -23,11 +23,11 @@ import persistence.actions.SetStatsAction;
  * @author madsh
  */
 public class ProfileRequestHandler extends IRequestHandler {
-
+    
     public ProfileRequestHandler(DatabaseFacade dbFacade) {
         super(dbFacade);
     }
-
+    
     @Override
     public Response handleRequest(Request request) {
         Response response = new Response();
@@ -50,7 +50,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
-            case SET_STAT: 
+            case SET_STAT:                
                 try {
                     SetStatsAction ssa = new SetStatsAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_TIME_TAKEN), request.getArgument(RequestArgumentName.PROGRAM_REPS), request.getArgument(RequestArgumentName.PROGRAM_SETS), request.getArgument(RequestArgumentName.PROGRAM_WEIGHT), request.getArgument(RequestArgumentName.PROGRAM_DATE));
                     response.addArgument(ResponseArgumentName.SUCCESS, ssa.getResult());
@@ -61,8 +61,8 @@ public class ProfileRequestHandler extends IRequestHandler {
             case UPDATE_PROFILE:
                 try {
                     //FIGURE OUT: The arguments for the UpdateProfileAction constructor.
-                UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName), Object obj);
-                response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
+                    UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.PROFILE_LIST_OF_CHANGES), request.getArgument(RequestArgumentName.PROFILE_LIST_OF_TABLE_FIELDS));
+                    response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -78,5 +78,5 @@ public class ProfileRequestHandler extends IRequestHandler {
         //UPDATE RETURN STATEMENT LATER!!!
         return null;
     }
-
+    
 }

@@ -1,6 +1,7 @@
 package Persistence.Actions;
 
 import java.sql.SQLException;
+import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.jooq.Record;
@@ -16,37 +17,40 @@ import static persistence.database.generated.Tables.PROFILE;
  */
 public class UpdateProfileAction extends IDatabaseAction<Boolean> {
 
-    private boolean updated = false;
+    private boolean result = false;
     private boolean executed = false;
 
     private int profileID;
-    private TableField TF;
-    private Object changeObj;
+    private List<Object> changes;
+    private List<TableField> tableFields;
 
-    public UpdateProfileAction(int profileID, TableField TF, Object changeObj) {
+    public UpdateProfileAction(int profileID, List<Object> changes, List<TableField> tableFields) {
         this.profileID = profileID;
-        this.TF = TF;
-        this.changeObj = changeObj;
+        this.changes = changes;
+        this.tableFields = tableFields;
     }
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
         //Updating chosen profile information:
-        database.update(PROFILE).set(TF, changeObj).where(PROFILE.ID.eq(profileID));
-
-        //Verify that the data has been updated:
-        Result<Record> res = database.select().from(PROFILE).where(PROFILE.ID.eq(profileID)).fetch();
-        Record record = res.get(0);
-
-        updated = record.getValue(TF).equals(changeObj);
-
+        for (int i = 0; i < tableFields.size(); i++) {
+            if (changes.get(i) instanceof Integer) {
+                database.update(PROFILE).set(tableFields.get(i), (int) changes.get(i)).where(PROFILE.ID.eq(profileID));
+            } else if (changes.get(i) instanceof String) {
+                database.update(PROFILE).set(tableFields.get(i), (String) changes.get(i)).where(PROFILE.ID.eq(profileID));
+            }
+        }
         executed = true;
+        //The data will always be changed if the method has been executed since there would otherwise be thrown exceptions from the library.
+        result = true;
+        
+        
 
     }
 
     @Override
     public Boolean getResult() {
-        return (executed ? updated : false);
+        return (executed ? result : false);
     }
 
     @Override

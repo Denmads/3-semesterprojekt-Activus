@@ -9,6 +9,8 @@ import java.io.Serializable;
 public enum RequestArgumentName implements Serializable {
     USER_ID,
     PROFILE_ID,
+    PROFILE_LIST_OF_CHANGES,
+    PROFILE_LIST_OF_TABLE_FIELDS,
     PROGRAM_ID,
     PROGRAM_OWNER_ID,
     PROGRAM_DESCRIPTION,
