@@ -27,7 +27,7 @@ public class LogoutAction extends IDatabaseAction<Boolean>{
         
         database.delete(TOKEN).where(TOKEN.LOGINID.eq(id));
         
-        Result<Record> res = database.select().from(TOKEN).where(TOKEN.LOGINID.eq(id));
+        Result<Record> res = database.select().from(TOKEN).where(TOKEN.LOGINID.eq(id)).fetch();
         if (res.isEmpty()){
             result = true;
         }

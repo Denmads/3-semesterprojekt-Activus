@@ -52,7 +52,7 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
             Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        Result<Record> res = database.select(LOGIN.ID).from(LOGIN).where(LOGIN.USERNAME.eq(username));
+        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
         if (!res.isEmpty()) {
             result = true;
         }
