@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -52,22 +53,23 @@ public class LoginPageController implements Initializable {
     }
     
     @FXML
-    private void handleLoginAction(MouseEvent event) {
-        try {
-            String username = usernameField.getText();
-            String password = passwordField.getText();
-            
-            boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
-            if(login){
-                changeToRootPage();
-            }
-            else{
-                showAlert("Login Error!", "Wrong username or password");
-            }
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+    private void handleLoginAction(ActionEvent event) {
+//        try {
+//            String username = usernameField.getText();
+//            String password = passwordField.getText();
+//            
+//            boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
+//            if(login){
+//                changeToRootPage();
+//            }
+//            else{
+//                showAlert("Login Error!", "Wrong username or password");
+//            }
+//        } catch (ServiceNotFoundException | ClassCastException ex) {
+//            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        changeToRootPage();
     }
 
     private void showAlert (String title, String message) {
@@ -79,11 +81,15 @@ public class LoginPageController implements Initializable {
     }
     
     private void changeToRootPage () {
+        
+        System.out.println("Changing");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/RootPage.fxml"));
             Parent root = loader.load();
+            System.out.println("Fxml loaded");
             RootPageController controller = loader.getController();
             controller.setDomainFacade(domainFacade);
+            System.out.println("controller");
             Scene scene = new Scene(root, 1280, 720);
             window.setScene(scene);
         } catch (IOException ex) {

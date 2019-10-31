@@ -5,9 +5,15 @@
  */
 package GUI.FXML.SideMenu.buttons;
 
+import Domain.serviceInterfaces.IAuthenticationService;
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
 import GUI.CustomMenuButtonController;
+import GUI.FXMain;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +44,15 @@ public class LogoutButtonController extends CustomMenuButtonController {
     
     @FXML
     private void logout (ActionEvent event) {
-        System.out.println("logout");
+        try {
+            //domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
+            FXMain.showLoginPage();
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(LogoutButtonController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(LogoutButtonController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(LogoutButtonController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
