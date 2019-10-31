@@ -1,5 +1,6 @@
 package domain;
 
+import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import layerInterfaces.IRequestDelegater;
 import Models.Request;
@@ -41,7 +42,7 @@ public class RequestDelegater implements IRequestDelegater{
             if (authenticateRequest(request)) {
                 response = requestHandlers.get(request.getServiceType()).handleRequest(request);
             } else {
-                //TODO: Create response object with Authentiation Error
+                //TODO
             }
         }
 
