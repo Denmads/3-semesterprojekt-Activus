@@ -1,0 +1,13 @@
+/FitnessClientApplication/nbproject/private/
+*.asta.lock
+*.iml
+/ActivusDataLibrary/nbproject/private/
+/Server/Activus_Server/nbproject/private/
+Server/Activus_Server/nbproject/.idea/nbproject.iml
+Server/Activus_Server/Activus_Server.iml
+/Server/client/nbproject/private/
+/Server/Activus_Server/build/
+/ActivusDataLibrary/build/
+/FitnessClientApplication/build/
+/FitnessClientApplication/dist/
+/Server/Activus_Server/dist/
