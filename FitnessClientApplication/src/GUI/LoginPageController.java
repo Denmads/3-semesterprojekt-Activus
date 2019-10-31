@@ -53,23 +53,24 @@ public class LoginPageController implements Initializable {
     }
     
     @FXML
-    private void handleLoginAction(ActionEvent event) {
-//        try {
-//            String username = usernameField.getText();
-//            String password = passwordField.getText();
-//            
-//            boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
-//            if(login){
-//                changeToRootPage();
-//            }
-//            else{
-//                showAlert("Login Error!", "Wrong username or password");
-//            }
-//        } catch (ServiceNotFoundException | ClassCastException ex) {
-//            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
 
-        changeToRootPage();
+    private void handleLoginAction(MouseEvent event) {
+        try {
+            String username = usernameField.getText();
+            String password = passwordField.getText();
+            
+            boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
+            if(login){
+                changeToRootPage();
+            }
+            else{
+                showAlert("Login Error!", "Wrong username or password");
+            }
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
     }
 
     private void showAlert (String title, String message) {
