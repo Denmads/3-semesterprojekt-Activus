@@ -139,6 +139,11 @@ public class ProfileService extends IProfileService {
         }
         return object;
     }
+
+    @Override
+    public List<Exercise> getCurrentStats(int ProfileID) {
+        return (List<Exercise>) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
+    }
     
  
 }

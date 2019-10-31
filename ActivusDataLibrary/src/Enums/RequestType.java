@@ -29,6 +29,7 @@ public enum RequestType implements Serializable {
     RECEIVE_EXERCISE,
     ADD_EXERCISE,
     REMOVE_EXERCISE,
-    LOAD_ALL_EXERCISE
+    LOAD_ALL_EXERCISE,
+    LOAD_ALL_STATS
     
 }

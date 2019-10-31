@@ -21,7 +21,7 @@ public class CreateTrainingProgramAction extends  IDatabaseAction<TrainingProgra
     
     
 
-    @Override;
+    @Override
     protected void execute(DSLContext database) throws SQLException {
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

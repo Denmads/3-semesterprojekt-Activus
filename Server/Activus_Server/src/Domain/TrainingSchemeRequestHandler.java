@@ -5,6 +5,7 @@
  */
 package Domain;
 
+import Enums.ResponseArgumentName;
 import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;
@@ -25,6 +26,7 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
         switch (request.getRequestType()){
             case CREATE_TRAINING_PROGRAM:{
                 
+                
             }
             case ADD_EXERCISE:{
                 
@@ -41,8 +43,7 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
             
         }
         
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return response;
     }
     
 }
