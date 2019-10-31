@@ -2,8 +2,6 @@ package Domain.authentication;
 
 
 import Domain.trainingScheme.TrainingSchemeService;
-import Domain.serviceInterfaces.IProfileService;
-import Models.Response;
 import Models.Profile;
 import Domain.profile.ProfileService;
 import Domain.serviceInterfaces.IAuthenticationService;
@@ -86,10 +84,8 @@ public class AuthenticationService extends IAuthenticationService {
     public void logout() {
         try {
             Request request = createRequest(RequestType.LOGOUT);
+            request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
             communicationLayer.sendRequest(request);
-            credentials = null;
-            
-            domainFacade.removeAllServices();
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }

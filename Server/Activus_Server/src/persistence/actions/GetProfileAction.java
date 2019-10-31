@@ -50,7 +50,7 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>>{
     
     @Override
     public ArrayList<Profile> getResult() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return resultList;
     }
 
     @Override

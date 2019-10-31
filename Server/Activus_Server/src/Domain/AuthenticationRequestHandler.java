@@ -47,10 +47,12 @@ public class AuthenticationRequestHandler extends IRequestHandler {
             try {
                 VerifyLoginAction vla = new VerifyLoginAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
                 databaseFacade.execute(vla);
-                GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getUserId());
-                databaseFacade.execute(gpblia);
-                response.addArgument(ResponseArgumentName.CREDENTIALS, vla.getResult());
-                response.addArgument(ResponseArgumentName.PROFILE, gpblia.getResult());
+                if (vla.hasResult()) {
+                    GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getUserId());
+                    databaseFacade.execute(gpblia);
+                    response.addArgument(ResponseArgumentName.CREDENTIALS, vla.getResult());
+                    response.addArgument(ResponseArgumentName.PROFILE, gpblia.getResult());
+                }
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -45,7 +45,7 @@ public class LogoutButtonController extends CustomMenuButtonController {
     @FXML
     private void logout (ActionEvent event) {
         try {
-            //domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
+            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
             FXMain.showLoginPage();
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(LogoutButtonController.class.getName()).log(Level.SEVERE, null, ex);

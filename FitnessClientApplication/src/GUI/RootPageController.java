@@ -44,12 +44,12 @@ public class RootPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addMenu();
-        loadContent("HomePage");
     }
     
     public void setDomainFacade (DomainFacade facade) {
         domainFacade = facade;
+        addMenu();
+        loadContent("HomePage");
     }
     
     private void addMenu () {

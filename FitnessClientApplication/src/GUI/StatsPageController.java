@@ -49,14 +49,6 @@ public class StatsPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            IProfileService profileService = domainFacade.<IProfileService>getService(ServiceType.PROFILE);
-            
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }
 

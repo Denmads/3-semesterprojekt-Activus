@@ -54,12 +54,13 @@ public class LoginPageController implements Initializable {
     
     @FXML
 
-    private void handleLoginAction(MouseEvent event) {
+    private void handleLoginAction(ActionEvent event) {
         try {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            
+            System.out.println("Send request");
             boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
+            System.out.println("checked login");
             if(login){
                 changeToRootPage();
             }
@@ -87,10 +88,8 @@ public class LoginPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/RootPage.fxml"));
             Parent root = loader.load();
-            System.out.println("Fxml loaded");
             RootPageController controller = loader.getController();
             controller.setDomainFacade(domainFacade);
-            System.out.println("controller");
             Scene scene = new Scene(root, 1280, 720);
             window.setScene(scene);
         } catch (IOException ex) {
