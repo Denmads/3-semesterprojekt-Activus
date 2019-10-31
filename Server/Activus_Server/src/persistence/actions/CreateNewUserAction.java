@@ -42,10 +42,10 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
     @Override
     protected void execute(DSLContext database) throws SQLException {
         try {
-            database.insertInto(PROFILE).columns(PROFILE.FIRST_NAME, PROFILE.LAST_NAME).values(firstName, lastName).execute();
             byte[] salt = PasswordTool.generateSalt();
             byte[] hashedPassword = PasswordTool.hashPassword(password, salt);
-            database.insertInto(LOGIN).columns(LOGIN.USERNAME, LOGIN.HASH_PASSWORD, LOGIN.PASSWORD_SALT).values(username, hashedPassword, salt).execute();
+            int loginId = database.insertInto(LOGIN).columns(LOGIN.USERNAME, LOGIN.HASH_PASSWORD, LOGIN.PASSWORD_SALT).values(username, hashedPassword, salt).returning(LOGIN.ID).fetchOne().getValue(LOGIN.ID);
+            database.insertInto(PROFILE).columns(PROFILE.LOGINID, PROFILE.FIRST_NAME, PROFILE.LAST_NAME).values(loginId, firstName, lastName).execute();
             executed = true;
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
