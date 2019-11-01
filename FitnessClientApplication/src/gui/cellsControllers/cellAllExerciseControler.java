@@ -54,7 +54,7 @@ public class cellAllExerciseControler extends ListCell<Exercise>{
 
         } else {
             exercise = item;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/listViewCells/ExerciseCell.fxml"));  
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/ExerciseCell.fxml"));  
             
             loader.setController(this);
             HBox parrent= null;

@@ -5,9 +5,8 @@
  */
 package gui;
 
-import GUI.FXML.SideMenu.SidebarMenuController;
 import domain.DomainFacade;
-import gui.CustomMenuButtonController;
+import gui.FXML.SideMenu.SidebarMenuController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
