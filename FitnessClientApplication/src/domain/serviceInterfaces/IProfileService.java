@@ -52,5 +52,6 @@ public abstract class IProfileService extends IService {
     public abstract boolean removeStats(int statsID);
     
     public abstract List<Exercise> getCurrentStats(int ProfileID);
-
+    
+    public abstract  List<Profile> getAllBuddys(int ProfileID);
 }

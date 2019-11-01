@@ -14,6 +14,7 @@ import java.io.Serializable;
 public enum ResponseArgumentName  implements Serializable {
     CREDENTIALS,
     PROFILE,
+    BUDDY_LIST,
     SUCCESS,
     TRAININGPROGRAM,
     STATS,

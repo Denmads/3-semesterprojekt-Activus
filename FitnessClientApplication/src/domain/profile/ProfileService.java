@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import Exceptions.*;
 import Models.Request;
 import Models.Response;
+import domain.DomainFacade;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import layerInterfaces.ICommunicationFacade;
@@ -136,6 +137,11 @@ public class ProfileService extends IProfileService {
     @Override
     public List<Exercise> getCurrentStats(int ProfileID) {
         return (List<Exercise>) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
+    }
+
+    @Override
+    public List<Profile> getAllBuddys(int ProfileID) {
+        return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUUDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
     }
     
  
