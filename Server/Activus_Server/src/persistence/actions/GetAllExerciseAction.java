@@ -25,11 +25,9 @@ public class GetAllExerciseAction extends IDatabaseAction<ArrayList<Exercise>>{
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        Result<Record> result = database.select().from(EXERCISE);
+        Result<Record> result = database.select().from(EXERCISE).fetch();
         this.exerciseList = new ArrayList<>();
-        result.stream().map((r) -> new Exercise((int)r.get(EXERCISE.ID),r.get(EXERCISE.NAME), r.get(EXERCISE.DESCRIPTION))).forEachOrdered((exercise) -> {
-            exerciseList.add((Exercise) exercise);
-        });      
+        //Map translate to model class and add records to exercise list    
     }
 
     @Override

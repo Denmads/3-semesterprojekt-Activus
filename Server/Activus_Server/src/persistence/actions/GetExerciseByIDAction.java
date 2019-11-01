@@ -44,8 +44,8 @@ public class GetExerciseByIDAction extends IDatabaseAction<Exercise>{
         
         set.setReps(rec.get(EXERCISE.REBS));
         set.setWeight(rec.get(EXERCISE.WEIGHT));
-        result.setTimeTaken(rec.get(EXERCISE.TIME_TAKEN));
-        result.setWeight(rec.get(EXERCISE.WEIGHT));
+        result.setTime(rec.get(EXERCISE.TIME_TAKEN));
+        //TODO add set info?
         
         executed = true;
     }

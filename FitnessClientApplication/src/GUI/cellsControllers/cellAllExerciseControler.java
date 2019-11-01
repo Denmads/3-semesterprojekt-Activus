@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.cellsControllers;
+package gui.cellsControllers;
 
-import LayerInterfaces.IDomainFacade;
 import Models.Exercise;
 import java.io.IOException;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import layerInterfaces.IDomainFacade;
 /**
  *
  * @author Sebas

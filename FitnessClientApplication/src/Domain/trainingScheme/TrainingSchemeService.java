@@ -1,22 +1,22 @@
-package Domain.trainingScheme;
+package domain.trainingScheme;
 
-import Domain.serviceInterfaces.IProfileService;
 import Models.Exercise;
-import Domain.serviceInterfaces.ITrainingSchemeService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
 import Models.Profile;
 import Models.Request;
 import Models.Response;
+import domain.serviceInterfaces.IProfileService;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
 
 /**
  *

@@ -1,20 +1,17 @@
-package Domain;
+package domain;
 
+import domain.IRequestHandler;
 import Enums.RequestArgumentName;
 import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
 import Models.Request;
 import Models.Response;
-import Persistence.Actions.UpdatePasswordAction;
-import Persistence.Actions.UpdateProfileAction;
-import Persistence.Actions.UpdateUsernameAction;
+import persistence.actions.UpdatePasswordAction;
+import persistence.actions.UpdateProfileAction;
+import persistence.actions.UpdateUsernameAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jooq.TableField;
 import persistence.DatabaseFacade;
-import persistence.actions.RemoveExerciseByIDAction;
-import persistence.actions.AddExerciseToTrainingProgramAction;
-import persistence.actions.CreateTrainingProgramAction;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.SetStatsAction;
 

@@ -41,8 +41,8 @@ public class ReciveMessageHistoryAction extends IDatabaseAction<ArrayList<Messag
             message.setReciverId(r.get(MESSAGE.RECEIVER));
             message.setMessage(r.get(MESSAGE.MESSAGE_));
             message.setDate(r.get(MESSAGE.DATE));
-            message.setTime(r.get(MESSAGE.TIME));
-            message.setIsRead(r.get(MESSAGE.SEEN));
+            //TODO Update JOOQ
+            //message.setIsRead(r.get(MESSAGE.SEEN));
             
             resultList.add(message);
         }

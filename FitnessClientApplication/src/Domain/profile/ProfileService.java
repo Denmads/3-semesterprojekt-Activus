@@ -1,24 +1,23 @@
-package Domain.profile;
+package domain.profile;
 
 import Models.Profile;
-import Domain.serviceInterfaces.IProfileService;
-import Domain.DomainFacade;
 import Models.Exercise;
-import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Exceptions.*;
 import Models.Request;
 import Models.Response;
+import domain.serviceInterfaces.IAuthenticationService;
+import domain.serviceInterfaces.IProfileService;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
 
 /**
  *

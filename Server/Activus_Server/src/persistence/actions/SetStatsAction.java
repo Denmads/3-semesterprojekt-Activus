@@ -53,7 +53,7 @@ public class SetStatsAction extends IDatabaseAction<Boolean> {
         }
         
         executed = true;
-        Result<Record> temp = database.select().from(STATS).where(STATS.ID.eq(id));
+        Result<Record> temp = database.select().from(STATS).where(STATS.ID.eq(id)).fetch();
         if(!temp.isEmpty()){
             result = true;
         }

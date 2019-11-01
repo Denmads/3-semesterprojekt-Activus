@@ -18,8 +18,5 @@ public abstract class IDatabaseAction<T> {
 
     public abstract T getResult();
 
-    public abstract boolean hasResult();
-    
-    public abstract void setResult(Request request);
-            
+    public abstract boolean hasResult();         
 }

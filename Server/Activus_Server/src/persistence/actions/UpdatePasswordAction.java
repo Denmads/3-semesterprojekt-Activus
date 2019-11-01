@@ -1,4 +1,4 @@
-package Persistence.Actions;
+package persistence.actions;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -10,8 +10,8 @@ import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooq.Result;
 import persistence.IDatabaseAction;
-import persistence.Util.PasswordTool;
 import static persistence.database.generated.Tables.LOGIN;
+import persistence.util.PasswordTool;
 
 /**
  * This class is meant to update the users password and the salt belonging to it.

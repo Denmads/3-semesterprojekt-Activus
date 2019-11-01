@@ -1,12 +1,10 @@
 package domain;
 
-import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import layerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;
-import persistence.IDatabaseAction;
 import java.util.HashMap;
 import persistence.actions.AuthenticateTokenAction;
 

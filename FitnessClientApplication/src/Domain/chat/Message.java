@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain.chat;
+package domain.chat;
 
 import Models.Profile;
 import java.util.Date;

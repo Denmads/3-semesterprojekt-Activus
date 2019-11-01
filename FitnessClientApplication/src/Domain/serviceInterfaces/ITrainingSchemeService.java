@@ -1,10 +1,10 @@
-package Domain.serviceInterfaces;
+package domain.serviceInterfaces;
 
 import Models.Exercise;
 import Enums.ServiceType;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
-import LayerInterfaces.IService;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
+import layerInterfaces.IService;
 import java.util.List;
 
 /**

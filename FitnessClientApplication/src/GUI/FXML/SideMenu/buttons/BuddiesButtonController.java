@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.FXML.SideMenu.buttons;
+package gui.FXML.SideMenu.buttons;
 
-import GUI.CustomMenuButtonController;
+import gui.CustomMenuButtonController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

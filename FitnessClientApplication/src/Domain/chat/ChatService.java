@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain.chat;
+package domain.chat;
 
-import Domain.profile.ProfileService;
-import Domain.serviceInterfaces.IAuthenticationService;
-import Domain.serviceInterfaces.IChatService;
-import Domain.serviceInterfaces.IProfileService;
+import domain.profile.ProfileService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
 import Models.Request;
 import Models.Response;
+import domain.serviceInterfaces.IChatService;
+import domain.serviceInterfaces.IProfileService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
 
 /**
  *

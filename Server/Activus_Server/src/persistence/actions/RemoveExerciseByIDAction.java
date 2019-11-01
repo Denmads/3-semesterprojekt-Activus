@@ -28,10 +28,10 @@ public class RemoveExerciseByIDAction extends IDatabaseAction<Boolean> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        database.deleteFrom(EXERCISE).where(EXERCISE.ID.eq(id));
+        database.deleteFrom(EXERCISE).where(EXERCISE.ID.eq(id)).execute();
         executed = true;
         
-        Result<Record> res = database.select().from(EXERCISE).where(EXERCISE.ID.eq(id));
+        Result<Record> res = database.select().from(EXERCISE).where(EXERCISE.ID.eq(id)).fetch();
         if(res.isEmpty()){
             result = true;
         }

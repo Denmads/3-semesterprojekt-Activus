@@ -1,13 +1,12 @@
-package Domain;
+package domain;
 
-import Domain.authentication.AuthenticationService;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
-import LayerInterfaces.IDomainFacade;
-import LayerInterfaces.IService;
 import java.util.HashMap;
-import LayerInterfaces.ICommunicationFacade;
-import java.util.Map;
+import domain.authentication.AuthenticationService;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
+import layerInterfaces.IService;
 
 /**
  * Providing access to the different services in the domain layer

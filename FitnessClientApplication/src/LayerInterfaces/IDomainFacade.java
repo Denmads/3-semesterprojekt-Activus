@@ -1,8 +1,7 @@
-package LayerInterfaces;
+package layerInterfaces;
 
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
-import java.util.HashMap;
 
 /**
  * Defines the domainFacade class

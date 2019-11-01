@@ -1,11 +1,11 @@
-package Domain.serviceInterfaces;
+package domain.serviceInterfaces;
 
-import Domain.authentication.NewAccountInfo;
+import domain.authentication.NewAccountInfo;
 import Enums.RequestType;
 import Enums.ServiceType;
-import LayerInterfaces.IService;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
+import layerInterfaces.IService;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
 import Models.Request;
 

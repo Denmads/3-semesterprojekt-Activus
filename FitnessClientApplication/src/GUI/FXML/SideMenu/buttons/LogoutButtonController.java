@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI.FXML.SideMenu.buttons;
+package gui.FXML.SideMenu.buttons;
 
-import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import GUI.CustomMenuButtonController;
-import GUI.FXMain;
+import domain.serviceInterfaces.IAuthenticationService;
+import gui.CustomMenuButtonController;
+import gui.FXMain;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**

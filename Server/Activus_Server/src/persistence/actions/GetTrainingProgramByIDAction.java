@@ -37,7 +37,8 @@ public class GetTrainingProgramByIDAction extends IDatabaseAction<TrainingProgra
         
         Record rec = res.get(0);
         
-        result = new TrainingProgram(rec.getValue(TRAINING_PROGRAM.OWNERID),rec.getValue(TRAINING_PROGRAM.NAME),rec.getValue(TRAINING_PROGRAM.DESCRIPTION));
+        //TODO Fix missing constructor args
+        //result = new TrainingProgram(rec.getValue(TRAINING_PROGRAM.OWNERID),rec.getValue(TRAINING_PROGRAM.NAME),rec.getValue(TRAINING_PROGRAM.DESCRIPTION));
         
     }
 

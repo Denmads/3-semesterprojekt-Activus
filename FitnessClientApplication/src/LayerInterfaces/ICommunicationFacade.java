@@ -1,4 +1,4 @@
-package LayerInterfaces;
+package layerInterfaces;
 
 import Models.Request;
 import Models.Response;

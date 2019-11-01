@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
-import Domain.DomainFacade;
+import domain.DomainFacade;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 

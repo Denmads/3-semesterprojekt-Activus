@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
-import GUI.cellsControllers.TodaysCellController;
+import gui.cellsControllers.TodaysCellController;
 import Models.Exercise;
 import Models.SetInfo;
 import java.net.URL;

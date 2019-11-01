@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
-import GUI.cellsControllers.TodaysCellController;
-import GUI.cellsControllers.cellAllExerciseControler;
+import gui.cellsControllers.cellAllExerciseControler;
 import Models.Exercise;
-import Models.SetInfo;
+import gui.ContentPageController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;

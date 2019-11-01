@@ -1,15 +1,8 @@
-package GUI.cellsControllers;
+package gui.cellsControllers;
 
-import Domain.serviceInterfaces.ITrainingSchemeService;
-import Enums.ServiceType;
-import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.IDomainFacade;
 import Models.Exercise;
 import Models.SetInfo;
 import java.io.IOException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import layerInterfaces.IDomainFacade;
 
 /**
  *

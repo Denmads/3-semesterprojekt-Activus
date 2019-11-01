@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Domain.authentication;
+package domain.authentication;
 
 /**
  * Contains minimum info to create a new account
