@@ -25,19 +25,28 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Name: " />
-            <TextField fx:id="fieldName" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" />
-            <Label text="Country: " GridPane.rowIndex="1" />
-            <TextField fx:id="fieldCountry" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Gender: " GridPane.rowIndex="2" />
-            <TextField fx:id="fieldGender" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Gym: " GridPane.rowIndex="3" />
-            <TextField fx:id="fieldGym" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="City: " GridPane.rowIndex="4" />
-            <TextField fx:id="fieldCity" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Button fx:id="btnSaveProfile" mnemonicParsing="false" onAction="#btnSaveProfileHandler" style="-fx-background-radius: 30;" text="Modify profile info" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="First name:" />
+            <TextField fx:id="fieldFirstName" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" />
+            <Label text="Gender: " GridPane.rowIndex="3" />
+            <TextField fx:id="fieldGender" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Gym: " GridPane.rowIndex="5" />
+            <TextField fx:id="fieldGym" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="City: " GridPane.rowIndex="6" />
+            <TextField fx:id="fieldCity" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button fx:id="btnSaveProfile" mnemonicParsing="false" onAction="#btnSaveProfileHandler" style="-fx-background-radius: 30;" text="Modify profile info" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label text="Last name:" GridPane.rowIndex="1" />
+            <TextField fx:id="fieldLastName" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="fieldCountry" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="Country: " GridPane.rowIndex="4" />
+            <Label text="Age:" GridPane.rowIndex="2" />
+            <TextField fx:id="fieldAge" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Sport:" GridPane.rowIndex="7" />
+            <TextField fx:id="fieldSport" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
          <VBox.margin>
             <Insets />
