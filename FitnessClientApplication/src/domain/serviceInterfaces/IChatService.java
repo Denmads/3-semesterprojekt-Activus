@@ -5,8 +5,8 @@
  */
 package domain.serviceInterfaces;
 
-import domain.chat.Message;
 import Enums.ServiceType;
+import Models.Message;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import layerInterfaces.IService;
@@ -23,7 +23,7 @@ public abstract class IChatService extends IService {
         type = ServiceType.CHAT;
     }
     
-    public abstract void sendMessage(int buddyProfileId, Message message);
+    public abstract void sendMessage(Message message);
     
     public abstract Message[] getChatHistory(int buddyProfileId);
     

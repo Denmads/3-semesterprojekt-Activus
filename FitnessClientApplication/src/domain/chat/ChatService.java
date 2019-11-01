@@ -12,6 +12,7 @@ import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
+import Models.Message;
 import Models.Request;
 import Models.Response;
 import domain.serviceInterfaces.IChatService;
@@ -33,12 +34,13 @@ public class ChatService extends IChatService {
     }
 
     @Override
-    public void sendMessage(int buddyProfileId, Message message) {
+    public void sendMessage(Message message) {
         
         try {
+            //All of this is in message if someone got the time make it so we do not sender more data then needed/ data twice.
             Request request = createRequest(RequestType.SEND_MESSAGE);
             request.addArgument(RequestArgumentName.SENDER_ID, domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-            request.addArgument(RequestArgumentName.RECIVER_ID, buddyProfileId);
+            request.addArgument(RequestArgumentName.RECIVER_ID, message.getReciverId());
             request.addArgument(RequestArgumentName.MESSAGE, message);
             communicationLayer.sendRequest(request);
         } catch (ServiceNotFoundException ex) {

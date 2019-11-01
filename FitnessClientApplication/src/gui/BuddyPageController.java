@@ -1,13 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import Models.Message;
+import Models.Profile;
 import domain.authentication.AuthenticationService;
+import domain.serviceInterfaces.IChatService;
+import domain.serviceInterfaces.IProfileService;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -39,6 +42,8 @@ public class BuddyPageController extends ContentPageController {
     @FXML
     private TextArea messageField;
     
+    private Profile buddy;
+    
     /**
      * Initializes the controller class.
      */
@@ -47,7 +52,7 @@ public class BuddyPageController extends ContentPageController {
         
         createAnimationForMessageField();
         
-      //TODO new to get the curret Profile
+//      TODO new to get the curret Profile
 //        for (int buddyID : currentProfile.getBuddyIds()) {
 //            Profile buddy = profileService.getProfile(buddyID);
 //            ProfileItem(buddy);
@@ -79,5 +84,20 @@ public class BuddyPageController extends ContentPageController {
             }
         });
     }
-           
+    
+    private boolean sendMessage(){
+        
+        try {
+            String text = messageField.getText();
+            int reciverId = buddy.getProfileId();
+            int senderId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            Message message = new Message(senderId, reciverId, text);
+            domainFacade.<IChatService>getService(ServiceType.CHAT).sendMessage(message);
+            return true;
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
 }
