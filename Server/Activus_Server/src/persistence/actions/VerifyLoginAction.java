@@ -31,11 +31,13 @@ public class VerifyLoginAction extends IDatabaseAction<CredentialsContainer> {
         this.username = username;
         this.password = password;
     }
-    
+
     @Override
     protected void execute(DSLContext database) throws SQLException {
+        //Fetching login information from database.
         Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
-        
+
+        //If the database returns something(Isn't empty) the password is verified.
         if (!res.isEmpty()) {
             Record record = res.get(0);
             
@@ -75,5 +77,5 @@ public class VerifyLoginAction extends IDatabaseAction<CredentialsContainer> {
     public boolean hasResult() {
         return credentials != null;
     }
-    
+
 }

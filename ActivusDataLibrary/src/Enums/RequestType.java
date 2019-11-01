@@ -27,8 +27,8 @@ public enum RequestType implements Serializable {
     RECEIVE_MESSAGE_HISTORY,
     CREATE_TRAINING_PROGRAM,
     RECEIVE_EXERCISE,
+    CREATE_EXERCISE,
     ADD_EXERCISE,
     REMOVE_EXERCISE,
     LOAD_ALL_EXERCISE
-    
 }

@@ -1,5 +1,6 @@
 package Domain.trainingScheme;
 
+import Models.Exercise;
 import Domain.serviceInterfaces.ITrainingSchemeService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;

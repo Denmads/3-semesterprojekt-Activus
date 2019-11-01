@@ -1,4 +1,4 @@
-package Domain.trainingScheme;
+package Models;
 
 /**
  * Contains info about one set of an exercise
@@ -10,7 +10,20 @@ public class SetInfo {
 
     private int reps;
     private double weight;
+    private int setIndex;
 
+    public int getSetIndex() {
+        return setIndex;
+    }
+
+    public void setSetIndex(int setIndex) {
+        this.setIndex = setIndex;
+    }
+
+    public SetInfo() {
+    }
+
+    
     public SetInfo(int reps, double weight) {
         this.reps = reps;
         this.weight = weight;

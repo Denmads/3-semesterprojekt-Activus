@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package domain;
+package Domain;
 
 import Models.Request;
 import Models.Response;
@@ -15,11 +10,12 @@ import persistence.DatabaseFacade;
  * @author madsh
  */
 public abstract class IRequestHandler {
+
     protected DatabaseFacade databaseFacade;
-    
-    public IRequestHandler (DatabaseFacade dbFacade) {
+
+    public IRequestHandler(DatabaseFacade dbFacade) {
         databaseFacade = dbFacade;
     }
-    
-    public abstract Response handleRequest (Request request);
+
+    public abstract Response handleRequest(Request request);
 }
