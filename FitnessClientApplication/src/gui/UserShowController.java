@@ -71,16 +71,8 @@ public class UserShowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
-        DataSender dateSender = DataSender.getInstance();
-        setData(dateSender.getProfile());
         
     }    
-    public void setData(Profile profile){
-        Username.setText(profile.getUsername());
-        gym.setText(profile.getGym());
-        cuntry.setText(profile.getCountry());
-        city.setText(profile.getCity());
-    }
     
    
 }
