@@ -31,8 +31,6 @@ public abstract class IProfileService extends IService {
 
     public abstract List<Profile> search(String searchString, SearchType searchType);
 
-    public abstract Profile getProfile(int profileID);
-
     public abstract boolean updateProfile(Profile newProfileInfo);
 
     public abstract boolean updateProfilePassWord(String newPassword);

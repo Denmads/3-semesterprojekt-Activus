@@ -13,7 +13,6 @@ public class Exercise {
     private String name;
     private double time;
     private String Description;
-    
 
     private ArrayList<SetInfo> set;
 
@@ -30,6 +29,7 @@ public class Exercise {
         this.name = name;
         this.time = time;
         this.set = new ArrayList<>();
+        this.Description = "no description";
     }
 
     public String getDescription() {
@@ -47,7 +47,6 @@ public class Exercise {
     public void setSet(ArrayList<SetInfo> set) {
         this.set = set;
     }
-
     
     public int getID() {
         return ID;
@@ -76,4 +75,12 @@ public class Exercise {
     public void removeSetInfo (int index) {
         set.remove(index);
     }
+
+    public ArrayList<SetInfo> getSetInfo() {
+        return set;
+    }
+    
+    
+    
+
 }

@@ -29,6 +29,6 @@ public abstract class ITrainingSchemeService extends IService{
     
     public abstract List<Exercise> loadAllExercise();
     
-    
+    public abstract void exerciseForTodayDone(Exercise exercise);
     
 }

@@ -52,12 +52,6 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public Profile getProfile(int profileID) {
-        return (Profile) returnResponsObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
-        
-    }
-
-    @Override
     public boolean updateProfile(Profile newProfileInfo) {
         boolean isUpdate;
         currentProfile = (Profile) returnResponsObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);

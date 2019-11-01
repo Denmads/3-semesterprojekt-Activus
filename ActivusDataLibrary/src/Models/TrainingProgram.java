@@ -1,50 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Models;
 
-import java.io.Serializable;
+import Models.Exercise;
+import java.util.ArrayList;
 
 /**
- *
- * @author Patrick
+ * A training program consists of exercises
+ * A model class
+ * 
+ * @author Victor
  */
-public class TrainingProgram implements Serializable {
-    private int ownerID;
-    private String name;
-    private String description;
+public class TrainingProgram {
 
-    public TrainingProgram(int ownerID, String name, String description) {
-        this.ownerID = ownerID;
-        this.name = name;
-        this.description = description;
+    private ArrayList<Exercise> exercises;
+
+    public TrainingProgram() {
+        exercises = new ArrayList();
     }
 
-    public int getOwnerID() {
-        return ownerID;
+    public void addExercise(Exercise exercise) {
+        this.exercises.add(exercise);
     }
 
-    public void setOwnerID(int ownerID) {
-        this.ownerID = ownerID;
+    public void addExerciseAtIndex(Exercise exercise, int index) {
+        this.exercises.add(index, exercise);
     }
 
-    public String getName() {
-        return name;
+    public void removeExercise(Exercise exercise) {
+        this.exercises.remove(exercise);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    
 }

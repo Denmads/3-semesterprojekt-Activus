@@ -62,10 +62,8 @@ public class CommunicationFacade implements ICommunicationFacade {
 
         try {
             openConnection();
-
             serverRequestStream.writeObject(request);
             response = serverResponseStream.readObject();
-
             closeConnection();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(CommunicationFacade.class.getName()).log(Level.SEVERE, null, ex);

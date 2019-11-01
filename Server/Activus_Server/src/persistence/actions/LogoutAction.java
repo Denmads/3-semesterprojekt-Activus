@@ -25,7 +25,7 @@ public class LogoutAction extends IDatabaseAction<Boolean>{
     @Override
     protected void execute(DSLContext database) throws SQLException {
         
-        database.delete(TOKEN).where(TOKEN.LOGINID.eq(id));
+        database.delete(TOKEN).where(TOKEN.LOGINID.eq(id)).execute();
         
         Result<Record> res = database.select().from(TOKEN).where(TOKEN.LOGINID.eq(id)).fetch();
         if (res.isEmpty()){
