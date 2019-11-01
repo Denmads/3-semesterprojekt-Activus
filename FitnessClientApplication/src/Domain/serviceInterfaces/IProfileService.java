@@ -50,5 +50,7 @@ public abstract class IProfileService extends IService {
     public abstract int setStats(Exercise exercise);
 
     public abstract boolean removeStats(int statsID);
+    
+    public abstract List<Exercise> getCurrentStats(int ProfileID);
 
 }

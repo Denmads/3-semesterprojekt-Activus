@@ -31,5 +31,6 @@ public enum RequestType implements Serializable {
     ADD_EXERCISE,
     REMOVE_EXERCISE,
     LOAD_ALL_EXERCISE,
-    REMOVE_EXERCISE_FOR_TODAY
+    REMOVE_EXERCISE_FOR_TODAY,
+    LOAD_ALL_STATS
 }

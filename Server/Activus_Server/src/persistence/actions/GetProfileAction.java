@@ -1,6 +1,7 @@
 package persistence.actions;
 
 import Models.Profile;
+import Models.Request;
 import static persistence.database.generated.Tables.LOGIN;
 import static persistence.database.generated.Tables.PROFILE;
 import java.sql.SQLException;

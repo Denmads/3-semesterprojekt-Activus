@@ -38,4 +38,9 @@ public class AuthenticateTokenAction extends IDatabaseAction<Boolean> {
         return executed;
     }
 
+    @Override
+    public void setResult(Request request) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -5,9 +5,6 @@
  */
 package domain;
 
-import Enums.RequestArgumentName;
-import Enums.ResponseArgumentName;
-import Exceptions.ArgumentNotFoundException;
 import Models.Request;
 import Models.Response;
 import java.util.logging.Level;
@@ -62,7 +59,6 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
         }
         
         return response;
-       
     }
     
 }

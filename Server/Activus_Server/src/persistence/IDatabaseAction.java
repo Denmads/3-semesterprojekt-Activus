@@ -1,5 +1,6 @@
 package persistence;
 
+import Models.Request;
 import java.sql.SQLException;
 import org.jooq.DSLContext;
 
@@ -18,4 +19,7 @@ public abstract class IDatabaseAction<T> {
     public abstract T getResult();
 
     public abstract boolean hasResult();
+    
+    public abstract void setResult(Request request);
+            
 }
