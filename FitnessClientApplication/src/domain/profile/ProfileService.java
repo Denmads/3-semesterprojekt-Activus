@@ -65,7 +65,8 @@ public class ProfileService extends IProfileService {
             req.addArgument(RequestArgumentName.PROFILE_COUNTRY, newProfileInfo.getCountry());
 
             Response res = communicationLayer.sendRequest(req);
-            
+            System.out.println("response: " + res);
+            System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
             isUpdated = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
 
             return isUpdated;

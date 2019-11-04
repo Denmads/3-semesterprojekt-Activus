@@ -95,7 +95,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
         }
         //UPDATE RETURN STATEMENT LATER!!!
-        return null;
+        return response;
     }
 
 }
