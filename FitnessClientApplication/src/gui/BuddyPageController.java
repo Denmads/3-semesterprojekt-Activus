@@ -7,6 +7,8 @@ import Models.Profile;
 import domain.authentication.AuthenticationService;
 import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
+import gui.cellsControllers.ProfileCellController;
+import gui.cellsControllers.cellAllExerciseControler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,10 +19,14 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.T;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -38,26 +44,22 @@ public class BuddyPageController extends ContentPageController {
     private VBox Vboks;
     private AuthenticationService authenticationService;
     @FXML
-    private ListView<?> ListViewBuddies;
+    private ListView<Profile> ListViewBuddies;
     @FXML
     private TextArea messageField;
     
     private Profile buddy;
+    private ObservableList<Profile> listBuddy;
     
     /**
-     * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
         
         createAnimationForMessageField();
         
-//      TODO new to get the curret Profile
-//        for (int buddyID : currentProfile.getBuddyIds()) {
-//            Profile buddy = profileService.getProfile(buddyID);
-//            ProfileItem(buddy);
-//                    
-//        }
         
     }    
     
@@ -99,5 +101,17 @@ public class BuddyPageController extends ContentPageController {
         }
         
         return false;
+    }
+    
+    private void loadBuddys(){
+        listBuddy = FXCollections.observableArrayList();
+        //TODO new to get the curret Profile
+        
+        
+        ListViewBuddies.setItems(listBuddy);
+        ListViewBuddies.setCellFactory((ListView<Profile> view) -> {
+            return new ProfileCellController(domainFacade);
+        });
+        ListViewBuddies.refresh();
     }
 }

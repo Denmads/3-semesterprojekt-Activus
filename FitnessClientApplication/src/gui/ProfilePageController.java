@@ -16,7 +16,7 @@ import javafx.scene.shape.Circle;
 /**
  * FXML Controller class
  *
- * @author perte
+ * @author terpen
  */
 public class ProfilePageController extends ContentPageController {
 
