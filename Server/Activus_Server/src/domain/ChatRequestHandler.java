@@ -12,6 +12,7 @@ import Models.Request;
 import Models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 import persistence.actions.ReciveMessageHistoryAction;
 import persistence.actions.SendMessageAction;
@@ -22,7 +23,7 @@ import persistence.actions.SendMessageAction;
  */
 public class ChatRequestHandler extends IRequestHandler {
 
-    public ChatRequestHandler(DatabaseFacade dbFacade) {
+    public ChatRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
 

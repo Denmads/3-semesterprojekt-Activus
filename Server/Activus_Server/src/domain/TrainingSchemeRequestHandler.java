@@ -12,6 +12,7 @@ import Models.Request;
 import Models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 import persistence.actions.AddExerciseToTrainingProgramAction;
 import persistence.actions.CreateTrainingProgramAction;
@@ -24,7 +25,7 @@ import persistence.actions.RemoveExerciseByIDAction;
  */
 public class TrainingSchemeRequestHandler extends IRequestHandler{
 
-    public TrainingSchemeRequestHandler(DatabaseFacade dbFacade) {
+    public TrainingSchemeRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
 
