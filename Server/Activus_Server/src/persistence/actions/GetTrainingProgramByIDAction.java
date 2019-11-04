@@ -33,7 +33,7 @@ public class GetTrainingProgramByIDAction extends IDatabaseAction<TrainingProgra
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        Result<Record3<Integer, String, String>> res = database.select(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.ID.eq(id)).fetch();
+        Result<Record3<Integer, String, String>> res = database.select(TRAINING_PROGRAM.ID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.ID.eq(id)).fetch();
         
         Record rec = res.get(0);
         

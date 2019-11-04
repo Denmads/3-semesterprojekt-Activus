@@ -33,19 +33,19 @@ public class GetExerciseByIDAction extends IDatabaseAction<Exercise>{
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        Result<Record6<String, String, Long, Integer, Integer, Integer>> res = database.select(EXERCISE.NAME,EXERCISE.DESCRIPTION,EXERCISE.TIME_TAKEN,EXERCISE.REBS,EXERCISE.SETS,EXERCISE.WEIGHT).from(EXERCISE.where(EXERCISE.ID.eq(id))).fetch();
+//        Result<Record6<String, String, Long, Integer, Integer, Integer>> res = database.select(EXERCISE.NAME,EXERCISE.DESCRIPTION,EXERCISE.TIME_TAKEN,EXERCISE.REBS,EXERCISE.SETS,EXERCISE.WEIGHT).from(EXERCISE.where(EXERCISE.ID.eq(id))).fetch();
         result = new Exercise();
         
         //TODO change database for getting sets for etch ecerxise
-        Record rec = res.get(0);
-        result.setDescription(rec.get(EXERCISE.DESCRIPTION));
-        result.setName(rec.get(EXERCISE.NAME));
+//        Record rec = res.get(0);
+//        result.setDescription(rec.get(EXERCISE.DESCRIPTION));
+//        result.setName(rec.get(EXERCISE.NAME));
         SetInfo set = new SetInfo(id, id);
         
-        set.setReps(rec.get(EXERCISE.REBS));
-        set.setWeight(rec.get(EXERCISE.WEIGHT));
-        result.setTime(rec.get(EXERCISE.TIME_TAKEN));
-        //TODO add set info?
+//        set.setReps(rec.get(EXERCISE.REBS));
+//        set.setWeight(rec.get(EXERCISE.WEIGHT));
+//        result.setTime(rec.get(EXERCISE.TIME_TAKEN));
+        //TODO add info?
         
         executed = true;
     }

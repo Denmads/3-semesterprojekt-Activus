@@ -17,15 +17,19 @@ import org.jooq.impl.SchemaImpl;
 
 import persistence.database.generated.tables.Buddys;
 import persistence.database.generated.tables.Exercise;
+import persistence.database.generated.tables.ExerciseSet;
 import persistence.database.generated.tables.Goal;
 import persistence.database.generated.tables.Login;
 import persistence.database.generated.tables.Message;
 import persistence.database.generated.tables.Profile;
 import persistence.database.generated.tables.QuestionForBuddys;
-import persistence.database.generated.tables.Schedule;
-import persistence.database.generated.tables.ScheduleProfile;
-import persistence.database.generated.tables.ScheduleTrainingProgram;
+import persistence.database.generated.tables.Scheme;
+import persistence.database.generated.tables.SchemeProfile;
+import persistence.database.generated.tables.SchemeTrainingProgram;
+import persistence.database.generated.tables.Set;
+import persistence.database.generated.tables.SetTrainingProgramExercise;
 import persistence.database.generated.tables.Stats;
+import persistence.database.generated.tables.StatsSet;
 import persistence.database.generated.tables.Token;
 import persistence.database.generated.tables.TrainingProgram;
 import persistence.database.generated.tables.TrainingProgramExercise;
@@ -45,7 +49,7 @@ import persistence.database.generated.tables.TraningsHours;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = -1402474417;
+    private static final long serialVersionUID = -459520661;
 
     /**
      * The reference instance of <code>public</code>
@@ -61,6 +65,11 @@ public class Public extends SchemaImpl {
      * The table <code>public.exercise</code>.
      */
     public final Exercise EXERCISE = persistence.database.generated.tables.Exercise.EXERCISE;
+
+    /**
+     * The table <code>public.exercise_set</code>.
+     */
+    public final ExerciseSet EXERCISE_SET = persistence.database.generated.tables.ExerciseSet.EXERCISE_SET;
 
     /**
      * The table <code>public.goal</code>.
@@ -88,24 +97,39 @@ public class Public extends SchemaImpl {
     public final QuestionForBuddys QUESTION_FOR_BUDDYS = persistence.database.generated.tables.QuestionForBuddys.QUESTION_FOR_BUDDYS;
 
     /**
-     * The table <code>public.schedule</code>.
+     * The table <code>public.scheme</code>.
      */
-    public final Schedule SCHEDULE = persistence.database.generated.tables.Schedule.SCHEDULE;
+    public final Scheme SCHEME = persistence.database.generated.tables.Scheme.SCHEME;
 
     /**
-     * The table <code>public.schedule_profile</code>.
+     * The table <code>public.scheme_profile</code>.
      */
-    public final ScheduleProfile SCHEDULE_PROFILE = persistence.database.generated.tables.ScheduleProfile.SCHEDULE_PROFILE;
+    public final SchemeProfile SCHEME_PROFILE = persistence.database.generated.tables.SchemeProfile.SCHEME_PROFILE;
 
     /**
-     * The table <code>public.schedule_training_program</code>.
+     * The table <code>public.scheme_training_program</code>.
      */
-    public final ScheduleTrainingProgram SCHEDULE_TRAINING_PROGRAM = persistence.database.generated.tables.ScheduleTrainingProgram.SCHEDULE_TRAINING_PROGRAM;
+    public final SchemeTrainingProgram SCHEME_TRAINING_PROGRAM = persistence.database.generated.tables.SchemeTrainingProgram.SCHEME_TRAINING_PROGRAM;
+
+    /**
+     * The table <code>public.Set</code>.
+     */
+    public final Set SET = persistence.database.generated.tables.Set.SET;
+
+    /**
+     * The table <code>public.set_training_program_exercise</code>.
+     */
+    public final SetTrainingProgramExercise SET_TRAINING_PROGRAM_EXERCISE = persistence.database.generated.tables.SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE;
 
     /**
      * The table <code>public.stats</code>.
      */
     public final Stats STATS = persistence.database.generated.tables.Stats.STATS;
+
+    /**
+     * The table <code>public.stats_set</code>.
+     */
+    public final StatsSet STATS_SET = persistence.database.generated.tables.StatsSet.STATS_SET;
 
     /**
      * The table <code>public.token</code>.
@@ -155,7 +179,8 @@ public class Public extends SchemaImpl {
             Sequences.MESSAGE_ID_SEQ,
             Sequences.PROFILE_ID_SEQ,
             Sequences.QUESTION_FOR_BUDDYS_ID_SEQ,
-            Sequences.SCHEDULE_ID_SEQ,
+            Sequences.SCHEME_ID_SEQ,
+            Sequences.SET_ID_SEQ,
             Sequences.STATS_ID_SEQ,
             Sequences.TRAINING_PROGRAM_ID_SEQ,
             Sequences.TRANINGS_HOURS_ID_SEQ);
@@ -172,15 +197,19 @@ public class Public extends SchemaImpl {
         return Arrays.<Table<?>>asList(
             Buddys.BUDDYS,
             Exercise.EXERCISE,
+            ExerciseSet.EXERCISE_SET,
             Goal.GOAL,
             Login.LOGIN,
             Message.MESSAGE,
             Profile.PROFILE,
             QuestionForBuddys.QUESTION_FOR_BUDDYS,
-            Schedule.SCHEDULE,
-            ScheduleProfile.SCHEDULE_PROFILE,
-            ScheduleTrainingProgram.SCHEDULE_TRAINING_PROGRAM,
+            Scheme.SCHEME,
+            SchemeProfile.SCHEME_PROFILE,
+            SchemeTrainingProgram.SCHEME_TRAINING_PROGRAM,
+            Set.SET,
+            SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE,
             Stats.STATS,
+            StatsSet.STATS_SET,
             Token.TOKEN,
             TrainingProgram.TRAINING_PROGRAM,
             TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE,
