@@ -6,6 +6,7 @@ import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;
 import java.util.HashMap;
+import layerInterfaces.IDatabaseFacade;
 import persistence.actions.AuthenticateTokenAction;
 
 
@@ -18,7 +19,7 @@ public class RequestDelegater implements IRequestDelegater{
 
     private HashMap<ServiceType, IRequestHandler> requestHandlers;
     
-    private DatabaseFacade databaseFacade;
+    private IDatabaseFacade databaseFacade;
 
     public RequestDelegater() {
         databaseFacade = new DatabaseFacade();
@@ -52,5 +53,9 @@ public class RequestDelegater implements IRequestDelegater{
         databaseFacade.execute(authenticationAction);
         
         return (authenticationAction.hasResult() ? authenticationAction.getResult() : false);
+    }
+    
+    public IDatabaseFacade getDatabaseFacade () {
+        return databaseFacade;
     }
 }

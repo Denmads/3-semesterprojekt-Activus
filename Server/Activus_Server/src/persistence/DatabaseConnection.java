@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -15,7 +16,6 @@ import org.apache.commons.dbcp2.BasicDataSource;
  * A class to provide a singular connection pool to multiple classes.
  */
 public class DatabaseConnection {
-    private static BasicDataSource connectionPool;
     
     
     private Properties prop;
@@ -33,13 +33,6 @@ public class DatabaseConnection {
         
         username = prop.getProperty("databaseUsername");
         password = prop.getProperty("databasePassword");
-        
-        connectionPool = new BasicDataSource();
-        connectionPool.setUsername(this.username);
-        connectionPool.setPassword(this.password);
-        connectionPool.setDriverClassName("org.postgresql.Driver");
-        connectionPool.setUrl(this.dbAddressString);
-        connectionPool.setInitialSize(10);
     }
     
     private void readConfig () {
@@ -61,11 +54,8 @@ public class DatabaseConnection {
      * @return a connection pool to perform transactions on.
      */
     public Connection getConnection () throws SQLException{
-        return connectionPool.getConnection();
-    }
-    
-    
-    public void close() throws SQLException {
-        connectionPool.close();
+//        return connectionPool.getConnection();
+
+        return DriverManager.getConnection(dbAddressString, username, password);
     }
 }

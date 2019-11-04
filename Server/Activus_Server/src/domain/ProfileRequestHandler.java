@@ -13,8 +13,7 @@ import persistence.actions.UpdateProfileAction;
 import persistence.actions.UpdateUsernameAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jooq.DSLContext;
-import org.jooq.TableField;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.SetStatsAction;
@@ -25,8 +24,8 @@ import static persistence.database.generated.Tables.PROFILE;
  * @author madsh
  */
 public class ProfileRequestHandler extends IRequestHandler {
-
-    public ProfileRequestHandler(DatabaseFacade dbFacade) {
+    
+    public ProfileRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
 

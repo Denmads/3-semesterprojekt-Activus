@@ -100,6 +100,7 @@ public class Keys {
     public static final UniqueKey<SetTrainingProgramExerciseRecord> SET_TRAINING_PROGRAM_EXERCISE_PKEY = UniqueKeys0.SET_TRAINING_PROGRAM_EXERCISE_PKEY;
     public static final UniqueKey<StatsRecord> STATS_PKEY = UniqueKeys0.STATS_PKEY;
     public static final UniqueKey<StatsSetRecord> STATS_SET_PKEY = UniqueKeys0.STATS_SET_PKEY;
+    public static final UniqueKey<TokenRecord> TOKEN_PKEY = UniqueKeys0.TOKEN_PKEY;
     public static final UniqueKey<TrainingProgramRecord> TRAINING_PROGRAM_PKEY = UniqueKeys0.TRAINING_PROGRAM_PKEY;
     public static final UniqueKey<TrainingProgramExerciseRecord> TRAINING_PROGRAM_EXERCISE_PKEY = UniqueKeys0.TRAINING_PROGRAM_EXERCISE_PKEY;
     public static final UniqueKey<TraningsHoursRecord> TRANINGS_HOURS_PKEY = UniqueKeys0.TRANINGS_HOURS_PKEY;
@@ -165,6 +166,7 @@ public class Keys {
         public static final UniqueKey<SetTrainingProgramExerciseRecord> SET_TRAINING_PROGRAM_EXERCISE_PKEY = Internal.createUniqueKey(SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE, "set_training_program_exercise_pkey", SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE.SETID, SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAM_EXERCISEEXERCISEID, SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAM_EXERCISETRAINING_PROGRAMID);
         public static final UniqueKey<StatsRecord> STATS_PKEY = Internal.createUniqueKey(Stats.STATS, "stats_pkey", Stats.STATS.ID);
         public static final UniqueKey<StatsSetRecord> STATS_SET_PKEY = Internal.createUniqueKey(StatsSet.STATS_SET, "stats_set_pkey", StatsSet.STATS_SET.STATSID, StatsSet.STATS_SET.SETID);
+        public static final UniqueKey<TokenRecord> TOKEN_PKEY = Internal.createUniqueKey(Token.TOKEN, "token_pkey", Token.TOKEN.LOGINID);
         public static final UniqueKey<TrainingProgramRecord> TRAINING_PROGRAM_PKEY = Internal.createUniqueKey(TrainingProgram.TRAINING_PROGRAM, "training_program_pkey", TrainingProgram.TRAINING_PROGRAM.ID);
         public static final UniqueKey<TrainingProgramExerciseRecord> TRAINING_PROGRAM_EXERCISE_PKEY = Internal.createUniqueKey(TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE, "training_program_exercise_pkey", TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.EXERCISEID, TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID);
         public static final UniqueKey<TraningsHoursRecord> TRANINGS_HOURS_PKEY = Internal.createUniqueKey(TraningsHours.TRANINGS_HOURS, "tranings_hours_pkey", TraningsHours.TRANINGS_HOURS.ID);

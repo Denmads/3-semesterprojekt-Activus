@@ -15,6 +15,7 @@ import Models.Request;
 import Models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 import persistence.actions.CreateNewUserAction;
 import persistence.actions.GetProfileByLoginIdAction;
@@ -28,7 +29,7 @@ import persistence.actions.VerifyLoginAction;
  */
 public class AuthenticationRequestHandler extends IRequestHandler {
 
-    public AuthenticationRequestHandler(DatabaseFacade dbFacade) {
+    public AuthenticationRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
 
@@ -55,9 +56,12 @@ public class AuthenticationRequestHandler extends IRequestHandler {
             try {
                 VerifyLoginAction vla = new VerifyLoginAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
                 databaseFacade.execute(vla);
+                System.out.println(vla.hasResult());
                 if (vla.hasResult()) {
+                    System.out.println("get profile");
                     GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getUserId());
                     databaseFacade.execute(gpblia);
+                    System.out.println("Gotten profile");
                     response.addArgument(ResponseArgumentName.CREDENTIALS, vla.getResult());
                     response.addArgument(ResponseArgumentName.PROFILE, gpblia.getResult());
                 }
