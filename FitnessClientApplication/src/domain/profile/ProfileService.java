@@ -18,6 +18,7 @@ import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
+import models.Stats;
 
 /**
  *
@@ -134,8 +135,9 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public List<Exercise> getCurrentStats(int ProfileID) {
-        return (List<Exercise>) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
+    public Stats getCurrentStats(int ProfileID) {
+        return (Stats) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
+       
     }
     
  

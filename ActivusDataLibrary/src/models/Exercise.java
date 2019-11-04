@@ -79,6 +79,11 @@ public class Exercise {
     public ArrayList<SetInfo> getSetInfo() {
         return set;
     }
+
+    @Override
+    public String toString() {
+        return ""+name;
+    }
     
     
     

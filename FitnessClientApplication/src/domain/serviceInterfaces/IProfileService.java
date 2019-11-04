@@ -4,10 +4,12 @@ import Models.Exercise;
 import Models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
+import java.util.HashMap;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import layerInterfaces.IService;
 import java.util.List;
+import models.Stats;
 
 
 /**
@@ -51,6 +53,8 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean removeStats(int statsID);
     
-    public abstract List<Exercise> getCurrentStats(int ProfileID);
+    public abstract Stats getCurrentStats(int ProfileID);
+    
+   
 
 }

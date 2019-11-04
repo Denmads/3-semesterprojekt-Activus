@@ -35,6 +35,7 @@ public enum RequestArgumentName implements Serializable {
     PROGRAM_WEIGHT,
     PROGRAM_DATE,
     SENDER_ID,
-    RECIVER_ID
+    RECIVER_ID,
+    STATS,
     
 }
