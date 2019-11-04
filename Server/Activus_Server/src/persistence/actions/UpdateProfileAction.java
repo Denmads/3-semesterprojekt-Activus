@@ -43,6 +43,7 @@ public class UpdateProfileAction extends IDatabaseAction<Boolean> {
         executed = true;
         //The data will always be changed if the method has been executed since there would otherwise be thrown exceptions from the library.
         result = true;
+        System.out.println(result);
         
         
 

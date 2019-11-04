@@ -16,7 +16,6 @@ public enum RequestArgumentName implements Serializable {
     PROFILE_LAST_NAME,
     PROFILE_GENDER,
     PROFILE_COUNTRY,
-    PROFILE_SPORT,
     PROGRAM_ID,
     PROGRAM_OWNER_ID,
     PROGRAM_DESCRIPTION,
