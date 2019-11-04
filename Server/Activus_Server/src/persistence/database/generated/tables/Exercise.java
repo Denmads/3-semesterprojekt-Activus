@@ -15,7 +15,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.ExerciseRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Exercise extends TableImpl<ExerciseRecord> {
 
-    private static final long serialVersionUID = -192592224;
+    private static final long serialVersionUID = -1158633180;
 
     /**
      * The reference instance of <code>public.exercise</code>
@@ -73,24 +73,9 @@ public class Exercise extends TableImpl<ExerciseRecord> {
     public final TableField<ExerciseRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(1000).nullable(false).defaultValue(org.jooq.impl.DSL.field("'If you cant tell by the name to bad someone did not give a description'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>public.exercise.time_taken</code>.
+     * The column <code>public.exercise.setid</code>.
      */
-    public final TableField<ExerciseRecord, Long> TIME_TAKEN = createField(DSL.name("time_taken"), org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.BIGINT)), this, "");
-
-    /**
-     * The column <code>public.exercise.rebs</code>.
-     */
-    public final TableField<ExerciseRecord, Integer> REBS = createField(DSL.name("rebs"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>public.exercise.sets</code>.
-     */
-    public final TableField<ExerciseRecord, Integer> SETS = createField(DSL.name("sets"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>public.exercise.weight</code>.
-     */
-    public final TableField<ExerciseRecord, Integer> WEIGHT = createField(DSL.name("weight"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
+    public final TableField<ExerciseRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.exercise</code> table reference
@@ -177,11 +162,11 @@ public class Exercise extends TableImpl<ExerciseRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Integer, String, String, Long, Integer, Integer, Integer> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row4<Integer, String, String, Integer> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

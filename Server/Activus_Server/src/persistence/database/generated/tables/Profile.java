@@ -15,7 +15,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row10;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.ProfileRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Profile extends TableImpl<ProfileRecord> {
 
-    private static final long serialVersionUID = -1176207551;
+    private static final long serialVersionUID = 95937302;
 
     /**
      * The reference instance of <code>public.profile</code>
@@ -63,9 +63,9 @@ public class Profile extends TableImpl<ProfileRecord> {
     public final TableField<ProfileRecord, Integer> ID = createField(DSL.name("id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('profile_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>public.profile.loginid</code>.
+     * The column <code>public.profile.login_id</code>.
      */
-    public final TableField<ProfileRecord, Integer> LOGINID = createField(DSL.name("loginid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<ProfileRecord, Integer> LOGIN_ID = createField(DSL.name("login_id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>public.profile.gym</code>.
@@ -101,11 +101,6 @@ public class Profile extends TableImpl<ProfileRecord> {
      * The column <code>public.profile.country</code>.
      */
     public final TableField<ProfileRecord, String> COUNTRY = createField(DSL.name("country"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'Country of nowhere'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
-
-    /**
-     * The column <code>public.profile.sport</code>.
-     */
-    public final TableField<ProfileRecord, String> SPORT = createField(DSL.name("sport"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'I do not do sport'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * Create a <code>public.profile</code> table reference
@@ -167,11 +162,11 @@ public class Profile extends TableImpl<ProfileRecord> {
 
     @Override
     public List<ForeignKey<ProfileRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<ProfileRecord, ?>>asList(Keys.PROFILE__FKPROFILE118136);
+        return Arrays.<ForeignKey<ProfileRecord, ?>>asList(Keys.PROFILE__FKPROFILE488694);
     }
 
     public Login login() {
-        return new Login(this, Keys.PROFILE__FKPROFILE118136);
+        return new Login(this, Keys.PROFILE__FKPROFILE488694);
     }
 
     @Override
@@ -201,11 +196,11 @@ public class Profile extends TableImpl<ProfileRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row10 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row10<Integer, Integer, String, String, Integer, String, String, String, String, String> fieldsRow() {
-        return (Row10) super.fieldsRow();
+    public Row9<Integer, Integer, String, String, Integer, String, String, String, String> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

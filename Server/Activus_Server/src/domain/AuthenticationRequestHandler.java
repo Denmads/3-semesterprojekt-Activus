@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import persistence.DatabaseFacade;
 import persistence.actions.CreateNewUserAction;
 import persistence.actions.GetProfileByLoginIdAction;
+import persistence.actions.IsUsernameUniqueAction;
 import persistence.actions.LogoutAction;
 import persistence.actions.VerifyLoginAction;
 
@@ -37,9 +38,16 @@ public class AuthenticationRequestHandler extends IRequestHandler {
 
         if (request.getRequestType().equals(CREATE_NEW_USER)) {
             try {
-                CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
-                databaseFacade.execute(cnua);
-                response.addArgument(ResponseArgumentName.SUCCESS, cnua.getResult());
+                IsUsernameUniqueAction uniqueAction = new IsUsernameUniqueAction(request.getArgument(RequestArgumentName.USERNAME));
+                databaseFacade.execute(uniqueAction);
+                if (uniqueAction.getResult()) {
+                    CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
+                    databaseFacade.execute(cnua);
+                    response.addArgument(ResponseArgumentName.ERRORS, "");
+                }
+                else {
+                    response.addArgument(ResponseArgumentName.ERRORS, "Username already exists!");
+                }
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
