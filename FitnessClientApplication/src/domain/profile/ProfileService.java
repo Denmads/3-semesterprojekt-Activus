@@ -66,7 +66,7 @@ public class ProfileService extends IProfileService {
 
             Response res = communicationLayer.sendRequest(req);
             
-            isUpdated = (boolean)res.getArgument(ResponseArgumentName.PROFILE);
+            isUpdated = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
 
             return isUpdated;
         } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
