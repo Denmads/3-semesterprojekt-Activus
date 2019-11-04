@@ -83,8 +83,11 @@ public class SearchPageController extends ContentPageController {
         exerciseNameField.setEditable(false);
 
         //Loading all exercises to the listview
+        //This shit doesn't work. Loading domainFacade into initialize.
         loadAllExercises();
     }
+    
+    
 
     @FXML
     private void handleSearchProfileButtonAction(ActionEvent event) {
