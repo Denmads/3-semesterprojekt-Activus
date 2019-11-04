@@ -8,7 +8,6 @@ import domain.authentication.AuthenticationService;
 import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
 import gui.cellsControllers.ProfileCellController;
-import gui.cellsControllers.cellAllExerciseControler;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,11 +21,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import static javafx.scene.input.KeyCode.T;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -59,6 +56,7 @@ public class BuddyPageController extends ContentPageController {
     public void initialize(URL url, ResourceBundle rb) {      
         
         createAnimationForMessageField();
+        //loadBuddys(); cant get domainfacade in initialize
         
         
     }    
@@ -105,8 +103,13 @@ public class BuddyPageController extends ContentPageController {
     
     private void loadBuddys(){
         listBuddy = FXCollections.observableArrayList();
-        //TODO new to get the curret Profile
-        
+        int profileId;
+        try {
+            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ListViewBuddies.setItems(listBuddy);
         ListViewBuddies.setCellFactory((ListView<Profile> view) -> {

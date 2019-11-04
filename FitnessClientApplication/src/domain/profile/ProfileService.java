@@ -141,7 +141,7 @@ public class ProfileService extends IProfileService {
 
     @Override
     public List<Profile> getAllBuddys(int ProfileID) {
-        return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUUDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
+        return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUDDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
     }
     
  
