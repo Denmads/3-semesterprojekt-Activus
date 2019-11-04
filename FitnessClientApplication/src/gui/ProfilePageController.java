@@ -8,6 +8,7 @@ package gui;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import Models.Profile;
+import domain.DomainFacade;
 import domain.profile.ProfileService;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
@@ -56,6 +57,23 @@ public class ProfilePageController extends ContentPageController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
+    }
+
+    @Override
+    public void setDomainFacade(DomainFacade facade) {
+        try {
+            super.setDomainFacade(facade);
+            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
+            fieldAge.setText(currentProfile.getAge() + "");
+            fieldCity.setText(currentProfile.getCity());
+            fieldCountry.setText(currentProfile.getCountry());
+            fieldFirstName.setText(currentProfile.getFirstName());
+            fieldGender.setText(currentProfile.getGender());
+            fieldGym.setText(currentProfile.getGym());
+            fieldLastName.setText(currentProfile.getLastName());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
