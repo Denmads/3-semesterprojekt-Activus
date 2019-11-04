@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -55,7 +56,7 @@ public class BuddyPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-        
+        textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
         createAnimationForMessageField();
         //loadBuddys(); cant get domainfacade in initialize
         
