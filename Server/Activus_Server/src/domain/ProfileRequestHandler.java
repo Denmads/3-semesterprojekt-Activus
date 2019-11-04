@@ -94,7 +94,6 @@ public class ProfileRequestHandler extends IRequestHandler {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
-        //UPDATE RETURN STATEMENT LATER!!!
         return response;
     }
 
