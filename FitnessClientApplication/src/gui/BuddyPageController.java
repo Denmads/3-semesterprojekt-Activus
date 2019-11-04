@@ -49,6 +49,7 @@ public class BuddyPageController extends ContentPageController {
     
     private Profile buddy;
     private ObservableList<Profile> listBuddy;
+    private TextField[] textFields;
     
     /**
      * @param url
