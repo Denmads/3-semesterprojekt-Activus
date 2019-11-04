@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="root" maxWidth="-Infinity" prefWidth="335.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.SideMenu.SidebarMenuController">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-color: #515151; -fx-border-width: 0 3 0 0; -fx-background-color: transparent;">
+         <content>
+            <VBox fx:id="buttonBox" alignment="TOP_CENTER" onMouseExited="#hideMenu" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #000000;">
+               <children>
+                  <ImageView fitHeight="138.0" fitWidth="231.0" opacity="0.9">
+                     <image>
+                        <Image url="@../../../Images/activus_logo_transparent.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+      <Label onMouseEntered="#showMenu" style="-fx-rotate: 90; -fx-background-color: #515151; -fx-background-radius: 10 10 0 0;" text="Menu">
+         <HBox.margin>
+            <Insets left="-19.0" right="-20.0" top="40.0" />
+         </HBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+         </padding>
+      </Label>
+   </children>
+</HBox>
