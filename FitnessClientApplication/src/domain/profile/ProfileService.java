@@ -63,7 +63,6 @@ public class ProfileService extends IProfileService {
             req.addArgument(RequestArgumentName.PROFILE_LAST_NAME, newProfileInfo.getLastName());
             req.addArgument(RequestArgumentName.PROFILE_GENDER, newProfileInfo.getGender());
             req.addArgument(RequestArgumentName.PROFILE_COUNTRY, newProfileInfo.getCountry());
-            req.addArgument(RequestArgumentName.PROFILE_SPORT, newProfileInfo.getSport());
 
             Response res = communicationLayer.sendRequest(req);
             

@@ -47,8 +47,6 @@ public class ProfilePageController extends ContentPageController {
     private TextField fieldLastName;
     @FXML
     private TextField fieldAge;
-    @FXML
-    private TextField fieldSport;
 
     private TextField[] textFields;
 
@@ -57,7 +55,7 @@ public class ProfilePageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge, fieldSport};
+        textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
     }
 
     @FXML
@@ -93,7 +91,6 @@ public class ProfilePageController extends ContentPageController {
             temp.setLastName(fieldLastName.getText());
             temp.setGender(fieldGender.getText());
             temp.setCountry(fieldCountry.getText());
-            temp.setSport(fieldSport.getText());
             boolean updated = domainFacade.<IProfileService>getService(ServiceType.PROFILE).updateProfile(temp);
             //save data to server TODO
         } catch (ServiceNotFoundException | ClassCastException ex) {
