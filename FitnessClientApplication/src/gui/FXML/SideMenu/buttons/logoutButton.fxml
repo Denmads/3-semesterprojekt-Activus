@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.Font?>
 
-<Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="37.0" prefWidth="125.0" style="-fx-background-color: #e58245; -fx-background-radius: 30;" text="Text" textFill="WHITE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXML.SideMenu.buttons.LogoutButtonController">
+<Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="37.0" prefWidth="125.0" style="-fx-background-color: #e58245; -fx-background-radius: 30;" text="Text" textFill="WHITE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.SideMenu.buttons.LogoutButtonController">
    <font>
       <Font name="System Bold" size="16.0" />
    </font>

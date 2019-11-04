@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateUserPageController">
+   <children>
+      <VBox fx:id="inputBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" spacing="15.0" style="-fx-background-color: #000000;">
+         <children>
+            <Label text="New User" textFill="#b2b2b2">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="errorTxt" style="-fx-background-color: #ff6666; -fx-background-radius: 5;" text="Error" visible="false">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+               </padding>
+            </Label>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER" prefWidth="100.0" style="-fx-background-color: #ffffff55; -fx-background-radius: 5 0 0 5;">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" text="First name:" textFill="#cacaca">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <TextField fx:id="firstNameField" style="-fx-background-radius: 0 5 5 0;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER" style="-fx-background-color: #ffffff55; -fx-background-radius: 5 0 0 5;">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" text="Last name:" textFill="#cacaca" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <TextField fx:id="lastNameField" style="-fx-background-radius: 0 5 5 0;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER" style="-fx-background-color: #ffffff55; -fx-background-radius: 5 0 0 5;">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" text="Username:" textFill="#cacaca" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <TextField fx:id="usernameField" style="-fx-background-radius: 0 5 5 0;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER" style="-fx-background-color: #ffffff55; -fx-background-radius: 5 0 0 5;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" text="Password:" textFill="#cacaca" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <PasswordField fx:id="passwordField" style="-fx-background-radius: 0 5 5 0;" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox alignment="CENTER" style="-fx-background-color: #ffffff55; -fx-background-radius: 5 0 0 5;">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" text="Repeat:" textFill="#cacaca" VBox.vgrow="ALWAYS">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <PasswordField fx:id="passwordReField" style="-fx-background-radius: 0 5 5 0;" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#createNewUser" prefWidth="150.0" style="-fx-background-color: #e58245; -fx-background-radius: 15;" text="Create">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </VBox>
+      <Label fx:id="successLbl" style="-fx-background-color: #cccccc; -fx-background-radius: 15;" text="User created!" textAlignment="CENTER" visible="false">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </Label>
+   </children>
+</StackPane>

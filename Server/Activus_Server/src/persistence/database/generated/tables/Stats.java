@@ -16,7 +16,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -43,7 +43,7 @@ import persistence.database.generated.tables.records.StatsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Stats extends TableImpl<StatsRecord> {
 
-    private static final long serialVersionUID = -1693821193;
+    private static final long serialVersionUID = 59750537;
 
     /**
      * The reference instance of <code>public.stats</code>
@@ -97,6 +97,11 @@ public class Stats extends TableImpl<StatsRecord> {
      * The column <code>public.stats.date</code>.
      */
     public final TableField<StatsRecord, Date> DATE = createField(DSL.name("date"), org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
+
+    /**
+     * The column <code>public.stats.setid</code>.
+     */
+    public final TableField<StatsRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.stats</code> table reference
@@ -196,11 +201,11 @@ public class Stats extends TableImpl<StatsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Integer, Integer, Integer, Long, Integer, Integer, Integer, Date> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Integer, Integer, Integer, Long, Integer, Integer, Integer, Date, Integer> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

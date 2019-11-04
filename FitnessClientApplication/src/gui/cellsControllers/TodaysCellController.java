@@ -66,7 +66,7 @@ public class TodaysCellController extends ListCell<Exercise> {
 
         } else {
             exercise = item;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/listViewCells/TodayCell.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/TodayCell.fxml"));
         
             loader.setController(this);
             VBox parent = null;

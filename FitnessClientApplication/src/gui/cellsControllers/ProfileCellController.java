@@ -47,7 +47,7 @@ public class ProfileCellController extends ListCell<Profile> {
 
         } else {
             profile = item;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/FXML/listViewCells/ProfileCell.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/ProfileCell.fxml"));
 
             loader.setController(this);
             HBox parrent = null;

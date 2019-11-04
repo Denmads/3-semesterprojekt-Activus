@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -91,6 +92,28 @@ public class LoginPageController implements Initializable {
             window.setScene(scene);
         } catch (IOException ex) {
             showAlert("Error!", "An Error occured: " + ex.getMessage());
+        }
+    }
+
+    @FXML
+    private void openNewUserPage(ActionEvent event) {
+        
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/CreateUserPage.fxml"));
+            Parent root = loader.load();
+            
+            CreateUserPageController controller = loader.getController();
+            controller.setFacade(domainFacade);
+            
+            Stage stage = new Stage();
+            controller.setStage(stage);
+            stage.setTitle("New User");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
