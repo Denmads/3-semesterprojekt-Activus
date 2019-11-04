@@ -20,5 +20,5 @@ public abstract class ContentPageController implements Initializable {
         onContentInitialize();
     }
     
-    public abstract void onContentInitialize ();
+    public void onContentInitialize () {};
 }
