@@ -17,5 +17,8 @@ public abstract class ContentPageController implements Initializable {
     
     public void setDomainFacade (DomainFacade facade) {
         domainFacade = facade;
+        onContentInitialize();
     }
+    
+    public abstract void onContentInitialize ();
 }
