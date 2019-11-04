@@ -45,7 +45,7 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
             byte[] salt = PasswordTool.generateSalt();
             byte[] hashedPassword = PasswordTool.hashPassword(password, salt);
             int loginId = database.insertInto(LOGIN).columns(LOGIN.USERNAME, LOGIN.HASH_PASSWORD, LOGIN.PASSWORD_SALT).values(username, hashedPassword, salt).returning(LOGIN.ID).fetchOne().getValue(LOGIN.ID);
-            database.insertInto(PROFILE).columns(PROFILE.LOGINID, PROFILE.FIRST_NAME, PROFILE.LAST_NAME).values(loginId, firstName, lastName).execute();
+            database.insertInto(PROFILE).columns(PROFILE.LOGIN_ID, PROFILE.FIRST_NAME, PROFILE.LAST_NAME).values(loginId, firstName, lastName).execute();
             executed = true;
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {

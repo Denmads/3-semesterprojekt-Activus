@@ -14,7 +14,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row2;
+import org.jooq.Row3;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -41,7 +41,7 @@ import persistence.database.generated.tables.records.TrainingProgramExerciseReco
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TrainingProgramExercise extends TableImpl<TrainingProgramExerciseRecord> {
 
-    private static final long serialVersionUID = -1668302692;
+    private static final long serialVersionUID = 22305340;
 
     /**
      * The reference instance of <code>public.training_program_exercise</code>
@@ -65,6 +65,11 @@ public class TrainingProgramExercise extends TableImpl<TrainingProgramExerciseRe
      * The column <code>public.training_program_exercise.training_programid</code>.
      */
     public final TableField<TrainingProgramExerciseRecord, Integer> TRAINING_PROGRAMID = createField(DSL.name("training_programid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>public.training_program_exercise.setid</code>.
+     */
+    public final TableField<TrainingProgramExerciseRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.training_program_exercise</code> table reference
@@ -159,11 +164,11 @@ public class TrainingProgramExercise extends TableImpl<TrainingProgramExerciseRe
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, Integer> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<Integer, Integer, Integer> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 }
