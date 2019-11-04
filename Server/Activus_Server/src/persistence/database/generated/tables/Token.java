@@ -12,15 +12,18 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
+import persistence.database.generated.Indexes;
 import persistence.database.generated.Keys;
 import persistence.database.generated.Public;
 import persistence.database.generated.tables.records.TokenRecord;
@@ -39,7 +42,7 @@ import persistence.database.generated.tables.records.TokenRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Token extends TableImpl<TokenRecord> {
 
-    private static final long serialVersionUID = 380650339;
+    private static final long serialVersionUID = 2100108051;
 
     /**
      * The reference instance of <code>public.token</code>
@@ -100,6 +103,21 @@ public class Token extends TableImpl<TokenRecord> {
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.<Index>asList(Indexes.TOKEN_PKEY);
+    }
+
+    @Override
+    public UniqueKey<TokenRecord> getPrimaryKey() {
+        return Keys.TOKEN_PKEY;
+    }
+
+    @Override
+    public List<UniqueKey<TokenRecord>> getKeys() {
+        return Arrays.<UniqueKey<TokenRecord>>asList(Keys.TOKEN_PKEY);
     }
 
     @Override
