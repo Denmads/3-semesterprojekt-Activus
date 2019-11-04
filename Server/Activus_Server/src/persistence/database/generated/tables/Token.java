@@ -12,18 +12,15 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
-import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row2;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
-import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
-import persistence.database.generated.Indexes;
 import persistence.database.generated.Keys;
 import persistence.database.generated.Public;
 import persistence.database.generated.tables.records.TokenRecord;
@@ -42,7 +39,7 @@ import persistence.database.generated.tables.records.TokenRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Token extends TableImpl<TokenRecord> {
 
-    private static final long serialVersionUID = 152303967;
+    private static final long serialVersionUID = 380650339;
 
     /**
      * The reference instance of <code>public.token</code>
@@ -58,14 +55,14 @@ public class Token extends TableImpl<TokenRecord> {
     }
 
     /**
-     * The column <code>public.token.loginid</code>.
-     */
-    public final TableField<TokenRecord, Integer> LOGINID = createField(DSL.name("loginid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
      * The column <code>public.token.token</code>.
      */
     public final TableField<TokenRecord, UUID> TOKEN_ = createField(DSL.name("token"), org.jooq.impl.SQLDataType.UUID.nullable(false), this, "");
+
+    /**
+     * The column <code>public.token.loginid</code>.
+     */
+    public final TableField<TokenRecord, Integer> LOGINID = createField(DSL.name("loginid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.token</code> table reference
@@ -106,27 +103,12 @@ public class Token extends TableImpl<TokenRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.TOKEN_PKEY);
-    }
-
-    @Override
-    public UniqueKey<TokenRecord> getPrimaryKey() {
-        return Keys.TOKEN_PKEY;
-    }
-
-    @Override
-    public List<UniqueKey<TokenRecord>> getKeys() {
-        return Arrays.<UniqueKey<TokenRecord>>asList(Keys.TOKEN_PKEY);
-    }
-
-    @Override
     public List<ForeignKey<TokenRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<TokenRecord, ?>>asList(Keys.TOKEN__FKTOKEN85612);
+        return Arrays.<ForeignKey<TokenRecord, ?>>asList(Keys.TOKEN__FKTOKEN86604);
     }
 
     public Login login() {
-        return new Login(this, Keys.TOKEN__FKTOKEN85612);
+        return new Login(this, Keys.TOKEN__FKTOKEN86604);
     }
 
     @Override
@@ -160,7 +142,7 @@ public class Token extends TableImpl<TokenRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Integer, UUID> fieldsRow() {
+    public Row2<UUID, Integer> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 }

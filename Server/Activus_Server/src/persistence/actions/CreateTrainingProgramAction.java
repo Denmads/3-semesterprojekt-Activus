@@ -29,13 +29,13 @@ public class CreateTrainingProgramAction extends IDatabaseAction<Boolean> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        database.insertInto(TRAINING_PROGRAM).columns(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).values(ownerID,name,description).execute();
+        //database.insertInto(TRAINING_PROGRAM).columns(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).values(ownerID,name,description).execute();
         executed = true;
         
-        Record1<Integer> res = database.select(TRAINING_PROGRAM.ID).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.OWNERID.eq(ownerID)).and(TRAINING_PROGRAM.NAME.eq(name)).and(TRAINING_PROGRAM.DESCRIPTION.eq(description)).fetchAny();
-        if(res.get(TRAINING_PROGRAM.ID) > -1){
-            result = true;
-        }
+//        Record1<Integer> res = database.select(TRAINING_PROGRAM.ID).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.OWNERID.eq(ownerID)).and(TRAINING_PROGRAM.NAME.eq(name)).and(TRAINING_PROGRAM.DESCRIPTION.eq(description)).fetchAny();
+//        if(res.get(TRAINING_PROGRAM.ID) > -1){
+//            result = true;
+//        }
     }
 
     @Override
