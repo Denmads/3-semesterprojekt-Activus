@@ -1,12 +1,12 @@
-package domain.serviceInterfaces;
+package Domain.serviceInterfaces;
 
-import Models.Exercise;
+import Domain.trainingScheme.Exercise;
 import Models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
-import layerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 import java.util.List;
 
 
@@ -31,6 +31,8 @@ public abstract class IProfileService extends IService {
 
     public abstract List<Profile> search(String searchString, SearchType searchType);
 
+    public abstract Profile getProfile(int profileID);
+
     public abstract boolean updateProfile(Profile newProfileInfo);
 
     public abstract boolean updateProfilePassWord(String newPassword);
@@ -50,7 +52,5 @@ public abstract class IProfileService extends IService {
     public abstract int setStats(Exercise exercise);
 
     public abstract boolean removeStats(int statsID);
-    
-    public abstract List<Exercise> getCurrentStats(int ProfileID);
 
 }

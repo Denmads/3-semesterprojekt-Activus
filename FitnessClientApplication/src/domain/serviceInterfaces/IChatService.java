@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain.serviceInterfaces;
+package Domain.serviceInterfaces;
 
-import domain.chat.Message;
+import Domain.chat.Message;
 import Enums.ServiceType;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
-import layerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 
 /**
  * The service provinding methods related to chatting with buddies

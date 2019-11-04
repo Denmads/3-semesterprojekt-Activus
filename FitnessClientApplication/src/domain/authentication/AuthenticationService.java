@@ -1,10 +1,12 @@
-package domain.authentication;
+package Domain.authentication;
 
 
-import domain.chat.ChatService;
+import Domain.trainingScheme.TrainingSchemeService;
+import Domain.serviceInterfaces.IProfileService;
+import Models.Response;
 import Models.Profile;
-import domain.profile.ProfileService;
-import domain.serviceInterfaces.IAuthenticationService;
+import Domain.profile.ProfileService;
+import Domain.serviceInterfaces.IAuthenticationService;
 import Models.Request;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
@@ -12,11 +14,10 @@ import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
 import Models.Response;
-import domain.trainingScheme.TrainingSchemeService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -64,7 +65,8 @@ public class AuthenticationService extends IAuthenticationService {
                 //Adding ProfileService to the domainFacade.
                 domainFacade.addService(ServiceType.PROFILE, PS);
                 
-                createServices();
+                TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
+                domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
                 
                 return true;
                 
@@ -79,28 +81,22 @@ public class AuthenticationService extends IAuthenticationService {
         
         return false;
     }
-    
-    private void createServices () {
-        TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
-        domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
-
-        ChatService chatService = new ChatService(communicationLayer, domainFacade);
-        domainFacade.addService(ServiceType.CHAT, chatService);
-    }
 
     @Override
     public void logout() {
         try {
             Request request = createRequest(RequestType.LOGOUT);
-            request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
             communicationLayer.sendRequest(request);
+            credentials = null;
+            
+            domainFacade.removeAllServices();
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public String createAccount(NewAccountInfo accountInfo) {
+    public boolean createAccount(NewAccountInfo accountInfo) {
         try {
             Request request = createRequest(RequestType.CREATE_NEW_USER);
             request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.getFirstName());
@@ -111,15 +107,17 @@ public class AuthenticationService extends IAuthenticationService {
             Response response = communicationLayer.sendRequest(request);
             
             try {
-                return (String)response.getArgument(ResponseArgumentName.ERRORS);
+                return (boolean)response.getArgument(ResponseArgumentName.SUCCESS);
             } catch (ArgumentNotFoundException ex) {
-                return "";
+                Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            return false;
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return "Error in system: Service not found!";
+        return false;
     }
 
     @Override

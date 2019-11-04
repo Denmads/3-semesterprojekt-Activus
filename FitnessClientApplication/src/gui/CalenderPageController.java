@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 
 /**
  * FXML Controller class
  *
  * @author steff
  */
-public class CalenderPageController extends ContentPageController {
+public class CalenderPageController extends PageHandler implements Initializable {
 
     /**
      * Initializes the controller class.

@@ -1,12 +1,12 @@
-package domain;
+package Domain;
 
 import Enums.ServiceType;
-import layerInterfaces.IRequestDelegater;
+import LayerInterfaces.IRequestDelegater;
 import Models.Request;
 import Models.Response;
 import persistence.DatabaseFacade;
+import persistence.IDatabaseAction;
 import java.util.HashMap;
-import layerInterfaces.IDatabaseFacade;
 import persistence.actions.AuthenticateTokenAction;
 
 
@@ -19,7 +19,7 @@ public class RequestDelegater implements IRequestDelegater{
 
     private HashMap<ServiceType, IRequestHandler> requestHandlers;
     
-    private IDatabaseFacade databaseFacade;
+    private DatabaseFacade databaseFacade;
 
     public RequestDelegater() {
         databaseFacade = new DatabaseFacade();
@@ -41,7 +41,7 @@ public class RequestDelegater implements IRequestDelegater{
             if (authenticateRequest(request)) {
                 response = requestHandlers.get(request.getServiceType()).handleRequest(request);
             } else {
-                //TODO
+                //TODO: Create response object with Authentiation Error
             }
         }
 
@@ -53,9 +53,5 @@ public class RequestDelegater implements IRequestDelegater{
         databaseFacade.execute(authenticationAction);
         
         return (authenticationAction.hasResult() ? authenticationAction.getResult() : false);
-    }
-    
-    public IDatabaseFacade getDatabaseFacade () {
-        return databaseFacade;
     }
 }

@@ -1,6 +1,6 @@
-package layerInterfaces;
+package LayerInterfaces;
 
-import domain.serviceInterfaces.IAuthenticationService;
+import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestType;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;

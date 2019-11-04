@@ -1,7 +1,7 @@
 package Communication;
 
 import Exceptions.ConfigFileNotFound;
-import layerInterfaces.ICommunicationFacade;
+import LayerInterfaces.ICommunicationFacade;
 import Models.Request;
 import Models.Response;
 import java.io.File;
@@ -62,8 +62,10 @@ public class CommunicationFacade implements ICommunicationFacade {
 
         try {
             openConnection();
+
             serverRequestStream.writeObject(request);
             response = serverResponseStream.readObject();
+
             closeConnection();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(CommunicationFacade.class.getName()).log(Level.SEVERE, null, ex);

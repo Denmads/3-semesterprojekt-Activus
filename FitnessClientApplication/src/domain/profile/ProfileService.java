@@ -1,23 +1,24 @@
-package domain.profile;
+package Domain.profile;
 
 import Models.Profile;
-import Models.Exercise;
+import Domain.serviceInterfaces.IProfileService;
+import Domain.DomainFacade;
+import Domain.trainingScheme.Exercise;
+import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Exceptions.*;
 import Models.Request;
 import Models.Response;
-import domain.serviceInterfaces.IAuthenticationService;
-import domain.serviceInterfaces.IProfileService;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
 
 /**
  *
@@ -48,6 +49,12 @@ public class ProfileService extends IProfileService {
         }
 
         return profiles;
+    }
+
+    @Override
+    public Profile getProfile(int profileID) {
+        return (Profile) returnResponsObject(RequestType.GET_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, profileID);
+        
     }
 
     @Override
@@ -131,11 +138,6 @@ public class ProfileService extends IProfileService {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
-    }
-
-    @Override
-    public List<Exercise> getCurrentStats(int ProfileID) {
-        return (List<Exercise>) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
     }
     
  

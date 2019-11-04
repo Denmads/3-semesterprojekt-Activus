@@ -1,7 +1,7 @@
-package communication;
+package Communication;
 
-import domain.RequestDelegater;
-import layerInterfaces.IRequestDelegater;
+import Domain.RequestDelegater;
+import LayerInterfaces.IRequestDelegater;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,8 +21,8 @@ public class TcpServer {
     
     private IRequestDelegater requestDelegater;
 
-    public void start(RequestDelegater delegater) {
-        requestDelegater = delegater;
+    public void start() {
+        requestDelegater = new RequestDelegater();
 
         try {
             //Opening a connection on the chosen PORT.

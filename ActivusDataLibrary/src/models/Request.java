@@ -27,8 +27,6 @@ public class Request implements Serializable{
         arguments = new HashMap<>();
     }
 
-    
-
     public ServiceType getServiceType () {
         return serviceType;
     }

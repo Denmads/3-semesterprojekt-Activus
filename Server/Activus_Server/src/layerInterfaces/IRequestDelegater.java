@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package layerInterfaces;
+package LayerInterfaces;
 
 import Models.Request;
 import Models.Response;

@@ -1,11 +1,11 @@
-package domain.serviceInterfaces;
+package Domain.serviceInterfaces;
 
-import domain.authentication.NewAccountInfo;
+import Domain.authentication.NewAccountInfo;
 import Enums.RequestType;
 import Enums.ServiceType;
-import layerInterfaces.IService;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 import Models.CredentialsContainer;
 import Models.Request;
 
@@ -27,7 +27,7 @@ public abstract class IAuthenticationService extends IService {
 
     public abstract void logout();
 
-    public abstract String createAccount(NewAccountInfo accountInfo);
+    public abstract boolean createAccount(NewAccountInfo accountInfo);
 
     public abstract Request createServerRequest(ServiceType serviceType, RequestType type);
 }

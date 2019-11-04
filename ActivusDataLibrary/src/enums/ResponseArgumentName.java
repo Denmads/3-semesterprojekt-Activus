@@ -18,8 +18,6 @@ public enum ResponseArgumentName  implements Serializable {
     TRAININGPROGRAM,
     STATS,
     CHAT_HISTORY,
-    EXERCISE, 
-    MESSAGE,
-    ERRORS
+    EXERCISE
 }
 

@@ -3,23 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain.chat;
+package Domain.chat;
 
-import domain.profile.ProfileService;
+import Domain.profile.ProfileService;
+import Domain.serviceInterfaces.IAuthenticationService;
+import Domain.serviceInterfaces.IChatService;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
-import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
 import Models.Request;
 import Models.Response;
-import domain.serviceInterfaces.IChatService;
-import domain.serviceInterfaces.IProfileService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
 
 /**
  *
@@ -37,8 +36,7 @@ public class ChatService extends IChatService {
         
         try {
             Request request = createRequest(RequestType.SEND_MESSAGE);
-            request.addArgument(RequestArgumentName.SENDER_ID, domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-            request.addArgument(RequestArgumentName.RECIVER_ID, buddyProfileId);
+            request.addArgument(RequestArgumentName.PROFILE_ID, buddyProfileId);
             request.addArgument(RequestArgumentName.MESSAGE, message);
             communicationLayer.sendRequest(request);
         } catch (ServiceNotFoundException ex) {

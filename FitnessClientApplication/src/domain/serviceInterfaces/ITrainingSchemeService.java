@@ -1,10 +1,10 @@
-package domain.serviceInterfaces;
+package Domain.serviceInterfaces;
 
-import Models.Exercise;
+import Domain.trainingScheme.Exercise;
 import Enums.ServiceType;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
-import layerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 import java.util.List;
 
 /**
@@ -29,6 +29,6 @@ public abstract class ITrainingSchemeService extends IService{
     
     public abstract List<Exercise> loadAllExercise();
     
-    public abstract void exerciseForTodayDone(Exercise exercise);
+    
     
 }

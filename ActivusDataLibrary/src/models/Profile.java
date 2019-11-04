@@ -52,6 +52,10 @@ public class Profile implements Serializable {
         this.username = Username;
     }
 
+    public int getProfileID() {
+        return profileId;
+    }
+
     public int getProfileId() {
         return profileId;
     }

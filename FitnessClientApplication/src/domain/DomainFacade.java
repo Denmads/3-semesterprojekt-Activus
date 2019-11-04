@@ -1,12 +1,13 @@
-package domain;
+package Domain;
 
+import Domain.authentication.AuthenticationService;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
+import LayerInterfaces.IDomainFacade;
+import LayerInterfaces.IService;
 import java.util.HashMap;
-import domain.authentication.AuthenticationService;
-import layerInterfaces.ICommunicationFacade;
-import layerInterfaces.IDomainFacade;
-import layerInterfaces.IService;
+import LayerInterfaces.ICommunicationFacade;
+import java.util.Map;
 
 /**
  * Providing access to the different services in the domain layer
@@ -38,6 +39,16 @@ public class DomainFacade implements IDomainFacade{
     @Override
     public void addService(ServiceType type, IService service) {
         services.put(type, service);
+    }
+
+    @Override
+    public void removeAllServices() {
+        for (Map.Entry<ServiceType, IService> entry : services.entrySet()) {
+            if (entry.getKey() != ServiceType.AUTHENTICATION) {
+                services.remove(entry.getKey());
+            }
+            
+        }
     }
     
 }
