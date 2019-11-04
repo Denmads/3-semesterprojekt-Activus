@@ -29,7 +29,7 @@ public class IsUsernameUniqueAction extends IDatabaseAction<Boolean>{
     protected void execute(DSLContext database) throws SQLException {
         int res = database.selectCount().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetchOne().value1();
         
-        result = res > 0;
+        result = res == 0;
         exec = true;
     }
 

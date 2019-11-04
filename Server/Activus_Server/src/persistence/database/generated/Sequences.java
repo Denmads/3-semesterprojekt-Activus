@@ -54,9 +54,14 @@ public class Sequences {
     public static final Sequence<Long> QUESTION_FOR_BUDDYS_ID_SEQ = new SequenceImpl<Long>("question_for_buddys_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 
     /**
-     * The sequence <code>public.schedule_id_seq</code>
+     * The sequence <code>public.scheme_id_seq</code>
      */
-    public static final Sequence<Long> SCHEDULE_ID_SEQ = new SequenceImpl<Long>("schedule_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+    public static final Sequence<Long> SCHEME_ID_SEQ = new SequenceImpl<Long>("scheme_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
+
+    /**
+     * The sequence <code>public.Set_id_seq</code>
+     */
+    public static final Sequence<Long> SET_ID_SEQ = new SequenceImpl<Long>("Set_id_seq", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT.nullable(false));
 
     /**
      * The sequence <code>public.stats_id_seq</code>

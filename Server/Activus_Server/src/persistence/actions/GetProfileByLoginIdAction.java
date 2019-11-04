@@ -31,7 +31,7 @@ public class GetProfileByLoginIdAction extends IDatabaseAction<Profile> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        int id = database.select(PROFILE.ID).from(PROFILE).where(PROFILE.LOGINID.eq(loginID)).fetchOne().getValue(PROFILE.ID);
+        int id = database.select(PROFILE.ID).from(PROFILE).where(PROFILE.LOGIN_ID.eq(loginID)).fetchOne().getValue(PROFILE.ID);
         
         ArrayList<Integer> ids = new ArrayList<>();
         ids.add(id);

@@ -43,6 +43,7 @@ public class AuthenticationRequestHandler extends IRequestHandler {
                 if (uniqueAction.getResult()) {
                     CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
                     databaseFacade.execute(cnua);
+                    response.addArgument(ResponseArgumentName.ERRORS, "");
                 }
                 else {
                     response.addArgument(ResponseArgumentName.ERRORS, "Username already exists!");

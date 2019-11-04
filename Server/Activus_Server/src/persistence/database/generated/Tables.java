@@ -8,15 +8,19 @@ import javax.annotation.Generated;
 
 import persistence.database.generated.tables.Buddys;
 import persistence.database.generated.tables.Exercise;
+import persistence.database.generated.tables.ExerciseSet;
 import persistence.database.generated.tables.Goal;
 import persistence.database.generated.tables.Login;
 import persistence.database.generated.tables.Message;
 import persistence.database.generated.tables.Profile;
 import persistence.database.generated.tables.QuestionForBuddys;
-import persistence.database.generated.tables.Schedule;
-import persistence.database.generated.tables.ScheduleProfile;
-import persistence.database.generated.tables.ScheduleTrainingProgram;
+import persistence.database.generated.tables.Scheme;
+import persistence.database.generated.tables.SchemeProfile;
+import persistence.database.generated.tables.SchemeTrainingProgram;
+import persistence.database.generated.tables.Set;
+import persistence.database.generated.tables.SetTrainingProgramExercise;
 import persistence.database.generated.tables.Stats;
+import persistence.database.generated.tables.StatsSet;
 import persistence.database.generated.tables.Token;
 import persistence.database.generated.tables.TrainingProgram;
 import persistence.database.generated.tables.TrainingProgramExercise;
@@ -47,6 +51,11 @@ public class Tables {
     public static final Exercise EXERCISE = Exercise.EXERCISE;
 
     /**
+     * The table <code>public.exercise_set</code>.
+     */
+    public static final ExerciseSet EXERCISE_SET = ExerciseSet.EXERCISE_SET;
+
+    /**
      * The table <code>public.goal</code>.
      */
     public static final Goal GOAL = Goal.GOAL;
@@ -72,24 +81,39 @@ public class Tables {
     public static final QuestionForBuddys QUESTION_FOR_BUDDYS = QuestionForBuddys.QUESTION_FOR_BUDDYS;
 
     /**
-     * The table <code>public.schedule</code>.
+     * The table <code>public.scheme</code>.
      */
-    public static final Schedule SCHEDULE = Schedule.SCHEDULE;
+    public static final Scheme SCHEME = Scheme.SCHEME;
 
     /**
-     * The table <code>public.schedule_profile</code>.
+     * The table <code>public.scheme_profile</code>.
      */
-    public static final ScheduleProfile SCHEDULE_PROFILE = ScheduleProfile.SCHEDULE_PROFILE;
+    public static final SchemeProfile SCHEME_PROFILE = SchemeProfile.SCHEME_PROFILE;
 
     /**
-     * The table <code>public.schedule_training_program</code>.
+     * The table <code>public.scheme_training_program</code>.
      */
-    public static final ScheduleTrainingProgram SCHEDULE_TRAINING_PROGRAM = ScheduleTrainingProgram.SCHEDULE_TRAINING_PROGRAM;
+    public static final SchemeTrainingProgram SCHEME_TRAINING_PROGRAM = SchemeTrainingProgram.SCHEME_TRAINING_PROGRAM;
+
+    /**
+     * The table <code>public.Set</code>.
+     */
+    public static final Set SET = Set.SET;
+
+    /**
+     * The table <code>public.set_training_program_exercise</code>.
+     */
+    public static final SetTrainingProgramExercise SET_TRAINING_PROGRAM_EXERCISE = SetTrainingProgramExercise.SET_TRAINING_PROGRAM_EXERCISE;
 
     /**
      * The table <code>public.stats</code>.
      */
     public static final Stats STATS = Stats.STATS;
+
+    /**
+     * The table <code>public.stats_set</code>.
+     */
+    public static final StatsSet STATS_SET = StatsSet.STATS_SET;
 
     /**
      * The table <code>public.token</code>.

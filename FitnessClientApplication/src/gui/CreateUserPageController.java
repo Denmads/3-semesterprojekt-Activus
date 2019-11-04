@@ -13,14 +13,20 @@ import domain.serviceInterfaces.IAuthenticationService;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -47,6 +53,10 @@ public class CreateUserPageController implements Initializable {
     private PasswordField passwordReField;
     
     private ArrayList<TextField> fields;
+    @FXML
+    private VBox inputBox;
+    @FXML
+    private Label successLbl;
     
     /**
      * Initializes the controller class.
@@ -88,7 +98,19 @@ public class CreateUserPageController implements Initializable {
                 String errors = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).createAccount(newInfo);
                 
                 if (errors.equals("")) {
-                    stage.close();
+                    inputBox.setEffect(new GaussianBlur(5));
+                    inputBox.setDisable(true);
+                    successLbl.setVisible(true);
+                    
+                    Timer timer = new Timer(true);
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Platform.runLater(() -> {
+                                stage.close();
+                            });
+                        }
+                    }, 2000);
                 }
                 else {
                     setErrorText(errors);

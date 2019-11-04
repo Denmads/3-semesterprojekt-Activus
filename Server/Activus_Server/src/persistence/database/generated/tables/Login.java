@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.LoginRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Login extends TableImpl<LoginRecord> {
 
-    private static final long serialVersionUID = -1526735879;
+    private static final long serialVersionUID = -1241392703;
 
     /**
      * The reference instance of <code>public.login</code>
@@ -117,7 +117,7 @@ public class Login extends TableImpl<LoginRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.LOGIN_ID, Indexes.LOGIN_PKEY, Indexes.LOGIN_USERNAME);
+        return Arrays.<Index>asList(Indexes.LOGIN_HASH_PASSWORD, Indexes.LOGIN_ID, Indexes.LOGIN_PASSWORD_SALT, Indexes.LOGIN_PKEY, Indexes.LOGIN_USERNAME);
     }
 
     @Override
