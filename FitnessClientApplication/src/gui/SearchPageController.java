@@ -5,7 +5,6 @@ import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import Models.Exercise;
 import Models.Profile;
-import domain.profile.ProfileService;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.ProfileCellController;
@@ -86,8 +85,6 @@ public class SearchPageController extends ContentPageController {
         //This shit doesn't work. Loading domainFacade into initialize.
         loadAllExercises();
     }
-    
-    
 
     @FXML
     private void handleSearchProfileButtonAction(ActionEvent event) {
@@ -157,10 +154,17 @@ public class SearchPageController extends ContentPageController {
             Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        boolean buddyCheck = true;
+
         //Going through the current users buddies to see if the user already has the selected profile as buddy.
         for (int i = 0; i < currentUserBuddies.length; i++) {
-            if (userid != currentUserBuddies[i]) {
+            if (userid == currentUserBuddies[i]) {
+                returnLabel.setText("This user is already your buddy");
+                buddyCheck = false;
+            }
 
+            //If the user doesn't have the selected profile as a buddy, a buddy request is sent.
+            if (buddyCheck) {
                 boolean request = false;
 
                 try {
@@ -177,9 +181,6 @@ public class SearchPageController extends ContentPageController {
                 } else if (request == true) {
                     returnLabel.setText("Buddy request sent");
                 }
-
-            } else if (userid == currentUserBuddies[i]) {
-                returnLabel.setText("This users is already your buddy");
             }
 
         }
@@ -187,14 +188,14 @@ public class SearchPageController extends ContentPageController {
     }
 
     private void loadBoxes() {
-        //Search Profile
+        //Search Profile-----------------------------
         genderBox.getItems().add("Male");
         genderBox.getItems().add("Female");
 
         for (int i = 15; i < 100; i++) {
             ageBox.getItems().add(i);
         }
-        //Search Exercise
+        //Search Exercise----------------------------
         exerciseTypeBox.getItems().add("Chest");
         exerciseTypeBox.getItems().add("Bicep");
         exerciseTypeBox.getItems().add("Tricep");
@@ -210,7 +211,7 @@ public class SearchPageController extends ContentPageController {
         //Removing all exercises from initialization.
         exerciseListField.getItems().clear();
 
-        //Ensuring the label &  is invisible.
+        //Ensuring that the label is invisible.
         resultLabel.setVisible(false);
 
         String type = exerciseTypeBox.getValue();
