@@ -42,11 +42,10 @@ public class FXMain extends Application {
         CommunicationFacade communicationFacade = new CommunicationFacade();
         domainFacade = new DomainFacade(communicationFacade);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/StatsPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/LoginPage.fxml"));
         Parent root = loader.load();
-        //LoginPageController controller = loader.getController();
-        StatsPageController controller = loader.getController();
-        //controller.setObjects(stage, domainFacade);
+        LoginPageController controller = loader.getController();     
+        controller.setObjects(stage, domainFacade);
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
 

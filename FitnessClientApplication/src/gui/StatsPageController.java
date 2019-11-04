@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,31 +50,42 @@ public class StatsPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        choseBoks.getItems().add(new Exercise(1, "pusups",0 ).getName());
-//        choseBoks.getItems().add(new Exercise(2, "pullups",0 ).getName());
+        choseBoks.getItems().add(new Exercise(1, "pusups",0 ).getName());
+        choseBoks.getItems().add(new Exercise(2, "pullups",0 ).getName());
         // creating choisboks with users exercises
-        try {
-            domainFacade = new DomainFacade(new CommunicationFacade());
-           // exerciseList = FXCollections.observableArrayList(domainFacade.<IProfileService>getService(ServiceType.TRAININGSCHEME).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId()));
-           exerciseList = FXCollections.observableArrayList(domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise());
-            if (!exerciseList.isEmpty()) {
-                exerciseList.forEach((e) -> {
-                    choseBoks.getItems().add(e.getName());
-                });
-                
-            }
+//        try {
+//            //domainFacade = new DomainFacade(new CommunicationFacade());
+//           //exerciseList = FXCollections.observableArrayList(domainFacade.<IProfileService>getService(ServiceType.TRAININGSCHEME).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId()));
+//           exerciseList = FXCollections.observableArrayList(domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise());
+//            if (!exerciseList.isEmpty()) {
+//                exerciseList.forEach((e) -> {
+//                    System.out.println(e.toString());
+//                
+////                    choseBoks.getItems().add(e.getName());
+//                });
+//                
+//            }else{
+//                System.out.println("no exercises in db");
+//            }
+            choseBoks.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+               @Override
+               public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                   exerciseName.setText(choseBoks.getItems().get(newValue.intValue()) );
+                   
+               }
+           });
 
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConfigFileNotFound ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+//        } catch (ServiceNotFoundException ex) {
+//            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassCastException ex) {
+//            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        
+        
+        
+        
     }
+    
 
 }
