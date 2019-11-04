@@ -5,6 +5,8 @@
  */
 package layerInterfaces;
 
+import java.sql.SQLException;
+import persistence.DatabaseConnection;
 import persistence.IDatabaseAction;
 
 /**
@@ -12,6 +14,12 @@ import persistence.IDatabaseAction;
  *
  * @author madsh
  */
-public interface IDatabaseFacade {
-    public void execute(IDatabaseAction query);
+public abstract class IDatabaseFacade {
+    protected DatabaseConnection connectionPool;
+    
+    public IDatabaseFacade () {
+        connectionPool = new DatabaseConnection();
+    }
+    
+    public abstract void execute(IDatabaseAction query);
 }

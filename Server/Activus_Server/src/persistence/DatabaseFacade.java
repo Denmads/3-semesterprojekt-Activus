@@ -12,13 +12,7 @@ import org.jooq.impl.DSL;
  *
  * @author madsh
  */
-public class DatabaseFacade implements IDatabaseFacade{
-
-    DatabaseConnection connectionPool;
-    
-    public DatabaseFacade () {
-        connectionPool = new DatabaseConnection();
-    }
+public class DatabaseFacade extends IDatabaseFacade{
     
     @Override
     public void execute(IDatabaseAction query) {
@@ -28,6 +22,7 @@ public class DatabaseFacade implements IDatabaseFacade{
         try {
             DSLContext database = DSL.using(connectionPool.getConnection(), SQLDialect.POSTGRES);
             query.execute(database);
+            database.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseFacade.class.getName()).log(Level.SEVERE, null, ex);
         }
