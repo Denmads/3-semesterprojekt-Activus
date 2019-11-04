@@ -5,6 +5,7 @@ import domain.chat.ChatService;
 import Models.Profile;
 import domain.profile.ProfileService;
 import domain.serviceInterfaces.IAuthenticationService;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import Models.Request;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
@@ -65,6 +66,8 @@ public class AuthenticationService extends IAuthenticationService {
                 domainFacade.addService(ServiceType.PROFILE, PS);
                 
                 createServices();
+                
+                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise();
                 
                 return true;
                 

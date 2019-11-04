@@ -58,6 +58,7 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
                 break;
             case LOAD_ALL_EXERCISE:
                 GetAllExerciseAction allExerciseAction = new GetAllExerciseAction();
+                databaseFacade.execute(allExerciseAction);
                 response.addArgument(ResponseArgumentName.EXERCISE, allExerciseAction.getResult());
         }
         
