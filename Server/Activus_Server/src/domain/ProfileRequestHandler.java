@@ -14,6 +14,7 @@ import persistence.actions.UpdateUsernameAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
+import org.jooq.TableField;
 import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.SetStatsAction;
