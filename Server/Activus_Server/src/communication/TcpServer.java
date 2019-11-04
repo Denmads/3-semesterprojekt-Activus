@@ -21,8 +21,8 @@ public class TcpServer {
     
     private IRequestDelegater requestDelegater;
 
-    public void start() {
-        requestDelegater = new RequestDelegater();
+    public void start(RequestDelegater delegater) {
+        requestDelegater = delegater;
 
         try {
             //Opening a connection on the chosen PORT.

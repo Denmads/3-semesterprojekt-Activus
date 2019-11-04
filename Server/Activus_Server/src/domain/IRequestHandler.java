@@ -2,6 +2,7 @@ package domain;
 
 import Models.Request;
 import Models.Response;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 
 /**
@@ -11,9 +12,9 @@ import persistence.DatabaseFacade;
  */
 public abstract class IRequestHandler {
 
-    protected DatabaseFacade databaseFacade;
+    protected IDatabaseFacade databaseFacade;
 
-    public IRequestHandler(DatabaseFacade dbFacade) {
+    public IRequestHandler(IDatabaseFacade dbFacade) {
         databaseFacade = dbFacade;
     }
 
