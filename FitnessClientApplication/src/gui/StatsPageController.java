@@ -41,7 +41,7 @@ public class StatsPageController extends ContentPageController {
     @FXML
     private LineChart<Integer, Date> charid;
     @FXML
-    private ChoiceBox<String> choseBoks;
+    private ChoiceBox<Exercise> choseBoks;
     private ObservableList<Exercise> exerciseList;
     
     /**
@@ -50,8 +50,8 @@ public class StatsPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        choseBoks.getItems().add(new Exercise(1, "pusups",0 ).getName());
-        choseBoks.getItems().add(new Exercise(2, "pullups",0 ).getName());
+        choseBoks.getItems().add(new Exercise(1, "pusups",0 ));
+        choseBoks.getItems().add(new Exercise(2, "pullups",0 ));
         // creating choisboks with users exercises
 //        try {
 //            //domainFacade = new DomainFacade(new CommunicationFacade());
@@ -70,7 +70,8 @@ public class StatsPageController extends ContentPageController {
             choseBoks.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
                @Override
                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                   exerciseName.setText(choseBoks.getItems().get(newValue.intValue()) );
+                   Exercise exercise = choseBoks.getItems().get(newValue.intValue());
+                   exerciseName.setText( exercise.getName());
                    
                }
            });
