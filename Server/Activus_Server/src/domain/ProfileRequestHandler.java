@@ -78,8 +78,6 @@ public class ProfileRequestHandler extends IRequestHandler {
                     tableFields.add(PROFILE.GENDER);
                     changes.add(request.getArgument(RequestArgumentName.PROFILE_COUNTRY));
                     tableFields.add(PROFILE.COUNTRY);
-                    //changes.add(request.getArgument(RequestArgumentName.PROFILE_SPORT));
-                    //tableFields.add(PROFILE.SPORT);
 
                     UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), changes, tableFields);
                     databaseFacade.execute(upa);
