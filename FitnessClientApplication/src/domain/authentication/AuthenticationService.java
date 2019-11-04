@@ -100,7 +100,7 @@ public class AuthenticationService extends IAuthenticationService {
     }
 
     @Override
-    public boolean createAccount(NewAccountInfo accountInfo) {
+    public String createAccount(NewAccountInfo accountInfo) {
         try {
             Request request = createRequest(RequestType.CREATE_NEW_USER);
             request.addArgument(RequestArgumentName.FIRST_NAME, accountInfo.getFirstName());
@@ -111,17 +111,15 @@ public class AuthenticationService extends IAuthenticationService {
             Response response = communicationLayer.sendRequest(request);
             
             try {
-                return (boolean)response.getArgument(ResponseArgumentName.SUCCESS);
+                return (String)response.getArgument(ResponseArgumentName.ERRORS);
             } catch (ArgumentNotFoundException ex) {
-                Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
+                return "";
             }
-            
-            return false;
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return false;
+        return "Error in system: Service not found!";
     }
 
     @Override
