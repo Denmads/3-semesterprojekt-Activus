@@ -25,6 +25,7 @@ import persistence.database.generated.tables.Set;
 import persistence.database.generated.tables.SetTrainingProgramExercise;
 import persistence.database.generated.tables.Stats;
 import persistence.database.generated.tables.StatsSet;
+import persistence.database.generated.tables.Token;
 import persistence.database.generated.tables.TrainingProgram;
 import persistence.database.generated.tables.TrainingProgramExercise;
 import persistence.database.generated.tables.TraningsHours;
@@ -69,6 +70,7 @@ public class Indexes {
     public static final Index STATS_PKEY = Indexes0.STATS_PKEY;
     public static final Index STATS_PROFILEID = Indexes0.STATS_PROFILEID;
     public static final Index STATS_SET_PKEY = Indexes0.STATS_SET_PKEY;
+    public static final Index TOKEN_PKEY = Indexes0.TOKEN_PKEY;
     public static final Index TRAINING_PROGRAM_PKEY = Indexes0.TRAINING_PROGRAM_PKEY;
     public static final Index TRAINING_PROGRAM_EXERCISE_PKEY = Indexes0.TRAINING_PROGRAM_EXERCISE_PKEY;
     public static final Index TRANINGS_HOURS_PKEY = Indexes0.TRANINGS_HOURS_PKEY;
@@ -100,6 +102,7 @@ public class Indexes {
         public static Index STATS_PKEY = Internal.createIndex("stats_pkey", Stats.STATS, new OrderField[] { Stats.STATS.ID }, true);
         public static Index STATS_PROFILEID = Internal.createIndex("stats_profileid", Stats.STATS, new OrderField[] { Stats.STATS.PROFILEID }, false);
         public static Index STATS_SET_PKEY = Internal.createIndex("stats_set_pkey", StatsSet.STATS_SET, new OrderField[] { StatsSet.STATS_SET.STATSID, StatsSet.STATS_SET.SETID }, true);
+        public static Index TOKEN_PKEY = Internal.createIndex("token_pkey", Token.TOKEN, new OrderField[] { Token.TOKEN.LOGINID }, true);
         public static Index TRAINING_PROGRAM_PKEY = Internal.createIndex("training_program_pkey", TrainingProgram.TRAINING_PROGRAM, new OrderField[] { TrainingProgram.TRAINING_PROGRAM.ID }, true);
         public static Index TRAINING_PROGRAM_EXERCISE_PKEY = Internal.createIndex("training_program_exercise_pkey", TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE, new OrderField[] { TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.EXERCISEID, TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID }, true);
         public static Index TRANINGS_HOURS_PKEY = Internal.createIndex("tranings_hours_pkey", TraningsHours.TRANINGS_HOURS, new OrderField[] { TraningsHours.TRANINGS_HOURS.ID }, true);
