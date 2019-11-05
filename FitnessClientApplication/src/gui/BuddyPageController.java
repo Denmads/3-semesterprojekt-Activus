@@ -78,6 +78,5 @@ public class BuddyPageController extends ContentPageController {
                 }
             }
         });
-    }
-           
+    }           
 }

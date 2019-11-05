@@ -13,6 +13,7 @@ public class Exercise {
     private String name;
     private double time;
     private String Description;
+    private String type;
 
     private ArrayList<SetInfo> set;
 
@@ -22,14 +23,22 @@ public class Exercise {
     public void setID(int ID) {
         this.ID = ID;
     }
-    
-    
-    public Exercise(int ID, String name, double time) {
+
+    public Exercise(int ID, String name, double time, String type) {
         this.ID = ID;
         this.name = name;
         this.time = time;
         this.set = new ArrayList<>();
         this.Description = "no description";
+        this.type = type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getDescription() {
@@ -47,7 +56,7 @@ public class Exercise {
     public void setSet(ArrayList<SetInfo> set) {
         this.set = set;
     }
-    
+
     public int getID() {
         return ID;
     }
@@ -68,19 +77,16 @@ public class Exercise {
         this.time = time;
     }
 
-    public void addSetInfo (SetInfo info) {
+    public void addSetInfo(SetInfo info) {
         set.add(info);
     }
-    
-    public void removeSetInfo (int index) {
+
+    public void removeSetInfo(int index) {
         set.remove(index);
     }
 
     public ArrayList<SetInfo> getSetInfo() {
         return set;
     }
-    
-    
-    
 
 }

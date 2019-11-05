@@ -11,12 +11,31 @@ import java.util.ArrayList;
  */
 public class TrainingProgram {
 
+    private String name;
+    private String description;
+    
     private ArrayList<Exercise> exercises;
 
     public TrainingProgram() {
         exercises = new ArrayList();
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public void addExercise(Exercise exercise) {
         this.exercises.add(exercise);
     }
@@ -28,5 +47,12 @@ public class TrainingProgram {
     public void removeExercise(Exercise exercise) {
         this.exercises.remove(exercise);
     }
-
+    
+    public void removeExerciseAtIndex(int index) {
+        this.exercises.remove(index);
+    }
+    
+    public ArrayList<Exercise> getExercises () {
+        return exercises;
+    }
 }

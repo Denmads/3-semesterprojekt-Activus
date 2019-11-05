@@ -12,7 +12,7 @@ import Models.Request;
 import Models.Response;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.ICommunicationFacade;
@@ -72,41 +72,47 @@ public class TrainingSchemeService extends ITrainingSchemeService {
         return false;
     }
 
-   private Object returnResponseObject(RequestType requestType,ResponseArgumentName responseArguementName){
-        Object object=null;
+    private Object returnResponseObject(RequestType requestType, ResponseArgumentName responseArguementName) {
+        Object object = null;
         try {
             Request request = createRequest(requestType);
             Response response = communicationLayer.sendRequest(request);
-            object= response.getArgument(responseArguementName);
+            object = response.getArgument(responseArguementName);
         } catch (ServiceNotFoundException | ClassCastException | ArgumentNotFoundException ex) {
             Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
-   }
+    }
 
     @Override
-    public List<Exercise> loadAllExercise() {
-        //returnResponseObject(RequestType., ResponseArgumentName.CREDENTIALS);
-        return null; //FIX THIS PLZ
+    public void loadAllExercise() {
+
+        try {
+
+            Request request = createRequest(RequestType.LOAD_ALL_EXERCISE);
+            Response response = communicationLayer.sendRequest(request);
+            allExercises = (ArrayList<Exercise>) response.getArgument(ResponseArgumentName.EXERCISE);
+
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void exerciseForTodayDone(Exercise exercise) {
         try {
             Profile pro = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
-            
+
             Request req = createRequest(RequestType.REMOVE_EXERCISE_FOR_TODAY);
             req.addArgument(RequestArgumentName.PROFILE_ID, pro.getProfileId());
             req.addArgument(RequestArgumentName.EXERCISE, exercise);
-            
+
             communicationLayer.sendRequest(req);
-            
+
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }
 
 }
