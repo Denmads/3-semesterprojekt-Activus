@@ -81,6 +81,7 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
     
     @FXML
     private void addSet (MouseEvent event) {
+        //Add set in database
         SetInfo info = new SetInfo(10, 10);
         sets.add(info);
         getItem().addSetInfo(info);

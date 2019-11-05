@@ -188,7 +188,9 @@ public class TrainingProgramsPageController extends ContentPageController {
             cell.setOnDragDropped(new EventHandler<DragEvent>() {
                 @Override
                 public void handle(DragEvent event) {
-                    
+                    if (cell.isEmpty()) {
+                        return;
+                    }
                     
                     Dragboard db = event.getDragboard();
                     if (db.hasContent(PROJECT_DATA_FORMAT)) {
@@ -201,16 +203,13 @@ public class TrainingProgramsPageController extends ContentPageController {
                         addedExercise.setSet(exercise.getSet());
 
                         
-                        int index = addedExercises.size();
-                        if (!cell.isEmpty()) {
-                            index = cell.getIndex()+1;
-                        }
+                        int index = cell.getIndex()+1;
                         addedExercise.setIndexInProgram(index);
                          
                         //Add exercise in database
-                        System.out.println("Drop on cell");
                         addedExercises.add(index, addedExercise);
                         trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
+                        event.consume();
                     }
                 }
             });
@@ -241,7 +240,6 @@ public class TrainingProgramsPageController extends ContentPageController {
                      addedExercise.setSet(exercise.getSet());
                      
                      //Add exercise in database
-                     System.out.println("Drop on list");
                      addedExercises.add(addedExercise);
                      trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
                      trainingProgramList.refresh();
@@ -255,6 +253,7 @@ public class TrainingProgramsPageController extends ContentPageController {
         TrainingProgram program = new TrainingProgram();
         if (openDialog("", "", false, program)) {
             //Add program database
+            trainingProgramList.getSelectionModel().select(program);
             trainingPrograms.add(program);
             showProgramDetails(program);
         }

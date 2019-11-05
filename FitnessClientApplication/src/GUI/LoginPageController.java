@@ -2,7 +2,6 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import gui.RootPageController;
 import domain.DomainFacade;
 import domain.serviceInterfaces.IAuthenticationService;
 import java.io.IOException;
@@ -56,9 +55,7 @@ public class LoginPageController implements Initializable {
         try {
             String username = usernameField.getText();
             String password = passwordField.getText();
-            System.out.println("Send request");
             boolean login = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).login(username, password);
-            System.out.println("checked login");
             if(login){
                 changeToRootPage();
             }
@@ -82,7 +79,6 @@ public class LoginPageController implements Initializable {
     
     private void changeToRootPage () {
         
-        System.out.println("Changing");
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/RootPage.fxml"));
             Parent root = loader.load();

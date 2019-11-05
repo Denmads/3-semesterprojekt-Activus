@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<VBox alignment="TOP_CENTER" spacing="50.0" style="-fx-background-color: #ff914d;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProfilePageController">
+<VBox alignment="TOP_CENTER" spacing="50.0" style="-fx-background-color: #ff914d;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ProfilePageController">
    <children>
       <Circle fx:id="circleProfilePic" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" VBox.vgrow="ALWAYS" />
       <GridPane style="-fx-background-color: WHITE; -fx-background-radius: 30;" VBox.vgrow="ALWAYS">
