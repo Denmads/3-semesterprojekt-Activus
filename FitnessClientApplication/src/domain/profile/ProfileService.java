@@ -38,7 +38,7 @@ public class ProfileService extends IProfileService {
             
             Request request = createRequest(RequestType.SEARCH);
             request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
-            request.addArgument(RequestArgumentName.TEXT, searchType);
+            request.addArgument(RequestArgumentName.TEXT, searchString);
             Response response = communicationLayer.sendRequest(request);
             profiles= (List < Profile >) response.getArgument(ResponseArgumentName.PROFILE);
         } catch (ArgumentNotFoundException ex) {
