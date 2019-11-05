@@ -92,12 +92,14 @@ public class TrainingProgramsPageController extends ContentPageController {
     private void addNewtrainingProgram(ActionEvent event) {
         TrainingProgram program = new TrainingProgram();
         if (openDialog("", "", false, program)) {
+            //Add program database
             trainingPrograms.add(program);
             showProgramDetails(program);
         }
     }
     
     public void deleteTrainingProgram (TrainingProgram program) {
+        //delete pogram database
         trainingPrograms.remove(program);
         trainingProgramList.refresh();
     }
@@ -159,6 +161,8 @@ public class TrainingProgramsPageController extends ContentPageController {
             program.setName(info.getKey());
             program.setDescription(info.getValue());
         });
+        
+        //if edit update program in database
         
         trainingProgramList.refresh();
         return result.isPresent();
