@@ -1,12 +1,14 @@
 package Models;
 
+import java.io.Serializable;
+
 /**
  * Contains info about one set of an exercise
  * A model class
  *
  * @author Victor
  */
-public class SetInfo implements Comparable<SetInfo>{
+public class SetInfo implements Comparable<SetInfo>, Serializable{
 
     private int reps;
     private double weight;

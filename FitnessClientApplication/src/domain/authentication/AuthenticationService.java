@@ -94,9 +94,11 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public void logout() {
         try {
-            Request request = createRequest(RequestType.LOGOUT);
-            request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
-            communicationLayer.sendRequest(request);
+            if (credentials != null) {
+                Request request = createRequest(RequestType.LOGOUT);
+                request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
+                communicationLayer.sendRequest(request);
+            }
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }

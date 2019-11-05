@@ -1,19 +1,21 @@
 package Models;
 
 import Models.SetInfo;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Victor
  */
-public class Exercise {
+public class Exercise implements Serializable{
 
     private int ID;
     private String name;
     private double time;
     private String Description;
     private String type;
+    private int indexInProgram;
 
     private ArrayList<SetInfo> set;
 
@@ -31,6 +33,7 @@ public class Exercise {
         this.set = new ArrayList<>();
         this.Description = "no description";
         this.type = type;
+        this.indexInProgram = -1;
     }
 
     public void setType(String type) {
@@ -81,12 +84,21 @@ public class Exercise {
         set.add(info);
     }
 
-    public void removeSetInfo(int index) {
-        set.remove(index);
+    public void removeSetInfo(SetInfo info) {
+        set.remove(info);
     }
 
     public ArrayList<SetInfo> getSetInfo() {
         return set;
     }
 
+    public int getIndexInProgram() {
+        return indexInProgram;
+    }
+
+    public void setIndexInProgram(int indexInProgram) {
+        this.indexInProgram = indexInProgram;
+    }
+    
+    
 }
