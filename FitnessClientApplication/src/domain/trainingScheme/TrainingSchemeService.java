@@ -90,6 +90,7 @@ public class TrainingSchemeService extends ITrainingSchemeService {
         try {
 
             Request request = createRequest(RequestType.LOAD_ALL_EXERCISE);
+            System.out.println(request.getServiceType());
             Response response = communicationLayer.sendRequest(request);
             allExercises = (ArrayList<Exercise>) response.getArgument(ResponseArgumentName.EXERCISE);
 

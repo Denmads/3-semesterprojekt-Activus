@@ -1,6 +1,7 @@
 package Models;
 
 import Models.Exercise;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * 
  * @author Victor
  */
-public class TrainingProgram {
+public class TrainingProgram implements Serializable{
 
     private String name;
     private String description;
