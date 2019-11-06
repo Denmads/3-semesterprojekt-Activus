@@ -8,7 +8,7 @@ package models;
 import Models.*;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
+
 
 
 /**
@@ -18,7 +18,7 @@ import java.util.Map;
 public class Stats {
     
     private final Profile currentProfile;
-    private HashMap<String,Exercise> exerHashMap;
+    private HashMap<Date,Exercise> exerHashMap;
     private HashMap<String,HashMap> statsMap;
     
 
@@ -30,16 +30,27 @@ public class Stats {
     
 
 
-   public void addExercises(String Type, Date date, Exercise exercise){
-     if(statsMap.containsKey(Type)){
-         statsMap.get(Type).put(date, exercise);   
+   public void addExercises(String type, Date date, Exercise exercise){
+     if(statsMap.containsKey(type)){
+         statsMap.get(type).put(date, exercise);   
      }else{
-         exerHashMap = new HashMap<String, Exercise>();
-         statsMap.put(Type, exerHashMap);
-         statsMap.get(Type).put(date, exercise);
+         exerHashMap = new HashMap<Date, Exercise>();
+         statsMap.put(type, exerHashMap);
+         statsMap.get(type).put(date, exercise);
      }
      
    }
+
+    public HashMap<String, HashMap> getStatsMap() {
+        return statsMap;
+    }
+
+    public HashMap<String, Exercise> getExerHashMap(String type) {
+        if(statsMap.containsKey(type)){
+            return statsMap.get(type);
+        }
+        return null;
+    }
     
     
     

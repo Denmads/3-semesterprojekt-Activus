@@ -1,6 +1,5 @@
 package Models;
 
-import Models.SetInfo;
 import java.util.ArrayList;
 
 /**

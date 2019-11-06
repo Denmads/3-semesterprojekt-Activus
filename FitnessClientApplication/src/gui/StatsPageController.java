@@ -10,13 +10,16 @@ import Enums.ServiceType;
 import Exceptions.ConfigFileNotFound;
 import Exceptions.ServiceNotFoundException;
 import Models.Exercise;
+import Models.Profile;
 import Models.SetInfo;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import domain.DomainFacade;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -46,30 +49,43 @@ public class StatsPageController extends ContentPageController {
     @FXML
     private LineChart<SetInfo, Date> charid;
     @FXML
-    private ChoiceBox<Exercise> choseBoks;
+    private ChoiceBox<String> choseBoks;
     private ObservableList<Exercise> exerciseList;
-    
+   
     /**
      * Initializes the controller class.
      * @param url
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         choseBoks.getItems().add(new Exercise(1, "Pullups", 0));
-         choseBoks.getItems().add(new Exercise(1, "Situps", 0));
+         try {
+           Stats stats =(Stats) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
+        for (int i = 0; i < 10; i++) {
+            Exercise e = new Exercise(i, ("pus"+i), i);
+            for (int j = 0; j < 3; j++) {
+                SetInfo s = new SetInfo(j, i);
+                e.addSetInfo(s);
+            }
+            
+            Date s= new Date();
+            String t=i+"tyoe";
+            stats.addExercises(t, s, e);
+        }
 
         // creating choisboks with users exercises
-        try {
-           Stats stats =(Stats) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-           
+        
+        for (Map.Entry<String, HashMap> entry : stats.getStatsMap().entrySet()) {
+                choseBoks.getItems().add(entry.getKey());
+                
+            }
            
             choseBoks.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
                @Override
                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                    
-                   Exercise exercise = choseBoks.getItems().get(newValue.intValue());
                    
-                   exerciseName.setText( exercise.getName());
+                   
+                   exerciseName.setText(choseBoks.getItems());
                    
                    
                }
