@@ -5,6 +5,7 @@ import domain.chat.ChatService;
 import models.Profile;
 import domain.profile.ProfileService;
 import domain.serviceInterfaces.IAuthenticationService;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import models.Request;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
@@ -66,6 +67,8 @@ public class AuthenticationService extends IAuthenticationService {
                 
                 createServices();
                 
+                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise();
+                
                 return true;
                 
             } catch (ArgumentNotFoundException e) {
@@ -91,9 +94,11 @@ public class AuthenticationService extends IAuthenticationService {
     @Override
     public void logout() {
         try {
-            Request request = createRequest(RequestType.LOGOUT);
-            request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
-            communicationLayer.sendRequest(request);
+            if (credentials != null) {
+                Request request = createRequest(RequestType.LOGOUT);
+                request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
+                communicationLayer.sendRequest(request);
+            }
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }

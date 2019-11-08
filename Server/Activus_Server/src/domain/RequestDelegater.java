@@ -33,7 +33,7 @@ public class RequestDelegater implements IRequestDelegater{
 
     public Response delegate(Request request) {
 
-        Response response = null;
+        Response response = new Response();
 
         if (request.getServiceType() == ServiceType.AUTHENTICATION) {
             response = requestHandlers.get(request.getServiceType()).handleRequest(request);
@@ -42,6 +42,7 @@ public class RequestDelegater implements IRequestDelegater{
                 response = requestHandlers.get(request.getServiceType()).handleRequest(request);
             } else {
                 //TODO
+                System.out.println("authentication Failed");
             }
         }
 

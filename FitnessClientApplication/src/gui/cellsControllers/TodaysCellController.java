@@ -108,12 +108,10 @@ public class TodaysCellController extends ListCell<Exercise> {
                 weightBox.getChildren().add(weight);
                 
                 setsList.getChildren().add(root);
-                
-                
-                
-                setText(null);
-                setGraphic(parent);
             }
+            
+            setText(null);
+            setGraphic(parent);
         }
     }
     

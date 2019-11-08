@@ -1,0 +1,80 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui.cellsControllers;
+
+import Models.Exercise;
+import Models.SetInfo;
+import Models.TrainingProgram;
+import gui.TrainingProgramsPageController;
+import java.io.IOException;
+import java.util.Optional;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+
+/**
+ *
+ * @author Denmads
+ */
+public class SetInfoCellController extends ListCell<SetInfo>{
+
+    @FXML
+    private Label repsLabel;
+    @FXML
+    private Label weightLabel;
+    
+    private TrainingProgramExerciseCellController parent;
+    
+    public SetInfoCellController (TrainingProgramExerciseCellController exercise) {
+        this.parent = exercise;
+    }
+    
+    
+    @Override
+    protected void updateItem(SetInfo item, boolean empty) {
+        super.updateItem(item, empty); 
+        
+        if (empty || item == null) {
+            setText(null);
+            setGraphic(null);
+
+        } else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/SetInfoCell.fxml"));
+        
+            loader.setController(this);
+            HBox parent = null;
+            try{
+               parent = loader.load();
+               
+            }catch(IOException ex){
+                System.out.println(ex);
+                return; 
+            }
+            
+            item.setSetIndex(getIndex());
+            repsLabel.setText(item.getReps() + "");
+            weightLabel.setText(item.getWeight() + " Kg");
+            
+            
+            setText(null);
+            setGraphic(parent);
+        }
+    }
+    
+    @FXML
+    private void deleteSet (MouseEvent event) {
+        parent.deleteSet(getItem());
+    }
+    
+    
+}

@@ -31,7 +31,8 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
 
     @Override
     public Response handleRequest(Request request) {
-        Response response = null;
+        Response response = new Response();
+        System.out.println("traininig");
         switch (request.getRequestType()){
             case CREATE_TRAINING_PROGRAM:
                 try {
@@ -59,9 +60,12 @@ public class TrainingSchemeRequestHandler extends IRequestHandler{
                 break;
             case LOAD_ALL_EXERCISE:
                 GetAllExerciseAction allExerciseAction = new GetAllExerciseAction();
+                databaseFacade.execute(allExerciseAction);
+                System.out.println(allExerciseAction.hasResult());
                 response.addArgument(ResponseArgumentName.EXERCISE, allExerciseAction.getResult());
         }
         
+        System.out.println(response);
         return response;
     }
     
