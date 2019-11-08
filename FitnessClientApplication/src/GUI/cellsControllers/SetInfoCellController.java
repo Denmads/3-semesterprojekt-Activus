@@ -5,22 +5,14 @@
  */
 package gui.cellsControllers;
 
-import Models.Exercise;
-import Models.SetInfo;
-import Models.TrainingProgram;
-import gui.TrainingProgramsPageController;
 import java.io.IOException;
-import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import models.SetInfo;
 
 /**
  *

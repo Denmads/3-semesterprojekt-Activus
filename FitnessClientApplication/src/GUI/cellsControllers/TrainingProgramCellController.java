@@ -5,7 +5,7 @@
  */
 package gui.cellsControllers;
 
-import Models.TrainingProgram;
+import models.TrainingProgram;
 import gui.TrainingProgramsPageController;
 import java.io.IOException;
 import java.util.Optional;

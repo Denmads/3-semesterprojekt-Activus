@@ -3,8 +3,8 @@ package gui;
 import Enums.SearchType;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import Models.Exercise;
-import Models.Profile;
+import models.Exercise;
+import models.Profile;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.ProfileCellController;
@@ -82,11 +82,15 @@ public class SearchPageController extends ContentPageController {
 
         //Shall only be editable when radiobutton is selected.
         exerciseNameField.setEditable(false);
+    }
 
+    @Override
+    public void onContentInitialize() {
         //Loading all exercises to the listview
-        //This shit doesn't work. Loading domainFacade into initialize.
         loadAllExercises();
     }
+    
+    
 
     @FXML
     private void handleSearchProfileButtonAction(ActionEvent event) {

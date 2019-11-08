@@ -44,6 +44,8 @@ public class ProfileService extends IProfileService {
             profiles = (List< Profile>) response.getArgument(ResponseArgumentName.PROFILE);
         } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return profiles;
@@ -137,6 +139,8 @@ public class ProfileService extends IProfileService {
             Response response = communicationLayer.sendRequest(request);
             object = response.getArgument(responseArguementName);
         } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;

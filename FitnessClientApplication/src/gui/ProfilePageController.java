@@ -7,13 +7,10 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import Models.Profile;
+import models.Profile;
 import domain.DomainFacade;
-import domain.profile.ProfileService;
-import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
