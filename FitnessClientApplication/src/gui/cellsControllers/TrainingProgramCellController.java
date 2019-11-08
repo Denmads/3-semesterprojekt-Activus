@@ -75,7 +75,7 @@ public class TrainingProgramCellController extends ListCell<TrainingProgram>{
     @FXML
     private void deleteTrainingProgram (MouseEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete TRaining Program?");
+        alert.setTitle("Delete Training Program?");
         alert.setHeaderText(null);
         alert.setContentText("Do you really want to delete " + program.getName() + "?");
 

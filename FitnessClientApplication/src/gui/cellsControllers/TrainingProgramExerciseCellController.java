@@ -35,7 +35,6 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
     
     public TrainingProgramExerciseCellController (TrainingProgramsPageController controller) {
         this.controller = controller;
-        sets = FXCollections.observableArrayList();
     }
     
     
@@ -62,7 +61,9 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
             
             
             nameLabel.setText(item.getName());
+            item.setIndexInProgram(getIndex());
             
+            sets = FXCollections.observableArrayList();
             sets.addAll(item.getSetInfo());
             setsList.setItems(sets);
             setsList.setCellFactory(view -> new SetInfoCellController(this));

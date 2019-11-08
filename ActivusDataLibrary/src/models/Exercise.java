@@ -100,5 +100,21 @@ public class Exercise implements Serializable{
         this.indexInProgram = indexInProgram;
     }
     
-    
+    public Exercise clone () {
+        Exercise clone = new Exercise();
+        clone.setID(getID());
+        clone.setName(getName());
+        clone.setDescription(getDescription());
+        clone.setType(getType());
+        
+        ArrayList<SetInfo> sets = new ArrayList<>();
+        
+        for (SetInfo set : getSet()) {
+            sets.add(set.clone());
+        }
+        
+        clone.setSet(sets);
+        
+        return clone;
+    }
 }

@@ -14,6 +14,7 @@ import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.TrainingProgramCellController;
 import gui.cellsControllers.TrainingProgramExerciseCellController;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -232,12 +233,7 @@ public class TrainingProgramsPageController extends ContentPageController {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
                      Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-                     Exercise addedExercise = new Exercise();
-                     addedExercise.setID(exercise.getID());
-                     addedExercise.setName(exercise.getName());
-                     addedExercise.setDescription(exercise.getDescription());
-                     addedExercise.setType(exercise.getType());
-                     addedExercise.setSet(exercise.getSet());
+                     Exercise addedExercise = exercise.clone();
                      
                      //Add exercise in database
                      addedExercises.add(addedExercise);
@@ -303,7 +299,7 @@ public class TrainingProgramsPageController extends ContentPageController {
 
         // Enable/Disable confirm button depending on whether a name was entered.
         Node confirmButton = dialog.getDialogPane().lookupButton(confirmButtonType);
-        confirmButton.setDisable(true);
+        confirmButton.setDisable(nameField.getText().trim().isEmpty() || nameField.getText().trim().length() > 20);
 
         // Do some validation (using the Java 8 lambda syntax).
         nameField.textProperty().addListener((observable, oldValue, newValue) -> {

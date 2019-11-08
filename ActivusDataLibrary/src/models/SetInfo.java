@@ -53,4 +53,11 @@ public class SetInfo implements Comparable<SetInfo>, Serializable{
         return setIndex - o.getSetIndex();
     }
 
+    public SetInfo clone () {
+        SetInfo clone = new SetInfo();
+        clone.setSetIndex(getSetIndex());
+        clone.setReps(getReps());
+        clone.setWeight(getWeight());
+        return clone;
+    }
 }
