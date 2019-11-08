@@ -55,7 +55,7 @@ public class ProfileService extends IProfileService {
             boolean isUpdated = false;
 
             Request req = createRequest(RequestType.UPDATE_PROFILE);
-
+            req.addArgument(RequestArgumentName.PROFILE_ID, newProfileInfo.getProfileId());
             req.addArgument(RequestArgumentName.PROFILE_GYM, newProfileInfo.getGym());
             req.addArgument(RequestArgumentName.PROFILE_CITY, newProfileInfo.getCity());
             req.addArgument(RequestArgumentName.PROFILE_AGE, newProfileInfo.getAge());
