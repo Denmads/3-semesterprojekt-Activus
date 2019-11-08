@@ -6,7 +6,7 @@
 package domain.serviceInterfaces;
 
 import Enums.ServiceType;
-import Models.Message;
+import models.Message;
 import java.util.List;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
