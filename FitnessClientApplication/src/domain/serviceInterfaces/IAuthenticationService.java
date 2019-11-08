@@ -6,8 +6,8 @@ import Enums.ServiceType;
 import layerInterfaces.IService;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
-import Models.CredentialsContainer;
-import Models.Request;
+import models.CredentialsContainer;
+import models.Request;
 
 /**
  * The service provinding methods related to authentication and login

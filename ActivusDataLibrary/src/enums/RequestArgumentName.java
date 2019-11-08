@@ -9,8 +9,13 @@ import java.io.Serializable;
 public enum RequestArgumentName implements Serializable {
     USER_ID,
     PROFILE_ID,
-    PROFILE_LIST_OF_CHANGES,
-    PROFILE_LIST_OF_TABLE_FIELDS,
+    PROFILE_GYM,
+    PROFILE_CITY,
+    PROFILE_AGE,
+    PROFILE_FIRST_NAME,
+    PROFILE_LAST_NAME,
+    PROFILE_GENDER,
+    PROFILE_COUNTRY,
     PROGRAM_ID,
     PROGRAM_OWNER_ID,
     PROGRAM_DESCRIPTION,
@@ -36,5 +41,7 @@ public enum RequestArgumentName implements Serializable {
     SENDER_ID,
     RECIVER_ID,
     MESSAGE,
-    BUDDY
+    BUDDY,
+    STATS
+    
 }

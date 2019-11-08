@@ -11,7 +11,7 @@
 
 <HBox fx:id="root" maxWidth="-Infinity" prefWidth="335.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.SideMenu.SidebarMenuController">
    <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-color: #515151; -fx-border-width: 0 3 0 0; -fx-background-color: transparent;">
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-border-color: #515151; -fx-border-width: 0 3 0 0; -fx-background-color: transparent; -fx-border-insets: 0 -2 0 0;">
          <content>
             <VBox fx:id="buttonBox" alignment="TOP_CENTER" onMouseExited="#hideMenu" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #000000;">
                <children>
@@ -29,7 +29,7 @@
       </ScrollPane>
       <Label onMouseEntered="#showMenu" style="-fx-rotate: 90; -fx-background-color: #515151; -fx-background-radius: 10 10 0 0;" text="Menu">
          <HBox.margin>
-            <Insets left="-19.0" right="-20.0" top="40.0" />
+            <Insets left="-19.0" right="-20.0" top="80.0" />
          </HBox.margin>
          <font>
             <Font name="System Bold" size="14.0" />

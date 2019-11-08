@@ -6,8 +6,8 @@
 package gui;
 
 import gui.cellsControllers.TodaysCellController;
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
+import models.SetInfo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -56,13 +56,13 @@ public class HomePageController extends ContentPageController {
     public void onContentInitialize() {
         test = FXCollections.observableArrayList();
         
-        Exercise testEx = new Exercise(112, "Push up", 0);
+        Exercise testEx = new Exercise(112, "Push up", 0, "Chest");
         testEx.addSetInfo(new SetInfo(10, 15));
         testEx.addSetInfo(new SetInfo(12, 25));
         testEx.addSetInfo(new SetInfo(1, 35));
         test.add(testEx);
         
-        Exercise testEx1 = new Exercise(1, "Bench Press", 0);
+        Exercise testEx1 = new Exercise(1, "Bench Press", 0, "Chest");
         testEx1.addSetInfo(new SetInfo(100, 150));
         testEx1.addSetInfo(new SetInfo(120, 250));
         testEx1.addSetInfo(new SetInfo(10, 350));

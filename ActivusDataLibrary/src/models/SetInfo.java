@@ -1,4 +1,6 @@
-package Models;
+package models;
+
+import java.io.Serializable;
 
 /**
  * Contains info about one set of an exercise
@@ -6,19 +8,12 @@ package Models;
  *
  * @author Victor
  */
-public class SetInfo {
+public class SetInfo implements Comparable<SetInfo>, Serializable{
 
     private int reps;
     private double weight;
     private int setIndex;
 
-    public int getSetIndex() {
-        return setIndex;
-    }
-
-    public void setSetIndex(int setIndex) {
-        this.setIndex = setIndex;
-    }
 
     public SetInfo() {
     }
@@ -29,6 +24,14 @@ public class SetInfo {
         this.weight = weight;
     }
 
+    public int getSetIndex() {
+        return setIndex;
+    }
+
+    public void setSetIndex(int setIndex) {
+        this.setIndex = setIndex;
+    }
+    
     public int getReps() {
         return reps;
     }
@@ -43,6 +46,11 @@ public class SetInfo {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public int compareTo(SetInfo o) {
+        return setIndex - o.getSetIndex();
     }
 
 }

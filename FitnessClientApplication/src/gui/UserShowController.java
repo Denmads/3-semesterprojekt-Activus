@@ -5,8 +5,8 @@
  */
 package gui;
 
-import Models.Profile;
-import Models.Request;
+import models.Profile;
+import models.Request;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

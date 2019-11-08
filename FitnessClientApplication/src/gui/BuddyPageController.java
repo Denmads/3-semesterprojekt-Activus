@@ -2,8 +2,8 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import Models.Message;
-import Models.Profile;
+import models.Message;
+import models.Profile;
 import domain.DomainFacade;
 import domain.authentication.AuthenticationService;
 import domain.serviceInterfaces.IChatService;
@@ -87,6 +87,7 @@ public class BuddyPageController extends ContentPageController {
                 }
             }
         });
+
     }
     
     private boolean sendMessage(){

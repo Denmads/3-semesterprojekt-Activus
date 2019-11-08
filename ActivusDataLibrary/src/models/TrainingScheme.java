@@ -1,7 +1,8 @@
-package Models;
+package models;
 
 import Enums.Day;
-import Models.TrainingProgram;
+import java.io.Serializable;
+import models.TrainingProgram;
 import java.util.HashMap;
 
 /**
@@ -10,7 +11,7 @@ import java.util.HashMap;
  *
  * @author Victor
  */
-public class TrainingScheme {
+public class TrainingScheme implements Serializable{
 
     private HashMap<Day, TrainingProgram> dayTrainingProgramMap;
     

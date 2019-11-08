@@ -29,6 +29,7 @@ public class CreateTrainingProgramAction extends IDatabaseAction<Boolean> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
+
         //database.insertInto(TRAINING_PROGRAM).columns(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).values(ownerID,name,description).execute();
         executed = true;
         
