@@ -2,10 +2,10 @@ package domain.authentication;
 
 
 import domain.chat.ChatService;
-import Models.Profile;
+import models.Profile;
 import domain.profile.ProfileService;
 import domain.serviceInterfaces.IAuthenticationService;
-import Models.Request;
+import models.Request;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
@@ -14,8 +14,8 @@ import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
-import Models.CredentialsContainer;
-import Models.Response;
+import models.CredentialsContainer;
+import models.Response;
 import domain.trainingScheme.TrainingSchemeService;
 import java.util.logging.Level;
 import java.util.logging.Logger;

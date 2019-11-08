@@ -1,6 +1,6 @@
 package persistence.actions;
 
-import Models.CredentialsContainer;
+import models.CredentialsContainer;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import persistence.IDatabaseAction;

@@ -1,7 +1,7 @@
 package domain.profile;
 
-import Models.Profile;
-import Models.Exercise;
+import models.Profile;
+import models.Exercise;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
@@ -12,13 +12,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Exceptions.*;
-import Models.Request;
-import Models.Response;
+import models.Request;
+import models.Response;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import models.Stats;
+
 
 /**
  *
@@ -42,9 +43,7 @@ public class ProfileService extends IProfileService {
             request.addArgument(RequestArgumentName.TEXT, searchType);
             Response response = communicationLayer.sendRequest(request);
             profiles= (List < Profile >) response.getArgument(ResponseArgumentName.PROFILE);
-        } catch (ArgumentNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServiceNotFoundException ex) {
+        } catch (ArgumentNotFoundException | ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -56,11 +55,7 @@ public class ProfileService extends IProfileService {
         boolean isUpdate;
         currentProfile = (Profile) returnResponsObject(RequestType.UPDATE_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, newProfileInfo);
         //To do OPdate the profile in db;
-        if(currentProfile!=newProfileInfo){
-            isUpdate= false;
-        }else{
-            isUpdate=true;
-        }
+        isUpdate = currentProfile == newProfileInfo;
         return isUpdate;
     }
 
@@ -124,16 +119,17 @@ public class ProfileService extends IProfileService {
             request.addArgument(requestArguementName, o);
             Response response = communicationLayer.sendRequest(request);
             object= response.getArgument(responseArguementName);
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ArgumentNotFoundException ex) {
+        } catch (ServiceNotFoundException | ClassCastException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
     }
 
+    /**
+     *
+     * @param ProfileID
+     * @return
+     */
     @Override
     public Stats getCurrentStats(int ProfileID) {
         return (Stats) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);

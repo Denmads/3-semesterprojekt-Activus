@@ -1,6 +1,6 @@
 package domain.serviceInterfaces;
 
-import Models.Exercise;
+import models.Exercise;
 import Enums.ServiceType;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;

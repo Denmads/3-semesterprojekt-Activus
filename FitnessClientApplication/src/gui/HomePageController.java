@@ -6,8 +6,8 @@
 package gui;
 
 import gui.cellsControllers.TodaysCellController;
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
+import models.SetInfo;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;

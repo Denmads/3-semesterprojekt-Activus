@@ -5,36 +5,23 @@
  */
 package gui;
 
-import Communication.CommunicationFacade;
 import Enums.ServiceType;
-import Exceptions.ConfigFileNotFound;
 import Exceptions.ServiceNotFoundException;
-import Models.Exercise;
-import Models.Profile;
-import Models.SetInfo;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import domain.DomainFacade;
+import models.Exercise;
+import models.SetInfo;
 import domain.serviceInterfaces.IProfileService;
-import domain.serviceInterfaces.ITrainingSchemeService;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.Observable;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.util.Callback;
 import models.Stats;
 
 /**
@@ -50,50 +37,43 @@ public class StatsPageController extends ContentPageController {
     private LineChart<SetInfo, Date> charid;
     @FXML
     private ChoiceBox<String> choseBoks;
-    private ObservableList<Exercise> exerciseList;
+   
    
     /**
      * Initializes the controller class.
      * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          try {
            Stats stats =(Stats) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-        for (int i = 0; i < 10; i++) {
-            Exercise e = new Exercise(i, ("pus"+i), i);
-            for (int j = 0; j < 3; j++) {
-                SetInfo s = new SetInfo(j, i);
-                e.addSetInfo(s);
-            }
-            
-            Date s= new Date();
-            String t=i+"tyoe";
-            stats.addExercises(t, s, e);
-        }
-
-        // creating choisboks with users exercises
         
-        for (Map.Entry<String, HashMap> entry : stats.getStatsMap().entrySet()) {
-                choseBoks.getItems().add(entry.getKey());
-                
-            }
-           
-            choseBoks.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-               @Override
-               public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                   
-                   
-                   
-                   exerciseName.setText(choseBoks.getItems());
-                   
-                   
-               }
+           stats.getStatsMap().entrySet().forEach((entry) -> {
+               String key = entry.getKey();
+               HashMap value = entry.getValue();
+               choseBoks.getItems().add(key);
+             });
+
+            choseBoks.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+                exerciseName.setText(choseBoks.getItems().toString());
+                charid.setTitle(choseBoks.getItems().toString());
+                stats.getStatsMap().entrySet().forEach((entry) -> {
+                    Object key = entry.getKey();
+                    HashMap<Date,Exercise> value = entry.getValue();
+                    XYChart.Series series = new XYChart.Series();
+                   if (choseBoks.getItems()==key) {
+                       value.entrySet().forEach((entry1) -> {
+                           Date key1 = entry1.getKey();
+                           Exercise value1 = entry1.getValue();
+                           series.getData().add(new XYChart.Data(value1.getSetInfo(), key1));
+                       });
+                       charid.getData().addAll(series);
+                   }
+               });
            });
 
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassCastException ex) {
+        } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
