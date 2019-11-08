@@ -1,7 +1,7 @@
-package Models;
+package models;
 
 import Enums.Day;
-import Models.TrainingProgram;
+import models.TrainingProgram;
 import java.util.HashMap;
 
 /**

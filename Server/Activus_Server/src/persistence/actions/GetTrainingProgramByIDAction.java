@@ -6,7 +6,7 @@
 package persistence.actions;
 
 
-import Models.TrainingProgram;
+import models.TrainingProgram;
 import java.sql.SQLException;
 import org.jooq.DSLContext;
 import org.jooq.Record;

@@ -6,7 +6,7 @@
 package gui;
 
 import gui.cellsControllers.cellAllExerciseControler;
-import Models.Exercise;
+import models.Exercise;
 import gui.ContentPageController;
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,6 +1,6 @@
 package persistence;
 
-import Models.Request;
+import models.Request;
 import java.sql.SQLException;
 import org.jooq.DSLContext;
 

@@ -1,6 +1,6 @@
 package persistence.actions;
 
-import Models.CredentialsContainer;
+import models.CredentialsContainer;
 import java.sql.SQLException;
 import persistence.IDatabaseAction;
 import org.jooq.DSLContext;

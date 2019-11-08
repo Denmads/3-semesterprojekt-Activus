@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 /**
  * Contains info about one set of an exercise

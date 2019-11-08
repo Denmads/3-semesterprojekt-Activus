@@ -1,7 +1,7 @@
 package gui.cellsControllers;
 
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
+import models.SetInfo;
 import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

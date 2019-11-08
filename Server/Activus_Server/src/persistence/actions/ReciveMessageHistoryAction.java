@@ -1,6 +1,6 @@
 package persistence.actions;
 
-import Models.Message;
+import models.Message;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.jooq.DSLContext;

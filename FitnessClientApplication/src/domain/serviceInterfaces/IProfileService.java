@@ -1,13 +1,14 @@
 package domain.serviceInterfaces;
 
-import Models.Exercise;
-import Models.Profile;
+import models.Exercise;
+import models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import layerInterfaces.IService;
 import java.util.List;
+import models.Stats;
 
 
 /**
@@ -51,6 +52,13 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean removeStats(int statsID);
     
-    public abstract List<Exercise> getCurrentStats(int ProfileID);
+    /**
+     *
+     * @param ProfileID
+     * @return
+     */
+    public abstract Stats getCurrentStats(int ProfileID);
+    
+   
 
 }

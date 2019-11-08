@@ -5,7 +5,6 @@
  */
 package domain.chat;
 
-import Models.Profile;
 import java.util.Date;
 
 /**
