@@ -49,6 +49,7 @@ public class BuddyPageController extends ContentPageController {
     
     private Profile buddy;
     private ObservableList<Profile> listBuddy;
+    private ObservableList<Message> listMessage;
     
     /**
      * @param url
@@ -123,7 +124,7 @@ public class BuddyPageController extends ContentPageController {
     public void onContentInitialize() {
         createAnimationForMessageField();
         //loadBuddys();  // to load buddys from the database
-        lb();
+        lb(); // load some buddys in to 8.11
     }
     
     private void lb(){
@@ -183,5 +184,19 @@ public class BuddyPageController extends ContentPageController {
             return new ProfileCellController(domainFacade);
         });
         ListViewBuddies.refresh();
+    }
+    
+    private void loadMessage(){
+        listBuddy = ListViewBuddies.getItems();
+        Profile p = listBuddy.get(ListViewBuddies.getEditingIndex());
+        int buddyId = p.getProfileId();
+        int profileId;
+        try {        
+            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
+            
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

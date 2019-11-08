@@ -7,6 +7,7 @@ package domain.serviceInterfaces;
 
 import Enums.ServiceType;
 import Models.Message;
+import java.util.List;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import layerInterfaces.IService;
@@ -25,6 +26,6 @@ public abstract class IChatService extends IService {
     
     public abstract void sendMessage(Message message);
     
-    public abstract Message[] getChatHistory(int buddyProfileId);
+    public abstract List<Message> getChatHistory(int buddyProfileId);
     
 }

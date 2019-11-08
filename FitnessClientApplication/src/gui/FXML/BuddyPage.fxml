@@ -12,7 +12,7 @@
       <ListView fx:id="ListViewBuddies" style="-fx-background-color: #707070;" stylesheets="@../css/Stylesheet.css" HBox.hgrow="ALWAYS" />
       <VBox alignment="BOTTOM_CENTER" spacing="10.0" style="-fx-background-color: #707070; -fx-background-radius: 25;" HBox.hgrow="ALWAYS">
          <children>
-            <ListView style="-fx-background-radius: 15 15 0 0;" stylesheets="@../css/Stylesheet.css" VBox.vgrow="ALWAYS">
+            <ListView fx:id="ListView" style="-fx-background-radius: 15 15 0 0;" stylesheets="@../css/Stylesheet.css" VBox.vgrow="ALWAYS">
                <VBox.margin>
                   <Insets />
                </VBox.margin>

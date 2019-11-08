@@ -17,6 +17,7 @@ import Models.Request;
 import Models.Response;
 import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.ICommunicationFacade;
@@ -49,8 +50,8 @@ public class ChatService extends IChatService {
     }
 
     @Override
-    public Message[] getChatHistory(int buddyProfileId) {
-       return (Message[]) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
+    public List<Message> getChatHistory(int buddyProfileId) {
+        return (List<Message>) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
     }
     
     private Object returnResponseObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
