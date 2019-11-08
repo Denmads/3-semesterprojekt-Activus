@@ -43,7 +43,9 @@ public class BuddyPageController extends ContentPageController {
     private VBox Vboks;
     private AuthenticationService authenticationService;
     @FXML
-    private ListView<Profile> ListViewBuddies;
+    private ListView<Profile> listViewBuddies;
+    @FXML
+    private ListView<Message> listViewMessage;
     @FXML
     private TextArea messageField;
     
@@ -113,11 +115,11 @@ public class BuddyPageController extends ContentPageController {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        ListViewBuddies.setItems(listBuddy);
-        ListViewBuddies.setCellFactory((ListView<Profile> view) -> {
+        listViewBuddies.setItems(listBuddy);
+        listViewBuddies.setCellFactory((ListView<Profile> view) -> {
             return new ProfileCellController(domainFacade);
         });
-        ListViewBuddies.refresh();
+        listViewBuddies.refresh();
     }
 
     @Override
@@ -179,24 +181,28 @@ public class BuddyPageController extends ContentPageController {
         p6.setGym("The world");
         listBuddy.add(p6);
         
-        ListViewBuddies.setItems(listBuddy);
-        ListViewBuddies.setCellFactory((ListView<Profile> view) -> {
+        listViewBuddies.setItems(listBuddy);
+        listViewBuddies.setCellFactory((ListView<Profile> view) -> {
             return new ProfileCellController(domainFacade);
         });
-        ListViewBuddies.refresh();
+        listViewBuddies.refresh();
     }
     
     private void loadMessage(){
-        listBuddy = ListViewBuddies.getItems();
-        Profile p = listBuddy.get(ListViewBuddies.getEditingIndex());
+        listBuddy = listViewBuddies.getItems();
+        Profile p = listBuddy.get(listViewBuddies.getEditingIndex());
         int buddyId = p.getProfileId();
         int profileId;
         try {        
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
+//            listViewMessage.setCellFactory((ListView<Message> view) -> {
+//                return new MessageCellController(domainFacade);
+//            });
             
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        listViewBuddies.refresh();
     }
 }
