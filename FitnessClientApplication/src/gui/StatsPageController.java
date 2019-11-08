@@ -37,4 +37,9 @@ public class StatsPageController extends ContentPageController {
         
     }
 
+    @Override
+    public void onContentInitialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

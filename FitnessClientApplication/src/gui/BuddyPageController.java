@@ -49,7 +49,6 @@ public class BuddyPageController extends ContentPageController {
     
     private Profile buddy;
     private ObservableList<Profile> listBuddy;
-    private TextField[] textFields;
     
     /**
      * @param url
@@ -57,9 +56,8 @@ public class BuddyPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-        textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
-        createAnimationForMessageField();
-        //loadBuddys(); cant get domainfacade in initialize
+//        createAnimationForMessageField();
+//        loadBuddys(); //cant get domainfacade in initialize
         
         
     }    
@@ -120,20 +118,70 @@ public class BuddyPageController extends ContentPageController {
         });
         ListViewBuddies.refresh();
     }
+
     @Override
-    public void setDomainFacade(DomainFacade facade) {
-        try {
-            super.setDomainFacade(facade);
-            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
-            fieldAge.setText(currentProfile.getAge() + "");
-            fieldCity.setText(currentProfile.getCity());
-            fieldCountry.setText(currentProfile.getCountry());
-            fieldFirstName.setText(currentProfile.getFirstName());
-            fieldGender.setText(currentProfile.getGender());
-            fieldGym.setText(currentProfile.getGym());
-            fieldLastName.setText(currentProfile.getLastName());
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void onContentInitialize() {
+        createAnimationForMessageField();
+        //loadBuddys();  // to load buddys from the database
+        lb();
+    }
+    
+    private void lb(){
+        listBuddy = FXCollections.observableArrayList();
+        
+        Profile p = new Profile(0);
+        p.setAge(15);
+        p.setCity("Mollerub");
+        p.setGender("Male");
+        p.setUsername("Bent");
+        p.setLastName("Mordrup");
+        p.setGym("The world");
+        
+        listBuddy.add(p);
+        
+        Profile p2 = new Profile(1);
+        p2.setAge(17);
+        p2.setUsername("fald");
+        p2.setLastName("Mordrup");
+        p2.setGym("The world");
+        listBuddy.add(p2);
+        
+        Profile p3 = new Profile(2);
+        p3.setAge(16);
+        p3.setGender("Male");
+        p3.setUsername("Kurt");
+        p3.setLastName("Mordrup");
+        p3.setGym("The world");
+        
+        listBuddy.add(p3);
+        
+        Profile p4 = new Profile(3);
+        p4.setAge(30);
+        p4.setUsername("Hald");
+        p4.setLastName("Mordrup");
+        p4.setGym("The world");
+        listBuddy.add(p4);
+        
+        Profile p5 = new Profile(4);
+        p5.setAge(19);
+        p5.setGender("Male");
+        p5.setUsername("Mads");
+        p5.setLastName("Mordrup");
+        p5.setGym("The world");
+        
+        listBuddy.add(p5);
+        
+        Profile p6 = new Profile(5);
+        p6.setAge(23);
+        p6.setUsername("Jarl");
+        p6.setLastName("Mordrup");
+        p6.setGym("The world");
+        listBuddy.add(p6);
+        
+        ListViewBuddies.setItems(listBuddy);
+        ListViewBuddies.setCellFactory((ListView<Profile> view) -> {
+            return new ProfileCellController(domainFacade);
+        });
+        ListViewBuddies.refresh();
     }
 }
