@@ -88,14 +88,18 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean deleteAccount() {
-
+    public boolean deleteAccount(int profileID) {
+        boolean isDeleted = false;
         try {
-            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
-        } catch (ServiceNotFoundException ex) {
+            Request req = createRequest(RequestType.DELETE_ACCOUNT);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            isDeleted = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (boolean) returnResponsObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
+        return isDeleted;
     }
 
     @Override
