@@ -15,7 +15,7 @@ public class FXMLTester extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("FXML/SearchPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("FXML/BuddyPage.fxml"));
 
         Scene scene = new Scene(root);
 

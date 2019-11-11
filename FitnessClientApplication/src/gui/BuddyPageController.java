@@ -91,7 +91,6 @@ public class BuddyPageController extends ContentPageController {
     }
     
     private boolean sendMessage(){
-        
         try {
             String text = messageField.getText();
             int reciverId = buddy.getProfileId();
@@ -196,7 +195,7 @@ public class BuddyPageController extends ContentPageController {
         int profileId;
         try {        
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-//            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
+            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
 //            listViewMessage.setCellFactory((ListView<Message> view) -> {
 //                return new MessageCellController(domainFacade);
 //            });
