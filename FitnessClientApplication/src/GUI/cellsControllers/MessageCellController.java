@@ -3,53 +3,55 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.cellsControllers;
+package GUI.cellsControllers;
 
-import models.Profile;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import layerInterfaces.IDomainFacade;
+import models.Message;
 
 /**
+ * FXML Controller class
  *
- * @author Sebas
+ * @author terpen
  */
-public class ProfileCellController extends ListCell<Profile> {
+public class MessageCellController extends ListCell<Message> {
 
     @FXML
-    private Label userName;
-
+    private Label name;
     @FXML
-    private Label gymName;
-
-    private Profile profile;
-
+    private Label dateTime;
+    @FXML
+    private Label message;
+    
     private IDomainFacade domainFacade;
 
-    public ProfileCellController(IDomainFacade domainFacade) {
+    private Message mes;
+    
+    public MessageCellController(IDomainFacade domainFacade) {
         this.domainFacade = domainFacade;
     }
 
-    
     @Override
-    protected void updateItem(Profile item, boolean empty) {
+    public void updateItem(Message item, boolean empty){
         super.updateItem(item, empty);
 
         if (empty || item == null) {
             setText(null);
             setGraphic(null);
-
         } else {
-            profile = item;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/ProfileCell.fxml"));
-
+            mes = item;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FXML/listViewCells/MessageCell.fxml"));
             loader.setController(this);
             HBox parrent = null;
-
             try {
                 parrent = loader.load();
 
@@ -57,11 +59,17 @@ public class ProfileCellController extends ListCell<Profile> {
                 System.out.println(ex);
                 return;
             }
-            userName.setText(profile.getUsername());
-            gymName.setText(profile.getGym());
+            message.setText(mes.getMessage());
+            dateTime.setText(mes.getTime().toString());
+            //needs to make the sender id to 
+            //name.setText(mes.getSenderId());
             setText(null);
             setGraphic(parrent);
         }
+        
+        
     }
-
+    
+   
+    
 }

@@ -2,6 +2,7 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
+import GUI.cellsControllers.MessageCellController;
 import models.Message;
 import models.Profile;
 import domain.DomainFacade;
@@ -90,21 +91,6 @@ public class BuddyPageController extends ContentPageController {
 
     }
     
-    private boolean sendMessage(){
-        try {
-            String text = messageField.getText();
-            int reciverId = buddy.getProfileId();
-            int senderId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-            Message message = new Message(senderId, reciverId, text);
-            domainFacade.<IChatService>getService(ServiceType.CHAT).sendMessage(message);
-            return true;
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return false;
-    }
-    
     private void loadBuddys(){
         listBuddy = FXCollections.observableArrayList();
         int profileId;
@@ -165,22 +151,6 @@ public class BuddyPageController extends ContentPageController {
         p4.setGym("The world");
         listBuddy.add(p4);
         
-        Profile p5 = new Profile(4);
-        p5.setAge(19);
-        p5.setGender("Male");
-        p5.setUsername("Mads");
-        p5.setLastName("Mordrup");
-        p5.setGym("The world");
-        
-        listBuddy.add(p5);
-        
-        Profile p6 = new Profile(5);
-        p6.setAge(23);
-        p6.setUsername("Jarl");
-        p6.setLastName("Mordrup");
-        p6.setGym("The world");
-        listBuddy.add(p6);
-        
         listViewBuddies.setItems(listBuddy);
         listViewBuddies.setCellFactory((ListView<Profile> view) -> {
             return new ProfileCellController(domainFacade);
@@ -196,13 +166,33 @@ public class BuddyPageController extends ContentPageController {
         try {        
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
-//            listViewMessage.setCellFactory((ListView<Message> view) -> {
-//                return new MessageCellController(domainFacade);
-//            });
+            listViewMessage.setCellFactory((ListView<Message> view) -> {
+                return new MessageCellController(domainFacade);
+            });
             
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
         listViewBuddies.refresh();
+    }
+    
+    private boolean sendMessage(){
+        try {
+            String text = messageField.getText();
+            int reciverId = buddy.getProfileId();
+            int senderId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            Message message = new Message(senderId, reciverId, text);
+            domainFacade.<IChatService>getService(ServiceType.CHAT).sendMessage(message);
+            return true;
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+
+    private void action(){
+        //listViewBuddies.get
+        
     }
 }
