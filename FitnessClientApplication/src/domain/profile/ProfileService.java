@@ -74,6 +74,10 @@ public class ProfileService extends IProfileService {
             System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
             isUpdated = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
 
+            if (isUpdated) {
+                currentProfile = newProfileInfo;
+            }
+            
             return isUpdated;
         } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
