@@ -14,6 +14,7 @@ import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.TrainingProgramCellController;
 import gui.cellsControllers.TrainingProgramExerciseCellController;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -124,17 +125,22 @@ public class TrainingProgramsPageController extends ContentPageController {
         }
     }
     
-    private void populateChoiceBox () {
+    private void populateChoiceBox () throws ServiceNotFoundException {
         ObservableList<String> types = FXCollections.observableArrayList();
-        types.add("All");
-        types.add("Chest");
-        types.add("Bicep");
-        types.add("Tricep");
-        types.add("Core");
-        types.add("Shoulder");
-        types.add("Leg");
-        types.add("Buttocks");
-        types.add("Back");
+        for(Exercise e : (List<Exercise>) domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).getAllExercises()){          
+            if(!types.contains(e.getType())){
+                types.add(e.getType());
+            }
+        }
+//        types.add("All");
+//        types.add("Chest");
+//        types.add("Bicep");
+//        types.add("Tricep");
+//        types.add("Core");
+//        types.add("Shoulder");
+//        types.add("Leg");
+//        types.add("Buttocks");
+//        types.add("Back");
         
         exerciseTypeChb.setItems(types);
         exerciseTypeChb.getSelectionModel().selectFirst();
@@ -230,21 +236,31 @@ public class TrainingProgramsPageController extends ContentPageController {
         exerciseInProgramList.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent event) {
+                boolean isAddet = false;
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
-                     Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-                     Exercise addedExercise = new Exercise();
-                     addedExercise.setID(exercise.getID());
-                     addedExercise.setName(exercise.getName());
-                     addedExercise.setDescription(exercise.getDescription());
-                     addedExercise.setType(exercise.getType());
-                     addedExercise.setSet(exercise.getSet());
-                     
-                     //Add exercise in database
-                     System.out.println("Drop on list");
-                     addedExercises.add(addedExercise);
-                     trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
-                     trainingProgramList.refresh();
+                    try {
+                        Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+                        Exercise addedExercise = new Exercise();
+                        addedExercise.setID(exercise.getID());
+                        addedExercise.setName(exercise.getName());
+                        addedExercise.setDescription(exercise.getDescription());
+                        addedExercise.setType(exercise.getType());
+                        addedExercise.setSet(exercise.getSet());
+                        isAddet = domainFacade.<ITrainingSchemeService>getService(ServiceType.PROFILE).addExercise(exercise);
+                        if(isAddet){
+                            System.out.println("Exercises is addet");
+                        }
+                        //Add exercise in database
+                        System.out.println("Drop on list");
+                        addedExercises.add(addedExercise);
+                        trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
+                        trainingProgramList.refresh();
+                    } catch (ServiceNotFoundException ex) {
+                        Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassCastException ex) {
+                        Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
