@@ -50,7 +50,8 @@ public class StatsPageController extends ContentPageController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            Stats s = new Stats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile());
+//            Stats s = new Stats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile());
+            Stats s = new Stats(new Profile(1));
             Exercise e = new Exercise(0, "bænk", 0, "bryst");
             for(int i = 0; i<3;i++){
                 SetInfo setinfo = new SetInfo((i+1), (i+10));
@@ -58,6 +59,7 @@ public class StatsPageController extends ContentPageController {
                 
             }
             s.addExercises(e.getType(), new Date(), e);
+            s.addExercises(e.getType(), new Date(2000), e);
             XYChart.Series reps= new XYChart.Series<>();
             XYChart.Series weight= new XYChart.Series<>();
             
@@ -80,8 +82,6 @@ public class StatsPageController extends ContentPageController {
             charid.getData().addAll(reps);
             charid.getData().addAll(weight);
             
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
             Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,35 +89,35 @@ public class StatsPageController extends ContentPageController {
 
     @Override
     public void onContentInitialize() {       
-         try {
-            Stats s = new Stats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile());
-            Exercise e = new Exercise(0, "bænk", 0, "bryst");
-            for(int i = 0; i<3;i++){
-                SetInfo setinfo = new SetInfo((i+1), (i+10));
-                e.addSetInfo(setinfo);               
-            }
-            s.addExercises(e.getType(), new Date(), e);
-           //Stats stats =(Stats) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-            Stats stats = s;
-            if(stats!=null){
-               System.out.println("Stats her "+stats);
-               stats.getStatsMap().entrySet().forEach((entry) -> {
-               String key = entry.getKey();
-               HashMap value = entry.getValue();
-               choseBoks.getItems().add(key);
-             });
-            choseBoks.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
-            exerciseName.setText(choseBoks.getItems().toString());
-            charid.setTitle(choseBoks.getItems().toString());             
-           });
-                
-            }else{
-               showAlert("No Stats!", "There are not stats to your profile");
-               
-            }
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//         try {
+//           Stats s = new Stats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile());
+//            Exercise e = new Exercise(0, "bænk", 0, "bryst");
+//            for(int i = 0; i<3;i++){
+//                SetInfo setinfo = new SetInfo((i+1), (i+10));
+//                e.addSetInfo(setinfo);               
+//            }
+//            s.addExercises(e.getType(), new Date(), e);
+//           //Stats stats =(Stats) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentStats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
+//            Stats stats = s;
+//            if(stats!=null){
+//               System.out.println("Stats her "+stats);
+//               stats.getStatsMap().entrySet().forEach((entry) -> {
+//               String key = entry.getKey();
+//               HashMap value = entry.getValue();
+//               choseBoks.getItems().add(key);
+//             });
+//            choseBoks.getSelectionModel().selectedIndexProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
+//            exerciseName.setText(choseBoks.getItems().toString());
+//            charid.setTitle(choseBoks.getItems().toString());             
+//           });
+//                
+//            }else{
+//               showAlert("No Stats!", "There are not stats to your profile");
+//               
+//            }
+//        } catch (ServiceNotFoundException | ClassCastException ex) {
+//            Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
         private void showAlert (String title, String message) {
