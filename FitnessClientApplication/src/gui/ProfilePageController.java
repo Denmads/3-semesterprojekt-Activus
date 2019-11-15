@@ -134,13 +134,14 @@ public class ProfilePageController extends ContentPageController {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             try {
+                String username = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getUsername();
                 int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-                System.out.println(id);
-                boolean deleted = domainFacade.<IProfileService>getService(ServiceType.PROFILE).deleteAccount(id);
-                if (deleted){
-                    domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
-                }
+                domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
+                FXMain.showLoginPage();
+                domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).deleteAccount(username, id);
             } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
                 Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {

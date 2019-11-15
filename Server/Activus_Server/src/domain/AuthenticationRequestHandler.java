@@ -7,6 +7,7 @@ package domain;
 
 import Enums.RequestArgumentName;
 import static Enums.RequestType.CREATE_NEW_USER;
+import static Enums.RequestType.DELETE_ACCOUNT;
 import static Enums.RequestType.LOGIN;
 import static Enums.RequestType.LOGOUT;
 import Enums.ResponseArgumentName;
@@ -16,8 +17,8 @@ import models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
-import persistence.DatabaseFacade;
 import persistence.actions.CreateNewUserAction;
+import persistence.actions.DeleteAccountAction;
 import persistence.actions.GetProfileByLoginIdAction;
 import persistence.actions.IsUsernameUniqueAction;
 import persistence.actions.LogoutAction;
@@ -74,7 +75,14 @@ public class AuthenticationRequestHandler extends IRequestHandler {
             } catch (ArgumentNotFoundException | ClassCastException ex) {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        } else if (request.getRequestType().equals(DELETE_ACCOUNT))
+                try {
+                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    databaseFacade.execute(daa);
+                    response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
         return response;
     }

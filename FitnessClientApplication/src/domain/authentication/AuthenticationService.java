@@ -128,6 +128,22 @@ public class AuthenticationService extends IAuthenticationService {
     }
 
     @Override
+    public boolean deleteAccount(String profileUsername, int profileID) {
+        boolean isDeleted = false;
+        try {
+            Request req = createRequest(RequestType.DELETE_ACCOUNT);
+            req.addArgument(RequestArgumentName.USERNAME, profileUsername);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            isDeleted = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isDeleted;
+    }
+    
+    @Override
     public Request createServerRequest(ServiceType serviceType, RequestType type) {
         if (credentials != null) {
             return new Request(type, credentials, serviceType);        

@@ -88,21 +88,6 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean deleteAccount(int profileID) {
-        boolean isDeleted = false;
-        try {
-            Request req = createRequest(RequestType.DELETE_ACCOUNT);
-            req.addArgument(RequestArgumentName.PROFILE_ID, profileID);
-            
-            Response res = communicationLayer.sendRequest(req);
-            isDeleted = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
-        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return isDeleted;
-    }
-
-    @Override
     public boolean followProfile(int profileID) {
         return (boolean) returnResponsObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
     }

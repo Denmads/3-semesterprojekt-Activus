@@ -86,13 +86,6 @@ public class ProfileRequestHandler extends IRequestHandler {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 break;
-            case DELETE_ACCOUNT:
-                try {
-                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.PROFILE_ID));
-                    response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
-                } catch (ArgumentNotFoundException | ClassCastException ex) {
-                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
         }
         return response;
     }

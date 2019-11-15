@@ -36,8 +36,6 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean updateProfilePassWord(String newPassword);
 
-    public abstract boolean deleteAccount(int profileID);
-
     public abstract boolean followProfile(int profileID);
 
     public abstract boolean followTrainingProgram(int programID);
