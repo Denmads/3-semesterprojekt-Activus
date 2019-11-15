@@ -20,6 +20,7 @@ public enum ResponseArgumentName  implements Serializable {
     CHAT_HISTORY,
     EXERCISE, 
     MESSAGE,
-    ERRORS
+    ERRORS,
+    SEARCH_RESULT
 }
 

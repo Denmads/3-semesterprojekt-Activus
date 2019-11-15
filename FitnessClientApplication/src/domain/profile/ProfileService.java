@@ -20,7 +20,6 @@ import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import models.Stats;
 
-
 /**
  *
  * @author steff
@@ -38,13 +37,13 @@ public class ProfileService extends IProfileService {
         try {
 
             Request request = createRequest(RequestType.SEARCH);
-            request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
-            request.addArgument(RequestArgumentName.TEXT, searchString);
+            request.addArgument(RequestArgumentName.PROFILE_CITY, searchString);
+            request.addArgument(RequestArgumentName.PROFILE_GENDER, searchString);
+            request.addArgument(RequestArgumentName.PROFILE_AGE, );
+
             Response response = communicationLayer.sendRequest(request);
-            profiles = (List< Profile>) response.getArgument(ResponseArgumentName.PROFILE);
-        } catch (ArgumentNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServiceNotFoundException ex) {
+            profiles = (List<Profile>) response.getArgument(ResponseArgumentName.SEARCH_RESULT);
+        } catch (ArgumentNotFoundException | ServiceNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -69,12 +68,12 @@ public class ProfileService extends IProfileService {
             Response res = communicationLayer.sendRequest(req);
             System.out.println("response: " + res);
             System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
-            isUpdated = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
 
             if (isUpdated) {
                 currentProfile = newProfileInfo;
             }
-            
+
             return isUpdated;
         } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
@@ -158,7 +157,7 @@ public class ProfileService extends IProfileService {
     @Override
     public Stats getCurrentStats(int ProfileID) {
         return (Stats) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
-       
+
     }
 
 }

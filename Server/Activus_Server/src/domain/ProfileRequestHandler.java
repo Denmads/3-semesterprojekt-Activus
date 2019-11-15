@@ -17,6 +17,7 @@ import layerInterfaces.IDatabaseFacade;
 import org.jooq.TableField;
 import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
+import persistence.actions.SearchAction;
 import persistence.actions.SetStatsAction;
 import static persistence.database.generated.Tables.PROFILE;
 
@@ -25,7 +26,7 @@ import static persistence.database.generated.Tables.PROFILE;
  * @author madsh
  */
 public class ProfileRequestHandler extends IRequestHandler {
-    
+
     public ProfileRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
@@ -93,6 +94,33 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            case SEARCH:
+                int number = 0;
+                String empty = "";
+                boolean check = false;
+                boolean check2 = false;
+
+                try {
+                    SearchAction sa = new SearchAction(request.getArgument(RequestArgumentName.PROFILE_AGE), empty, empty);
+                    databaseFacade.execute(sa);
+
+                    check = sa.hasResult();
+
+                    if (check) {
+                        sa = new SearchAction(number, request.getArgument(RequestArgumentName.PROFILE_GENDER), empty);
+                        databaseFacade.execute(sa);
+                        check2 = sa.hasResult();
+                    }
+                    if (check2) {
+                        sa = new SearchAction(number, empty, request.getArgument(RequestArgumentName.PROFILE_CITY));
+                        databaseFacade.execute(sa);
+                    }
+                    response.addArgument(ResponseArgumentName.SEARCH_RESULT, sa.getResult());
+
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
         }
         return response;
     }

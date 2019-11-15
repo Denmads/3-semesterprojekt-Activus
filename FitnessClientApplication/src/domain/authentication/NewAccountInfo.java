@@ -1,27 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain.authentication;
 
 /**
- * Contains minimum info to create a new account
- * A model class
+ * Contains minimum info to create a new account A model class
  *
  * @author madsh
  */
 public class NewAccountInfo {
+
     private String firstName;
     private String lastName;
     private String username;
     private String password;
-    
-    public NewAccountInfo(String firstName, String lastName, String username, String password) {
+    private String city;
+    private int age;
+    private String gender;
+
+    public NewAccountInfo(String firstName, String lastName, String username, String password, String city, int age, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.city = city;
+        this.age = age;
+        this.gender = gender;
     }
 
     public String getFirstName() {
@@ -39,6 +40,17 @@ public class NewAccountInfo {
     public String getPassword() {
         return password;
     }
-    
-    
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
 }

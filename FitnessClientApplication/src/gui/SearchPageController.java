@@ -13,6 +13,7 @@ import models.Exercise;
 import gui.ContentPageController;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -68,9 +69,6 @@ public class SearchPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Initializing comboBoxes
-        loadBoxes();
-
         //Search Profile--------------------------------------------------------
         //Making the requestBuddyButton & returnSearchLabel invisible until they're needed.
         requestBuddyButton.setVisible(false);
@@ -88,10 +86,15 @@ public class SearchPageController extends ContentPageController {
     public void onContentInitialize() {
         //Loading all exercises to the listview
         loadAllExercises();
+        //Initializing comboBoxes
+        loadBoxes();
     }
 
     @FXML
     private void handleSearchProfileButtonAction(ActionEvent event) {
+        //Clearing Listview
+        searchField.getItems().clear();
+        
         //Ensuring the label & requestBuddyButton is invisible.
         returnLabel.setVisible(false);
         requestBuddyButton.setVisible(false);
@@ -150,6 +153,15 @@ public class SearchPageController extends ContentPageController {
             //If only gender is chosen
         } else if (!genderBox.getSelectionModel().isEmpty() && cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
             returnList.addAll(searchByGender(gender));
+            //If all are chosen
+        } else if (!genderBox.getSelectionModel().isEmpty() && !cityBox.getSelectionModel().isEmpty() && !ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByCity(city));
+            
+            for (Profile p : returnList) {
+                if (p.getAge() < age || !gender.equals(p.getGender())) {
+                    returnList.remove(p);
+                }
+            }
         }
 
         //If the returned profiles match the search parameters they are put in the list.
@@ -174,7 +186,7 @@ public class SearchPageController extends ContentPageController {
     private List<Profile> searchByGender(String gender) {
 
         List<Profile> getList = new ArrayList();
-        getList.clear();
+
         try {
             getList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(gender, SearchType.GENDER);
 
@@ -193,7 +205,7 @@ public class SearchPageController extends ContentPageController {
     private List<Profile> searchByAge(int age) {
 
         List<Profile> getList = new ArrayList();
-        getList.clear();
+
         try {
             getList.addAll(searchByAll());
 
@@ -219,7 +231,7 @@ public class SearchPageController extends ContentPageController {
     private List<Profile> searchByCity(String city) {
 
         List<Profile> getList = new ArrayList();
-        getList.clear();
+
         try {
             getList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(city, SearchType.CITY);
 
@@ -240,13 +252,18 @@ public class SearchPageController extends ContentPageController {
         List<Profile> maleList = new ArrayList();
         List<Profile> femaleList = new ArrayList();
         List<Profile> allList = new ArrayList();
-        maleList.clear();
-        femaleList.clear();
-        allList.clear();
 
+        HashMap<SearchType, Object> map = new HashMap();
+        map.put(SearchType.GENDER, "Male");
+        map.put(SearchType.GENDER, "Female");
+        
         try {
             maleList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search("Male", SearchType.GENDER);
             femaleList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search("Female", SearchType.GENDER);
+            System.out.println(maleList);
+            System.out.println(femaleList);
+            System.out.println(allList);
+            
             allList.addAll(maleList);
             allList.addAll(femaleList);
 
@@ -319,19 +336,19 @@ public class SearchPageController extends ContentPageController {
         }
 
         //Filling cityBox
-        //ArrayList<Profile> checkList = null;
-        //ArrayList<String> cityList = new ArrayList();
-        //checkList.addAll(searchByAll());
-        //for (Profile p : checkList) {
-      //      if (!cityList.contains(p.getCity())) {
-        //        cityList.add(p.getCity());
-      //      }
-       // }
-        //for (String s : cityList) {
-       //     cityBox.getItems().add(s);
-     //   }
-      //  checkList.clear();
-    //    cityList.clear();
+        ArrayList<Profile> checkList = null;
+        ArrayList<String> cityList = new ArrayList();
+        checkList.addAll(searchByAll());
+        for (Profile p : checkList) {
+            if (!cityList.contains(p.getCity())) {
+                cityList.add(p.getCity());
+            }
+        }
+        for (String s : cityList) {
+            cityBox.getItems().add(s);
+        }
+        checkList.clear();
+        cityList.clear();
 
         //Search Exercise----------------------------
         exerciseTypeBox.getItems().add("Chest");
