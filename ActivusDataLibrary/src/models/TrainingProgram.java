@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class TrainingProgram implements Serializable{
 
+    private int id;
+    
     private String name;
     private String description;
     
@@ -21,6 +23,14 @@ public class TrainingProgram implements Serializable{
         exercises = new ArrayList();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }

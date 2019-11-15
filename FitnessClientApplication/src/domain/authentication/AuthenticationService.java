@@ -96,7 +96,7 @@ public class AuthenticationService extends IAuthenticationService {
         try {
             if (credentials != null) {
                 Request request = createRequest(RequestType.LOGOUT);
-                request.addArgument(RequestArgumentName.USER_ID, credentials.getUserId());
+                request.addArgument(RequestArgumentName.USER_ID, credentials.getLoginId());
                 communicationLayer.sendRequest(request);
             }
         } catch (ServiceNotFoundException ex) {

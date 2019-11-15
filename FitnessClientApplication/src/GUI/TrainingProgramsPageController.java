@@ -195,22 +195,22 @@ public class TrainingProgramsPageController extends ContentPageController {
                     
                     Dragboard db = event.getDragboard();
                     if (db.hasContent(PROJECT_DATA_FORMAT)) {
-                        Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-                        Exercise addedExercise = new Exercise();
-                        addedExercise.setID(exercise.getID());
-                        addedExercise.setName(exercise.getName());
-                        addedExercise.setDescription(exercise.getDescription());
-                        addedExercise.setType(exercise.getType());
-                        addedExercise.setSet(exercise.getSet());
-
-                        
-                        int index = cell.getIndex()+1;
-                        addedExercise.setIndexInProgram(index);
-                         
-                        //Add exercise in database
-                        addedExercises.add(index, addedExercise);
-                        trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
-                        event.consume();
+                        try {
+                            Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+                            Exercise addedExercise = exercise.clone();
+                            
+                            int index = cell.getIndex()+1;
+                            addedExercise.setIndexInProgram(index);
+                            
+                            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, trainingProgramList.getSelectionModel().getSelectedItem());
+                            addedExercises.add(index, addedExercise);
+                            trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
+                            event.consume();
+                        } catch (ServiceNotFoundException ex) {
+                            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassCastException ex) {
+                            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             });
@@ -232,13 +232,19 @@ public class TrainingProgramsPageController extends ContentPageController {
             public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
-                     Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-                     Exercise addedExercise = exercise.clone();
-                     
-                     //Add exercise in database
-                     addedExercises.add(addedExercise);
-                     trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
-                     trainingProgramList.refresh();
+                    try {
+                        Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+                        Exercise addedExercise = exercise.clone();
+                        
+                        domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, trainingProgramList.getSelectionModel().getSelectedItem());
+                        addedExercises.add(addedExercise);
+                        trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
+                        trainingProgramList.refresh();
+                    } catch (ServiceNotFoundException ex) {
+                        Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassCastException ex) {
+                        Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         });
@@ -248,10 +254,14 @@ public class TrainingProgramsPageController extends ContentPageController {
     private void addNewtrainingProgram(ActionEvent event) {
         TrainingProgram program = new TrainingProgram();
         if (openDialog("", "", false, program)) {
-            //Add program database
-            trainingProgramList.getSelectionModel().select(program);
-            trainingPrograms.add(program);
-            showProgramDetails(program);
+            try {
+                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).createNewTrainingProgram(program);
+                trainingProgramList.getSelectionModel().select(program);
+                trainingPrograms.add(program);
+                showProgramDetails(program);
+            } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -267,6 +277,32 @@ public class TrainingProgramsPageController extends ContentPageController {
         trainingProgramList.getSelectionModel().getSelectedItem().removeExercise(exercise);
         exerciseInProgramList.refresh();
         trainingProgramList.refresh();
+    }
+    
+    public void moveExerciseUp (int indexOfExercise) {
+        if (indexOfExercise == 0) {
+            return;
+        }
+        
+        Exercise e = addedExercises.get(indexOfExercise);
+        addedExercises.remove(indexOfExercise);
+        addedExercises.add(indexOfExercise-1, e);
+        exerciseInProgramList.refresh();
+        
+        //Update set index of indexOfSet - 1 and indexOfSet in DB
+    }
+    
+    public void moveExerciseDown (int indexOfExercise) {
+        if (indexOfExercise == addedExercises.size()) {
+            return;
+        }
+        
+        Exercise e = addedExercises.get(indexOfExercise);
+        addedExercises.remove(indexOfExercise);
+        addedExercises.add(indexOfExercise+1, e);
+        exerciseInProgramList.refresh();
+        
+        //Update set index of indexOfSet - 1 and indexOfSet in DB
     }
     
     public boolean openDialog (String name, String desc, boolean edit, TrainingProgram program) {

@@ -2,9 +2,6 @@ package persistence.actions;
 
 import java.sql.SQLException;
 import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Record1;
-import org.jooq.Result;
 import persistence.IDatabaseAction;
 import static persistence.database.generated.Tables.TRAINING_PROGRAM;
 
@@ -12,10 +9,9 @@ import static persistence.database.generated.Tables.TRAINING_PROGRAM;
  * Action to create a new training program in the DB
  * @author Patrick
  */
-public class CreateTrainingProgramAction extends IDatabaseAction<Boolean> {
+public class CreateTrainingProgramAction extends IDatabaseAction<Integer> {
 
-    private boolean result;
-    private boolean executed;
+    private int result = -1;
     
     private int ownerID;
     private String name;
@@ -29,23 +25,17 @@ public class CreateTrainingProgramAction extends IDatabaseAction<Boolean> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        //database.insertInto(TRAINING_PROGRAM).columns(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).values(ownerID,name,description).execute();
-        executed = true;
-        
-//        Record1<Integer> res = database.select(TRAINING_PROGRAM.ID).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.OWNERID.eq(ownerID)).and(TRAINING_PROGRAM.NAME.eq(name)).and(TRAINING_PROGRAM.DESCRIPTION.eq(description)).fetchAny();
-//        if(res.get(TRAINING_PROGRAM.ID) > -1){
-//            result = true;
-//        }
+        result = database.insertInto(TRAINING_PROGRAM).columns(TRAINING_PROGRAM.PROFILE_ID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).values(ownerID,name,description).returning(TRAINING_PROGRAM.ID).fetchOne().getValue(TRAINING_PROGRAM.ID);
     }
 
     @Override
-    public Boolean getResult() {
-        return executed ? result : false;
+    public Integer getResult() {
+        return result;
     }
 
     @Override
     public boolean hasResult() {
-        return executed;
+        return result != -1;
     }
     
 }

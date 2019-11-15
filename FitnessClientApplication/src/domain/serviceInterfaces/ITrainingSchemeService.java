@@ -2,6 +2,7 @@ package domain.serviceInterfaces;
 
 import Models.Exercise;
 import Enums.ServiceType;
+import Models.TrainingProgram;
 import java.util.ArrayList;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
@@ -22,11 +23,11 @@ public abstract class ITrainingSchemeService extends IService{
         type = ServiceType.TRAININGSCHEME;
     }
 
-    public abstract boolean createNewTrainingProgram(String programName);
+    public abstract boolean createNewTrainingProgram(TrainingProgram program);
 
     public abstract Exercise LoadExercise();
     
-    public abstract boolean addExercise(Exercise exercise);
+    public abstract boolean addExercise(Exercise exercise, TrainingProgram program);
     
     public abstract boolean removeExercise(Exercise exercise);
     

@@ -9,6 +9,7 @@ import Models.Exercise;
 import Models.SetInfo;
 import gui.TrainingProgramsPageController;
 import java.io.IOException;
+import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -79,11 +80,21 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
         controller.deleteExerciseFromProgram(getItem());
     }
     
+    @FXML
+    private void moveExerciseUp (MouseEvent event) {
+        controller.moveExerciseUp(getIndex());
+    }
+    
+    @FXML
+    private void moveExerciseDown (MouseEvent event) {
+        controller.moveExerciseDown(getIndex());
+    }
     
     @FXML
     private void addSet (MouseEvent event) {
         //Add set in database
-        SetInfo info = new SetInfo(10, 10);
+        SetInfo info = new SetInfo(new Random().nextInt(20), 10);
+        info.setSetIndex(sets.size());
         sets.add(info);
         getItem().addSetInfo(info);
         setsList.setPrefHeight(33.5 * sets.size());
@@ -95,5 +106,31 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
         getItem().removeSetInfo(info);
         setsList.refresh();
         setsList.setPrefHeight(33.5 * sets.size());
+    }
+    
+    public void moveSetUp (int indexOfSet) {
+        if (indexOfSet == 0) {
+            return;
+        }
+        
+        SetInfo info = sets.get(indexOfSet);
+        sets.remove(indexOfSet);
+        sets.add(indexOfSet-1, info);
+        setsList.refresh();
+        
+        //Update set index of indexOfSet - 1 and indexOfSet in DB
+    }
+    
+    public void moveSetDown (int indexOfSet) {
+        if (indexOfSet == sets.size()-1) {
+            return;
+        }
+        
+        SetInfo info = sets.get(indexOfSet);
+        sets.remove(indexOfSet);
+        sets.add(indexOfSet+1, info);
+        setsList.refresh();
+        
+        //Update set index of indexOfSet + 1 and indexOfSet in DB
     }
 }

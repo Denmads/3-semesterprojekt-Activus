@@ -68,5 +68,13 @@ public class SetInfoCellController extends ListCell<SetInfo>{
         parent.deleteSet(getItem());
     }
     
+    @FXML
+    private void moveSetUp (MouseEvent event) {
+        parent.moveSetUp(getIndex());
+    }
     
+    @FXML
+    private void moveSetDown (MouseEvent event) {
+        parent.moveSetDown(getIndex());
+    }
 }

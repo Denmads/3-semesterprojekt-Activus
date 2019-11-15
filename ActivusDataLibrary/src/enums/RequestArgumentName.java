@@ -11,9 +11,6 @@ public enum RequestArgumentName implements Serializable {
     PROFILE_ID,
     PROFILE_LIST_OF_CHANGES,
     PROFILE_LIST_OF_TABLE_FIELDS,
-    PROGRAM_ID,
-    PROGRAM_OWNER_ID,
-    PROGRAM_DESCRIPTION,
     STAT_ID,
     USERNAME,
     PASSWORD,
@@ -29,12 +26,11 @@ public enum RequestArgumentName implements Serializable {
     EXERCISE_TIME,
     MESSAGE,
     PROGRAM_NAME,
+    PROGRAM_ID,
+    PROGRAM_DESCRIPTION,
     PROGRAM_TIME_TAKEN,
-    PROGRAM_REPS,
-    PROGRAM_SETS,
-    PROGRAM_WEIGHT,
     PROGRAM_DATE,
     SENDER_ID,
-    RECIVER_ID
-    
+    RECIVER_ID,
+    INDEX    
 }

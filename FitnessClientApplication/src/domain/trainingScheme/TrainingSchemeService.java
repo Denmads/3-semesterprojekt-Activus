@@ -10,6 +10,7 @@ import Exceptions.ServiceNotFoundException;
 import Models.Profile;
 import Models.Request;
 import Models.Response;
+import Models.TrainingProgram;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import java.util.ArrayList;
@@ -29,11 +30,17 @@ public class TrainingSchemeService extends ITrainingSchemeService {
     }
 
     @Override
-    public boolean createNewTrainingProgram(String programName) {
+    public boolean createNewTrainingProgram(TrainingProgram program) {
         try {
             Request request = createRequest(RequestType.CREATE_TRAINING_PROGRAM);
-            request.addArgument(RequestArgumentName.PROGRAM_NAME, programName);
-            communicationLayer.sendRequest(request);
+            request.addArgument(RequestArgumentName.PROGRAM_NAME, program.getName());
+            request.addArgument(RequestArgumentName.PROGRAM_DESCRIPTION, program.getDescription());
+            Response response = communicationLayer.sendRequest(request);
+            try {
+                program.setId((int)response.getArgument(ResponseArgumentName.NEW_ID));
+            } catch (ArgumentNotFoundException ex) {
+                Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return true;
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(TrainingSchemeService.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,10 +54,12 @@ public class TrainingSchemeService extends ITrainingSchemeService {
     }
 
     @Override
-    public boolean addExercise(Exercise exercise) {
+    public boolean addExercise(Exercise exercise, TrainingProgram program) {
         try {
             Request request = createRequest(RequestType.ADD_EXERCISE);
             request.addArgument(RequestArgumentName.EXERCISE, exercise);
+            request.addArgument(RequestArgumentName.PROGRAM_ID, program.getId());
+            request.addArgument(RequestArgumentName.INDEX, exercise.getIndexInProgram());
             communicationLayer.sendRequest(request);
             return true;
         } catch (ServiceNotFoundException ex) {

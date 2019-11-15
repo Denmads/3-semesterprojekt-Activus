@@ -19,35 +19,27 @@ import static persistence.database.generated.Tables.TRAINING_PROGRAM_EXERCISE;
  */
 public class AddExerciseToTrainingProgramAction extends IDatabaseAction<Boolean> {
 
-    private boolean result;
     private boolean executed;
     
     private int exerciseID;
     private int trainingProgramID;
-
-    public AddExerciseToTrainingProgramAction(int exerciseID, int trainingProgramID) {
+    private int index;
+    
+    public AddExerciseToTrainingProgramAction(int exerciseID, int trainingProgramID, int index) {
         this.exerciseID = exerciseID;
         this.trainingProgramID = trainingProgramID;
+        this.index = index;
     }
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        database.insertInto(TRAINING_PROGRAM_EXERCISE).columns(TRAINING_PROGRAM_EXERCISE.EXERCISEID, TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID).values(exerciseID, trainingProgramID).execute();
+        database.insertInto(TRAINING_PROGRAM_EXERCISE).columns(TRAINING_PROGRAM_EXERCISE.EXERCISEID, TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID, TRAINING_PROGRAM_EXERCISE.INDEX).values(exerciseID, trainingProgramID, index).execute();
         executed = true;
-        
-        Result<Record1<Integer>> res = database.select(TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID).from(TRAINING_PROGRAM_EXERCISE).where(TRAINING_PROGRAM_EXERCISE.EXERCISEID.eq(exerciseID)).fetch();
-        for(Record rec : res){
-            if(rec.equals(trainingProgramID)){
-                result = true;
-                break;
-            }
-        }
-        
     }
 
     @Override
     public Boolean getResult() {
-        return executed ? result : false;
+        return executed;
     }
 
     @Override

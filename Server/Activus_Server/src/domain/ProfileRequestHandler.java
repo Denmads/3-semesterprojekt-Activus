@@ -1,6 +1,5 @@
 package domain;
 
-import domain.IRequestHandler;
 import Enums.RequestArgumentName;
 import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
@@ -12,7 +11,6 @@ import persistence.actions.UpdateUsernameAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
-import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.SetStatsAction;
 
@@ -49,13 +47,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case SET_STAT:                
-                try {
-                    SetStatsAction ssa = new SetStatsAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_TIME_TAKEN), request.getArgument(RequestArgumentName.PROGRAM_REPS), request.getArgument(RequestArgumentName.PROGRAM_SETS), request.getArgument(RequestArgumentName.PROGRAM_WEIGHT), request.getArgument(RequestArgumentName.PROGRAM_DATE));
-                    response.addArgument(ResponseArgumentName.SUCCESS, ssa.getResult());
-                } catch (ArgumentNotFoundException | ClassCastException ex) {
-                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                break;
+              break;
             case UPDATE_PROFILE:
                 try {
                     //FIGURE OUT: The arguments for the UpdateProfileAction constructor.

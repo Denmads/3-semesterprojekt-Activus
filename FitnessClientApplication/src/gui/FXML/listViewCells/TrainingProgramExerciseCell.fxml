@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ff914d; -fx-background-radius: 20;" vgap="5.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane hgap="5.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ff914d; -fx-background-radius: 20;" vgap="5.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
@@ -29,13 +29,39 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <HBox style="-fx-background-color: #ff6666; -fx-background-radius: 10;" GridPane.columnIndex="3">
+      <HBox spacing="10.0" GridPane.columnIndex="3">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#deleteExercise" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Images/TrainingProgram/delete.png" />
-               </image>
-            </ImageView>
+            <HBox spacing="5.0">
+               <children>
+                  <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#moveExerciseUp" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#moveExerciseDown" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox style="-fx-background-color: #ff6666; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#deleteExercise" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/TrainingProgram/delete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
       </HBox>
       <VBox alignment="TOP_CENTER" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="1">
