@@ -52,14 +52,18 @@ public class StatsPageController extends ContentPageController {
         try {
 //            Stats s = new Stats(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile());
             Stats s = new Stats(new Profile(1));
-            Exercise e = new Exercise(0, "bænk", 0, "bryst");
+            for(int j=0; j<5;j++){
+            
+        
+            Exercise e = new Exercise(j, "bænk", j, "bryst");
             for(int i = 0; i<3;i++){
-                SetInfo setinfo = new SetInfo((i+1), (i+10));
+                SetInfo setinfo = new SetInfo((i+j), (i+10+j));
                 e.addSetInfo(setinfo);
                 
             }
-            s.addExercises(e.getType(), new Date(), e);
-            s.addExercises(e.getType(), new Date(2000), e);
+            Date date = new Date(j,j,j,j,j);
+            s.addExercises(e.getType(), date, e);
+            s.addExercises(e.getType(), date, e);
             XYChart.Series reps= new XYChart.Series<>();
             XYChart.Series weight= new XYChart.Series<>();
             
@@ -81,6 +85,8 @@ public class StatsPageController extends ContentPageController {
             }
             charid.getData().addAll(reps);
             charid.getData().addAll(weight);
+            }
+            
             
         } catch (ClassCastException ex) {
             Logger.getLogger(StatsPageController.class.getName()).log(Level.SEVERE, null, ex);
