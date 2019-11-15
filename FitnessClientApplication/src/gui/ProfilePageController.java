@@ -135,6 +135,7 @@ public class ProfilePageController extends ContentPageController {
         if(result.get() == ButtonType.OK){
             try {
                 int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                System.out.println(id);
                 boolean deleted = domainFacade.<IProfileService>getService(ServiceType.PROFILE).deleteAccount(id);
                 if (deleted){
                     domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();

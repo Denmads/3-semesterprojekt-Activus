@@ -29,7 +29,7 @@ public class DeleteAccountAction extends IDatabaseAction<Boolean> {
         
         Result<Record> res = database.select().from(PROFILE).where(PROFILE.ID.eq(profileId)).fetch();
         accountDeleted = res.isEmpty();
-        
+        System.out.println("Deleted " + executed);
         executed = true;
     }
 
