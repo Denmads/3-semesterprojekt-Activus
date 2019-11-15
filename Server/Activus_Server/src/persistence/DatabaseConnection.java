@@ -37,7 +37,7 @@ public class DatabaseConnection {
     
     private void readConfig () {
         //Change if path on server is changed
-        File f = new File("config.properties"); //TILFØJ home/ 
+        File f = new File("home/config.properties");
         System.out.println(f.getAbsolutePath());
         
         try (FileReader reader = new FileReader(f)) {
