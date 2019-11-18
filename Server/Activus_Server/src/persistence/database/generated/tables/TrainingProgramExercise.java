@@ -41,7 +41,7 @@ import persistence.database.generated.tables.records.TrainingProgramExerciseReco
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TrainingProgramExercise extends TableImpl<TrainingProgramExerciseRecord> {
 
-    private static final long serialVersionUID = 22305340;
+    private static final long serialVersionUID = 416765883;
 
     /**
      * The reference instance of <code>public.training_program_exercise</code>
@@ -67,9 +67,9 @@ public class TrainingProgramExercise extends TableImpl<TrainingProgramExerciseRe
     public final TableField<TrainingProgramExerciseRecord, Integer> TRAINING_PROGRAMID = createField(DSL.name("training_programid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>public.training_program_exercise.setid</code>.
+     * The column <code>public.training_program_exercise.index</code>.
      */
-    public final TableField<TrainingProgramExerciseRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<TrainingProgramExerciseRecord, Integer> INDEX = createField(DSL.name("index"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.training_program_exercise</code> table reference

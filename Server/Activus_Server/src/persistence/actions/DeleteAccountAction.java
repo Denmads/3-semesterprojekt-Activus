@@ -2,10 +2,8 @@ package persistence.actions;
 
 import java.sql.SQLException;
 import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Result;
 import persistence.IDatabaseAction;
-import static persistence.database.generated.Tables.PROFILE;
+import static persistence.database.generated.Tables.LOGIN;
 
 /**
  *
@@ -16,20 +14,21 @@ public class DeleteAccountAction extends IDatabaseAction<Boolean> {
 
     private boolean accountDeleted = false;
     private boolean executed = false;
-            
-    private int profileId;
 
-    public DeleteAccountAction(int profileId) {
-        this.profileId = profileId;
+    private String profileName;
+    private int profileID;
+
+    public DeleteAccountAction(String profileName, int profileID) {
+        this.profileName = profileName;
+        this.profileID = profileID;
     }
-    
+
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        database.deleteFrom(PROFILE).where(PROFILE.ID.eq(profileId)).execute();
-        
-        Result<Record> res = database.select().from(PROFILE).where(PROFILE.ID.eq(profileId)).fetch();
-        accountDeleted = res.isEmpty();
-        
+
+        database.update(LOGIN).set(LOGIN.FLAG, true).where(LOGIN.ID.eq(profileID)).execute();
+
+        accountDeleted = database.select(LOGIN.FLAG).from(LOGIN).where(LOGIN.ID.eq(profileID)).fetchOne().getValue(LOGIN.FLAG);
         executed = true;
     }
 
@@ -42,5 +41,5 @@ public class DeleteAccountAction extends IDatabaseAction<Boolean> {
     public boolean hasResult() {
         return executed;
     }
-    
+
 }

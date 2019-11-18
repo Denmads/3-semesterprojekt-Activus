@@ -7,6 +7,7 @@ package domain;
 
 import Enums.RequestArgumentName;
 import static Enums.RequestType.CREATE_NEW_USER;
+import static Enums.RequestType.DELETE_ACCOUNT;
 import static Enums.RequestType.LOGIN;
 import static Enums.RequestType.LOGOUT;
 import Enums.ResponseArgumentName;
@@ -16,8 +17,8 @@ import models.Response;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
-import persistence.DatabaseFacade;
 import persistence.actions.CreateNewUserAction;
+import persistence.actions.DeleteAccountAction;
 import persistence.actions.GetProfileByLoginIdAction;
 import persistence.actions.IsUsernameUniqueAction;
 import persistence.actions.LogoutAction;
@@ -75,7 +76,6 @@ public class AuthenticationRequestHandler extends IRequestHandler {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
         return response;
     }
 }
