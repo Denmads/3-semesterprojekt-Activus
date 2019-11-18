@@ -135,10 +135,8 @@ public class ProfilePageController extends ContentPageController {
         if(result.get() == ButtonType.OK){
             try {
                 String username = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getUsername();
-                int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-                domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
-                FXMain.showLoginPage();
-                domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).deleteAccount(username, id);
+                //int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                domainFacade.<IProfileService>getService(ServiceType.PROFILE).deleteAccount(username);
             } catch (ServiceNotFoundException | ClassCastException ex) {
                 Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {

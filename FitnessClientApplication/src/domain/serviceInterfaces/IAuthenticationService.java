@@ -28,8 +28,6 @@ public abstract class IAuthenticationService extends IService {
     public abstract void logout();
 
     public abstract String createAccount(NewAccountInfo accountInfo);
-    
-    public abstract boolean deleteAccount(String profileUsername, int profileID);
 
     public abstract Request createServerRequest(ServiceType serviceType, RequestType type);
 }

@@ -45,6 +45,8 @@ public abstract class IProfileService extends IService {
     public abstract boolean acceptBuddyRequest(int requestingProfileID);
 
     public abstract boolean setGoal(String Goal);
+    
+    public abstract boolean deleteAccount(String profileUsername);
 
     public abstract int setStats(Exercise exercise);
 

@@ -16,10 +16,10 @@ import models.Request;
 import models.Response;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
+import gui.FXMain;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import models.Stats;
-
 
 /**
  *
@@ -69,12 +69,12 @@ public class ProfileService extends IProfileService {
             Response res = communicationLayer.sendRequest(req);
             System.out.println("response: " + res);
             System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
-            isUpdated = (boolean)res.getArgument(ResponseArgumentName.SUCCESS);
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
 
             if (isUpdated) {
                 currentProfile = newProfileInfo;
             }
-            
+
             return isUpdated;
         } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
@@ -139,6 +139,32 @@ public class ProfileService extends IProfileService {
         return object;
     }
 
+    @Override
+    public boolean deleteAccount(String profileUsername) {
+        boolean isDeleted = false;
+        try {
+            try {
+                Request req = createRequest(RequestType.DELETE_ACCOUNT);
+                req.addArgument(RequestArgumentName.USERNAME, profileUsername);
+
+                Response res = communicationLayer.sendRequest(req);
+                isDeleted = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+                Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
+            FXMain.showLoginPage();
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isDeleted;
+    }
+
     /**
      *
      * @param ProfileID
@@ -147,7 +173,7 @@ public class ProfileService extends IProfileService {
     @Override
     public Stats getCurrentStats(int ProfileID) {
         return (Stats) returnResponsObject(RequestType.LOAD_ALL_STATS, RequestArgumentName.STAT_ID, ResponseArgumentName.STATS, ProfileID);
-       
+
     }
 
 }
