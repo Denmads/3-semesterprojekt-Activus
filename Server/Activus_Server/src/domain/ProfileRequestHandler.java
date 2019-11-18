@@ -3,6 +3,7 @@ package domain;
 import domain.IRequestHandler;
 import Enums.RequestArgumentName;
 import Enums.ResponseArgumentName;
+import Enums.SearchType;
 import Exceptions.ArgumentNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,28 +96,20 @@ public class ProfileRequestHandler extends IRequestHandler {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
             case SEARCH:
-                int number = 0;
-                String empty = "";
-                boolean check = false;
-                boolean check2 = false;
-
                 try {
-                    SearchAction sa = new SearchAction(request.getArgument(RequestArgumentName.PROFILE_AGE), empty, empty);
+                    SearchAction sa = null;
+
+                    if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.AGE)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_AGE);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.CITY)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_CITY);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.GENDER)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_GENDER);
+                    }
+
                     databaseFacade.execute(sa);
-
-                    check = sa.hasResult();
-
-                    if (check) {
-                        sa = new SearchAction(number, request.getArgument(RequestArgumentName.PROFILE_GENDER), empty);
-                        databaseFacade.execute(sa);
-                        check2 = sa.hasResult();
-                    }
-                    if (check2) {
-                        sa = new SearchAction(number, empty, request.getArgument(RequestArgumentName.PROFILE_CITY));
-                        databaseFacade.execute(sa);
-                    }
-                    response.addArgument(ResponseArgumentName.SEARCH_RESULT, sa.getResult());
-
+                    response.addArgument(ResponseArgumentName.SUCCESS, sa.getResult());
+                    
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
