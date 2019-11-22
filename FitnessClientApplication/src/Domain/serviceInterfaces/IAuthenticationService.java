@@ -3,11 +3,11 @@ package Domain.serviceInterfaces;
 import Domain.authentication.NewAccountInfo;
 import Enums.RequestType;
 import Enums.ServiceType;
-import LayerInterfaces.IService;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
-import Models.CredentialsContainer;
-import Models.Request;
+import layerInterfaces.IService;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
+import models.CredentialsContainer;
+import models.Request;
 
 /**
  * The service provinding methods related to authentication and login

@@ -5,8 +5,8 @@
  */
 package LayerInterfaces;
 
-import Models.Request;
-import Models.Response;
+import models.Request;
+import models.Response;
 
 /**
  *

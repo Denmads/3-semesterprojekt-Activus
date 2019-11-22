@@ -1,7 +1,7 @@
 package LayerInterfaces;
 
-import Models.Request;
-import Models.Response;
+import models.Request;
+import models.Response;
 
 /**
  * Can send request to the server and get a response back
