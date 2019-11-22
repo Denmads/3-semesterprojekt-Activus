@@ -15,7 +15,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.TrainingProgramRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
 
-    private static final long serialVersionUID = 825845714;
+    private static final long serialVersionUID = 292421790;
 
     /**
      * The reference instance of <code>public.training_program</code>
@@ -71,6 +71,11 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
      * The column <code>public.training_program.description</code>.
      */
     public final TableField<TrainingProgramRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'No Description'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>public.training_program.profile_id</code>.
+     */
+    public final TableField<TrainingProgramRecord, Integer> PROFILE_ID = createField(DSL.name("profile_id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.training_program</code> table reference
@@ -131,6 +136,15 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
     }
 
     @Override
+    public List<ForeignKey<TrainingProgramRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<TrainingProgramRecord, ?>>asList(Keys.TRAINING_PROGRAM__PROFILE_ID);
+    }
+
+    public Profile profile() {
+        return new Profile(this, Keys.TRAINING_PROGRAM__PROFILE_ID);
+    }
+
+    @Override
     public TrainingProgram as(String alias) {
         return new TrainingProgram(DSL.name(alias), this);
     }
@@ -157,11 +171,11 @@ public class TrainingProgram extends TableImpl<TrainingProgramRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Integer, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Integer, String, String, Integer> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

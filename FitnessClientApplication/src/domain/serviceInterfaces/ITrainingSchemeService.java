@@ -1,10 +1,11 @@
 package Domain.serviceInterfaces;
 
-import Domain.trainingScheme.Exercise;
+import models.Exercise;
 import Enums.ServiceType;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
-import LayerInterfaces.IService;
+import java.util.ArrayList;
+import layerInterfaces.ICommunicationFacade;
+import layerInterfaces.IDomainFacade;
+import layerInterfaces.IService;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  * @author Victor
  */
 public abstract class ITrainingSchemeService extends IService{
+    
+    protected ArrayList<Exercise> allExercises;
 
     public ITrainingSchemeService(ICommunicationFacade communication, IDomainFacade domainFacade) {
         super(communication, domainFacade);
@@ -27,8 +30,11 @@ public abstract class ITrainingSchemeService extends IService{
     
     public abstract boolean removeExercise(Exercise exercise);
     
-    public abstract List<Exercise> loadAllExercise();
+    public abstract void loadAllExercise();
     
     
     
+    public List<Exercise> getAllExercises() {
+        return allExercises;
+    }
 }

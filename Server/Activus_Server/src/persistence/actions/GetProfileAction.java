@@ -1,6 +1,6 @@
 package persistence.actions;
 
-import Models.Profile;
+import models.Profile;
 import static persistence.database.generated.Tables.LOGIN;
 import static persistence.database.generated.Tables.PROFILE;
 import persistence.database.generated.tables.Login;

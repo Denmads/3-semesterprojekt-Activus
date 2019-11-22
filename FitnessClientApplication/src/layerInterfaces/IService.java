@@ -4,7 +4,7 @@ import Domain.serviceInterfaces.IAuthenticationService;
 import Enums.RequestType;
 import Exceptions.ServiceNotFoundException;
 import Enums.ServiceType;
-import Models.Request;
+import models.Request;
 
 /**
  * Defines a service in the domain layer, and makes sure it have access to the domainFacade and communication layer

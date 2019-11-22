@@ -13,10 +13,10 @@ import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
-import LayerInterfaces.ICommunicationFacade;
-import LayerInterfaces.IDomainFacade;
-import Models.Request;
-import Models.Response;
+import models.Request;
+import models.Response;
+import domain.serviceInterfaces.IChatService;
+import domain.serviceInterfaces.IProfileService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -1,7 +1,6 @@
-package Models;
+package models;
 
 import java.io.Serializable;
-import java.util.List;
 
 
 /**
@@ -20,11 +19,11 @@ public class Profile implements Serializable {
     private String country;
     private String gender;
     private String gym;
-
     private int[] buddyIds;
 
     public Profile(int profileId) {
         this.profileId = profileId;
+        age = -1;
     }
     
 
@@ -107,6 +106,4 @@ public class Profile implements Serializable {
     public void setAge(int age) {
         this.age = age;
     }
-
-    
 }

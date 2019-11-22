@@ -15,7 +15,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.LoginRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Login extends TableImpl<LoginRecord> {
 
-    private static final long serialVersionUID = -1241392703;
+    private static final long serialVersionUID = 1452038254;
 
     /**
      * The reference instance of <code>public.login</code>
@@ -76,6 +76,11 @@ public class Login extends TableImpl<LoginRecord> {
      * The column <code>public.login.password_salt</code>.
      */
     public final TableField<LoginRecord, byte[]> PASSWORD_SALT = createField(DSL.name("password_salt"), org.jooq.impl.SQLDataType.BLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>public.login.flag</code>.
+     */
+    public final TableField<LoginRecord, Boolean> FLAG = createField(DSL.name("flag"), org.jooq.impl.SQLDataType.BOOLEAN.nullable(false).defaultValue(org.jooq.impl.DSL.field("false", org.jooq.impl.SQLDataType.BOOLEAN)), this, "");
 
     /**
      * Create a <code>public.login</code> table reference
@@ -162,11 +167,11 @@ public class Login extends TableImpl<LoginRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, byte[], byte[]> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row5<Integer, String, byte[], byte[], Boolean> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

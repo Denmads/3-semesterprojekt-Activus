@@ -16,7 +16,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row5;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -43,7 +43,7 @@ import persistence.database.generated.tables.records.StatsRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Stats extends TableImpl<StatsRecord> {
 
-    private static final long serialVersionUID = 59750537;
+    private static final long serialVersionUID = 1031153071;
 
     /**
      * The reference instance of <code>public.stats</code>
@@ -79,29 +79,9 @@ public class Stats extends TableImpl<StatsRecord> {
     public final TableField<StatsRecord, Long> TIME_TAKEN = createField(DSL.name("time_taken"), org.jooq.impl.SQLDataType.BIGINT.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.BIGINT)), this, "");
 
     /**
-     * The column <code>public.stats.rebs</code>.
-     */
-    public final TableField<StatsRecord, Integer> REBS = createField(DSL.name("rebs"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>public.stats.sets</code>.
-     */
-    public final TableField<StatsRecord, Integer> SETS = createField(DSL.name("sets"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
-
-    /**
-     * The column <code>public.stats.weight</code>.
-     */
-    public final TableField<StatsRecord, Integer> WEIGHT = createField(DSL.name("weight"), org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("(-1)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
-
-    /**
      * The column <code>public.stats.date</code>.
      */
     public final TableField<StatsRecord, Date> DATE = createField(DSL.name("date"), org.jooq.impl.SQLDataType.DATE.nullable(false), this, "");
-
-    /**
-     * The column <code>public.stats.setid</code>.
-     */
-    public final TableField<StatsRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>public.stats</code> table reference
@@ -201,11 +181,11 @@ public class Stats extends TableImpl<StatsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row5 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, Integer, Integer, Long, Integer, Integer, Integer, Date, Integer> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row5<Integer, Integer, Integer, Long, Date> fieldsRow() {
+        return (Row5) super.fieldsRow();
     }
 }

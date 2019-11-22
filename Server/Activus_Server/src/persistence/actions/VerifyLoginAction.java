@@ -1,5 +1,7 @@
 package persistence.actions;
 
+
+import models.CredentialsContainer;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import persistence.IDatabaseAction;
@@ -32,17 +34,17 @@ public class VerifyLoginAction extends IDatabaseAction<Boolean> {
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
-        
+        //Fetching login information from database.
+        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username).and(LOGIN.FLAG.eq(false))).fetch();
+
+        //If the database returns something(Isn't empty) the password is verified.
         if (!res.isEmpty()) {
             Record record = res.get(0);
             
-            byte[] passSalt = record.getValue(LOGIN.PASSWORD_SALT);
-            byte[] hashedPassword = null;
-            try {
-                hashedPassword = PasswordTool.hashPassword(password, passSalt);
-            } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
-                Logger.getLogger(VerifyLoginAction.class.getName()).log(Level.SEVERE, null, ex);
+            boolean loginCorrect = checkPassword(record);
+            if (loginCorrect) {
+                int id = record.getValue(LOGIN.ID);
+                credentials = new CredentialsContainer(username, id, createAuthenticationToken(database, record));
             }
             
             loginCorrect = Arrays.equals(hashedPassword, record.getValue(LOGIN.HASH_PASSWORD));

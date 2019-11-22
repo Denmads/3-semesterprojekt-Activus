@@ -1,9 +1,8 @@
 package Communication;
 
-import Domain.RequestDelegater;
-import LayerInterfaces.IRequestDelegater;
-import Models.Request;
-import Models.Response;
+import layerInterfaces.IRequestDelegater;
+import models.Request;
+import models.Response;
 import java.io.*;
 import java.net.Socket;
 

@@ -1,7 +1,7 @@
 package gui.cellsControllers;
 
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
+import models.SetInfo;
 import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -108,12 +108,10 @@ public class TodaysCellController extends ListCell<Exercise> {
                 weightBox.getChildren().add(weight);
                 
                 setsList.getChildren().add(root);
-                
-                
-                
-                setText(null);
-                setGraphic(parent);
             }
+            
+            setText(null);
+            setGraphic(parent);
         }
     }
     

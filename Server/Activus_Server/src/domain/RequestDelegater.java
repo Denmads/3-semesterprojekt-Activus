@@ -1,9 +1,9 @@
 package Domain;
 
 import Enums.ServiceType;
-import LayerInterfaces.IRequestDelegater;
-import Models.Request;
-import Models.Response;
+import layerInterfaces.IRequestDelegater;
+import models.Request;
+import models.Response;
 import persistence.DatabaseFacade;
 import persistence.IDatabaseAction;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class RequestDelegater implements IRequestDelegater{
 
     public Response delegate(Request request) {
 
-        Response response = null;
+        Response response = new Response();
 
         if (request.getServiceType() == ServiceType.AUTHENTICATION) {
             response = requestHandlers.get(request.getServiceType()).handleRequest(request);
@@ -41,7 +41,8 @@ public class RequestDelegater implements IRequestDelegater{
             if (authenticateRequest(request)) {
                 response = requestHandlers.get(request.getServiceType()).handleRequest(request);
             } else {
-                //TODO: Create response object with Authentiation Error
+                //TODO
+                System.out.println("authentication Failed");
             }
         }
 

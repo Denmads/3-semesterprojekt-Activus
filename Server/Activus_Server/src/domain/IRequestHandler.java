@@ -5,8 +5,10 @@
  */
 package Domain;
 
-import Models.Request;
-import Models.Response;
+
+import models.Request;
+import models.Response;
+import layerInterfaces.IDatabaseFacade;
 import persistence.DatabaseFacade;
 
 /**

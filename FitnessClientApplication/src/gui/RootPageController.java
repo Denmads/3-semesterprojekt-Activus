@@ -129,6 +129,7 @@ public class RootPageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/" + fxml + ".fxml"));
             Parent contentRoot = loader.load();
             ContentPageController contentController = loader.getController();
+            System.out.println(domainFacade);
             contentController.setDomainFacade(domainFacade);
             contentPane.setCenter(contentRoot);
         } catch (IOException ex) {

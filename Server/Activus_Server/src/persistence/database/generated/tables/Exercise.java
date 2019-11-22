@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.ExerciseRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Exercise extends TableImpl<ExerciseRecord> {
 
-    private static final long serialVersionUID = -1158633180;
+    private static final long serialVersionUID = 217494120;
 
     /**
      * The reference instance of <code>public.exercise</code>
@@ -73,9 +73,9 @@ public class Exercise extends TableImpl<ExerciseRecord> {
     public final TableField<ExerciseRecord, String> DESCRIPTION = createField(DSL.name("description"), org.jooq.impl.SQLDataType.VARCHAR(1000).nullable(false).defaultValue(org.jooq.impl.DSL.field("'If you cant tell by the name to bad someone did not give a description'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
-     * The column <code>public.exercise.setid</code>.
+     * The column <code>public.exercise.type</code>.
      */
-    public final TableField<ExerciseRecord, Integer> SETID = createField(DSL.name("setid"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<ExerciseRecord, String> TYPE = createField(DSL.name("type"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'None'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
 
     /**
      * Create a <code>public.exercise</code> table reference
@@ -166,7 +166,7 @@ public class Exercise extends TableImpl<ExerciseRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Integer, String, String, Integer> fieldsRow() {
+    public Row4<Integer, String, String, String> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 }

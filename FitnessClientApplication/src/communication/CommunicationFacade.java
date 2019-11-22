@@ -1,9 +1,9 @@
 package Communication;
 
 import Exceptions.ConfigFileNotFound;
-import LayerInterfaces.ICommunicationFacade;
-import Models.Request;
-import Models.Response;
+import layerInterfaces.ICommunicationFacade;
+import models.Request;
+import models.Response;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
