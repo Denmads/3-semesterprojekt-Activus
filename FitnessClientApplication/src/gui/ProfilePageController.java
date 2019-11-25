@@ -28,7 +28,7 @@ import javafx.scene.shape.Circle;
 /**
  * FXML Controller class
  *
- * @author perte
+ * @author terpen
  */
 public class ProfilePageController extends ContentPageController {
 
@@ -63,23 +63,6 @@ public class ProfilePageController extends ContentPageController {
         textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
     }
 
-    @Override
-    public void setDomainFacade(DomainFacade facade) {
-        try {
-            super.setDomainFacade(facade);
-            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
-            fieldAge.setText(currentProfile.getAge() + "");
-            fieldCity.setText(currentProfile.getCity());
-            fieldCountry.setText(currentProfile.getCountry());
-            fieldFirstName.setText(currentProfile.getFirstName());
-            fieldGender.setText(currentProfile.getGender());
-            fieldGym.setText(currentProfile.getGym());
-            fieldLastName.setText(currentProfile.getLastName());
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     @FXML
     private void btnSaveProfileHandler(ActionEvent event) {
         if (btnSaveProfile.getText().equals("Save profile info")) {
@@ -109,7 +92,6 @@ public class ProfilePageController extends ContentPageController {
             btnSaveProfile.setText("Modify profile info");
             int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             Profile temp = new Profile(id);
-
             temp.setGym(fieldGym.getText());
             temp.setCity(fieldCity.getText());
             temp.setAge(Integer.parseInt(fieldAge.getText()));
@@ -119,6 +101,22 @@ public class ProfilePageController extends ContentPageController {
             temp.setCountry(fieldCountry.getText());
             boolean updated = domainFacade.<IProfileService>getService(ServiceType.PROFILE).updateProfile(temp);
             //save data to server TODO
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void onContentInitialize() {
+        try {
+            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
+            fieldAge.setText(currentProfile.getAge() + "");
+            fieldCity.setText(currentProfile.getCity());
+            fieldCountry.setText(currentProfile.getCountry());
+            fieldFirstName.setText(currentProfile.getFirstName());
+            fieldGender.setText(currentProfile.getGender());
+            fieldGym.setText(currentProfile.getGym());
+            fieldLastName.setText(currentProfile.getLastName());
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
         }

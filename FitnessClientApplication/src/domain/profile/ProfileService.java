@@ -14,6 +14,9 @@ import java.util.logging.Logger;
 import Exceptions.*;
 import models.Request;
 import models.Response;
+import domain.DomainFacade;
+import models.Request;
+import models.Response;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import gui.FXMain;
@@ -175,4 +178,10 @@ public class ProfileService extends IProfileService {
 
     }
 
+    @Override
+    public List<Profile> getAllBuddys(int ProfileID) {
+        return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUDDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
+    }
+    
+ 
 }

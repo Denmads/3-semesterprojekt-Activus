@@ -1,22 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import GUI.cellsControllers.MessageCellController;
+import models.Message;
+import models.Profile;
+import domain.DomainFacade;
 import domain.authentication.AuthenticationService;
+import domain.serviceInterfaces.IChatService;
+import domain.serviceInterfaces.IProfileService;
+import gui.cellsControllers.ProfileCellController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -34,26 +43,26 @@ public class BuddyPageController extends ContentPageController {
     private ImageView Menubtn;
     private VBox Vboks;
     private AuthenticationService authenticationService;
-    @FXML
-    private ListView<?> ListViewBuddies;
+    private ListView<Profile> listViewBuddies;
+    private ListView<Message> listViewMessage;
     @FXML
     private TextArea messageField;
     
+    private Profile buddy;
+    private ObservableList<Profile> listBuddy;
+    private ObservableList<Message> listMessage;
+    @FXML
+    private ListView<?> ListViewBuddies;
+    @FXML
+    private ListView<?> ListView;
+    
     /**
-     * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-        
-        createAnimationForMessageField();
-        
-      //TODO new to get the curret Profile
-//        for (int buddyID : currentProfile.getBuddyIds()) {
-//            Profile buddy = profileService.getProfile(buddyID);
-//            ProfileItem(buddy);
-//                    
-//        }
-        
+
     }    
     
     private void createAnimationForMessageField () {
@@ -78,5 +87,74 @@ public class BuddyPageController extends ContentPageController {
                 }
             }
         });
-    }           
+
+    }
+    
+    private void loadBuddys(){
+        listBuddy = FXCollections.observableArrayList();
+        int profileId;
+        try {
+            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        listViewBuddies.setItems(listBuddy);
+        listViewBuddies.setCellFactory((ListView<Profile> view) -> {
+            return new ProfileCellController(domainFacade);
+        });
+        listViewBuddies.refresh();
+    }
+
+    @Override
+    public void onContentInitialize() {
+        createAnimationForMessageField();
+        loadBuddys();  // to load buddys from the database
+    }
+    
+    private void loadMessage(){
+        listBuddy = listViewBuddies.getItems();
+        Profile p = listBuddy.get(listViewBuddies.getEditingIndex());
+        int buddyId = p.getProfileId();
+        int profileId;
+        try {        
+            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId, buddyId);
+            listViewMessage.setCellFactory((ListView<Message> view) -> {
+                return new MessageCellController(domainFacade);
+            });
+            
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        listViewBuddies.refresh();
+    }
+    
+    private boolean sendMessage(){
+        try {
+            String text = messageField.getText();
+            int reciverId = buddy.getProfileId();
+            int senderId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            Message message = new Message(senderId, reciverId, text);
+            domainFacade.<IChatService>getService(ServiceType.CHAT).sendMessage(message);
+            return true;
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
+    }
+
+    @FXML
+    private void action(){
+        checkBuddy();
+        buddy = listViewBuddies.getSelectionModel().getSelectedItem();
+        loadMessage();
+    }
+    
+    
+    private void checkBuddy(){
+        
+    }
 }

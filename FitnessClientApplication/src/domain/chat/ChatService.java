@@ -12,10 +12,12 @@ import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
+import models.Message;
 import models.Request;
 import models.Response;
 import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.ICommunicationFacade;
@@ -33,12 +35,13 @@ public class ChatService extends IChatService {
     }
 
     @Override
-    public void sendMessage(int buddyProfileId, Message message) {
+    public void sendMessage(Message message) {
         
         try {
+            //All of this is in message if someone got the time make it so we do not sender more data then needed/ data twice.
             Request request = createRequest(RequestType.SEND_MESSAGE);
             request.addArgument(RequestArgumentName.SENDER_ID, domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId());
-            request.addArgument(RequestArgumentName.RECIVER_ID, buddyProfileId);
+            request.addArgument(RequestArgumentName.RECIVER_ID, message.getReciverId());
             request.addArgument(RequestArgumentName.MESSAGE, message);
             communicationLayer.sendRequest(request);
         } catch (ServiceNotFoundException ex) {
@@ -47,8 +50,8 @@ public class ChatService extends IChatService {
     }
 
     @Override
-    public Message[] getChatHistory(int buddyProfileId) {
-       return (Message[]) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
+    public List<Message> getChatHistory(int buddyProfileId) {
+        return (List<Message>) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
     }
     
     private Object returnResponseObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){

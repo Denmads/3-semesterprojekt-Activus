@@ -52,13 +52,8 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean removeStats(int statsID);
     
-    /**
-     *
-     * @param ProfileID
-     * @return
-     */
+    public abstract  List<Profile> getAllBuddys(int ProfileID);
+
     public abstract Stats getCurrentStats(int ProfileID);
     
-   
-
 }

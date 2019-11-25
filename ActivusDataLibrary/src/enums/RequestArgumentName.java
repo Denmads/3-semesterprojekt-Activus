@@ -32,7 +32,6 @@ public enum RequestArgumentName implements Serializable {
     EXERCISE_REPS,
     EXERCISE_WEIGHT,
     EXERCISE_TIME,
-    MESSAGE,
     PROGRAM_NAME,
     PROGRAM_TIME_TAKEN,
     PROGRAM_REPS,
@@ -41,6 +40,8 @@ public enum RequestArgumentName implements Serializable {
     PROGRAM_DATE,
     SENDER_ID,
     RECIVER_ID,
-    STATS,
+    MESSAGE,
+    BUDDY,
+    STATS
     
 }
