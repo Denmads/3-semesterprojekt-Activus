@@ -5,8 +5,6 @@
  */
 package gui.cellsControllers;
 
-import Models.Exercise;
-import Models.SetInfo;
 import gui.TrainingProgramsPageController;
 import java.io.IOException;
 import java.util.Random;
@@ -19,6 +17,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import models.Exercise;
+import models.SetInfo;
 
 /**
  *

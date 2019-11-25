@@ -5,7 +5,7 @@
  */
 package persistence.actions;
 
-import Models.Profile;
+import models.Profile;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import org.jooq.DSLContext;

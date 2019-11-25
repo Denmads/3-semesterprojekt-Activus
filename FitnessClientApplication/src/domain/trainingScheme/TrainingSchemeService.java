@@ -1,16 +1,15 @@
 package domain.trainingScheme;
 
-import Models.Exercise;
+import models.Exercise;
 import Enums.RequestArgumentName;
 import Enums.RequestType;
 import Enums.ResponseArgumentName;
 import Enums.ServiceType;
 import Exceptions.ArgumentNotFoundException;
 import Exceptions.ServiceNotFoundException;
-import Models.Profile;
-import Models.Request;
-import Models.Response;
-import Models.TrainingProgram;
+import models.Profile;
+import models.Request;
+import models.Response;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import java.util.ArrayList;

@@ -2,8 +2,8 @@ package domain;
 
 import Enums.ServiceType;
 import layerInterfaces.IRequestDelegater;
-import Models.Request;
-import Models.Response;
+import models.Request;
+import models.Response;
 import persistence.DatabaseFacade;
 import java.util.HashMap;
 import layerInterfaces.IDatabaseFacade;

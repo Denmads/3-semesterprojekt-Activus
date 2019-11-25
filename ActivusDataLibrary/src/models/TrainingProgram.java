@@ -1,6 +1,6 @@
-package Models;
+package models;
 
-import Models.Exercise;
+import models.Exercise;
 import java.io.Serializable;
 import java.util.ArrayList;
 

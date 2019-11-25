@@ -1,13 +1,14 @@
 package domain.serviceInterfaces;
 
-import Models.Exercise;
-import Models.Profile;
+import models.Exercise;
+import models.Profile;
 import Enums.SearchType;
 import Enums.ServiceType;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import layerInterfaces.IService;
 import java.util.List;
+import models.Stats;
 
 
 /**
@@ -35,8 +36,6 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean updateProfilePassWord(String newPassword);
 
-    public abstract boolean deleteAccount();
-
     public abstract boolean followProfile(int profileID);
 
     public abstract boolean followTrainingProgram(int programID);
@@ -46,11 +45,15 @@ public abstract class IProfileService extends IService {
     public abstract boolean acceptBuddyRequest(int requestingProfileID);
 
     public abstract boolean setGoal(String Goal);
+    
+    public abstract boolean deleteAccount(String profileUsername);
 
     public abstract int setStats(Exercise exercise);
 
     public abstract boolean removeStats(int statsID);
     
-    public abstract List<Exercise> getCurrentStats(int ProfileID);
+    public abstract  List<Profile> getAllBuddys(int ProfileID);
 
+    public abstract Stats getCurrentStats(int ProfileID);
+    
 }

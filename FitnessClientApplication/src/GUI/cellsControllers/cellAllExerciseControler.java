@@ -5,7 +5,7 @@
  */
 package gui.cellsControllers;
 
-import Models.Exercise;
+import models.Exercise;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

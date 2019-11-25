@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 import Enums.RequestArgumentName;
 import Enums.RequestType;
@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @author madsh
  */
-public class Request implements Serializable{
+public class Request implements Serializable {
 
     private ServiceType serviceType;
     private RequestType type;
@@ -27,29 +27,27 @@ public class Request implements Serializable{
         arguments = new HashMap<>();
     }
 
-    
-
-    public ServiceType getServiceType () {
+    public ServiceType getServiceType() {
         return serviceType;
     }
-    
+
     public RequestType getRequestType() {
         return type;
     }
 
-    public CredentialsContainer getCredentials () {
+    public CredentialsContainer getCredentials() {
         return credentials;
     }
-    
-    public void addArgument (RequestArgumentName argName, Object value) {
+
+    public void addArgument(RequestArgumentName argName, Object value) {
         arguments.put(argName, value);
     }
-    
-    public <T> T getArgument (RequestArgumentName argName) throws ArgumentNotFoundException, ClassCastException{
+
+    public <T> T getArgument(RequestArgumentName argName) throws ArgumentNotFoundException, ClassCastException {
         if (!arguments.containsKey(argName)) {
             throw new ArgumentNotFoundException();
         }
-        
-        return (T)arguments.get(argName);
+
+        return (T) arguments.get(argName);
     }
 }

@@ -5,7 +5,7 @@
  */
 package gui.cellsControllers;
 
-import Models.Profile;
+import models.Profile;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +31,7 @@ public class ProfileCellController extends ListCell<Profile> {
     private IDomainFacade domainFacade;
 
     public ProfileCellController(IDomainFacade domainFacade) {
-
         this.domainFacade = domainFacade;
-
     }
 
     

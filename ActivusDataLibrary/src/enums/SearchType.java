@@ -7,5 +7,5 @@ import java.io.Serializable;
  * @author steff
  */
 public enum SearchType  implements Serializable {
-    FIRSTNAME, LASTNAME, USERNAME, CITY, COUNTRY, GENDER, GYM
+    FIRSTNAME, LASTNAME, USERNAME, CITY, COUNTRY, GENDER, GYM, AGE
 }

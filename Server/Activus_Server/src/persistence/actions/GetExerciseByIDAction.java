@@ -5,16 +5,10 @@
  */
 package persistence.actions;
 
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
 import java.sql.SQLException;
-import java.util.Set;
 import org.jooq.DSLContext;
-import org.jooq.Record;
-import org.jooq.Record6;
-import org.jooq.Result;
 import persistence.IDatabaseAction;
-import static persistence.database.generated.Tables.EXERCISE;
 
 /**
  *

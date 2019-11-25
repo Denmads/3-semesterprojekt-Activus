@@ -5,8 +5,8 @@
  */
 package persistence.actions;
 
-import Models.Exercise;
-import Models.SetInfo;
+import models.Exercise;
+import models.SetInfo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;

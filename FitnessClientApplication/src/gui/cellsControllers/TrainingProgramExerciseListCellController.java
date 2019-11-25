@@ -6,7 +6,7 @@
 package gui.cellsControllers;
 
 import gui.TrainingProgramsPageController;
-import Models.Exercise;
+import models.Exercise;
 import static gui.TrainingProgramsPageController.PROJECT_DATA_FORMAT;
 import java.io.IOException;
 import javafx.event.EventHandler;

@@ -1,6 +1,7 @@
-package Models;
+package models;
 
-import Models.SetInfo;
+import models.SetInfo;
+import models.SetInfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 

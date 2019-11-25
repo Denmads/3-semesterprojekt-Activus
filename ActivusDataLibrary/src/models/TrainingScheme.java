@@ -1,8 +1,8 @@
-package Models;
+package models;
 
 import Enums.Day;
-import Models.TrainingProgram;
 import java.io.Serializable;
+import models.TrainingProgram;
 import java.util.HashMap;
 
 /**
