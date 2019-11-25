@@ -26,6 +26,6 @@ public abstract class IChatService extends IService {
     
     public abstract void sendMessage(Message message);
     
-    public abstract List<Message> getChatHistory(int buddyProfileId);
+    public abstract List<Message> getChatHistory(int profileId, int buddyProfileId);
     
 }

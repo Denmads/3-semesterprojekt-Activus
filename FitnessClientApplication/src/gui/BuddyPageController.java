@@ -43,9 +43,7 @@ public class BuddyPageController extends ContentPageController {
     private ImageView Menubtn;
     private VBox Vboks;
     private AuthenticationService authenticationService;
-    @FXML
     private ListView<Profile> listViewBuddies;
-    @FXML
     private ListView<Message> listViewMessage;
     @FXML
     private TextArea messageField;
@@ -53,6 +51,10 @@ public class BuddyPageController extends ContentPageController {
     private Profile buddy;
     private ObservableList<Profile> listBuddy;
     private ObservableList<Message> listMessage;
+    @FXML
+    private ListView<?> ListViewBuddies;
+    @FXML
+    private ListView<?> ListView;
     
     /**
      * @param url
@@ -60,10 +62,7 @@ public class BuddyPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {      
-//        createAnimationForMessageField();
-//        loadBuddys(); //cant get domainfacade in initialize
-        
-        
+
     }    
     
     private void createAnimationForMessageField () {
@@ -111,8 +110,8 @@ public class BuddyPageController extends ContentPageController {
     @Override
     public void onContentInitialize() {
         createAnimationForMessageField();
-        //loadBuddys();  // to load buddys from the database
-        lb(); // load some buddys in to 8.11
+        loadBuddys();  // to load buddys from the database
+        //lb(); // load some buddys in to 8.11
     }
     
     private void lb(){
@@ -165,7 +164,7 @@ public class BuddyPageController extends ContentPageController {
         int profileId;
         try {        
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId);
+            listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId, buddyId);
             listViewMessage.setCellFactory((ListView<Message> view) -> {
                 return new MessageCellController(domainFacade);
             });
@@ -191,8 +190,15 @@ public class BuddyPageController extends ContentPageController {
         return false;
     }
 
+    @FXML
     private void action(){
-        //listViewBuddies.get
+        checkBuddy();
+        buddy = listViewBuddies.getSelectionModel().getSelectedItem();
+        loadMessage();
+    }
+    
+    
+    private void checkBuddy(){
         
     }
 }
