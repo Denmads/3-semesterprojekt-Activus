@@ -277,7 +277,7 @@ public class SearchPageController extends ContentPageController {
             }
 
             //If the user doesn't have the selected profile as a buddy, a buddy request is sent.
-            if (buddyCheck = true) {
+            if (buddyCheck == true) {
                 boolean request = false;
 
                 try {
