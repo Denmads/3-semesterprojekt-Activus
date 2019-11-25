@@ -18,7 +18,6 @@ public enum RequestArgumentName implements Serializable {
     PROFILE_LAST_NAME,
     PROFILE_GENDER,
     PROFILE_COUNTRY,
-    PROGRAM_ID,
     PROGRAM_OWNER_ID,
     PROGRAM_DESCRIPTION,
     STAT_ID,
@@ -36,7 +35,6 @@ public enum RequestArgumentName implements Serializable {
     EXERCISE_TIME,
     PROGRAM_NAME,
     PROGRAM_ID,
-    PROGRAM_DESCRIPTION,
     PROGRAM_TIME_TAKEN,
     PROGRAM_DATE,
     SENDER_ID,
@@ -44,5 +42,7 @@ public enum RequestArgumentName implements Serializable {
     INDEX,
     MESSAGE,
     BUDDY,
-    STATS
+    STATS,
+    SET_INFO,
+    SET_ID
 }

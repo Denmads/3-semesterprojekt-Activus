@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -129,9 +130,11 @@ public class RootPageController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/" + fxml + ".fxml"));
             Parent contentRoot = loader.load();
             ContentPageController contentController = loader.getController();
-            System.out.println(domainFacade);
             contentController.setDomainFacade(domainFacade);
             contentPane.setCenter(contentRoot);
+            Platform.runLater(() -> {
+                menuContoller.hideMenu(null);
+            });
         } catch (IOException ex) {
             Logger.getLogger(RootPageController.class.getName()).log(Level.SEVERE, null, ex);
         }

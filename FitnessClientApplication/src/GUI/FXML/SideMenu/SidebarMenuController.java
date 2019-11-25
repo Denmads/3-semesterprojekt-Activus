@@ -61,7 +61,7 @@ public class SidebarMenuController implements Initializable {
     }
     
     @FXML
-    private void hideMenu(MouseEvent event) {
+    public void hideMenu(MouseEvent event) {
         menuLostFocusTimeline.play();
         Timer timer = new Timer(true);
         timer.schedule(new TimerTask() {

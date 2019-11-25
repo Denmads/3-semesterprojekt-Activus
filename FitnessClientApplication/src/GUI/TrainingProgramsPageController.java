@@ -7,6 +7,7 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import gui.cellsControllers.TrainingProgramExerciseListCellController;
 import models.Exercise;
 import models.TrainingProgram;
@@ -15,6 +16,7 @@ import gui.cellsControllers.TrainingProgramCellController;
 import gui.cellsControllers.TrainingProgramExerciseCellController;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -92,7 +94,7 @@ public class TrainingProgramsPageController extends ContentPageController {
         trainingPrograms = FXCollections.observableArrayList();
         
         trainingProgramList.setItems(trainingPrograms);
-        trainingProgramList.setCellFactory(view -> new TrainingProgramCellController(this));
+        trainingProgramList.setCellFactory(view -> new TrainingProgramCellController(this, domainFacade));
         
         
         trainingProgramList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TrainingProgram>() {
@@ -118,6 +120,11 @@ public class TrainingProgramsPageController extends ContentPageController {
             
             populateChoiceBox();
             setupExerciseSearch();
+            
+            List<TrainingProgram> programs = new ArrayList<>();
+            programs.addAll(domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).getAllTrainingPrograms());
+            trainingPrograms.addAll(programs);
+            
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
@@ -184,7 +191,7 @@ public class TrainingProgramsPageController extends ContentPageController {
         
         exerciseInProgramList.setItems(addedExercises);
         exerciseInProgramList.setCellFactory(view -> {
-            TrainingProgramExerciseCellController cell =  new TrainingProgramExerciseCellController(this);
+            TrainingProgramExerciseCellController cell =  new TrainingProgramExerciseCellController(this, domainFacade);
             
             cell.setOnDragDropped(new EventHandler<DragEvent>() {
                 @Override
@@ -236,7 +243,7 @@ public class TrainingProgramsPageController extends ContentPageController {
                         Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
                         Exercise addedExercise = exercise.clone();
                         
-                        domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, trainingProgramList.getSelectionModel().getSelectedItem());
+                        domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, getCurrentProgram());
                         addedExercises.add(addedExercise);
                         trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
                         trainingProgramList.refresh();
@@ -266,15 +273,24 @@ public class TrainingProgramsPageController extends ContentPageController {
     }
     
     public void deleteTrainingProgram (TrainingProgram program) {
-        //delete program database
-        trainingPrograms.remove(program);
-        trainingProgramList.refresh();
+        try {
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).deleteTrainingPogram(program.getId());
+            trainingPrograms.remove(program);
+            trainingProgramList.refresh();
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void deleteExerciseFromProgram (Exercise exercise) {
-        //Delete exercise link in db
+        
+        try {
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).removeExercise(exercise.getID(), getCurrentProgram().getId());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         addedExercises.remove(exercise);
-        trainingProgramList.getSelectionModel().getSelectedItem().removeExercise(exercise);
+        getCurrentProgram().removeExercise(exercise);
         exerciseInProgramList.refresh();
         trainingProgramList.refresh();
     }
@@ -289,7 +305,6 @@ public class TrainingProgramsPageController extends ContentPageController {
         addedExercises.add(indexOfExercise-1, e);
         exerciseInProgramList.refresh();
         
-        //Update set index of indexOfSet - 1 and indexOfSet in DB
     }
     
     public void moveExerciseDown (int indexOfExercise) {
@@ -302,7 +317,10 @@ public class TrainingProgramsPageController extends ContentPageController {
         addedExercises.add(indexOfExercise+1, e);
         exerciseInProgramList.refresh();
         
-        //Update set index of indexOfSet - 1 and indexOfSet in DB
+    }
+    
+    public TrainingProgram getCurrentProgram () {
+        return trainingProgramList.getSelectionModel().getSelectedItem();
     }
     
     public boolean openDialog (String name, String desc, boolean edit, TrainingProgram program) {
@@ -363,13 +381,11 @@ public class TrainingProgramsPageController extends ContentPageController {
             program.setDescription(info.getValue());
         });
         
-        //if edit update program in database
-        
         trainingProgramList.refresh();
         return result.isPresent();
     }
     
-    private void showProgramDetails (TrainingProgram program) {
+    public void showProgramDetails (TrainingProgram program) {
         trainingProgramView.setDisable(false);
         trainingProgramView.setVisible(true);
         

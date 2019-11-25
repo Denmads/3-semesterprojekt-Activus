@@ -65,8 +65,6 @@ public class AuthenticationService extends IAuthenticationService {
 
                 createServices();
 
-                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise();
-
                 return true;
 
             } catch (ArgumentNotFoundException e) {

@@ -5,10 +5,16 @@
  */
 package gui.cellsControllers;
 
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import domain.DomainFacade;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import models.TrainingProgram;
 import gui.TrainingProgramsPageController;
 import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
@@ -31,11 +37,13 @@ public class TrainingProgramCellController extends ListCell<TrainingProgram>{
     private Label numExerciseLabel;
     
     private TrainingProgramsPageController controller;
+    private DomainFacade domainFacade;
     
     private TrainingProgram program;
     
-    public TrainingProgramCellController (TrainingProgramsPageController controller) {
+    public TrainingProgramCellController (TrainingProgramsPageController controller, DomainFacade facade) {
         this.controller = controller;
+        domainFacade = facade;
     }
     
     
@@ -87,7 +95,14 @@ public class TrainingProgramCellController extends ListCell<TrainingProgram>{
     
     @FXML
     private void editTrainingProgram (MouseEvent event) {
-        controller.openDialog(program.getName(), program.getDescription(), true, program);
+        if (controller.openDialog(program.getName(), program.getDescription(), true, program)) {
+            try {
+                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).updateTrainingProgramInfo(program.getId(), program.getName(), program.getDescription());
+                controller.showProgramDetails(program);
+            } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(TrainingProgramCellController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     
