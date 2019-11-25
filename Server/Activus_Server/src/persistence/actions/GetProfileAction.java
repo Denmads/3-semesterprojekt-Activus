@@ -41,6 +41,7 @@ public class GetProfileAction extends IDatabaseAction<ArrayList<Profile>> {
             profile.setGender(r.getValue(PROFILE.GENDER));
             profile.setGym(r.getValue(PROFILE.GYM));
             profile.setUsername(r.getValue(LOGIN.USERNAME));
+            profile.setActiveBuddy(r.getValue(PROFILE.ACTIVEBUDDY));
 
             resultList.add(profile);
         }
