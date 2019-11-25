@@ -22,6 +22,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 
@@ -54,6 +55,8 @@ public class ProfilePageController extends ContentPageController {
     private TextField[] textFields;
     @FXML
     private Button btnDeleteAccount;
+    @FXML
+    private CheckBox checkActiveBuddy;
 
     /**
      * Initializes the controller class.
@@ -76,6 +79,7 @@ public class ProfilePageController extends ContentPageController {
         for (TextField tf : textFields) {
             tf.setEditable(true);
         }
+        checkActiveBuddy.setDisable(false);
         btnDeleteAccount.setVisible(true);
         btnDeleteAccount.setDisable(false);
         btnSaveProfile.setText("Save profile info");
@@ -87,6 +91,7 @@ public class ProfilePageController extends ContentPageController {
             for (TextField tf : textFields) {
                 tf.setEditable(false);
             }
+            checkActiveBuddy.setDisable(true);
             btnDeleteAccount.setVisible(false);
             btnDeleteAccount.setDisable(true);
             btnSaveProfile.setText("Modify profile info");
@@ -98,7 +103,8 @@ public class ProfilePageController extends ContentPageController {
             temp.setFirstName(fieldFirstName.getText());
             temp.setLastName(fieldLastName.getText());
             temp.setGender(fieldGender.getText());
-            temp.setCountry(fieldCountry.getText());
+            temp.setCountry(fieldCountry.getText()); 
+            temp.setActiveBuddy(checkActiveBuddy.isSelected());
             boolean updated = domainFacade.<IProfileService>getService(ServiceType.PROFILE).updateProfile(temp);
             //save data to server TODO
         } catch (ServiceNotFoundException | ClassCastException ex) {

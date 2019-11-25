@@ -2,10 +2,9 @@ package models;
 
 import java.io.Serializable;
 
-
 /**
  * Model class for profile
- * 
+ *
  * @author madsh
  */
 public class Profile implements Serializable {
@@ -20,12 +19,12 @@ public class Profile implements Serializable {
     private String gender;
     private String gym;
     private int[] buddyIds;
+    private boolean activeBuddy;
 
     public Profile(int profileId) {
         this.profileId = profileId;
         age = -1;
     }
-    
 
     public String getFirstName() {
         return firstName;
@@ -101,5 +100,13 @@ public class Profile implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isActiveBuddy() {
+        return activeBuddy;
+    }
+
+    public void setActiveBuddy(boolean activeBuddy) {
+        this.activeBuddy = activeBuddy;
     }
 }
