@@ -111,50 +111,6 @@ public class BuddyPageController extends ContentPageController {
     public void onContentInitialize() {
         createAnimationForMessageField();
         loadBuddys();  // to load buddys from the database
-        //lb(); // load some buddys in to 8.11
-    }
-    
-    private void lb(){
-        listBuddy = FXCollections.observableArrayList();
-        
-        Profile p = new Profile(0);
-        p.setAge(15);
-        p.setCity("Mollerub");
-        p.setGender("Male");
-        p.setUsername("Bent");
-        p.setLastName("Mordrup");
-        p.setGym("The world");
-        
-        listBuddy.add(p);
-        
-        Profile p2 = new Profile(1);
-        p2.setAge(17);
-        p2.setUsername("fald");
-        p2.setLastName("Mordrup");
-        p2.setGym("The world");
-        listBuddy.add(p2);
-        
-        Profile p3 = new Profile(2);
-        p3.setAge(16);
-        p3.setGender("Male");
-        p3.setUsername("Kurt");
-        p3.setLastName("Mordrup");
-        p3.setGym("The world");
-        
-        listBuddy.add(p3);
-        
-        Profile p4 = new Profile(3);
-        p4.setAge(30);
-        p4.setUsername("Hald");
-        p4.setLastName("Mordrup");
-        p4.setGym("The world");
-        listBuddy.add(p4);
-        
-        listViewBuddies.setItems(listBuddy);
-        listViewBuddies.setCellFactory((ListView<Profile> view) -> {
-            return new ProfileCellController(domainFacade);
-        });
-        listViewBuddies.refresh();
     }
     
     private void loadMessage(){
