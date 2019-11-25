@@ -8,8 +8,6 @@ package gui;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import models.Profile;
-import domain.DomainFacade;
-import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import java.net.URL;
 import java.util.Optional;
@@ -123,6 +121,7 @@ public class ProfilePageController extends ContentPageController {
             fieldGender.setText(currentProfile.getGender());
             fieldGym.setText(currentProfile.getGym());
             fieldLastName.setText(currentProfile.getLastName());
+            checkActiveBuddy.setSelected(currentProfile.isActiveBuddy());
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
         }

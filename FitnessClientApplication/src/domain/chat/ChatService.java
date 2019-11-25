@@ -49,10 +49,10 @@ public class ChatService extends IChatService {
         }
     }
 
-//    @Override
-//    public List<Message> getChatHistory(int buddyProfileId) {
-//        return (List<Message>) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
-//    }
+    @Override
+    public List<Message> getChatHistory(int buddyProfileId) {
+        return (List<Message>) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
+    }
     
     private Object returnResponseObject(RequestType requestType, RequestArgumentName requestArguementName,ResponseArgumentName responseArguementName, Object o){
         Object object=null;
@@ -69,10 +69,5 @@ public class ChatService extends IChatService {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
-    }
-
-    @Override
-    public List<Message> getChatHistory(int profileId, int buddyProfileId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
