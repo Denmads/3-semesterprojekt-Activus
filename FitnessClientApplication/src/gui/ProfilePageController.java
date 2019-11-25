@@ -9,14 +9,19 @@ import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import models.Profile;
 import domain.DomainFacade;
+import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 
@@ -47,6 +52,8 @@ public class ProfilePageController extends ContentPageController {
     private TextField fieldAge;
 
     private TextField[] textFields;
+    @FXML
+    private Button btnDeleteAccount;
 
     /**
      * Initializes the controller class.
@@ -54,23 +61,6 @@ public class ProfilePageController extends ContentPageController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
-    }
-
-    @Override
-    public void setDomainFacade(DomainFacade facade) {
-        try {
-            super.setDomainFacade(facade);
-            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
-            fieldAge.setText(currentProfile.getAge() + "");
-            fieldCity.setText(currentProfile.getCity());
-            fieldCountry.setText(currentProfile.getCountry());
-            fieldFirstName.setText(currentProfile.getFirstName());
-            fieldGender.setText(currentProfile.getGender());
-            fieldGym.setText(currentProfile.getGym());
-            fieldLastName.setText(currentProfile.getLastName());
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
@@ -86,6 +76,8 @@ public class ProfilePageController extends ContentPageController {
         for (TextField tf : textFields) {
             tf.setEditable(true);
         }
+        btnDeleteAccount.setVisible(true);
+        btnDeleteAccount.setDisable(false);
         btnSaveProfile.setText("Save profile info");
     }
 
@@ -95,6 +87,8 @@ public class ProfilePageController extends ContentPageController {
             for (TextField tf : textFields) {
                 tf.setEditable(false);
             }
+            btnDeleteAccount.setVisible(false);
+            btnDeleteAccount.setDisable(true);
             btnSaveProfile.setText("Modify profile info");
             int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             Profile temp = new Profile(id);
@@ -111,8 +105,44 @@ public class ProfilePageController extends ContentPageController {
             Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @Override
     public void onContentInitialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
+            fieldAge.setText(currentProfile.getAge() + "");
+            fieldCity.setText(currentProfile.getCity());
+            fieldCountry.setText(currentProfile.getCountry());
+            fieldFirstName.setText(currentProfile.getFirstName());
+            fieldGender.setText(currentProfile.getGender());
+            fieldGym.setText(currentProfile.getGym());
+            fieldLastName.setText(currentProfile.getLastName());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    @FXML
+    private void btnDeleteAccountHandler(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Delete account?");
+        alert.setHeaderText("Do you really want to delete your account?");
+        alert.setContentText("You will be logged out and data will be deleted. Are you okay with this?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            try {
+                String username = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getUsername();
+                //int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                domainFacade.<IProfileService>getService(ServiceType.PROFILE).deleteAccount(username);
+            } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            
+        }
+    }
+
 }

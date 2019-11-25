@@ -1,6 +1,5 @@
 package domain.authentication;
 
-
 import domain.chat.ChatService;
 import models.Profile;
 import domain.profile.ProfileService;
@@ -20,7 +19,6 @@ import models.Response;
 import domain.trainingScheme.TrainingSchemeService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
@@ -51,7 +49,7 @@ public class AuthenticationService extends IAuthenticationService {
             loginRQ.addArgument(RequestArgumentName.PASSWORD, password);
             //Sending the request to the server.
             Response response = communicationLayer.sendRequest(loginRQ);
-            
+
             //We verify the users login in a try-catch statement.
             //If the server receives an argument that doesn't exist we will get an exception.
             //Therefore if the logininformation is incorrect the method will return false.
@@ -64,26 +62,26 @@ public class AuthenticationService extends IAuthenticationService {
                 ProfileService PS = new ProfileService(p, communicationLayer, domainFacade);
                 //Adding ProfileService to the domainFacade.
                 domainFacade.addService(ServiceType.PROFILE, PS);
-                
+
                 createServices();
-                
+
                 domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).loadAllExercise();
-                
+
                 return true;
-                
+
             } catch (ArgumentNotFoundException e) {
                 System.out.println(e);
                 System.out.println("----------Failed Login----------");
             }
             return false;
         } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null,ex);
+            Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return false;
     }
-    
-    private void createServices () {
+
+    private void createServices() {
         TrainingSchemeService trainingSchemeService = new TrainingSchemeService(communicationLayer, domainFacade);
         domainFacade.addService(ServiceType.TRAININGSCHEME, trainingSchemeService);
 
@@ -102,6 +100,7 @@ public class AuthenticationService extends IAuthenticationService {
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
+        credentials = null;
     }
 
     @Override
@@ -112,32 +111,32 @@ public class AuthenticationService extends IAuthenticationService {
             request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.getLastName());
             request.addArgument(RequestArgumentName.USERNAME, accountInfo.getUsername());
             request.addArgument(RequestArgumentName.PASSWORD, accountInfo.getPassword());
+            request.addArgument(RequestArgumentName.PROFILE_CITY, accountInfo.getCity());
+            request.addArgument(RequestArgumentName.PROFILE_AGE, accountInfo.getAge());
+            request.addArgument(RequestArgumentName.PROFILE_GENDER, accountInfo.getGender());
             
             Response response = communicationLayer.sendRequest(request);
-            
+
             try {
-                return (String)response.getArgument(ResponseArgumentName.ERRORS);
+                return (String) response.getArgument(ResponseArgumentName.ERRORS);
             } catch (ArgumentNotFoundException ex) {
                 return "";
             }
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(AuthenticationService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return "Error in system: Service not found!";
     }
 
     @Override
     public Request createServerRequest(ServiceType serviceType, RequestType type) {
         if (credentials != null) {
-            return new Request(type, credentials, serviceType);        
-        }
-        else {
+            return new Request(type, credentials, serviceType);
+        } else {
             return new Request(type, null, ServiceType.AUTHENTICATION);
         }
-        
+
     }
-    
-    
-    
+
 }

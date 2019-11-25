@@ -2,7 +2,9 @@ package domain;
 
 import domain.IRequestHandler;
 import Enums.RequestArgumentName;
+import static Enums.RequestType.DELETE_ACCOUNT;
 import Enums.ResponseArgumentName;
+import Enums.SearchType;
 import Exceptions.ArgumentNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import layerInterfaces.IDatabaseFacade;
 import org.jooq.TableField;
 import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
+import persistence.actions.SearchAction;
 import persistence.actions.SetStatsAction;
 import static persistence.database.generated.Tables.PROFILE;
 
@@ -25,7 +28,7 @@ import static persistence.database.generated.Tables.PROFILE;
  * @author madsh
  */
 public class ProfileRequestHandler extends IRequestHandler {
-    
+
     public ProfileRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
@@ -88,13 +91,35 @@ public class ProfileRequestHandler extends IRequestHandler {
                 break;
             case DELETE_ACCOUNT:
                 try {
-                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.PROFILE_ID));
+                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.USERNAME), request.getCredentials().getUserId());
+                    databaseFacade.execute(daa);
                     response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+            case SEARCH:
+                try {
+                    SearchAction sa = null;
+
+                    if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.AGE)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_AGE);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.CITY)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_CITY);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.GENDER)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_GENDER);
+                    }
+
+                    databaseFacade.execute(sa);
+                    response.addArgument(ResponseArgumentName.SUCCESS, sa.getResult());
+                    
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
         }
         return response;
-    }
 
+    }
 }

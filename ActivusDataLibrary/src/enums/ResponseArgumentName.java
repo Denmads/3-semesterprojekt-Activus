@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Enums;
 
 import java.io.Serializable;
@@ -11,7 +6,7 @@ import java.io.Serializable;
  *
  * @author madsh
  */
-public enum ResponseArgumentName  implements Serializable {
+public enum ResponseArgumentName implements Serializable {
     CREDENTIALS,
     PROFILE,
     BUDDY_LIST,
@@ -19,8 +14,8 @@ public enum ResponseArgumentName  implements Serializable {
     TRAININGPROGRAM,
     STATS,
     CHAT_HISTORY,
-    EXERCISE, 
+    EXERCISE,
     MESSAGE,
-    ERRORS
+    ERRORS,
+    SEARCH_RESULT
 }
-

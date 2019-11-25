@@ -35,7 +35,6 @@ public class FXMain extends Application {
 
     }
     private DomainFacade domainFacade;
-    
 
     private void loadLoginPage() throws IOException, ConfigFileNotFound {
 
@@ -44,16 +43,14 @@ public class FXMain extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML/LoginPage.fxml"));
         Parent root = loader.load();
-        LoginPageController controller = loader.getController();     
+        LoginPageController controller = loader.getController();
         controller.setObjects(stage, domainFacade);
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
-
     }
 
     public static void showLoginPage() throws Exception {
         instance.loadLoginPage();
-
     }
 
     /**
