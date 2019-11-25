@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
 import org.jooq.TableField;
-import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.SearchAction;
 import persistence.actions.SetStatsAction;
@@ -80,7 +79,9 @@ public class ProfileRequestHandler extends IRequestHandler {
                     tableFields.add(PROFILE.GENDER);
                     changes.add(request.getArgument(RequestArgumentName.PROFILE_COUNTRY));
                     tableFields.add(PROFILE.COUNTRY);
-
+                    changes.add(request.getArgument(RequestArgumentName.PROFILE_ACTIVE_BUDDY));
+                    tableFields.add(PROFILE.ACTIVEBUDDY);
+                    
                     UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), changes, tableFields);
                     databaseFacade.execute(upa);
                     response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());

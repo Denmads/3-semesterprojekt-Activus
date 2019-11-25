@@ -36,6 +36,8 @@ public class UpdateProfileAction extends IDatabaseAction<Boolean> {
         for (int i = 0; i < tableFields.size(); i++) {
             if (changes.get(i) instanceof String) {
                 database.update(PROFILE).set(tableFields.get(i), (String) changes.get(i)).where(PROFILE.ID.eq(profileID)).execute();
+            } else if (changes.get(i) instanceof Boolean){
+                database.update(PROFILE).set(tableFields.get(i), (boolean) changes.get(i)).where(PROFILE.ID.eq(profileID)).execute();
             } else if (changes.get(i) instanceof Integer) {
                 database.update(PROFILE).set(tableFields.get(i), (int) changes.get(i)).where(PROFILE.ID.eq(profileID)).execute();
             }
