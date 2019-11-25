@@ -35,14 +35,13 @@ public class VerifyLoginAction extends IDatabaseAction<CredentialsContainer> {
     @Override
     protected void execute(DSLContext database) throws SQLException {
         //Fetching login information from database.
-        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
+        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username).and(LOGIN.FLAG.eq(false))).fetch();
 
         //If the database returns something(Isn't empty) the password is verified.
         if (!res.isEmpty()) {
             Record record = res.get(0);
             
             boolean loginCorrect = checkPassword(record);
-            
             if (loginCorrect) {
                 int id = record.getValue(LOGIN.ID);
                 credentials = new CredentialsContainer(username, id, createAuthenticationToken(database, record));

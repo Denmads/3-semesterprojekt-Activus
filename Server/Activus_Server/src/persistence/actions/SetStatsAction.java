@@ -44,19 +44,19 @@ public class SetStatsAction extends IDatabaseAction<Boolean> {
     @Override
     protected void execute(DSLContext database) throws SQLException {
         //After Stats UI Design is made this function needs to be looked at. Benjamin
-        Result<Record1<Integer>> res = database.select(STATS.ID).from(STATS).where(STATS.PROFILEID.eq(profileID)).and(STATS.EXERCISEID.eq(exerciseID)).and(STATS.TIME_TAKEN.eq(timeTaken)).and(STATS.REBS.eq(reps)).and(STATS.SETS.eq(sets)).and(STATS.WEIGHT.eq(weight)).and(STATS.DATE.eq(date)).fetch();
-        int id = res.get(0).get(STATS.ID);
-        if (id > -1) {
-            database.update(STATS).set(STATS.PROFILEID, profileID).set(STATS.EXERCISEID, exerciseID).set(STATS.TIME_TAKEN, timeTaken).set(STATS.REBS, reps).set(STATS.SETS,sets).set(STATS.WEIGHT,weight).set(STATS.DATE,date).where(STATS.ID.eq(id)).execute();
-        } else {
-            database.insertInto(STATS).columns(STATS.PROFILEID, STATS.EXERCISEID, STATS.TIME_TAKEN, STATS.REBS, STATS.SETS, STATS.WEIGHT, STATS.DATE).values(profileID, exerciseID, timeTaken, reps, sets, weight, date).execute();
-        }
-        
-        executed = true;
-        Result<Record> temp = database.select().from(STATS).where(STATS.ID.eq(id)).fetch();
-        if(!temp.isEmpty()){
-            result = true;
-        }
+        //Result<Record1<Integer>> res = database.select(STATS.ID).from(STATS).where(STATS.PROFILEID.eq(profileID)).and(STATS.EXERCISEID.eq(exerciseID)).and(STATS.TIME_TAKEN.eq(timeTaken)).and(STATS.REBS.eq(reps)).and(STATS.SETS.eq(sets)).and(STATS.WEIGHT.eq(weight)).and(STATS.DATE.eq(date)).fetch();
+//        int id = res.get(0).get(STATS.ID);
+//        if (id > -1) {
+//          //  database.update(STATS).set(STATS.PROFILEID, profileID).set(STATS.EXERCISEID, exerciseID).set(STATS.TIME_TAKEN, timeTaken).set(STATS.REBS, reps).set(STATS.SETS,sets).set(STATS.WEIGHT,weight).set(STATS.DATE,date).where(STATS.ID.eq(id)).execute();
+//        } else {
+//            //database.insertInto(STATS).columns(STATS.PROFILEID, STATS.EXERCISEID, STATS.TIME_TAKEN, STATS.REBS, STATS.SETS, STATS.WEIGHT, STATS.DATE).values(profileID, exerciseID, timeTaken, reps, sets, weight, date).execute();
+//        }
+//        
+//        executed = true;
+//        Result<Record> temp = database.select().from(STATS).where(STATS.ID.eq(id)).fetch();
+//        if(!temp.isEmpty()){
+//            result = true;
+//        }
     }
 
     @Override

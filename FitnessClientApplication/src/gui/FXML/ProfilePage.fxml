@@ -44,6 +44,7 @@
             <Label text="Country: " GridPane.rowIndex="4" />
             <Label text="Age:" GridPane.rowIndex="2" />
             <TextField fx:id="fieldAge" editable="false" style="-fx-background-radius: 30;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btnDeleteAccount" disable="true" mnemonicParsing="false" onAction="#btnDeleteAccountHandler" text="Delete Account" visible="false" GridPane.rowIndex="7" />
          </children>
          <VBox.margin>
             <Insets />

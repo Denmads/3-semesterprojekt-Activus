@@ -2,6 +2,7 @@ package domain;
 
 import domain.IRequestHandler;
 import Enums.RequestArgumentName;
+import static Enums.RequestType.DELETE_ACCOUNT;
 import Enums.ResponseArgumentName;
 import Enums.SearchType;
 import Exceptions.ArgumentNotFoundException;
@@ -90,11 +91,13 @@ public class ProfileRequestHandler extends IRequestHandler {
                 break;
             case DELETE_ACCOUNT:
                 try {
-                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.PROFILE_ID));
+                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.USERNAME), request.getCredentials().getUserId());
+                    databaseFacade.execute(daa);
                     response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
             case SEARCH:
                 try {
                     SearchAction sa = null;
@@ -114,8 +117,9 @@ public class ProfileRequestHandler extends IRequestHandler {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                break;
         }
         return response;
-    }
 
+    }
 }

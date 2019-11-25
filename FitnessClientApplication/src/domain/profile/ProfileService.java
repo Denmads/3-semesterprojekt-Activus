@@ -16,6 +16,7 @@ import models.Request;
 import models.Response;
 import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
+import gui.FXMain;
 import layerInterfaces.ICommunicationFacade;
 import layerInterfaces.IDomainFacade;
 import models.Stats;
@@ -86,17 +87,6 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean deleteAccount() {
-
-        try {
-            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
-        } catch (ServiceNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return (boolean) returnResponsObject(RequestType.DELETE_ACCOUNT, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, currentProfile);
-    }
-
-    @Override
     public boolean followProfile(int profileID) {
         return (boolean) returnResponsObject(RequestType.FOLLOW_PROFILE, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, profileID);
     }
@@ -146,6 +136,32 @@ public class ProfileService extends IProfileService {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return object;
+    }
+
+    @Override
+    public boolean deleteAccount(String profileUsername) {
+        boolean isDeleted = false;
+        try {
+            try {
+                Request req = createRequest(RequestType.DELETE_ACCOUNT);
+                req.addArgument(RequestArgumentName.USERNAME, profileUsername);
+
+                Response res = communicationLayer.sendRequest(req);
+                isDeleted = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+                Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).logout();
+            FXMain.showLoginPage();
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isDeleted;
     }
 
     /**
