@@ -29,25 +29,24 @@ import persistence.actions.VerifyLoginAction;
  * @author madsh
  */
 public class AuthenticationRequestHandler extends IRequestHandler {
-
+    
     public AuthenticationRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
-
+    
     @Override
     public Response handleRequest(Request request) {
         Response response = new Response();
-
+        
         if (request.getRequestType().equals(CREATE_NEW_USER)) {
             try {
                 IsUsernameUniqueAction uniqueAction = new IsUsernameUniqueAction(request.getArgument(RequestArgumentName.USERNAME));
                 databaseFacade.execute(uniqueAction);
                 if (uniqueAction.getResult()) {
-                    CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD));
+                    CreateNewUserAction cnua = new CreateNewUserAction(request.getArgument(RequestArgumentName.FIRST_NAME), request.getArgument(RequestArgumentName.LAST_NAME), request.getArgument(RequestArgumentName.USERNAME), request.getArgument(RequestArgumentName.PASSWORD), request.getArgument(RequestArgumentName.PROFILE_CITY), request.getArgument(RequestArgumentName.PROFILE_AGE), request.getArgument(RequestArgumentName.PROFILE_GENDER));
                     databaseFacade.execute(cnua);
                     response.addArgument(ResponseArgumentName.ERRORS, "");
-                }
-                else {
+                } else {
                     response.addArgument(ResponseArgumentName.ERRORS, "Username already exists!");
                 }
             } catch (ArgumentNotFoundException | ClassCastException ex) {
@@ -76,6 +75,7 @@ public class AuthenticationRequestHandler extends IRequestHandler {
                 Logger.getLogger(AuthenticationRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         return response;
     }
 }

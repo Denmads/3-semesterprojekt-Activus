@@ -111,7 +111,10 @@ public class AuthenticationService extends IAuthenticationService {
             request.addArgument(RequestArgumentName.LAST_NAME, accountInfo.getLastName());
             request.addArgument(RequestArgumentName.USERNAME, accountInfo.getUsername());
             request.addArgument(RequestArgumentName.PASSWORD, accountInfo.getPassword());
-
+            request.addArgument(RequestArgumentName.PROFILE_CITY, accountInfo.getCity());
+            request.addArgument(RequestArgumentName.PROFILE_AGE, accountInfo.getAge());
+            request.addArgument(RequestArgumentName.PROFILE_GENDER, accountInfo.getGender());
+            
             Response response = communicationLayer.sendRequest(request);
 
             try {

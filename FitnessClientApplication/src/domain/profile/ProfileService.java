@@ -40,11 +40,10 @@ public class ProfileService extends IProfileService {
             Request request = createRequest(RequestType.SEARCH);
             request.addArgument(RequestArgumentName.SEARCH_TYPE, searchType);
             request.addArgument(RequestArgumentName.TEXT, searchString);
+
             Response response = communicationLayer.sendRequest(request);
-            profiles = (List< Profile>) response.getArgument(ResponseArgumentName.PROFILE);
-        } catch (ArgumentNotFoundException ex) {
-            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ServiceNotFoundException ex) {
+            profiles = (List<Profile>) response.getArgument(ResponseArgumentName.SUCCESS);
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
             Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
         }
 
