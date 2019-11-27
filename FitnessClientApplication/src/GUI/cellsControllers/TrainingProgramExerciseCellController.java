@@ -5,8 +5,15 @@
  */
 package gui.cellsControllers;
 
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import domain.DomainFacade;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.TrainingProgramsPageController;
 import java.io.IOException;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import models.Exercise;
 import models.SetInfo;
+import models.TrainingProgram;
 
 /**
  *
@@ -32,10 +40,11 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
     private ObservableList<SetInfo> sets;
     
     private TrainingProgramsPageController controller;
+    private DomainFacade domainFacade;
     
-    public TrainingProgramExerciseCellController (TrainingProgramsPageController controller) {
+    public TrainingProgramExerciseCellController (TrainingProgramsPageController controller, DomainFacade facade) {
         this.controller = controller;
-        sets = FXCollections.observableArrayList();
+        domainFacade = facade;
     }
     
     
@@ -63,9 +72,22 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
             
             nameLabel.setText(item.getName());
             
+            
+            if (getIndex() != item.getIndexInProgram()) {
+                TrainingProgram program = controller.getCurrentProgram();
+                try {
+                    domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).updateExerciseIndex(item.getID(), program.getId(), getIndex());
+                } catch (ServiceNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(TrainingProgramExerciseCellController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+            item.setIndexInProgram(getIndex());
+            
+            sets = FXCollections.observableArrayList();
             sets.addAll(item.getSetInfo());
             setsList.setItems(sets);
-            setsList.setCellFactory(view -> new SetInfoCellController(this));
+            setsList.setCellFactory(view -> new SetInfoCellController(this, domainFacade));
             setsList.setPrefHeight(33.5 * sets.size());
             
             setText(null);
@@ -78,20 +100,67 @@ public class TrainingProgramExerciseCellController extends ListCell<Exercise>{
         controller.deleteExerciseFromProgram(getItem());
     }
     
+    @FXML
+    private void moveExerciseUp (MouseEvent event) {
+        controller.moveExerciseUp(getIndex());
+    }
+    
+    @FXML
+    private void moveExerciseDown (MouseEvent event) {
+        controller.moveExerciseDown(getIndex());
+    }
     
     @FXML
     private void addSet (MouseEvent event) {
-        SetInfo info = new SetInfo(10, 10);
-        sets.add(info);
-        getItem().addSetInfo(info);
-        setsList.setPrefHeight(33.5 * sets.size());
+        try {
+            SetInfo info = new SetInfo(new Random().nextInt(20), 10);
+            info.setSetIndex(sets.size());
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addSetToExercise(getItem().getID(), controller.getCurrentProgram().getId(), info);
+            sets.add(info);
+            getItem().addSetInfo(info);
+            setsList.setPrefHeight(33.5 * sets.size());
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(TrainingProgramExerciseCellController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(TrainingProgramExerciseCellController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void deleteSet (SetInfo info) {
-        //Remove from database
-        sets.remove(info);
-        getItem().removeSetInfo(info);
+        try {
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).removeSet(info.getId());
+            sets.remove(info);
+            getItem().removeSetInfo(info);
+            setsList.refresh();
+            setsList.setPrefHeight(33.5 * sets.size());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(TrainingProgramExerciseCellController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void moveSetUp (int indexOfSet) {
+        if (indexOfSet == 0) {
+            return;
+        }
+        
+        SetInfo info = sets.get(indexOfSet);
+        sets.remove(indexOfSet);
+        sets.add(indexOfSet-1, info);
         setsList.refresh();
-        setsList.setPrefHeight(33.5 * sets.size());
+        
+        //Update set index of indexOfSet - 1 and indexOfSet in DB
+    }
+    
+    public void moveSetDown (int indexOfSet) {
+        if (indexOfSet == sets.size()-1) {
+            return;
+        }
+        
+        SetInfo info = sets.get(indexOfSet);
+        sets.remove(indexOfSet);
+        sets.add(indexOfSet+1, info);
+        setsList.refresh();
+        
+        //Update set index of indexOfSet + 1 and indexOfSet in DB
     }
 }

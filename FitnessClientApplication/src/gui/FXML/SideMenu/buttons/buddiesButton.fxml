@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.SideMenu.buttons.BuddiesButtonController">
+<StackPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.SideMenu.buttons.BuddiesButtonController">
    <children>
       <Button fx:id="buddiesBtn" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" style="-fx-background-color: #707070; -fx-background-radius: 30;" text="Text" textFill="WHITE">
          <font>

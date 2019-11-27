@@ -5,7 +5,13 @@
  */
 package gui.cellsControllers;
 
+import Enums.ServiceType;
+import Exceptions.ServiceNotFoundException;
+import domain.DomainFacade;
+import domain.serviceInterfaces.ITrainingSchemeService;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -26,9 +32,11 @@ public class SetInfoCellController extends ListCell<SetInfo>{
     private Label weightLabel;
     
     private TrainingProgramExerciseCellController parent;
+    private DomainFacade domainFacade;
     
-    public SetInfoCellController (TrainingProgramExerciseCellController exercise) {
+    public SetInfoCellController (TrainingProgramExerciseCellController exercise, DomainFacade facade) {
         this.parent = exercise;
+        domainFacade = facade;
     }
     
     
@@ -53,6 +61,13 @@ public class SetInfoCellController extends ListCell<SetInfo>{
                 return; 
             }
             
+            if (getIndex() != item.getSetIndex()) {
+                try {
+                    domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).updateSetIndex(getItem().getId(), getIndex());
+                } catch (ServiceNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(SetInfoCellController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             item.setSetIndex(getIndex());
             repsLabel.setText(item.getReps() + "");
             weightLabel.setText(item.getWeight() + " Kg");
@@ -68,5 +83,13 @@ public class SetInfoCellController extends ListCell<SetInfo>{
         parent.deleteSet(getItem());
     }
     
+    @FXML
+    private void moveSetUp (MouseEvent event) {
+        parent.moveSetUp(getIndex());
+    }
     
+    @FXML
+    private void moveSetDown (MouseEvent event) {
+        parent.moveSetDown(getIndex());
+    }
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import Enums.ServiceType;
@@ -22,6 +17,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,7 +34,7 @@ public class CreateUserPageController implements Initializable {
 
     private DomainFacade domainFacade;
     private Stage stage;
-    
+
     @FXML
     private Label errorTxt;
     @FXML
@@ -51,13 +47,19 @@ public class CreateUserPageController implements Initializable {
     private PasswordField passwordField;
     @FXML
     private PasswordField passwordReField;
-    
-    private ArrayList<TextField> fields;
     @FXML
     private VBox inputBox;
     @FXML
     private Label successLbl;
+    @FXML
+    private ComboBox<Integer> ageBox;
+    @FXML
+    private TextField cityField;
+    @FXML
+    private ComboBox<String> genderBox;
     
+    private ArrayList<TextField> fields;
+
     /**
      * Initializes the controller class.
      */
@@ -69,18 +71,24 @@ public class CreateUserPageController implements Initializable {
         fields.add(usernameField);
         fields.add(passwordField);
         fields.add(passwordReField);
-    }    
-    
-    
-    public void setFacade (DomainFacade facade) {
+        fields.add(cityField);
+
+        //Filling ageBox
+        for (int i = 15; i < 100; i++) {
+            ageBox.getItems().add(i);
+        }
+        //Filling genderBox
+        genderBox.getItems().add("Male");
+        genderBox.getItems().add("Female");  
+    }
+
+    public void setFacade(DomainFacade facade) {
         domainFacade = facade;
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-    
-    
 
     @FXML
     private void createNewUser(ActionEvent event) {
@@ -90,18 +98,23 @@ public class CreateUserPageController implements Initializable {
                 return;
             }
         }
-        
+
+        if (ageBox.getSelectionModel().isEmpty() || genderBox.getSelectionModel().isEmpty()) {
+            setErrorText("All fields must be entered!");
+            return;
+        }
+
         if (passwordField.getText().equals(passwordReField.getText())) {
-            NewAccountInfo newInfo = new NewAccountInfo(firstNameField.getText(), lastNameField.getText(), usernameField.getText(), passwordField.getText());
-            
+            NewAccountInfo newInfo = new NewAccountInfo(firstNameField.getText(), lastNameField.getText(), usernameField.getText(), passwordField.getText(), cityField.getText(), ageBox.getValue(), genderBox.getValue());
+
             try {
                 String errors = domainFacade.<IAuthenticationService>getService(ServiceType.AUTHENTICATION).createAccount(newInfo);
-                
+
                 if (errors.equals("")) {
                     inputBox.setEffect(new GaussianBlur(5));
                     inputBox.setDisable(true);
                     successLbl.setVisible(true);
-                    
+
                     Timer timer = new Timer(true);
                     timer.schedule(new TimerTask() {
                         @Override
@@ -111,21 +124,19 @@ public class CreateUserPageController implements Initializable {
                             });
                         }
                     }, 2000);
-                }
-                else {
+                } else {
                     setErrorText(errors);
                 }
             } catch (ServiceNotFoundException | ClassCastException ex) {
                 setErrorText(ex.getMessage());
                 Logger.getLogger(CreateUserPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        else {
+        } else {
             setErrorText("Passwords do not match!");
         }
     }
-    
-    private void setErrorText (String text) {
+
+    private void setErrorText(String text) {
         errorTxt.setText(text);
         errorTxt.setVisible(true);
     }

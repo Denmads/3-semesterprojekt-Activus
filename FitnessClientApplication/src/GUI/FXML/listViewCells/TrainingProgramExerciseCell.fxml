@@ -29,13 +29,39 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <HBox style="-fx-background-color: #ff6666; -fx-background-radius: 10;" GridPane.columnIndex="3">
+      <HBox spacing="10.0" GridPane.columnIndex="3">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#deleteExercise" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../Images/TrainingProgram/delete.png" />
-               </image>
-            </ImageView>
+            <HBox spacing="5.0">
+               <children>
+                  <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#moveExerciseUp" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#moveExerciseDown" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox style="-fx-background-color: #ff6666; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="32.0" onMouseReleased="#deleteExercise" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/TrainingProgram/delete.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
          </children>
       </HBox>
       <VBox alignment="TOP_CENTER" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="1">

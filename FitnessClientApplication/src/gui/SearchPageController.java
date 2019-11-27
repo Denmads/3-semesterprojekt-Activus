@@ -3,14 +3,12 @@ package gui;
 import Enums.SearchType;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import models.Exercise;
 import models.Profile;
 import domain.serviceInterfaces.IProfileService;
 import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.ProfileCellController;
 import gui.cellsControllers.cellAllExerciseControler;
 import models.Exercise;
-import gui.ContentPageController;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +38,6 @@ public class SearchPageController extends ContentPageController {
     @FXML
     private ComboBox<String> genderBox;
     @FXML
-    private TextField cityTextfield;
-    @FXML
     private ComboBox<Integer> ageBox;
     @FXML
     private ListView<Profile> searchField;
@@ -59,6 +55,8 @@ public class SearchPageController extends ContentPageController {
     private Label resultLabel;
     @FXML
     private RadioButton searchNameRadioButton;
+    @FXML
+    private ComboBox<String> cityBox;
 
     private ObservableList<Exercise> allExercisesList = FXCollections.observableArrayList();
 
@@ -68,9 +66,6 @@ public class SearchPageController extends ContentPageController {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Initializing comboBoxes
-        loadBoxes();
-
         //Search Profile--------------------------------------------------------
         //Making the requestBuddyButton & returnSearchLabel invisible until they're needed.
         requestBuddyButton.setVisible(false);
@@ -88,45 +83,91 @@ public class SearchPageController extends ContentPageController {
     public void onContentInitialize() {
         //Loading all exercises to the listview
         loadAllExercises();
+        //Initializing comboBoxes
+        loadBoxes();
     }
-    
-    
 
     @FXML
     private void handleSearchProfileButtonAction(ActionEvent event) {
+        //Clearing Listview
+        searchField.getItems().clear();
+
         //Ensuring the label & requestBuddyButton is invisible.
         returnLabel.setVisible(false);
         requestBuddyButton.setVisible(false);
 
         String gender = genderBox.getValue();
-        String city = cityTextfield.getText();
-        int age = ageBox.getValue();
+        String city = cityBox.getValue();
+        //Needs to be done this way. Age can't be null.
+        int age = 0;
+        if (!ageBox.getSelectionModel().isEmpty()) {
+            age = ageBox.getValue();
+        }
 
         System.out.println("Searching with the chosen values/parameters");
 
-        List<Profile> cityList = new ArrayList();
         ObservableList<Profile> returnList = FXCollections.observableArrayList();
 
         //Clearing list to make sure there aren't duplicates. In case the user keeps searching.
-        cityList.clear();
         returnList.clear();
 
-        try {
-            cityList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(city, SearchType.CITY);
+        //If all boxes are empty
+        if (genderBox.getSelectionModel().isEmpty() && cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByAge(15));
 
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (cityList.isEmpty()) {
-                returnLabel.setVisible(true);
-                returnLabel.setText("Search returned no results");
+            //If only gender is empty
+        } else if (genderBox.getSelectionModel().isEmpty() && !cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByCity(city));
+            for (int i = returnList.size() - 1; i > -1; i--) {
+                if (returnList.get(i).getAge() < age) {
+                    returnList.remove(i);
+                }
+            }
+            //If only age is empty    
+        } else if (!genderBox.getSelectionModel().isEmpty() && !cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByCity(city));
+            for (int i = returnList.size() - 1; i > -1; i--) {
+                if (!returnList.get(i).getGender().equals(gender)) {
+                    returnList.remove(i);
+                }
+            }
+            //If only city is empty    
+        } else if (!genderBox.getSelectionModel().isEmpty() && cityBox.getSelectionModel().isEmpty() && !ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByGender(gender));
+
+            for (int i = returnList.size() - 1; i > -1; i--) {
+                if (returnList.get(i).getAge() < age) {
+                    returnList.remove(i);
+                }
+            }
+            //If only city is chosen    
+        } else if (genderBox.getSelectionModel().isEmpty() && !cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByCity(city));
+            //If only age is chosen
+        } else if (genderBox.getSelectionModel().isEmpty() && cityBox.getSelectionModel().isEmpty() && !ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByAge(age));
+            //If only gender is chosen
+        } else if (!genderBox.getSelectionModel().isEmpty() && cityBox.getSelectionModel().isEmpty() && ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByGender(gender));
+            //If all are chosen
+        } else if (!genderBox.getSelectionModel().isEmpty() && !cityBox.getSelectionModel().isEmpty() && !ageBox.getSelectionModel().isEmpty()) {
+            returnList.addAll(searchByCity(city));
+
+            for (int i = returnList.size() - 1; i > -1; i--) {
+                if (returnList.get(i).getAge() < age || !gender.equals(returnList.get(i).getGender())) {
+                    returnList.remove(i);
+                }
             }
         }
 
-        //Checking if the returned results match the search parameters.
-        for (Profile p : cityList) {
-            if (p.getGender().equals(gender) && p.getAge() >= age) {
-                returnList.add(p);
+        //Removing current user from the search
+        for (int i = returnList.size() - 1; i > -1; i--) {
+            try {
+                if (returnList.get(i).getProfileId() == domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId()) {
+                    returnList.remove(i);
+                }
+            } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -144,13 +185,79 @@ public class SearchPageController extends ContentPageController {
                 requestBuddyButton.setVisible(true);
             }
         }
+
+        //If the returned profiles match the search parameters they are put in the list.
+    }
+
+    //This is used if the user only searches for gender.
+    private List<Profile> searchByGender(String gender) {
+
+        List<Profile> getList = new ArrayList();
+
+        try {
+            getList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(gender, SearchType.GENDER);
+
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (getList.isEmpty()) {
+                returnLabel.setVisible(true);
+                returnLabel.setText("Search returned no results");
+            }
+        }
+        return getList;
+    }
+
+    //This is used if the user only searches for age.
+    private List<Profile> searchByAge(int age) {
+
+        List<Profile> getList = new ArrayList();
+
+        try {
+            getList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(Integer.toString(age), SearchType.AGE);
+
+            //Filtering by age.
+            for (Profile p : getList) {
+                if (p.getAge() < age) {
+                    getList.remove(p);
+                }
+            }
+
+        } catch (ClassCastException | ServiceNotFoundException ex) {
+            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (getList.isEmpty()) {
+                returnLabel.setVisible(true);
+                returnLabel.setText("Search returned no results");
+            }
+        }
+        return getList;
+    }
+
+    //This is used if the user only searches for city.
+    private List<Profile> searchByCity(String city) {
+
+        List<Profile> getList = new ArrayList();
+
+        try {
+            getList = domainFacade.<IProfileService>getService(ServiceType.PROFILE).search(city, SearchType.CITY);
+
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (getList.isEmpty()) {
+                returnLabel.setVisible(true);
+                returnLabel.setText("Search returned no results");
+            }
+        }
+        return getList;
     }
 
     @FXML
     private void handleRequestBuddyAction(ActionEvent event) {
 
         //Getting the selected users/buddy's id.
-        int userid = searchField.getSelectionModel().getSelectedItem().getProfileId();
+        int buddyID = searchField.getSelectionModel().getSelectedItem().getProfileId();
 
         //Getting the current users buddies
         int[] currentUserBuddies = null;
@@ -164,18 +271,18 @@ public class SearchPageController extends ContentPageController {
 
         //Going through the current users buddies to see if the user already has the selected profile as buddy.
         for (int i = 0; i < currentUserBuddies.length; i++) {
-            if (userid == currentUserBuddies[i]) {
+            if (buddyID == currentUserBuddies[i]) {
                 returnLabel.setText("This user is already your buddy");
                 buddyCheck = false;
             }
 
             //If the user doesn't have the selected profile as a buddy, a buddy request is sent.
-            if (buddyCheck) {
+            if (buddyCheck == true) {
                 boolean request = false;
 
                 try {
                     //Sending request.
-                    request = domainFacade.<IProfileService>getService(ServiceType.PROFILE).sendBuddyRequest(userid);
+                    request = domainFacade.<IProfileService>getService(ServiceType.PROFILE).sendBuddyRequest(buddyID);
 
                 } catch (ServiceNotFoundException | ClassCastException ex) {
                     Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,10 +305,28 @@ public class SearchPageController extends ContentPageController {
         genderBox.getItems().add("Male");
         genderBox.getItems().add("Female");
 
+        //Filling ageBox
         for (int i = 15; i < 100; i++) {
             ageBox.getItems().add(i);
         }
+
+        //Filling cityBox
+        ArrayList<Profile> checkList = new ArrayList();
+        ArrayList<String> cityList = new ArrayList();
+        checkList.addAll(searchByAge(15));
+        for (Profile p : checkList) {
+            if (!cityList.contains(p.getCity())) {
+                cityList.add(p.getCity());
+            }
+        }
+        for (String s : cityList) {
+            cityBox.getItems().add(s);
+        }
+        checkList.clear();
+        cityList.clear();
+
         //Search Exercise----------------------------
+        exerciseTypeBox.getItems().add("All");
         exerciseTypeBox.getItems().add("Chest");
         exerciseTypeBox.getItems().add("Bicep");
         exerciseTypeBox.getItems().add("Tricep");
@@ -230,14 +355,21 @@ public class SearchPageController extends ContentPageController {
         //Searching for exercises with the given parameters.
         if (searchNameRadioButton.isSelected()) {
             for (Exercise e : allExercisesList) {
-                if (e.getName().equals(name) && e.getType().equals(type)) {
+                if (type.equals("All") && e.getName().equals(name)) {
+                    returnList.add(e);
+                } else if (e.getName().equals(name) && e.getType().equals(type)) {
                     returnList.add(e);
                 }
             }
         } else if (!searchNameRadioButton.isSelected()) {
-            for (Exercise e : allExercisesList) {
-                if (e.getType().equals(type)) {
-                    returnList.add(e);
+            if (type.equals("All")) {
+                returnList.addAll(allExercisesList);
+            } else {
+
+                for (Exercise e : allExercisesList) {
+                    if (e.getType().equals(type)) {
+                        returnList.add(e);
+                    }
                 }
             }
         }
@@ -285,6 +417,15 @@ public class SearchPageController extends ContentPageController {
             exerciseNameField.clear();
         }
 
+    }
+
+    @FXML
+    private void handleClearSearchButtonAction(ActionEvent event) {
+        searchField.getItems().clear();
+        //Boxes
+        ageBox.getSelectionModel().clearSelection();
+        cityBox.getSelectionModel().clearSelection();
+        genderBox.getSelectionModel().clearSelection();
     }
 
 }

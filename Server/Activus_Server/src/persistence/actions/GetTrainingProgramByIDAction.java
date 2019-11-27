@@ -5,53 +5,60 @@
  */
 package persistence.actions;
 
-
-import models.TrainingProgram;
 import java.sql.SQLException;
+import models.TrainingProgram;
 import org.jooq.DSLContext;
 import org.jooq.Record;
-import org.jooq.Record3;
+import org.jooq.Record1;
 import org.jooq.Result;
 import persistence.IDatabaseAction;
 import static persistence.database.generated.Tables.TRAINING_PROGRAM;
-
+import static persistence.database.generated.Tables.TRAINING_PROGRAM_EXERCISE;
 
 /**
  *
- * @author Patrick
+ * @author Denmads
  */
-public class GetTrainingProgramByIDAction extends IDatabaseAction<TrainingProgram>{
+public class GetTrainingProgramByIdAction extends IDatabaseAction<TrainingProgram>{
 
-    private TrainingProgram result;
-    private boolean executed;
+    private TrainingProgram result = null;
     
-    private int id;
+    private int programId;
 
-    public GetTrainingProgramByIDAction(int id) {
-        this.id = id;
+    public GetTrainingProgramByIdAction(int programId) {
+        this.programId = programId;
     }
     
     @Override
     protected void execute(DSLContext database) throws SQLException {
-
-        //Result<Record3<Integer, String, String>> res = database.select(TRAINING_PROGRAM.OWNERID,TRAINING_PROGRAM.NAME,TRAINING_PROGRAM.DESCRIPTION).from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.ID.eq(id)).fetch();
-
+        Record program = database.select().from(TRAINING_PROGRAM).where(TRAINING_PROGRAM.ID.eq(programId)).fetchOne();
         
-        //Record rec = res.get(0);
+        result = new TrainingProgram();
+        result.setId(programId);
+        result.setName(program.getValue(TRAINING_PROGRAM.NAME));
+        result.setDescription(program.getValue(TRAINING_PROGRAM.DESCRIPTION));
         
-        //TODO Fix missing constructor args
-        //result = new TrainingProgram(rec.getValue(TRAINING_PROGRAM.OWNERID),rec.getValue(TRAINING_PROGRAM.NAME),rec.getValue(TRAINING_PROGRAM.DESCRIPTION));
+        //Add exercises
+        Result<Record1<Integer>> exercises = database.select(TRAINING_PROGRAM_EXERCISE.EXERCISEID).from(TRAINING_PROGRAM_EXERCISE).where(TRAINING_PROGRAM_EXERCISE.TRAINING_PROGRAMID.eq(programId)).orderBy(TRAINING_PROGRAM_EXERCISE.INDEX).fetch();
         
+        for (Record1<Integer> r : exercises) {
+            GetProgramExerciseByIdAction getAction = new GetProgramExerciseByIdAction(programId, r.component1());
+            getAction.execute(database);
+            
+            if (getAction.hasResult()) {
+                result.addExercise(getAction.getResult());
+            }
+        }
     }
 
     @Override
     public TrainingProgram getResult() {
-        return executed ? result : null;
+        return result;
     }
 
     @Override
     public boolean hasResult() {
-        return executed;
+        return result != null;
     }
     
 }

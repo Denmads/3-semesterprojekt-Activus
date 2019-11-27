@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistence.actions;
 
 import java.security.NoSuchAlgorithmException;
@@ -31,12 +26,18 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
     private String lastName;
     private String username;
     private String password;
+    private String city;
+    private int age;
+    private String gender;
 
-    public CreateNewUserAction(String firstName, String lastName, String username, String password) {
+    public CreateNewUserAction(String firstName, String lastName, String username, String password, String city, int age, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
+        this.city = city;
+        this.age = age;
+        this.gender = gender;
     }
 
     @Override
@@ -45,13 +46,13 @@ public class CreateNewUserAction extends IDatabaseAction<Boolean> {
             byte[] salt = PasswordTool.generateSalt();
             byte[] hashedPassword = PasswordTool.hashPassword(password, salt);
             int loginId = database.insertInto(LOGIN).columns(LOGIN.USERNAME, LOGIN.HASH_PASSWORD, LOGIN.PASSWORD_SALT).values(username, hashedPassword, salt).returning(LOGIN.ID).fetchOne().getValue(LOGIN.ID);
-            database.insertInto(PROFILE).columns(PROFILE.LOGIN_ID, PROFILE.FIRST_NAME, PROFILE.LAST_NAME).values(loginId, firstName, lastName).execute();
+            database.insertInto(PROFILE).columns(PROFILE.LOGIN_ID, PROFILE.FIRST_NAME, PROFILE.LAST_NAME, PROFILE.CITY, PROFILE.AGE, PROFILE.GENDER).values(loginId, firstName, lastName, city, age, gender).execute();
             executed = true;
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException ex) {
             Logger.getLogger(CreateNewUserAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
         if (!res.isEmpty()) {
             result = true;

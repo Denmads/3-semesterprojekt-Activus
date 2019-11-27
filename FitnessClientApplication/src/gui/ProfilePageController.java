@@ -8,8 +8,6 @@ package gui;
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
 import models.Profile;
-import domain.DomainFacade;
-import domain.serviceInterfaces.IAuthenticationService;
 import domain.serviceInterfaces.IProfileService;
 import java.net.URL;
 import java.util.Optional;
@@ -22,13 +20,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
  *
- * @author perte
+ * @author terpen
  */
 public class ProfilePageController extends ContentPageController {
 
@@ -54,6 +53,8 @@ public class ProfilePageController extends ContentPageController {
     private TextField[] textFields;
     @FXML
     private Button btnDeleteAccount;
+    @FXML
+    private CheckBox checkActiveBuddy;
 
     /**
      * Initializes the controller class.
@@ -61,23 +62,6 @@ public class ProfilePageController extends ContentPageController {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textFields = new TextField[]{fieldCountry, fieldGender, fieldGym, fieldCity, fieldFirstName, fieldLastName, fieldAge};
-    }
-
-    @Override
-    public void setDomainFacade(DomainFacade facade) {
-        try {
-            super.setDomainFacade(facade);
-            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
-            fieldAge.setText(currentProfile.getAge() + "");
-            fieldCity.setText(currentProfile.getCity());
-            fieldCountry.setText(currentProfile.getCountry());
-            fieldFirstName.setText(currentProfile.getFirstName());
-            fieldGender.setText(currentProfile.getGender());
-            fieldGym.setText(currentProfile.getGym());
-            fieldLastName.setText(currentProfile.getLastName());
-        } catch (ServiceNotFoundException | ClassCastException ex) {
-            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     @FXML
@@ -93,6 +77,7 @@ public class ProfilePageController extends ContentPageController {
         for (TextField tf : textFields) {
             tf.setEditable(true);
         }
+        checkActiveBuddy.setDisable(false);
         btnDeleteAccount.setVisible(true);
         btnDeleteAccount.setDisable(false);
         btnSaveProfile.setText("Save profile info");
@@ -104,21 +89,39 @@ public class ProfilePageController extends ContentPageController {
             for (TextField tf : textFields) {
                 tf.setEditable(false);
             }
+            checkActiveBuddy.setDisable(true);
             btnDeleteAccount.setVisible(false);
             btnDeleteAccount.setDisable(true);
             btnSaveProfile.setText("Modify profile info");
             int id = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             Profile temp = new Profile(id);
-
             temp.setGym(fieldGym.getText());
             temp.setCity(fieldCity.getText());
             temp.setAge(Integer.parseInt(fieldAge.getText()));
             temp.setFirstName(fieldFirstName.getText());
             temp.setLastName(fieldLastName.getText());
             temp.setGender(fieldGender.getText());
-            temp.setCountry(fieldCountry.getText());
+            temp.setCountry(fieldCountry.getText()); 
+            temp.setActiveBuddy(checkActiveBuddy.isSelected());
             boolean updated = domainFacade.<IProfileService>getService(ServiceType.PROFILE).updateProfile(temp);
             //save data to server TODO
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void onContentInitialize() {
+        try {
+            Profile currentProfile = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile();
+            fieldAge.setText(currentProfile.getAge() + "");
+            fieldCity.setText(currentProfile.getCity());
+            fieldCountry.setText(currentProfile.getCountry());
+            fieldFirstName.setText(currentProfile.getFirstName());
+            fieldGender.setText(currentProfile.getGender());
+            fieldGym.setText(currentProfile.getGym());
+            fieldLastName.setText(currentProfile.getLastName());
+            checkActiveBuddy.setSelected(currentProfile.isActiveBuddy());
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(ProfilePageController.class.getName()).log(Level.SEVERE, null, ex);
         }

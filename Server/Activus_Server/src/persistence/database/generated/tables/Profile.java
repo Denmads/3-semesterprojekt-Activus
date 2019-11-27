@@ -15,7 +15,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -42,7 +42,7 @@ import persistence.database.generated.tables.records.ProfileRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Profile extends TableImpl<ProfileRecord> {
 
-    private static final long serialVersionUID = 95937302;
+    private static final long serialVersionUID = 1742268158;
 
     /**
      * The reference instance of <code>public.profile</code>
@@ -101,6 +101,11 @@ public class Profile extends TableImpl<ProfileRecord> {
      * The column <code>public.profile.country</code>.
      */
     public final TableField<ProfileRecord, String> COUNTRY = createField(DSL.name("country"), org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false).defaultValue(org.jooq.impl.DSL.field("'Country of nowhere'::character varying", org.jooq.impl.SQLDataType.VARCHAR)), this, "");
+
+    /**
+     * The column <code>public.profile.activebuddy</code>.
+     */
+    public final TableField<ProfileRecord, Boolean> ACTIVEBUDDY = createField(DSL.name("activebuddy"), org.jooq.impl.SQLDataType.BOOLEAN.defaultValue(org.jooq.impl.DSL.field("false", org.jooq.impl.SQLDataType.BOOLEAN)), this, "");
 
     /**
      * Create a <code>public.profile</code> table reference
@@ -196,11 +201,11 @@ public class Profile extends TableImpl<ProfileRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Integer, Integer, String, String, Integer, String, String, String, String> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row10<Integer, Integer, String, String, Integer, String, String, String, String, Boolean> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

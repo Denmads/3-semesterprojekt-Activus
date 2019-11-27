@@ -31,9 +31,7 @@ public class ProfileCellController extends ListCell<Profile> {
     private IDomainFacade domainFacade;
 
     public ProfileCellController(IDomainFacade domainFacade) {
-
         this.domainFacade = domainFacade;
-
     }
 
     
