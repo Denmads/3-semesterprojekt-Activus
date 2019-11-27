@@ -149,13 +149,20 @@ public class BuddyPageController extends ContentPageController {
 
     @FXML
     private void action(){
-        checkBuddy();
-        buddy = listViewBuddies.getSelectionModel().getSelectedItem();
-        loadMessage();
+        if (checkBuddy()){
+            buddy = listViewBuddies.getSelectionModel().getSelectedItem();
+            loadMessage();
+        }
+        
     }
     
     
-    private void checkBuddy(){
-        
+    private boolean checkBuddy(){
+        try {
+            return domainFacade.<IProfileService>getService(ServiceType.PROFILE).isBuddy(buddy.getProfileId());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

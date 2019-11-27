@@ -183,6 +183,11 @@ public class ProfileService extends IProfileService {
     public List<Profile> getAllBuddys(int ProfileID) {
         return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUDDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
     }
+
+    @Override
+    public boolean isBuddy(int buddyID) {
+        return (boolean) returnResponsObject(RequestType.IS_BUDDY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
+    }
     
  
 }

@@ -19,6 +19,7 @@ import org.jooq.TableField;
 import persistence.actions.AcceptBuddyRequest;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.DennyBuddyRequest;
+import persistence.actions.IsBuddyAction;
 import persistence.actions.SearchAction;
 import persistence.actions.SendBuddyRequest;
 import persistence.actions.SetStatsAction;
@@ -141,7 +142,14 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+            
+            case IS_BUDDY:
+                try {
+                    IsBuddyAction iba = new IsBuddyAction(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, iba.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex){
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
         }
         return response;

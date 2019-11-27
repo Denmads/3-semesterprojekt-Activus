@@ -43,6 +43,8 @@ public abstract class IProfileService extends IService {
     public abstract boolean sendBuddyRequest(int buddyID);
 
     public abstract boolean acceptBuddyRequest(int requestingProfileID);
+    
+    public abstract boolean isBuddy(int buddyID);
 
     public abstract boolean setGoal(String Goal);
     
