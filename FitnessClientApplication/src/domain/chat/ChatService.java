@@ -50,7 +50,7 @@ public class ChatService extends IChatService {
     }
 
     @Override
-    public List<Message> getChatHistory(int buddyProfileId) {
+    public List<Message> getChatHistory(int profileId, int buddyProfileId) {
         return (List<Message>) returnResponseObject(RequestType.RECEIVE_MESSAGE_HISTORY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.CHAT_HISTORY, buddyProfileId);
     }
     
