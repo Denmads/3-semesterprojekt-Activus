@@ -2,7 +2,7 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import GUI.cellsControllers.MessageCellController;
+import gui.cellsControllers.MessageCellController;
 import models.Message;
 import models.Profile;
 import domain.DomainFacade;
@@ -105,6 +105,7 @@ public class BuddyPageController extends ContentPageController {
             return new ProfileCellController(domainFacade);
         });
         listViewBuddies.refresh();
+        
     }
 
     @Override
@@ -152,6 +153,8 @@ public class BuddyPageController extends ContentPageController {
         if (checkBuddy()){
             buddy = listViewBuddies.getSelectionModel().getSelectedItem();
             loadMessage();
+        } else {
+            
         }
         
     }

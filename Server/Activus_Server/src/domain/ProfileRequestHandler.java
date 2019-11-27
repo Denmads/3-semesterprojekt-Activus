@@ -120,6 +120,10 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+            case GET_ALL_BUDDYS:
+                
+                break;
             case ACCEPT_BUDDY_REQUEST:
                 try {
                     AcceptBuddyRequest abr = new AcceptBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
@@ -127,6 +131,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
             case SEND_BUDDY_REQUEST:
                 try {
                     SendBuddyRequest sbr = new SendBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
@@ -134,7 +139,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+                break;
             case DENNY_BUDDY_REQUEST:
                 try {
                     DennyBuddyRequest dbr = new DennyBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
@@ -142,7 +147,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            
+                break;
             case IS_BUDDY:
                 try {
                     IsBuddyAction iba = new IsBuddyAction(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
