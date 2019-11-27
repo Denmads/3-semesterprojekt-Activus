@@ -16,8 +16,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
 import org.jooq.TableField;
+import persistence.actions.AcceptBuddyRequest;
 import persistence.actions.DeleteAccountAction;
+import persistence.actions.DennyBuddyRequest;
 import persistence.actions.SearchAction;
+import persistence.actions.SendBuddyRequest;
 import persistence.actions.SetStatsAction;
 import static persistence.database.generated.Tables.PROFILE;
 
@@ -116,7 +119,29 @@ public class ProfileRequestHandler extends IRequestHandler {
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+            case ACCEPT_BUDDY_REQUEST:
+                try {
+                    AcceptBuddyRequest abr = new AcceptBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, abr.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex){
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            case SEND_BUDDY_REQUEST:
+                try {
+                    SendBuddyRequest sbr = new SendBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, sbr.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex){
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            case DENNY_BUDDY_REQUEST:
+                try {
+                    DennyBuddyRequest dbr = new DennyBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    response.addArgument(ResponseArgumentName.SUCCESS, dbr.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex){
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
                 break;
         }
         return response;
