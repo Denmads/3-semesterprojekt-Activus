@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="30.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefWidth="100.0" spacing="5.0">
+         <children>
+            <Label text="Reps:" />
+            <Label fx:id="repsLabel" text="10" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label text="Weight:" />
+            <Label fx:id="weightLabel" text="10 Kg" />
+         </children>
+      </HBox>
+      <HBox spacing="5.0">
+         <children>
+            <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="24.0" onMouseReleased="#moveSetUp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox style="-fx-background-color: #aaaaff; -fx-background-radius: 10;">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="24.0" onMouseReleased="#moveSetDown" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../../../Images/TrainingProgram/upArrow.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+      <HBox style="-fx-background-color: #ff6666; -fx-background-radius: 10;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="24.0" onMouseReleased="#deleteSet" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/TrainingProgram/delete.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</HBox>

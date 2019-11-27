@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 public class SetInfo implements Comparable<SetInfo>, Serializable{
 
+    private int id;
     private int reps;
     private double weight;
     private int setIndex;
@@ -24,6 +25,14 @@ public class SetInfo implements Comparable<SetInfo>, Serializable{
         this.weight = weight;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getSetIndex() {
         return setIndex;
     }
@@ -53,4 +62,11 @@ public class SetInfo implements Comparable<SetInfo>, Serializable{
         return setIndex - o.getSetIndex();
     }
 
+    public SetInfo clone () {
+        SetInfo clone = new SetInfo();
+        clone.setSetIndex(getSetIndex());
+        clone.setReps(getReps());
+        clone.setWeight(getWeight());
+        return clone;
+    }
 }

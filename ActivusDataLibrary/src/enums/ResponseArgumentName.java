@@ -17,5 +17,6 @@ public enum ResponseArgumentName implements Serializable {
     EXERCISE,
     MESSAGE,
     ERRORS,
+    NEW_ID,
     SEARCH_RESULT
 }
