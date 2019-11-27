@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox alignment="CENTER_LEFT" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HomePageController">
+   <children>
+      <ImageView fitHeight="660.0" fitWidth="1220.0" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/Menu/background.png" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" style="-fx-background-color: #E88C22; -fx-background-radius: 30;" text="        Today        ">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewTodaysTraining" style="-fx-background-color: #707070; -fx-background-radius: 30;" stylesheets="@../css/Stylesheet.css" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+   </padding>
+</HBox>

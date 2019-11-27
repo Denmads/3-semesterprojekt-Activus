@@ -58,7 +58,7 @@ public class AuthenticationRequestHandler extends IRequestHandler {
                 databaseFacade.execute(vla);
                 System.out.println(vla.hasResult());
                 if (vla.hasResult()) {
-                    GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getUserId());
+                    GetProfileByLoginIdAction gpblia = new GetProfileByLoginIdAction(vla.getResult().getLoginId());
                     databaseFacade.execute(gpblia);
                     response.addArgument(ResponseArgumentName.CREDENTIALS, vla.getResult());
                     response.addArgument(ResponseArgumentName.PROFILE, gpblia.getResult());

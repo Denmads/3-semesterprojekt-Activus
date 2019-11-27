@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.dbcp2.BasicDataSource;
 
 /**
  * A class to provide a singular connection pool to multiple classes.
@@ -37,7 +36,8 @@ public class DatabaseConnection {
     
     private void readConfig () {
         //Change if path on server is changed
-        File f = new File("home/config.properties");
+        //On server home/
+        File f = new File("config.properties");
         System.out.println(f.getAbsolutePath());
         
         try (FileReader reader = new FileReader(f)) {

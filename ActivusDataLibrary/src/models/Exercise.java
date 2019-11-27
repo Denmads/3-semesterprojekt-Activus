@@ -1,7 +1,5 @@
 package models;
 
-import models.SetInfo;
-import models.SetInfo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -21,10 +19,7 @@ public class Exercise implements Serializable{
     private ArrayList<SetInfo> set;
 
     public Exercise() {
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+        this.set = new ArrayList<>();
     }
 
     public Exercise(int ID, String name, double time, String type) {
@@ -35,6 +30,10 @@ public class Exercise implements Serializable{
         this.Description = "no description";
         this.type = type;
         this.indexInProgram = -1;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public void setType(String type) {
@@ -101,5 +100,21 @@ public class Exercise implements Serializable{
         this.indexInProgram = indexInProgram;
     }
     
-    
+    public Exercise clone () {
+        Exercise clone = new Exercise();
+        clone.setID(getID());
+        clone.setName(getName());
+        clone.setDescription(getDescription());
+        clone.setType(getType());
+        
+        ArrayList<SetInfo> sets = new ArrayList<>();
+        
+        for (SetInfo set : getSet()) {
+            sets.add(set.clone());
+        }
+        
+        clone.setSet(sets);
+        
+        return clone;
+    }
 }
