@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SearchPageController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="315.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SearchPageController">
     <tabs>
         <Tab style="-fx-background-color: #2B60DE;" text="Exercises">
             <content>
-                <VBox alignment="TOP_CENTER" prefHeight="729.0" prefWidth="308.0" spacing="15.0" style="-fx-background-color: #e88c22;">
+                <VBox alignment="TOP_CENTER" prefHeight="729.0" prefWidth="308.0" spacing="15.0" style="-fx-background-color: #ff914d;">
                     <children>
                         <Label text="Exercises" textFill="WHITE">
                             <font>
@@ -52,7 +52,7 @@
         </Tab>
         <Tab style="-fx-background-color: #2B60DE;" text="Buddy Search">
             <content>
-                <VBox alignment="TOP_CENTER" prefHeight="729.0" prefWidth="308.0" spacing="15.0" style="-fx-background-color: #e88c22;">
+                <VBox alignment="TOP_CENTER" prefHeight="729.0" prefWidth="308.0" spacing="15.0" style="-fx-background-color: #ff914d;">
                     <children>
                         <Label text="Search" textFill="WHITE">
                             <font>
