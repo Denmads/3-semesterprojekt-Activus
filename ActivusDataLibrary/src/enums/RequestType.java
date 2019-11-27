@@ -21,6 +21,7 @@ public enum RequestType implements Serializable {
     SEND_BUDDY_REQUEST,
     ACCEPT_BUDDY_REQUEST,
     DENNY_BUDDY_REQUEST,
+    IS_BUDDY,
     GET_ALL_BUDDYS,
     SET_GOAL,
     SET_STAT,

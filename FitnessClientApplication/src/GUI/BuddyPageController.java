@@ -131,6 +131,7 @@ public class BuddyPageController extends ContentPageController {
         listViewBuddies.refresh();
     }
     
+    @FXML
     private boolean sendMessage(){
         try {
             String text = messageField.getText();
