@@ -28,7 +28,7 @@ import persistence.database.generated.tables.TrainingProgramExercise;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingProgramExerciseRecord> implements Record3<Integer, Integer, Integer> {
 
-    private static final long serialVersionUID = -1401979889;
+    private static final long serialVersionUID = -1040028881;
 
     /**
      * Setter for <code>public.training_program_exercise.exerciseid</code>.
@@ -59,16 +59,16 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
     }
 
     /**
-     * Setter for <code>public.training_program_exercise.setid</code>.
+     * Setter for <code>public.training_program_exercise.index</code>.
      */
-    public void setSetid(Integer value) {
+    public void setIndex(Integer value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>public.training_program_exercise.setid</code>.
+     * Getter for <code>public.training_program_exercise.index</code>.
      */
-    public Integer getSetid() {
+    public Integer getIndex() {
         return (Integer) get(2);
     }
 
@@ -107,7 +107,7 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
 
     @Override
     public Field<Integer> field3() {
-        return TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.SETID;
+        return TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE.INDEX;
     }
 
     @Override
@@ -122,7 +122,7 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
 
     @Override
     public Integer component3() {
-        return getSetid();
+        return getIndex();
     }
 
     @Override
@@ -137,7 +137,7 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
 
     @Override
     public Integer value3() {
-        return getSetid();
+        return getIndex();
     }
 
     @Override
@@ -154,7 +154,7 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
 
     @Override
     public TrainingProgramExerciseRecord value3(Integer value) {
-        setSetid(value);
+        setIndex(value);
         return this;
     }
 
@@ -180,11 +180,11 @@ public class TrainingProgramExerciseRecord extends UpdatableRecordImpl<TrainingP
     /**
      * Create a detached, initialised TrainingProgramExerciseRecord
      */
-    public TrainingProgramExerciseRecord(Integer exerciseid, Integer trainingProgramid, Integer setid) {
+    public TrainingProgramExerciseRecord(Integer exerciseid, Integer trainingProgramid, Integer index) {
         super(TrainingProgramExercise.TRAINING_PROGRAM_EXERCISE);
 
         set(0, exerciseid);
         set(1, trainingProgramid);
-        set(2, setid);
+        set(2, index);
     }
 }

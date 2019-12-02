@@ -14,6 +14,7 @@ import org.jooq.Record;
 import org.jooq.Result;
 import persistence.util.PasswordTool;
 import static persistence.database.generated.Tables.LOGIN;
+import static persistence.database.generated.Tables.PROFILE;
 import static persistence.database.generated.Tables.TOKEN;
 
 /**
@@ -35,17 +36,17 @@ public class VerifyLoginAction extends IDatabaseAction<CredentialsContainer> {
     @Override
     protected void execute(DSLContext database) throws SQLException {
         //Fetching login information from database.
-        Result<Record> res = database.select().from(LOGIN).where(LOGIN.USERNAME.eq(username)).fetch();
+        Result<Record> res = database.select(LOGIN.asterisk(), PROFILE.ID).from(LOGIN.join(PROFILE).on(LOGIN.ID.eq(PROFILE.LOGIN_ID))).where(LOGIN.USERNAME.eq(username).and(LOGIN.FLAG.eq(false))).fetch();
 
         //If the database returns something(Isn't empty) the password is verified.
         if (!res.isEmpty()) {
             Record record = res.get(0);
             
             boolean loginCorrect = checkPassword(record);
-            
             if (loginCorrect) {
-                int id = record.getValue(LOGIN.ID);
-                credentials = new CredentialsContainer(username, id, createAuthenticationToken(database, record));
+                int loginId = record.getValue(LOGIN.ID);
+                int profileId = record.getValue(PROFILE.ID);
+                credentials = new CredentialsContainer(username, loginId, profileId, createAuthenticationToken(database, record));
             }
         }
     }

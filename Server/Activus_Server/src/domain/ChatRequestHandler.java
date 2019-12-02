@@ -10,6 +10,7 @@ import Enums.ResponseArgumentName;
 import Exceptions.ArgumentNotFoundException;
 import models.Request;
 import models.Response;
+import models.Message;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
@@ -35,7 +36,7 @@ public class ChatRequestHandler extends IRequestHandler {
         switch (request.getRequestType()) {
             case SEND_MESSAGE:
                 try {
-                    SendMessageAction sma = new SendMessageAction(request.getArgument(RequestArgumentName.SENDER_ID), request.getArgument(RequestArgumentName.RECIVER_ID), request.getArgument(RequestArgumentName.MESSAGE));
+                    SendMessageAction sma = new SendMessageAction(request.getArgument(RequestArgumentName.MESSAGE));
                     response.addArgument(ResponseArgumentName.SUCCESS, sma.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ChatRequestHandler.class.getName()).log(Level.SEVERE, null, ex);

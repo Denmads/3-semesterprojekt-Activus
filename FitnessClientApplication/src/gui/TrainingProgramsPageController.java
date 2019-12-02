@@ -7,6 +7,7 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import gui.cellsControllers.TrainingProgramExerciseListCellController;
 import models.Exercise;
 import models.TrainingProgram;
@@ -14,6 +15,10 @@ import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.TrainingProgramCellController;
 import gui.cellsControllers.TrainingProgramExerciseCellController;
 import java.net.URL;
+<<<<<<< HEAD:FitnessClientApplication/src/gui/TrainingProgramsPageController.java
+=======
+import java.util.ArrayList;
+>>>>>>> master:FitnessClientApplication/src/GUI/TrainingProgramsPageController.java
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -92,7 +97,7 @@ public class TrainingProgramsPageController extends ContentPageController {
         trainingPrograms = FXCollections.observableArrayList();
         
         trainingProgramList.setItems(trainingPrograms);
-        trainingProgramList.setCellFactory(view -> new TrainingProgramCellController(this));
+        trainingProgramList.setCellFactory(view -> new TrainingProgramCellController(this, domainFacade));
         
         
         trainingProgramList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<TrainingProgram>() {
@@ -118,6 +123,11 @@ public class TrainingProgramsPageController extends ContentPageController {
             
             populateChoiceBox();
             setupExerciseSearch();
+            
+            List<TrainingProgram> programs = new ArrayList<>();
+            programs.addAll(domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).getAllTrainingPrograms());
+            trainingPrograms.addAll(programs);
+            
         } catch (ServiceNotFoundException ex) {
             Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassCastException ex) {
@@ -189,34 +199,33 @@ public class TrainingProgramsPageController extends ContentPageController {
         
         exerciseInProgramList.setItems(addedExercises);
         exerciseInProgramList.setCellFactory(view -> {
-            TrainingProgramExerciseCellController cell =  new TrainingProgramExerciseCellController(this);
+            TrainingProgramExerciseCellController cell =  new TrainingProgramExerciseCellController(this, domainFacade);
             
             cell.setOnDragDropped(new EventHandler<DragEvent>() {
                 @Override
                 public void handle(DragEvent event) {
-                    
+                    if (cell.isEmpty()) {
+                        return;
+                    }
                     
                     Dragboard db = event.getDragboard();
                     if (db.hasContent(PROJECT_DATA_FORMAT)) {
-                        Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-                        Exercise addedExercise = new Exercise();
-                        addedExercise.setID(exercise.getID());
-                        addedExercise.setName(exercise.getName());
-                        addedExercise.setDescription(exercise.getDescription());
-                        addedExercise.setType(exercise.getType());
-                        addedExercise.setSet(exercise.getSet());
-
-                        
-                        int index = addedExercises.size();
-                        if (!cell.isEmpty()) {
-                            index = cell.getIndex()+1;
+                        try {
+                            Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+                            Exercise addedExercise = exercise.clone();
+                            
+                            int index = cell.getIndex()+1;
+                            addedExercise.setIndexInProgram(index);
+                            
+                            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, trainingProgramList.getSelectionModel().getSelectedItem());
+                            addedExercises.add(index, addedExercise);
+                            trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
+                            event.consume();
+                        } catch (ServiceNotFoundException ex) {
+                            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ClassCastException ex) {
+                            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        addedExercise.setIndexInProgram(index);
-                         
-                        //Add exercise in database
-                        System.out.println("Drop on cell");
-                        addedExercises.add(index, addedExercise);
-                        trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
                     }
                 }
             });
@@ -241,6 +250,7 @@ public class TrainingProgramsPageController extends ContentPageController {
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
                     try {
                         Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+<<<<<<< HEAD:FitnessClientApplication/src/gui/TrainingProgramsPageController.java
                         Exercise addedExercise = new Exercise();
                         addedExercise.setID(exercise.getID());
                         addedExercise.setName(exercise.getName());
@@ -253,6 +263,11 @@ public class TrainingProgramsPageController extends ContentPageController {
                         }
                         //Add exercise in database
                         System.out.println("Drop on list");
+=======
+                        Exercise addedExercise = exercise.clone();
+                        
+                        domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, getCurrentProgram());
+>>>>>>> master:FitnessClientApplication/src/GUI/TrainingProgramsPageController.java
                         addedExercises.add(addedExercise);
                         trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
                         trainingProgramList.refresh();
@@ -270,24 +285,66 @@ public class TrainingProgramsPageController extends ContentPageController {
     private void addNewtrainingProgram(ActionEvent event) {
         TrainingProgram program = new TrainingProgram();
         if (openDialog("", "", false, program)) {
-            //Add program database
-            trainingPrograms.add(program);
-            showProgramDetails(program);
+            try {
+                domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).createNewTrainingProgram(program);
+                trainingProgramList.getSelectionModel().select(program);
+                trainingPrograms.add(program);
+                showProgramDetails(program);
+            } catch (ServiceNotFoundException | ClassCastException ex) {
+                Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
     public void deleteTrainingProgram (TrainingProgram program) {
-        //delete program database
-        trainingPrograms.remove(program);
-        trainingProgramList.refresh();
+        try {
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).deleteTrainingPogram(program.getId());
+            trainingPrograms.remove(program);
+            trainingProgramList.refresh();
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void deleteExerciseFromProgram (Exercise exercise) {
-        //Delete exercise link in db
+        
+        try {
+            domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).removeExercise(exercise.getID(), getCurrentProgram().getId());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(TrainingProgramsPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         addedExercises.remove(exercise);
-        trainingProgramList.getSelectionModel().getSelectedItem().removeExercise(exercise);
+        getCurrentProgram().removeExercise(exercise);
         exerciseInProgramList.refresh();
         trainingProgramList.refresh();
+    }
+    
+    public void moveExerciseUp (int indexOfExercise) {
+        if (indexOfExercise == 0) {
+            return;
+        }
+        
+        Exercise e = addedExercises.get(indexOfExercise);
+        addedExercises.remove(indexOfExercise);
+        addedExercises.add(indexOfExercise-1, e);
+        exerciseInProgramList.refresh();
+        
+    }
+    
+    public void moveExerciseDown (int indexOfExercise) {
+        if (indexOfExercise == addedExercises.size()) {
+            return;
+        }
+        
+        Exercise e = addedExercises.get(indexOfExercise);
+        addedExercises.remove(indexOfExercise);
+        addedExercises.add(indexOfExercise+1, e);
+        exerciseInProgramList.refresh();
+        
+    }
+    
+    public TrainingProgram getCurrentProgram () {
+        return trainingProgramList.getSelectionModel().getSelectedItem();
     }
     
     public boolean openDialog (String name, String desc, boolean edit, TrainingProgram program) {
@@ -320,7 +377,7 @@ public class TrainingProgramsPageController extends ContentPageController {
 
         // Enable/Disable confirm button depending on whether a name was entered.
         Node confirmButton = dialog.getDialogPane().lookupButton(confirmButtonType);
-        confirmButton.setDisable(true);
+        confirmButton.setDisable(nameField.getText().trim().isEmpty() || nameField.getText().trim().length() > 20);
 
         // Do some validation (using the Java 8 lambda syntax).
         nameField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -348,13 +405,11 @@ public class TrainingProgramsPageController extends ContentPageController {
             program.setDescription(info.getValue());
         });
         
-        //if edit update program in database
-        
         trainingProgramList.refresh();
         return result.isPresent();
     }
     
-    private void showProgramDetails (TrainingProgram program) {
+    public void showProgramDetails (TrainingProgram program) {
         trainingProgramView.setDisable(false);
         trainingProgramView.setVisible(true);
         

@@ -36,8 +36,6 @@ public abstract class IProfileService extends IService {
 
     public abstract boolean updateProfilePassWord(String newPassword);
 
-    public abstract boolean deleteAccount();
-
     public abstract boolean followProfile(int profileID);
 
     public abstract boolean followTrainingProgram(int programID);
@@ -47,18 +45,15 @@ public abstract class IProfileService extends IService {
     public abstract boolean acceptBuddyRequest(int requestingProfileID);
 
     public abstract boolean setGoal(String Goal);
+    
+    public abstract boolean deleteAccount(String profileUsername);
 
     public abstract int setStats(Exercise exercise);
 
     public abstract boolean removeStats(int statsID);
     
-    /**
-     *
-     * @param ProfileID
-     * @return
-     */
+    public abstract  List<Profile> getAllBuddys(int ProfileID);
+
     public abstract Stats getCurrentStats(int ProfileID);
     
-   
-
 }

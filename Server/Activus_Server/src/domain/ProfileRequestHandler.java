@@ -1,8 +1,9 @@
 package domain;
 
-import domain.IRequestHandler;
 import Enums.RequestArgumentName;
+import static Enums.RequestType.DELETE_ACCOUNT;
 import Enums.ResponseArgumentName;
+import Enums.SearchType;
 import Exceptions.ArgumentNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import layerInterfaces.IDatabaseFacade;
 import org.jooq.TableField;
-import persistence.DatabaseFacade;
 import persistence.actions.DeleteAccountAction;
+import persistence.actions.SearchAction;
 import persistence.actions.SetStatsAction;
 import static persistence.database.generated.Tables.PROFILE;
 
@@ -25,7 +26,7 @@ import static persistence.database.generated.Tables.PROFILE;
  * @author madsh
  */
 public class ProfileRequestHandler extends IRequestHandler {
-    
+
     public ProfileRequestHandler(IDatabaseFacade dbFacade) {
         super(dbFacade);
     }
@@ -53,12 +54,12 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case SET_STAT:
-                try {
-                    SetStatsAction ssa = new SetStatsAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_TIME_TAKEN), request.getArgument(RequestArgumentName.PROGRAM_REPS), request.getArgument(RequestArgumentName.PROGRAM_SETS), request.getArgument(RequestArgumentName.PROGRAM_WEIGHT), request.getArgument(RequestArgumentName.PROGRAM_DATE));
-                    response.addArgument(ResponseArgumentName.SUCCESS, ssa.getResult());
-                } catch (ArgumentNotFoundException | ClassCastException ex) {
-                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    SetStatsAction ssa = new SetStatsAction(request.getArgument(RequestArgumentName.PROFILE_ID), request.getArgument(RequestArgumentName.EXERCISE_ID), request.getArgument(RequestArgumentName.PROGRAM_TIME_TAKEN), request.getArgument(RequestArgumentName.PROGRAM_REPS), request.getArgument(RequestArgumentName.PROGRAM_SETS), request.getArgument(RequestArgumentName.PROGRAM_WEIGHT), request.getArgument(RequestArgumentName.PROGRAM_DATE));
+//                    response.addArgument(ResponseArgumentName.SUCCESS, ssa.getResult());
+//                } catch (ArgumentNotFoundException | ClassCastException ex) {
+//                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 break;
             case UPDATE_PROFILE:
                 try {
@@ -78,7 +79,9 @@ public class ProfileRequestHandler extends IRequestHandler {
                     tableFields.add(PROFILE.GENDER);
                     changes.add(request.getArgument(RequestArgumentName.PROFILE_COUNTRY));
                     tableFields.add(PROFILE.COUNTRY);
-
+                    changes.add(request.getArgument(RequestArgumentName.PROFILE_ACTIVE_BUDDY));
+                    tableFields.add(PROFILE.ACTIVEBUDDY);
+                    
                     UpdateProfileAction upa = new UpdateProfileAction(request.getArgument(RequestArgumentName.PROFILE_ID), changes, tableFields);
                     databaseFacade.execute(upa);
                     response.addArgument(ResponseArgumentName.SUCCESS, upa.getResult());
@@ -88,13 +91,35 @@ public class ProfileRequestHandler extends IRequestHandler {
                 break;
             case DELETE_ACCOUNT:
                 try {
-                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.PROFILE_ID));
+                    DeleteAccountAction daa = new DeleteAccountAction(request.getArgument(RequestArgumentName.USERNAME), request.getCredentials().getLoginId());
+                    databaseFacade.execute(daa);
                     response.addArgument(ResponseArgumentName.SUCCESS, daa.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex) {
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+            case SEARCH:
+                try {
+                    SearchAction sa = null;
+
+                    if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.AGE)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_AGE);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.CITY)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_CITY);
+                    } else if (request.getArgument(RequestArgumentName.SEARCH_TYPE).equals(SearchType.GENDER)) {
+                        sa = new SearchAction(request.getArgument(RequestArgumentName.TEXT), RequestArgumentName.PROFILE_GENDER);
+                    }
+
+                    databaseFacade.execute(sa);
+                    response.addArgument(ResponseArgumentName.SUCCESS, sa.getResult());
+                    
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                break;
         }
         return response;
-    }
 
+    }
 }

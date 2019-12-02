@@ -11,13 +11,15 @@ import java.util.UUID;
  */
 public class CredentialsContainer implements Serializable {
 
-    private String username;
-    private int userId;
-    private UUID authenticationToken;
+    private final String username;
+    private final int loginId;
+    private final int profileId;
+    private final UUID authenticationToken;
 
-    public CredentialsContainer(String username, int userId, UUID authenticationToken) {
+    public CredentialsContainer(String username, int loginId, int profileId, UUID authenticationToken) {
         this.username = username;
-        this.userId = userId;
+        this.loginId = loginId;
+        this.profileId = profileId;
         this.authenticationToken = authenticationToken;
     }
 
@@ -25,10 +27,14 @@ public class CredentialsContainer implements Serializable {
         return username;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getLoginId() {
+        return loginId;
     }
 
+    public int getProfileId() {
+        return profileId;
+    }
+    
     public UUID getAuthenticationToken() {
         return authenticationToken;
     }

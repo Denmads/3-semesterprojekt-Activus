@@ -168,6 +168,7 @@ public class StatsPageController extends ContentPageController {
         }
     }
     
+<<<<<<< HEAD:FitnessClientApplication/src/gui/StatsPageController.java
     private void showAlert (String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -176,3 +177,12 @@ public class StatsPageController extends ContentPageController {
         alert.showAndWait();
     }
 }
+=======
+
+    @Override
+    public void onContentInitialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}
+>>>>>>> master:FitnessClientApplication/src/GUI/StatsPageController.java

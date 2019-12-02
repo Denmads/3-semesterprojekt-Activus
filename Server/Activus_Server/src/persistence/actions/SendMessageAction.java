@@ -6,6 +6,7 @@
 
 package persistence.actions;
 
+import models.Message;
 import java.sql.SQLException;
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -22,18 +23,18 @@ public class SendMessageAction extends IDatabaseAction<Boolean>{
     private boolean executed = false;
     private int senderId;
     private int reciverId;
-    private String message;
+    private Message message;
     
-    public SendMessageAction(int senderId, int reciverId, String message){
-        this.senderId = senderId;
-        this.reciverId = reciverId;
+    public SendMessageAction(Message message){
+        this.senderId = message.getSenderId();
+        this.reciverId = message.getReciverId();
         this.message = message;
     }
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
         int id = -1;
-        id = database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message).returning(MESSAGE.ID).execute();
+        id = database.insertInto(MESSAGE).columns(MESSAGE.SENDER, MESSAGE.RECEIVER, MESSAGE.MESSAGE_).values(senderId, reciverId, message.getMessage()).returning(MESSAGE.ID).execute();
         result = id != -1;
         executed = true;
     }

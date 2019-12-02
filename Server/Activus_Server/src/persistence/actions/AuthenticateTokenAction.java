@@ -24,7 +24,7 @@ public class AuthenticateTokenAction extends IDatabaseAction<Boolean> {
 
     @Override
     protected void execute(DSLContext database) throws SQLException {
-        int count = database.selectCount().from(TOKEN).where(TOKEN.LOGINID.eq(credentials.getUserId()).and(TOKEN.TOKEN_.eq(credentials.getAuthenticationToken()))).fetchOne().value1();
+        int count = database.selectCount().from(TOKEN).where(TOKEN.LOGINID.eq(credentials.getLoginId()).and(TOKEN.TOKEN_.eq(credentials.getAuthenticationToken()))).fetchOne().value1();
         result = count > 0;
         executed = true;
     }
