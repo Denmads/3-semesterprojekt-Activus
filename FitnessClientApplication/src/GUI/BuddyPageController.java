@@ -11,6 +11,7 @@ import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
 import gui.cellsControllers.ProfileCellController;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -150,11 +155,43 @@ public class BuddyPageController extends ContentPageController {
 
     @FXML
     private void action(){
+        buddy = listViewBuddies.getSelectionModel().getSelectedItem();
         if (checkBuddy()){
-            buddy = listViewBuddies.getSelectionModel().getSelectedItem();
             loadMessage();
         } else {
-            
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation for buddy");
+            alert.setHeaderText("Confirmation for buddy request");
+            alert.setContentText("Do you wanna accept the buddy request from the user?");
+
+            ButtonType buttonTypeOne = new ButtonType("Accept");
+            ButtonType buttonTypeTwo = new ButtonType("Deny");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeOne){
+                try {
+                    domainFacade.<IProfileService>getService(ServiceType.PROFILE).acceptBuddyRequest(buddy.getProfileId());
+                } catch (ServiceNotFoundException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassCastException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                alert.close();
+            } else if (result.get() == buttonTypeTwo) {
+                try {
+                    domainFacade.<IProfileService>getService(ServiceType.PROFILE).dennyBuddyRequest(buddy.getProfileId());
+                } catch (ServiceNotFoundException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassCastException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                alert.close();
+            } else {
+                alert.close();
+            }
         }
         
     }
