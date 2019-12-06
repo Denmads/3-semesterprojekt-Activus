@@ -36,9 +36,9 @@ public class SearchAction extends IDatabaseAction<ArrayList<Profile>> {
         SelectJoinStep<Record> baseStep = database.select(PROFILE.asterisk(), LOGIN.USERNAME).from(PROFILE.join(LOGIN).on(PROFILE.LOGIN_ID.eq(LOGIN.ID)));
 
         if (this.ran.equals(RequestArgumentName.PROFILE_AGE)) {
-            result = baseStep.where(PROFILE.AGE.greaterOrEqual(Integer.parseInt(search))).fetch();
+            result = baseStep.where(PROFILE.AGE.greaterOrEqual(Integer.parseInt(search)).and(PROFILE.ACTIVEBUDDY.isTrue())).fetch();
         } else {
-            result = baseStep.where(PROFILE.CITY.eq(search).or(PROFILE.GENDER.eq(search))).fetch();
+            result = baseStep.where(PROFILE.CITY.eq(search).or(PROFILE.GENDER.eq(search)).and(PROFILE.ACTIVEBUDDY.isTrue())).fetch();
         }
 
         for (Record r : result) {
