@@ -45,8 +45,6 @@ public class GetAllBuddys extends IDatabaseAction<List<Profile>>{
             }
         }
         
-        
-        
     }
 
     @Override

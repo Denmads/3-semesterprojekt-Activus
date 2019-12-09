@@ -58,7 +58,7 @@ public class SearchPageController extends ContentPageController {
     @FXML
     private ComboBox<String> cityBox;
 
-    private ObservableList<Exercise> allExercisesList = FXCollections.observableArrayList();
+    private ArrayList<Exercise> allExercisesList = new ArrayList();
 
     /**
      * Initializes the controller class.
@@ -272,12 +272,12 @@ public class SearchPageController extends ContentPageController {
         //Going through the current users buddies to see if the user already has the selected profile as buddy.
         //First checking if the array is still null or empty.
         if (currentUserBuddies != null && currentUserBuddies.length != 0) {
-        for (int i = 0; i < currentUserBuddies.length; i++) {
-            if (buddyID == currentUserBuddies[i]) {
-                returnLabel.setText("This user is already your buddy");
-                buddyCheck = false;
+            for (int i = 0; i < currentUserBuddies.length; i++) {
+                if (buddyID == currentUserBuddies[i]) {
+                    returnLabel.setText("This user is already your buddy");
+                    buddyCheck = false;
+                }
             }
-        }
             //If the user doesn't have the selected profile as a buddy, a buddy request is sent.
             if (buddyCheck == true) {
                 boolean request = false;
@@ -297,9 +297,7 @@ public class SearchPageController extends ContentPageController {
                     returnLabel.setText("Buddy request sent");
                 }
             }
-
         }
-
     }
 
     private void loadBoxes() {
@@ -341,6 +339,7 @@ public class SearchPageController extends ContentPageController {
 
     @FXML
     private void handleSearchExerciseButtonAction(ActionEvent event) {
+        System.out.println(allExercisesList.toString());
         //Removing all exercises from initialization.
         exerciseListField.getItems().clear();
 
@@ -365,7 +364,9 @@ public class SearchPageController extends ContentPageController {
             }
         } else if (!searchNameRadioButton.isSelected()) {
             if (type.equals("All")) {
-                returnList.addAll(allExercisesList);
+                for (Exercise e : allExercisesList) {
+                    returnList.add(e);
+                }
             } else {
 
                 for (Exercise e : allExercisesList) {
@@ -383,11 +384,13 @@ public class SearchPageController extends ContentPageController {
         });
 
         exerciseListField.refresh();
+
     }
 
     private void loadAllExercises() {
         //Removing all exercises from initialization.
         exerciseListField.getItems().clear();
+        ObservableList<Exercise> returnList = FXCollections.observableArrayList();
 
         System.out.println("Loading all exercises");
 
@@ -397,12 +400,15 @@ public class SearchPageController extends ContentPageController {
         try {
 
             allExercisesList.addAll(domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).getAllExercises());
+            for (Exercise e : allExercisesList) {
+                returnList.add(e);
+            }
 
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        exerciseListField.setItems(allExercisesList);
+        exerciseListField.setItems(returnList);
         exerciseListField.setCellFactory((ListView<Exercise> view) -> {
             return new cellAllExerciseControler(domainFacade);
         });

@@ -100,12 +100,8 @@ public class BuddyPageController extends ContentPageController {
         int profileId;
         try {
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-            if (domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId) == null){
-                
-            } else {
-                listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
-                System.out.println(listBuddy.toString());
-            }
+            System.out.println("work");
+            listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
             
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,7 +118,7 @@ public class BuddyPageController extends ContentPageController {
     @Override
     public void onContentInitialize() {
         createAnimationForMessageField();
-        loadBuddys();  // to load buddys from the database
+//        loadBuddys();  // to load buddys from the database
     }
     
     private void loadMessage(){
