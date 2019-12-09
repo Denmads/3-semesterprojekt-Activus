@@ -100,7 +100,13 @@ public class BuddyPageController extends ContentPageController {
         int profileId;
         try {
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-            listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
+            if (domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId) == null){
+                
+            } else {
+                listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
+                System.out.println(listBuddy.toString());
+            }
+            
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
