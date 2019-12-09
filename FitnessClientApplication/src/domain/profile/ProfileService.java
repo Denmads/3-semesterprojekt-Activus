@@ -111,6 +111,11 @@ public class ProfileService extends IProfileService {
     public boolean acceptBuddyRequest(int requestingProfileID) {
         return (boolean) returnResponsObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
     }
+    
+    @Override
+    public boolean dennyBuddyRequest(int requestingProfileID) {
+        return (boolean) returnResponsObject(RequestType.DENNY_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
+    }
 
     @Override
     public boolean setGoal(String Goal) {
@@ -182,6 +187,11 @@ public class ProfileService extends IProfileService {
     @Override
     public List<Profile> getAllBuddys(int ProfileID) {
         return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUDDYS, RequestArgumentName.BUDDY, ResponseArgumentName.PROFILE, ProfileID);
+    }
+
+    @Override
+    public boolean isBuddy(int buddyID) {
+        return (boolean) returnResponsObject(RequestType.IS_BUDDY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
     }
     
  

@@ -1,6 +1,7 @@
 package Enums;
 
 import java.io.Serializable;
+import jdk.internal.dynalink.support.BottomGuardingDynamicLinker;
 
 /**
  *
@@ -43,6 +44,7 @@ public enum RequestArgumentName implements Serializable {
     INDEX,
     MESSAGE,
     BUDDY,
+    BUDDY_ID,
     STATS,
     SET_INFO,
     SET_ID
