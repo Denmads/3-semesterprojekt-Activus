@@ -132,17 +132,22 @@ public class TrainingProgramsPageController extends ContentPageController {
         }
     }
     
-    private void populateChoiceBox () {
+    private void populateChoiceBox () throws ServiceNotFoundException {
         ObservableList<String> types = FXCollections.observableArrayList();
-        types.add("All");
-        types.add("Chest");
-        types.add("Bicep");
-        types.add("Tricep");
-        types.add("Core");
-        types.add("Shoulder");
-        types.add("Leg");
-        types.add("Buttocks");
-        types.add("Back");
+        for(Exercise e : (List<Exercise>) domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).getAllExercises()){          
+            if(!types.contains(e.getType())){
+                types.add(e.getType());
+            }
+        }
+//        types.add("All");
+//        types.add("Chest");
+//        types.add("Bicep");
+//        types.add("Tricep");
+//        types.add("Core");
+//        types.add("Shoulder");
+//        types.add("Leg");
+//        types.add("Buttocks");
+//        types.add("Back");
         
         exerciseTypeChb.setItems(types);
         exerciseTypeChb.getSelectionModel().selectFirst();
@@ -237,10 +242,12 @@ public class TrainingProgramsPageController extends ContentPageController {
         exerciseInProgramList.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent event) {
+                boolean isAddet = false;
                 Dragboard db = event.getDragboard();
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
                     try {
                         Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
+
                         Exercise addedExercise = exercise.clone();
                         
                         domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, getCurrentProgram());
