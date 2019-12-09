@@ -15,10 +15,7 @@ import domain.serviceInterfaces.ITrainingSchemeService;
 import gui.cellsControllers.TrainingProgramCellController;
 import gui.cellsControllers.TrainingProgramExerciseCellController;
 import java.net.URL;
-<<<<<<< HEAD:FitnessClientApplication/src/gui/TrainingProgramsPageController.java
-=======
 import java.util.ArrayList;
->>>>>>> master:FitnessClientApplication/src/GUI/TrainingProgramsPageController.java
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -250,24 +247,10 @@ public class TrainingProgramsPageController extends ContentPageController {
                 if (db.hasContent(PROJECT_DATA_FORMAT)) {
                     try {
                         Exercise exercise = (Exercise) db.getContent(PROJECT_DATA_FORMAT);
-<<<<<<< HEAD:FitnessClientApplication/src/gui/TrainingProgramsPageController.java
-                        Exercise addedExercise = new Exercise();
-                        addedExercise.setID(exercise.getID());
-                        addedExercise.setName(exercise.getName());
-                        addedExercise.setDescription(exercise.getDescription());
-                        addedExercise.setType(exercise.getType());
-                        addedExercise.setSet(exercise.getSet());
-                        isAddet = domainFacade.<ITrainingSchemeService>getService(ServiceType.PROFILE).addExercise(exercise);
-                        if(isAddet){
-                            System.out.println("Exercises is addet");
-                        }
-                        //Add exercise in database
-                        System.out.println("Drop on list");
-=======
+
                         Exercise addedExercise = exercise.clone();
                         
                         domainFacade.<ITrainingSchemeService>getService(ServiceType.TRAININGSCHEME).addExercise(addedExercise, getCurrentProgram());
->>>>>>> master:FitnessClientApplication/src/GUI/TrainingProgramsPageController.java
                         addedExercises.add(addedExercise);
                         trainingProgramList.getSelectionModel().getSelectedItem().addExercise(addedExercise);
                         trainingProgramList.refresh();
