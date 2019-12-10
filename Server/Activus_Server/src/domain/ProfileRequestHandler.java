@@ -19,6 +19,7 @@ import org.jooq.TableField;
 import persistence.actions.AcceptBuddyRequest;
 import persistence.actions.DeleteAccountAction;
 import persistence.actions.DennyBuddyRequest;
+import persistence.actions.GetAllBuddys;
 import persistence.actions.IsBuddyAction;
 import persistence.actions.SearchAction;
 import persistence.actions.SendBuddyRequest;
@@ -122,11 +123,18 @@ public class ProfileRequestHandler extends IRequestHandler {
                 }
                 break;
             case GET_ALL_BUDDYS:
-                
+                try {
+                    GetAllBuddys gab = new GetAllBuddys(request.getArgument (request.getArgument(RequestArgumentName.PROFILE_ID)));
+                    databaseFacade.execute(gab);
+                    response.addArgument(ResponseArgumentName.SUCCESS, gab.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex){
+                    Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case ACCEPT_BUDDY_REQUEST:
                 try {
                     AcceptBuddyRequest abr = new AcceptBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    databaseFacade.execute(abr);
                     response.addArgument(ResponseArgumentName.SUCCESS, abr.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -135,6 +143,8 @@ public class ProfileRequestHandler extends IRequestHandler {
             case SEND_BUDDY_REQUEST:
                 try {
                     SendBuddyRequest sbr = new SendBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    databaseFacade.execute(sbr);
+                    System.out.println("done??");
                     response.addArgument(ResponseArgumentName.SUCCESS, sbr.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -143,6 +153,7 @@ public class ProfileRequestHandler extends IRequestHandler {
             case DENNY_BUDDY_REQUEST:
                 try {
                     DennyBuddyRequest dbr = new DennyBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    databaseFacade.execute(dbr);
                     response.addArgument(ResponseArgumentName.SUCCESS, dbr.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -151,6 +162,7 @@ public class ProfileRequestHandler extends IRequestHandler {
             case IS_BUDDY:
                 try {
                     IsBuddyAction iba = new IsBuddyAction(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
+                    databaseFacade.execute(iba);
                     response.addArgument(ResponseArgumentName.SUCCESS, iba.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
