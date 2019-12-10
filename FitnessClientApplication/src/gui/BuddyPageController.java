@@ -2,7 +2,7 @@ package gui;
 
 import Enums.ServiceType;
 import Exceptions.ServiceNotFoundException;
-import GUI.cellsControllers.MessageCellController;
+import gui.cellsControllers.MessageCellController;
 import models.Message;
 import models.Profile;
 import domain.DomainFacade;
@@ -11,6 +11,7 @@ import domain.serviceInterfaces.IChatService;
 import domain.serviceInterfaces.IProfileService;
 import gui.cellsControllers.ProfileCellController;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -95,7 +100,9 @@ public class BuddyPageController extends ContentPageController {
         int profileId;
         try {
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            System.out.println("work");
             listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
+            System.out.println("work2");
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,6 +112,7 @@ public class BuddyPageController extends ContentPageController {
             return new ProfileCellController(domainFacade);
         });
         listViewBuddies.refresh();
+        
     }
 
     @Override
@@ -131,6 +139,7 @@ public class BuddyPageController extends ContentPageController {
         listViewBuddies.refresh();
     }
     
+    @FXML
     private boolean sendMessage(){
         try {
             String text = messageField.getText();
@@ -148,13 +157,53 @@ public class BuddyPageController extends ContentPageController {
 
     @FXML
     private void action(){
-        checkBuddy();
         buddy = listViewBuddies.getSelectionModel().getSelectedItem();
-        loadMessage();
+        if (checkBuddy()){
+            loadMessage();
+        } else {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation for buddy");
+            alert.setHeaderText("Confirmation for buddy request");
+            alert.setContentText("Do you wanna accept the buddy request from the user?");
+
+            ButtonType buttonTypeOne = new ButtonType("Accept");
+            ButtonType buttonTypeTwo = new ButtonType("Deny");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            int profileId;
+            if (result.get() == buttonTypeOne){
+                try {
+                    profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                    domainFacade.<IProfileService>getService(ServiceType.PROFILE).acceptBuddyRequest(buddy.getProfileId(), profileId);
+                } catch (ServiceNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                alert.close();
+            } else if (result.get() == buttonTypeTwo) {
+                try {
+                    profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                    domainFacade.<IProfileService>getService(ServiceType.PROFILE).dennyBuddyRequest(buddy.getProfileId(), profileId);
+                } catch (ServiceNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                alert.close();
+            } else {
+                alert.close();
+            }
+        }
+        
     }
     
     
-    private void checkBuddy(){
-        
+    private boolean checkBuddy(){
+        try {
+            return domainFacade.<IProfileService>getService(ServiceType.PROFILE).isBuddy(buddy.getProfileId());
+        } catch (ServiceNotFoundException | ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }

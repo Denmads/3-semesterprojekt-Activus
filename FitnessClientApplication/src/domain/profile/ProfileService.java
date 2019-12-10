@@ -107,14 +107,60 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean sendBuddyRequest(int buddyID) {
-        return (boolean) returnResponsObject(RequestType.SEND_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
-
+    public boolean sendBuddyRequest(int buddyID, int profileId) {
+        boolean isUpdated = false;
+        try {
+            Request req = createRequest(RequestType.SEND_BUDDY_REQUEST);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileId);
+            req.addArgument(RequestArgumentName.BUDDY_ID, buddyID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            System.out.println("response: " + res);
+            System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isUpdated;
     }
 
     @Override
-    public boolean acceptBuddyRequest(int requestingProfileID) {
-        return (boolean) returnResponsObject(RequestType.ACCEPT_BUDDY_REQUEST, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, requestingProfileID);
+    public boolean acceptBuddyRequest(int profileId, int buddyID) {
+        boolean isUpdated = false;
+        try {
+            Request req = createRequest(RequestType.ACCEPT_BUDDY_REQUEST);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileId);
+            req.addArgument(RequestArgumentName.BUDDY_ID, buddyID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            System.out.println("response: " + res);
+            System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isUpdated;
+    }
+    
+    @Override
+    public boolean dennyBuddyRequest(int profileId, int buddyID) {
+        boolean isUpdated = false;
+        try {
+            Request req = createRequest(RequestType.DENNY_BUDDY_REQUEST);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileId);
+            req.addArgument(RequestArgumentName.BUDDY_ID, buddyID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            System.out.println("response: " + res);
+            System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isUpdated;
     }
 
     @Override
@@ -184,4 +230,15 @@ public class ProfileService extends IProfileService {
 
     }
 
+    @Override
+    public List<Profile> getAllBuddys(int ProfileID) {
+        return (List<Profile>) returnResponsObject(RequestType.GET_ALL_BUDDYS, RequestArgumentName.PROFILE_ID, ResponseArgumentName.PROFILE, ProfileID);
+    }
+
+    @Override
+    public boolean isBuddy(int buddyID) {
+        return (boolean) returnResponsObject(RequestType.IS_BUDDY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
+    }
+    
+ 
 }
