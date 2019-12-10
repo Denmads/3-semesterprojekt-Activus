@@ -30,6 +30,28 @@ public class ChatRequestHandler extends IRequestHandler{
         switch(request.getRequestType()){
             case SEND_MESSAGE: /*do something*/ break; //Missing implementation
             case RECEIVE_MESSAGE_HISTORY: break;
+
+        Response response = new Response();
+
+        switch (request.getRequestType()) {
+            case SEND_MESSAGE:
+                try {
+                    SendMessageAction sma = new SendMessageAction(request.getArgument(RequestArgumentName.MESSAGE));
+                    databaseFacade.execute(sma);
+                    response.addArgument(ResponseArgumentName.SUCCESS, sma.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ChatRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break; 
+            case RECEIVE_MESSAGE_HISTORY:
+                try {
+                    ReciveMessageHistoryAction rmha = new ReciveMessageHistoryAction(request.getArgument(RequestArgumentName.SENDER_ID), request.getArgument(RequestArgumentName.RECIVER_ID));
+                    databaseFacade.execute(rmha);
+                    response.addArgument(ResponseArgumentName.MESSAGE, rmha.getResult());
+                } catch (ArgumentNotFoundException | ClassCastException ex) {
+                    Logger.getLogger(ChatRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
         }
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
