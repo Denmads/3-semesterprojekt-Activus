@@ -258,7 +258,7 @@ public class SearchPageController extends ContentPageController {
 
         //Getting the selected users/buddy's id.
         int buddyID = searchField.getSelectionModel().getSelectedItem().getProfileId();
-
+        
         //Getting the current users buddies
         int[] currentUserBuddies = null;
         try {
@@ -278,13 +278,15 @@ public class SearchPageController extends ContentPageController {
                     buddyCheck = false;
                 }
             }
+        }
             //If the user doesn't have the selected profile as a buddy, a buddy request is sent.
             if (buddyCheck == true) {
                 boolean request = false;
 
                 try {
                     //Sending request.
-                    request = domainFacade.<IProfileService>getService(ServiceType.PROFILE).sendBuddyRequest(buddyID);
+                    int profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+                    request = domainFacade.<IProfileService>getService(ServiceType.PROFILE).sendBuddyRequest(buddyID, profileId);
 
                 } catch (ServiceNotFoundException | ClassCastException ex) {
                     Logger.getLogger(SearchPageController.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,7 +298,7 @@ public class SearchPageController extends ContentPageController {
                 } else if (request == true) {
                     returnLabel.setText("Buddy request sent");
                 }
-            }
+            
         }
     }
 
@@ -335,6 +337,8 @@ public class SearchPageController extends ContentPageController {
         exerciseTypeBox.getItems().add("Leg");
         exerciseTypeBox.getItems().add("Buttocks");
         exerciseTypeBox.getItems().add("Back");
+        
+        exerciseTypeBox.setValue("All");
     }
 
     @FXML

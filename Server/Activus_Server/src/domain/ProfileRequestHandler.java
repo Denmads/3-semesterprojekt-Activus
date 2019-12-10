@@ -144,6 +144,7 @@ public class ProfileRequestHandler extends IRequestHandler {
                 try {
                     SendBuddyRequest sbr = new SendBuddyRequest(request.getArgument(RequestArgumentName.BUDDY_ID), request.getArgument(RequestArgumentName.PROFILE_ID));
                     databaseFacade.execute(sbr);
+                    System.out.println("done??");
                     response.addArgument(ResponseArgumentName.SUCCESS, sbr.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);

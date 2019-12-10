@@ -33,9 +33,9 @@ public class GetAllBuddys extends IDatabaseAction<List<Profile>>{
     @Override
     protected void execute(DSLContext database) throws SQLException {
         Result<Record> result = database.select().from(BUDDYS).where(BUDDYS.PROFILEID.equal(profileId)).or(BUDDYS.PROFILEID2.equal(profileId)).fetch();
-        resultList = new ArrayList<Profile>();
+        resultList = new ArrayList<>();
         resultList.add(new Profile(0));
-        for (Record r: result){
+        result.forEach((r) -> {
             if (profileId == r.getValue(BUDDYS.PROFILEID)){
                 Profile p = new Profile (r.getValue(BUDDYS.PROFILEID2));
                 resultList.add(p);
@@ -43,7 +43,7 @@ public class GetAllBuddys extends IDatabaseAction<List<Profile>>{
                 Profile p = new Profile (r.getValue(BUDDYS.PROFILEID));
                 resultList.add(p);
             }
-        }
+        });
         
     }
 
