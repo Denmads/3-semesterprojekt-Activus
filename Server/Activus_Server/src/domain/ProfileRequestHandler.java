@@ -124,9 +124,9 @@ public class ProfileRequestHandler extends IRequestHandler {
                 break;
             case GET_ALL_BUDDYS:
                 try {
-                    GetAllBuddys gab = new GetAllBuddys(request.getArgument (request.getArgument(RequestArgumentName.PROFILE_ID)));
+                    GetAllBuddys gab = new GetAllBuddys(request.getArgument(RequestArgumentName.PROFILE_ID));
                     databaseFacade.execute(gab);
-                    response.addArgument(ResponseArgumentName.SUCCESS, gab.getResult());
+                    response.addArgument(ResponseArgumentName.PROFILE, gab.getResult());
                 } catch (ArgumentNotFoundException | ClassCastException ex){
                     Logger.getLogger(ProfileRequestHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }

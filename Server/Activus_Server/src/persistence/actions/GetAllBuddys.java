@@ -15,6 +15,8 @@ import org.jooq.Record;
 import org.jooq.Result;
 import persistence.IDatabaseAction;
 import static persistence.database.generated.Tables.BUDDYS;
+import static persistence.database.generated.Tables.LOGIN;
+import static persistence.database.generated.Tables.PROFILE;
 
 
 /**
@@ -34,14 +36,45 @@ public class GetAllBuddys extends IDatabaseAction<List<Profile>>{
     protected void execute(DSLContext database) throws SQLException {
         Result<Record> result = database.select().from(BUDDYS).where(BUDDYS.PROFILEID.equal(profileId)).or(BUDDYS.PROFILEID2.equal(profileId)).fetch();
         resultList = new ArrayList<>();
-        resultList.add(new Profile(0));
-        result.forEach((r) -> {
-            if (profileId == r.getValue(BUDDYS.PROFILEID)){
-                Profile p = new Profile (r.getValue(BUDDYS.PROFILEID2));
-                resultList.add(p);
+        
+        result.forEach((rec) -> {
+            if (profileId == rec.getValue(BUDDYS.PROFILEID)){
+                int id = rec.getValue(BUDDYS.PROFILEID2);
+                Profile profile = new Profile (id);
+                Result<Record> bud = database.select(PROFILE.asterisk()).from(PROFILE).where(PROFILE.ID.eq(id)).fetch();
+                
+                for (Record r : bud) {
+                    profile.setAge(r.getValue(PROFILE.AGE));
+                    profile.setCity(r.getValue(PROFILE.CITY));
+                    profile.setCountry(r.getValue(PROFILE.COUNTRY));
+                    profile.setFirstName(r.getValue(PROFILE.FIRST_NAME));
+                    profile.setLastName(r.getValue(PROFILE.LAST_NAME));
+                    profile.setGender(r.getValue(PROFILE.GENDER));
+                    profile.setGym(r.getValue(PROFILE.GYM));
+                    profile.setActiveBuddy(r.getValue(PROFILE.ACTIVEBUDDY));
+
+                    resultList.add(profile);
+                }
+                
+                
             } else {
-                Profile p = new Profile (r.getValue(BUDDYS.PROFILEID));
-                resultList.add(p);
+                int id = rec.getValue(BUDDYS.PROFILEID);
+                Profile profile = new Profile (id);
+                Result<Record> bud = database.select(PROFILE.asterisk()).from(PROFILE).where(PROFILE.ID.eq(id)).fetch();
+                
+                for (Record r : bud) {
+                    profile.setAge(r.getValue(PROFILE.AGE));
+                    profile.setCity(r.getValue(PROFILE.CITY));
+                    profile.setCountry(r.getValue(PROFILE.COUNTRY));
+                    profile.setFirstName(r.getValue(PROFILE.FIRST_NAME));
+                    profile.setLastName(r.getValue(PROFILE.LAST_NAME));
+                    profile.setGender(r.getValue(PROFILE.GENDER));
+                    profile.setGym(r.getValue(PROFILE.GYM));
+                    profile.setActiveBuddy(r.getValue(PROFILE.ACTIVEBUDDY));
+
+                    resultList.add(profile);
+                }
+                
             }
         });
         

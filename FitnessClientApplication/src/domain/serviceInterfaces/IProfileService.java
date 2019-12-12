@@ -46,7 +46,7 @@ public abstract class IProfileService extends IService {
     
     public abstract boolean dennyBuddyRequest(int buddyID, int profileId);
     
-    public abstract boolean isBuddy(int buddyID);
+    public abstract boolean isBuddy(int buddyID, int profileID);
 
     public abstract boolean setGoal(String Goal);
     

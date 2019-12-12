@@ -48,18 +48,19 @@ public class BuddyPageController extends ContentPageController {
     private ImageView Menubtn;
     private VBox Vboks;
     private AuthenticationService authenticationService;
-    private ListView<Profile> listViewBuddies;
-    private ListView<Message> listViewMessage;
+    //private ListView<Profile> listViewBuddies;
+    //private ListView<Message> listViewMessage;
     @FXML
     private TextArea messageField;
     
     private Profile buddy;
+    private int profileId;
     private ObservableList<Profile> listBuddy;
     private ObservableList<Message> listMessage;
     @FXML
-    private ListView<?> ListViewBuddies;
+    private ListView<Profile> ListViewBuddies;
     @FXML
-    private ListView<?> ListView;
+    private ListView<Message> ListView;
     
     /**
      * @param url
@@ -97,46 +98,53 @@ public class BuddyPageController extends ContentPageController {
     
     private void loadBuddys(){
         listBuddy = FXCollections.observableArrayList();
-        int profileId;
         try {
-            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
-            System.out.println("work");
-            listBuddy = (ObservableList<Profile>) domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId);
-            System.out.println("work2");
+            //profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+            listBuddy.addAll(domainFacade.<IProfileService>getService(ServiceType.PROFILE).getAllBuddys(profileId));
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if(listBuddy.size() != 0){
+            ListViewBuddies.setItems(listBuddy);
+            ListViewBuddies.setCellFactory((ListView<Profile> view) -> {
+                return new ProfileCellController(domainFacade);
+            });
+            ListViewBuddies.refresh();
+        }
+
         
-        listViewBuddies.setItems(listBuddy);
-        listViewBuddies.setCellFactory((ListView<Profile> view) -> {
-            return new ProfileCellController(domainFacade);
-        });
-        listViewBuddies.refresh();
         
     }
 
     @Override
     public void onContentInitialize() {
+        try {
+            profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
+        } catch (ServiceNotFoundException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassCastException ex) {
+            Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         createAnimationForMessageField();
-        loadBuddys();  // to load buddys from the database
+        loadBuddys();  
     }
     
     private void loadMessage(){
-        listBuddy = listViewBuddies.getItems();
-        Profile p = listBuddy.get(listViewBuddies.getEditingIndex());
+        listBuddy = ListViewBuddies.getItems();
+        Profile p = listBuddy.get(ListViewBuddies.getEditingIndex());
         int buddyId = p.getProfileId();
         int profileId;
         try {        
             profileId = domainFacade.<IProfileService>getService(ServiceType.PROFILE).getCurrentProfile().getProfileId();
             listMessage = (ObservableList<Message>) domainFacade.<IChatService>getService(ServiceType.CHAT).getChatHistory(profileId, buddyId);
-            listViewMessage.setCellFactory((ListView<Message> view) -> {
+            ListView.setCellFactory((ListView<Message> view) -> {
                 return new MessageCellController(domainFacade);
             });
             
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        listViewBuddies.refresh();
+        ListViewBuddies.refresh();
     }
     
     @FXML
@@ -157,7 +165,7 @@ public class BuddyPageController extends ContentPageController {
 
     @FXML
     private void action(){
-        buddy = listViewBuddies.getSelectionModel().getSelectedItem();
+        buddy = ListViewBuddies.getSelectionModel().getSelectedItem();
         if (checkBuddy()){
             loadMessage();
         } else {
@@ -200,7 +208,7 @@ public class BuddyPageController extends ContentPageController {
     
     private boolean checkBuddy(){
         try {
-            return domainFacade.<IProfileService>getService(ServiceType.PROFILE).isBuddy(buddy.getProfileId());
+            return domainFacade.<IProfileService>getService(ServiceType.PROFILE).isBuddy(buddy.getProfileId(),profileId);
         } catch (ServiceNotFoundException | ClassCastException ex) {
             Logger.getLogger(BuddyPageController.class.getName()).log(Level.SEVERE, null, ex);
         }

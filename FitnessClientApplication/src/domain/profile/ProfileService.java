@@ -231,8 +231,24 @@ public class ProfileService extends IProfileService {
     }
 
     @Override
-    public boolean isBuddy(int buddyID) {
-        return (boolean) returnResponsObject(RequestType.IS_BUDDY, RequestArgumentName.PROFILE_ID, ResponseArgumentName.SUCCESS, buddyID);
+    public boolean isBuddy(int buddyID, int profileID) {
+        boolean isUpdated = false;
+        try {
+            Request req = createRequest(RequestType.IS_BUDDY);
+            req.addArgument(RequestArgumentName.PROFILE_ID, profileID);
+            req.addArgument(RequestArgumentName.BUDDY_ID, buddyID);
+            
+            Response res = communicationLayer.sendRequest(req);
+            System.out.println("response: " + res);
+            System.out.println("arg:" + res.getArgument(ResponseArgumentName.SUCCESS));
+            isUpdated = (boolean) res.getArgument(ResponseArgumentName.SUCCESS);
+            
+        } catch (ServiceNotFoundException | ArgumentNotFoundException ex) {
+            Logger.getLogger(ProfileService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isUpdated;
+        
+        //return (boolean) returnResponsObject(RequestType.IS_BUDDY, RequestArgumentName.BUDDY_ID, ResponseArgumentName.SUCCESS, buddyID);
     }
     
  
