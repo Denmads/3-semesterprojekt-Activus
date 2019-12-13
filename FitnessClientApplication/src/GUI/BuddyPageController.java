@@ -131,7 +131,7 @@ public class BuddyPageController extends ContentPageController {
     
     private void loadMessage(){
         listBuddy = ListViewBuddies.getItems();
-        Profile p = listBuddy.get(ListViewBuddies.getEditingIndex());
+        Profile p = ListViewBuddies.getItems().get(1);
         int buddyId = p.getProfileId();
         int profileId;
         try {        
